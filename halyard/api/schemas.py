@@ -24,6 +24,36 @@ class CreateRequest(BaseModel):
     target_person_evidenced: bool = False
 
 
+class IntakeStart(BaseModel):
+    """A Slack-style ask. Structured fields are optional overrides of the parse."""
+
+    raw_ask: str = ""
+    requester_name: str = Field(min_length=1)
+    account_text: str = ""
+    target_person_name: str = ""
+    target_title: str = ""
+    deal_value_usd: int = 0
+    urgency: str = ""
+    operational_owner_id: int | None = None
+    request_id: str | None = None
+    target_person_evidenced: bool = False
+
+
+class ConfirmTarget(BaseModel):
+    account_id: int | None = None
+    person_id: int | None = None
+    target_title: str = ""
+    actor: str = "operator"
+    note: str = ""
+
+
+class RouteDecision(BaseModel):
+    path_id: int
+    decision: str = Field(pattern="^(confirm|reject)$")
+    actor: str = "operator"
+    note: str = ""
+
+
 class TransitionRequest(BaseModel):
     to_state: str
     actor: str = "operator"

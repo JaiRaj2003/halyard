@@ -76,11 +76,29 @@ def create_request(
     settings: Settings,
     clock: Clock,
 ) -> IntroRequest:
+    if not norm_ws(payload.target_account_text) and not norm_ws(payload.raw_ask):
+        raise ValidationProblem("an account or a free-text ask is required")
+    request = persist_owned_request(session, payload, settings, clock)
+    apply_target_and_paths(session, request, payload, settings, clock.now())
+    return request
+
+
+def persist_owned_request(
+    session: Session,
+    payload: NewRequest,
+    settings: Settings,
+    clock: Clock,
+) -> IntroRequest:
+    """Write the request, owned and actionable, before anything is resolved.
+
+    Nothing downstream — parsing, entity resolution, path discovery — is allowed
+    to decide whether this row exists. Once this returns, the ask is a tracked
+    operational object with an owner, a state and a due next action, and an
+    operator walking away cannot make it disappear.
+    """
     now = clock.now()
     if not norm_ws(payload.requester_name):
         raise ValidationProblem("requester_name is required")
-    if not norm_ws(payload.target_account_text):
-        raise ValidationProblem("target_account_text is required")
 
     requester = _live_person(session, payload.requester_name, is_internal=True, now=now)
     triage_owner = _triage_owner(session, settings)
@@ -96,7 +114,7 @@ def create_request(
     if session.scalar(select(IntroRequest).where(IntroRequest.request_id == request_id)):
         raise ValidationProblem(f"request_id '{request_id}' already exists")
 
-    org = _resolve_live_account(session, payload.target_account_text)
+    action = assign_next_action(WorkflowState.NEEDS_TRIAGE, now, settings)
     request = IntroRequest(
         request_id=request_id,
         origin="live_intake",
@@ -106,22 +124,56 @@ def create_request(
         operational_owner_source=owner_source,
         was_ownerless_at_ingest=False,
         had_recorded_handling=False,
-        organization_id=org.id if org else None,
         raw_ask=norm_ws(payload.raw_ask),
         deal_value_usd=int(payload.deal_value_usd or 0),
         urgency=norm_ws(payload.urgency),
         workflow_state=WorkflowState.NEEDS_TRIAGE.value,
         state_source=StateSource.LIVE_INTAKE.value,
+        state_confidence="high",
+        state_evidence="created at intake; not yet triaged",
+        next_action=action.action,
+        next_action_assigned_at=action.assigned_at,
+        next_action_due_at=action.due_at,
         requested_at=now,
         last_activity_at=now,
         operationalized_at=now,
     )
     session.add(request)
     session.flush()
+    log_event(
+        session,
+        request,
+        "request_created",
+        now,
+        actor=requester.display_name,
+        detail=f"intake; operational owner resolved via {owner_source}",
+    )
+    session.flush()
+    return request
+
+
+def apply_target_and_paths(
+    session: Session,
+    request: IntroRequest,
+    payload: NewRequest,
+    settings: Settings,
+    now: datetime,
+) -> IntroRequest:
+    """Resolve the target, find candidate paths and derive the state.
+
+    Everything here can legitimately come back empty. An unresolvable account or
+    an ask with no observable path leaves the request in an active state with a
+    next action, never removed and never ownerless.
+    """
+    org = _resolve_live_account(session, payload.target_account_text)
+    request.organization_id = org.id if org else None
 
     resolved_person = None
     if payload.target_person_evidenced and norm_ws(payload.target_person_name):
         resolved_person = _live_person(session, payload.target_person_name, is_internal=False, now=now)
+    if request.target is not None:
+        session.delete(request.target)
+        session.flush()
     session.add(
         RequestTarget(
             request_id=request.id,
@@ -143,6 +195,7 @@ def create_request(
         )
     )
     session.flush()
+    session.expire(request, ["target"])
 
     path_counts = build_candidate_paths(session, {request.request_id: request})
     state = derive_unevidenced_state(
@@ -161,9 +214,6 @@ def create_request(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
-
-    _log(session, request, "request_created", now, actor=requester.display_name,
-         detail=f"intake; operational owner resolved via {owner_source}")
     session.flush()
     return request
 
@@ -514,7 +564,7 @@ def transition(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
-    _log(session, request, f"transition:{current.value}->{requested.value}", now, actor=actor, detail=norm_ws(note))
+    log_event(session, request, f"transition:{current.value}->{requested.value}", now, actor=actor, detail=norm_ws(note))
     session.flush()
     return request
 
@@ -536,7 +586,7 @@ def set_owner(
     request.operational_owner_id = owner.id
     request.operational_owner_source = MANUAL_ASSIGNMENT
     request.last_activity_at = now
-    _log(
+    log_event(
         session,
         request,
         "owner_changed",
@@ -548,7 +598,7 @@ def set_owner(
     return request
 
 
-def _log(session: Session, request: IntroRequest, event_type: str, now: datetime, actor: str, detail: str) -> None:
+def log_event(session: Session, request: IntroRequest, event_type: str, now: datetime, actor: str, detail: str) -> None:
     session.add(
         IntroEvent(
             request_id=request.id,

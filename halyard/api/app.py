@@ -17,11 +17,14 @@ from ..config import Settings, load_settings
 from ..db.session import build_engine, sessionmaker_for
 from ..domain.ownership import OwnershipError
 from ..domain.states import TransitionError
+from ..services import intake as intake_service
 from ..services import metrics as metrics_service
 from ..services import requests as request_service
+from ..services import routing as routing_service
 from ..services import search as search_service
+from ..services.intake import IntakeSubmission
 from ..services.requests import NewRequest, RequestNotFound, ValidationProblem
-from .schemas import CreateRequest, OwnerRequest, TransitionRequest
+from .schemas import ConfirmTarget, CreateRequest, IntakeStart, OwnerRequest, RouteDecision, TransitionRequest
 
 
 def create_app(
@@ -98,6 +101,64 @@ def create_app(
             session, settings, clock, state=state, owner_id=owner_id, account_id=account_id, origin=origin,
             overdue=overdue, stale=stale, ownerless_at_ingest=ownerless_at_ingest, query=q, limit=limit, offset=offset,
         )
+
+    @app.post("/api/intake/start", status_code=201)
+    def intake_start(body: IntakeStart, session: Session = Depends(get_session)):
+        """Persist and own the ask, then return everything known about it.
+
+        The request exists before any parsing or routing happens, so abandoning
+        the screen loses nothing.
+        """
+        try:
+            result = intake_service.start_intake(session, IntakeSubmission(**body.model_dump()), settings, clock)
+            session.commit()
+        except (ValidationProblem, OwnershipError) as exc:
+            session.rollback()
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+        except Exception:
+            session.rollback()
+            raise
+        return result
+
+    @app.get("/api/intake/{request_key}")
+    def intake_view(request_key: str, session: Session = Depends(get_session)):
+        return _guarded(lambda: intake_service.reintake(session, request_key, settings, clock))
+
+    @app.post("/api/requests/{request_key}/target")
+    def confirm_target(request_key: str, body: ConfirmTarget, session: Session = Depends(get_session)):
+        try:
+            result = routing_service.confirm_target(
+                session, request_key, settings, clock, account_id=body.account_id, person_id=body.person_id,
+                target_title=body.target_title, actor=body.actor, note=body.note,
+            )
+            session.commit()
+        except RequestNotFound as exc:
+            session.rollback()
+            raise HTTPException(status_code=404, detail=f"request '{request_key}' not found") from exc
+        except (ValidationProblem, TransitionError) as exc:
+            session.rollback()
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+        return result
+
+    @app.post("/api/requests/{request_key}/route")
+    def review_route(request_key: str, body: RouteDecision, session: Session = Depends(get_session)):
+        """A human confirms or rejects a candidate path. Nothing else selects a route."""
+        try:
+            result = routing_service.review_route(
+                session, request_key, body.path_id, body.decision, settings, clock,
+                actor=body.actor, note=body.note,
+            )
+            session.commit()
+        except RequestNotFound as exc:
+            session.rollback()
+            raise HTTPException(status_code=404, detail=f"request '{request_key}' not found") from exc
+        except TransitionError as exc:
+            session.rollback()
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+        except ValidationProblem as exc:
+            session.rollback()
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+        return result
 
     @app.post("/api/requests", status_code=201)
     def create_request_endpoint(body: CreateRequest, session: Session = Depends(get_session)):
