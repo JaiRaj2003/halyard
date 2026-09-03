@@ -58,11 +58,11 @@ export function Disclosure({ summary, children }: { summary: string; children: R
   )
 }
 
-export function Field({ label, children }: { label: string; children: ReactNode }) {
+export function Field({ label, wrap = false, children }: { label: string; wrap?: boolean; children: ReactNode }) {
   return (
     <div className="min-w-0">
       <dt className="text-[11px] uppercase tracking-wide text-muted">{label}</dt>
-      <dd className="mt-0.5 truncate text-sm">{children || <span className="text-muted">—</span>}</dd>
+      <dd className={`mt-0.5 text-sm ${wrap ? '' : 'truncate'}`}>{children || <span className="text-muted">—</span>}</dd>
     </div>
   )
 }

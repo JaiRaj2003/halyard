@@ -93,7 +93,7 @@ function Hero({ data }: { data: IntakeResult }) {
         <Disclosure summary="Request record">
           <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <Field label="Requester">{request.requester}</Field>
-            <Field label="Owner assigned">{label('owner_source', request.operational_owner_source)}</Field>
+            <Field label="Owner assigned" wrap>{label('owner_source', request.operational_owner_source)}</Field>
             <Field label="Route">
               {request.selected_connector ?? label('route_status', request.route_status)}
             </Field>
@@ -101,7 +101,7 @@ function Hero({ data }: { data: IntakeResult }) {
             <Field label="Last activity">{relative(request.last_activity_at)}</Field>
             <Field label="Route evidence">{label('route_signal', request.route_signal)}</Field>
             <Field label="Target status">{label('resolution', request.target_resolution_status)}</Field>
-            <Field label="How this status was reached">{request.state_evidence}</Field>
+            <Field label="How this status was reached" wrap>{request.state_evidence}</Field>
           </dl>
         </Disclosure>
       </div>
@@ -281,10 +281,10 @@ function PathRow({ path, busy, onDecide }: {
             ))}
           </ul>
           <dl className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <Field label="Timing">{label('observability', path.observability)}</Field>
-            <Field label="Evidence strength">{label('confidence', path.confidence)}</Field>
-            <Field label="Connected">{path.relationship_date ? shortDate(path.relationship_date) : 'no date recorded'}</Field>
-            <Field label="Connector">
+            <Field label="Timing" wrap>{label('observability', path.observability)}</Field>
+            <Field label="Evidence strength" wrap>{label('confidence', path.confidence)}</Field>
+            <Field label="Connected" wrap>{path.relationship_date ? shortDate(path.relationship_date) : 'no date recorded'}</Field>
+            <Field label="Connector" wrap>
               {path.connector.on_roster ? 'On the managed roster' : 'Observed, not on the managed roster'}
             </Field>
           </dl>

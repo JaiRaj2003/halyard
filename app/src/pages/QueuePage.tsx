@@ -63,6 +63,7 @@ export default function QueuePage() {
 
   useEffect(() => {
     setData(null)
+    setError('')
     api
       .queue(view)
       .then(setData)

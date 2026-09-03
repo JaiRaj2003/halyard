@@ -23,30 +23,37 @@ const PRIMARY: string[] = [
 const PRIMARY_LEGACY: string[] = ['legacy_backlog', 'legacy_backlog_remediation']
 
 function MetricCard({ metric }: { metric: LeadershipMetric }) {
-  const body = (
-    <div className="flex h-full flex-col rounded-lg border border-line bg-white p-4 shadow-sm transition hover:border-accent">
+  const figure = (
+    <>
       <p className="text-xs font-medium uppercase tracking-wide text-muted">{metric.label}</p>
       <p className="mt-1.5 text-3xl font-semibold leading-none tabular-nums">
         {metric.value}
         {metric.denominator !== null && <span className="text-base font-normal text-muted"> / {metric.denominator}</span>}
       </p>
       <p className="mt-2 text-[11px] uppercase tracking-wide text-muted">{metric.window}</p>
-      <div className="mt-2">
+    </>
+  )
+  return (
+    <div className="flex h-full flex-col rounded-lg border border-line bg-white p-4 shadow-sm transition hover:border-accent">
+      {/* Only the figure navigates: the disclosure has to stay outside the link
+          or asking what a metric counts would drill into the queue instead. */}
+      {metric.drill_down_view ? (
+        <Link
+          to={`/queue?view=${metric.drill_down_view}`}
+          className="block focus:outline-none focus:ring-2 focus:ring-accent"
+        >
+          {figure}
+          <span className="mt-2 block text-xs font-medium text-accent">See the {metric.value} requests →</span>
+        </Link>
+      ) : (
+        figure
+      )}
+      <div className="mt-auto pt-3">
         <Disclosure summary="What this counts">
           <p className="text-xs text-muted">{metric.definition}</p>
         </Disclosure>
       </div>
-      {metric.drill_down_view && (
-        <p className="mt-auto pt-3 text-xs font-medium text-accent">See the {metric.value} requests →</p>
-      )}
     </div>
-  )
-  return metric.drill_down_view ? (
-    <Link to={`/queue?view=${metric.drill_down_view}`} className="block focus:outline-none focus:ring-2 focus:ring-accent">
-      {body}
-    </Link>
-  ) : (
-    body
   )
 }
 
