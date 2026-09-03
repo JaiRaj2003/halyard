@@ -476,8 +476,12 @@ def candidate_path_payload(session: Session, request: IntroRequest, settings: Se
             {
                 "id": entry.path.id,
                 "rank": entry.rank,
-                "recommended": entry.recommended,
-                "recommendation_label": "Recommended to investigate first" if entry.recommended else "",
+                "recommended": entry.recommended and entry.path.review_status == "unreviewed",
+                "recommendation_label": (
+                    "Recommended to investigate first"
+                    if entry.recommended and entry.path.review_status == "unreviewed"
+                    else ""
+                ),
                 "factors": [factor_payload(factor) for factor in entry.factors],
                 "connector": connector_summary(entry.path.connector),
                 "hop_type": entry.path.hop_type,
