@@ -1,0 +1,51 @@
+account_id,account_name,domain,normalized_domain,normalized_name,industry,hq,employee_count,owner,stage,domain_group,domain_group_size,duplicate_class,resolution
+A1027,Aldergate Telecom,aldergate.com,aldergate.com,aldergate telecom,Telecom,Dallas,39000,Yusuf Petrossian,Closed Lost,,1,unique_domain,canonical
+A91001,"Apex Logistics, Inc.",apexlogistics.com,apexlogistics.com,apex logistics,Logistics,Memphis,14000,Yusuf Petrossian,Prospect,DG_apexlogistics.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1001,Apex Logistics,apexlogistics.com,apexlogistics.com,apex logistics,Logistics,Memphis,14000,Rafael Salcedo,Prospect,DG_apexlogistics.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1002,Apex Holdings,apexlogisticsgroup.co.uk,apexlogisticsgroup.co.uk,apex,Logistics,Leeds,900,Imani Mkhize,Negotiation,,1,unique_domain,canonical
+A91035,Ashgrove Agriculture Inc,ashgroveag.com,ashgroveag.com,ashgrove agriculture,Agriculture,Des Moines,23000,Rafael Salcedo,Pilot,DG_ashgroveag.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1035,Ashgrove Agriculture,ashgroveag.com,ashgroveag.com,ashgrove agriculture,Agriculture,Des Moines,23000,Hana Nakashima,Pilot,DG_ashgroveag.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1045,Bexley Bioworks,bexleybio.com,bexleybio.com,bexley bioworks,Biotech,Cambridge,1400,Sloane Fairweather,Negotiation,,1,unique_domain,canonical
+A1010,Blackwood Holdings,blackwoodindustrial.com,blackwoodindustrial.com,blackwood,Industrials,Cleveland,27000,Imani Mkhize,Negotiation,,1,unique_domain,canonical
+A91006,Brightmoor Energy Inc,brightmoorenergy.com,brightmoorenergy.com,brightmoor energy,Energy,Houston,9800,Imani Mkhize,Discovery,DG_brightmoorenergy.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1006,Brightmoor Energy,brightmoorenergy.com,brightmoorenergy.com,brightmoor energy,Energy,Houston,9800,Imani Mkhize,Discovery,DG_brightmoorenergy.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1025,Cindermill Holdings,cindermill.com,cindermill.com,cindermill,Mining,Perth,13000,Nadia Okonkwo,Discovery,,1,unique_domain,canonical
+A1038,Cobalt Lane Capital Markets,cobaltlanecm.com,cobaltlanecm.com,cobalt lane capital markets,Financial Services,Chicago,6900,Rafael Salcedo,Discovery,,1,unique_domain,canonical
+A1029,Duncastle Holdings,duncastle.com,duncastle.com,duncastle,Hospitality,Orlando,52000,Bertrand Vandermolen,Prospect,,1,unique_domain,canonical
+A91020,"Ellerby Semiconductor, Inc.",ellerbysemi.com,ellerbysemi.com,ellerby semiconductor,Semiconductors,Austin,21000,Yusuf Petrossian,Negotiation,DG_ellerbysemi.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1020,Ellerby Semiconductor,ellerbysemi.com,ellerbysemi.com,ellerby semiconductor,Semiconductors,Austin,21000,Sloane Fairweather,Negotiation,DG_ellerbysemi.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1040,Falkirk Shipping,falkirkshipping.com,falkirkshipping.com,falkirk shipping,Logistics,Norfolk,10400,Curtis Hartigan,Prospect,,1,unique_domain,canonical
+A1016,Ferrowick Insurance,ferrowick.com,ferrowick.com,ferrowick insurance,Insurance,Hartford,15500,Hana Nakashima,Negotiation,,1,unique_domain,canonical
+A1012,Kestrel Airlines,flykestrel.com,flykestrel.com,kestrel airlines,Airlines,Denver,54000,Rafael Salcedo,Negotiation,,1,unique_domain,canonical
+A1017,Glasspoint Health,glasspointhealth.com,glasspointhealth.com,glasspoint health,Healthcare,Nashville,37000,Bertrand Vandermolen,Closed Lost,,1,unique_domain,canonical
+A1041,Gravenhurst Motors,gravenhurst.com,gravenhurst.com,gravenhurst motors,Automotive,Windsor,43000,Sloane Fairweather,Negotiation,,1,unique_domain,canonical
+A1008,Halcyon Grid,halcyongrid.com,halcyongrid.com,halcyon grid,Utilities,Portland,6400,Bertrand Vandermolen,Negotiation,,1,unique_domain,canonical
+A1050,Harrowgate Health,harrowgatehealth.com,harrowgatehealth.com,harrowgate health,Healthcare,Tampa,22400,Imani Mkhize,Pilot,,1,unique_domain,canonical
+A1024,Hollowbrook Grocers,hollowbrook.com,hollowbrook.com,hollowbrook grocers,Retail,Boise,44000,Nadia Okonkwo,Pilot,DG_hollowbrook.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A91024,Hollowbrook Grocers Inc.,hollowbrook.com,hollowbrook.com,hollowbrook grocers,Retail,Boise,44000,Imani Mkhize,Pilot,DG_hollowbrook.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1009,Ironvale Steel,ironvalesteel.com,ironvalesteel.com,ironvale steel,Industrials,Pittsburgh,18000,Hana Nakashima,Negotiation,,1,unique_domain,canonical
+A1042,Larchmont Aerospace,larchmontaero.com,larchmontaero.com,larchmont aerospace,Aerospace,Everett,12900,Bertrand Vandermolen,Closed Lost,,1,unique_domain,canonical
+A1022,Larkhall Software,larkhall.io,larkhall.io,larkhall software,Technology,Toronto,1800,Imani Mkhize,Prospect,,1,unique_domain,canonical
+A1018,Marchford Clinics,marchfordclinics.com,marchfordclinics.com,marchford clinics,Healthcare,Rochester,8200,Curtis Hartigan,Prospect,,1,unique_domain,canonical
+A1047,Marlowe Freight Systems,marlowefreight.com,marlowefreight.com,marlowe freight systems,Logistics,Salt Lake City,5200,Imani Mkhize,Pilot,,1,unique_domain,canonical
+A1034,Meridian Holdings,meridianpeakfoods.com,meridianpeakfoods.com,meridian,Consumer,Omaha,19000,Bertrand Vandermolen,Evaluation,,1,unique_domain,canonical
+A1003,Northwind Freight,northwindfreight.com,northwindfreight.com,northwind freight,Logistics,Chicago,22000,Curtis Hartigan,Pilot,,1,unique_domain,canonical
+A1039,Nortonbury Logistics,nortonbury.com,nortonbury.com,nortonbury logistics,Logistics,Louisville,7700,Bertrand Vandermolen,Evaluation,,1,unique_domain,canonical
+A1044,Osric Networks,osricnetworks.com,osricnetworks.com,osric networks,Telecom,Reston,9100,Nadia Okonkwo,Discovery,,1,unique_domain,canonical
+A1043,Pelham Beverage,pelhambev.com,pelhambev.com,pelham beverage,Consumer,Charlotte,28000,Yusuf Petrossian,Evaluation,,1,unique_domain,canonical
+A1023,Pemberton Retail,pembertonretail.com,pembertonretail.com,pemberton retail,Retail,Columbus,76000,Hana Nakashima,Negotiation,,1,unique_domain,canonical
+A1030,Priorwood Chemicals,priorwood.com,priorwood.com,priorwood chemicals,Chemicals,Baton Rouge,16800,Bertrand Vandermolen,Discovery,,1,unique_domain,canonical
+A1019,Quillon Pharma,quillonpharma.com,quillonpharma.com,quillon pharma,Pharma,Basel,29000,Rafael Salcedo,Closed Lost,,1,unique_domain,canonical
+A1031,Ravensmoor Defense,ravensmoor.com,ravensmoor.com,ravensmoor defense,Defense,Arlington,34000,Hana Nakashima,Negotiation,,1,unique_domain,canonical
+A1005,Sablefield Motors,sablefield.com,sablefield.com,sablefield motors,Automotive,Detroit,61000,Hana Nakashima,Closed Lost,,1,unique_domain,canonical
+A91032,Silverbrook Paper Corp,silverbrookpaper.com,silverbrookpaper.com,silverbrook paper,Materials,Green Bay,11200,Yusuf Petrossian,Closed Lost,DG_silverbrookpaper.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1032,Silverbrook Paper,silverbrookpaper.com,silverbrookpaper.com,silverbrook paper,Materials,Green Bay,11200,Curtis Hartigan,Closed Lost,DG_silverbrookpaper.com,2,probable_duplicate_same_normalized_name,kept_separate_pending_identifier_evidence
+A1026,Strathmore Holdings,strathmorerail.com,strathmorerail.com,strathmore,Transport,Kansas City,25000,Imani Mkhize,Prospect,,1,unique_domain,canonical
+A1014,Sundermere Bank,sundermere.com,sundermere.com,sundermere bank,Financial Services,New York,41000,Imani Mkhize,Pilot,,1,unique_domain,canonical
+A1037,Tessellate Payments,tessellate.co,tessellate.co,tessellate payments,Fintech,London,3100,Nadia Okonkwo,Negotiation,,1,unique_domain,canonical
+A1046,Thistledown Energy,thistledownenergy.com,thistledownenergy.com,thistledown energy,Energy,Calgary,8600,Yusuf Petrossian,Pilot,,1,unique_domain,canonical
+A1015,THORNBURYFINANCIAL,thornburyfinancial.com,thornburyfinancial.com,thornburyfinancial,Financial Services,Charlotte,26000,Sloane Fairweather,Pilot,,1,unique_domain,canonical
+A1007,Vantage Ridge Utilities,vantageridge.com,vantageridge.com,vantage ridge utilities,Utilities,Sacramento,12500,Rafael Salcedo,Discovery,,1,unique_domain,canonical
+A1049,Volney Industrial Systems,volney.com,volney.com,volney industrial systems,Industrials,Milwaukee,14700,Yusuf Petrossian,Closed Lost,,1,unique_domain,canonical
+A1036,WRENFIELDROBOTICS,wrenfield.ai,wrenfield.ai,wrenfieldrobotics,Technology,Boston,2600,Rafael Salcedo,Discovery,,1,unique_domain,canonical
+A1028,Yarrowdale Media,yarrowdale.com,yarrowdale.com,yarrowdale media,Media,Los Angeles,7100,Rafael Salcedo,Evaluation,,1,unique_domain,canonical

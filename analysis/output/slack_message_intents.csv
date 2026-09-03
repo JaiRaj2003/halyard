@@ -1,0 +1,524 @@
+request_id,message_index,ts,user,intent,is_ask_like,referred_person,text
+R1001,0,2026-04-14T09:13:00Z,Imani Mkhize,bump,False,,asking again: Vantage Ridge Utilities. Chief Operating Officer. Happy to draft the forward myself if someone can vouch.
+R1001,1,2026-04-14T16:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,did we not already lose this one?
+R1001,2,2026-04-16T15:30:00Z,Hana Nakashima,referral_suggestion,False,Curtis Hartigan,adding Curtis Hartigan who might know
+R1001,3,2026-04-16T17:30:00Z,Nadia Okonkwo,no_knowledge,False,,no idea sorry
+R1002,0,2025-09-14T09:14:00Z,Imani Mkhize,unclassified,True,,"does anyone know anyone at Volney Industrial Systems? looking for VP Data & Analytics, ideally warm"
+R1002,1,2025-09-14T13:30:00Z,Nadia Okonkwo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1003,0,2026-03-03T09:11:00Z,Imani Mkhize,unclassified,True,,long shot — Redtree Foods. Tomás Jarrold-Egerton (VP Engineering). Anyone?
+R1003,1,2026-03-03T14:05:00Z,Dana Whitfield,volunteer_offer,False,,"I met their VP Enterprise Architecture at a conference last spring, happy to reach out"
+R1003,2,2026-03-06T14:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1004,0,2026-07-06T09:13:00Z,Imani Mkhize,unclassified,True,,long shot — Marchford Clinics. Silas Mkhize-Thackeray (Head of Developer Productivity). Anyone?
+R1004,1,2026-07-06T19:30:00Z,Yusuf Petrossian,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1004,2,2026-07-07T19:30:00Z,Imani Mkhize,possible_duplicate_query,False,,is this the same as the one from last month?
+R1005,0,2026-03-05T09:16:00Z,Rafael Salcedo,unclassified,True,,"need help getting to Ravensmoor Defense. Curtis Ashdown-Kirkbride is the Chief Data Officer there, cold outbound is going nowhere"
+R1006,0,2026-06-07T09:14:00Z,Rafael Salcedo,unclassified,True,,trying to reach VP Engineering at Kingsmere Retail Group — anyone have a path?
+R1007,0,2026-06-01T09:15:00Z,Rafael Salcedo,unclassified,True,,long shot — Halcyon Grid. Espen Crowther-Isenberg (Head of Platform Engineering). Anyone?
+R1008,0,2026-01-07T09:17:00Z,Yusuf Petrossian,unclassified,True,,trying to reach Chief Technology Officer at Silverbrook Paper — anyone have a path?
+R1008,1,2026-01-08T11:30:00Z,Curtis Hartigan,qualification_question,False,,what's the deal size here?
+R1008,2,2026-01-10T12:30:00Z,Curtis Hartigan,qualification_question,False,,what's the deal size here?
+R1009,0,2026-04-15T09:19:00Z,Yusuf Petrossian,unclassified,True,,long shot — Marchford Clinics. Ansel Lomsadze-Ingleby (SVP Digital). Anyone?
+R1009,1,2026-04-16T11:30:00Z,Rafael Salcedo,no_knowledge,False,,no idea sorry
+R1009,2,2026-04-18T18:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,did we not already lose this one?
+R1009,3,2026-04-19T14:30:00Z,Bertrand Vandermolen,no_knowledge,False,,no idea sorry
+R1010,0,2026-05-24T09:18:00Z,Bertrand Vandermolen,unclassified,True,,"need help getting to Larkhall Software. Hugo Norrington-Isenberg is the Chief Technology Officer there, cold outbound is going nowhere"
+R1010,1,2026-05-24T14:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1010,2,2026-05-28T19:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1011,0,2025-08-29T09:18:00Z,Rafael Salcedo,unclassified,True,,need an intro at Thornbury — anyone?
+R1011,1,2025-08-29T14:30:00Z,Rafael Salcedo,no_knowledge,False,,no idea sorry
+R1011,2,2025-08-31T14:30:00Z,Sloane Fairweather,no_knowledge,False,,no idea sorry
+R1011,3,2025-09-02T15:30:00Z,Rafael Salcedo,blocker_note,False,,I think their procurement is frozen until Q1
+R1012,0,2026-03-25T09:12:00Z,Nadia Okonkwo,unclassified,True,,"anyone connected to Ilse Oyelaran-Zettergren? They run engineering at a large logistics business, I don't have the entity name handy"
+R1012,1,2026-03-26T13:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1012,2,2026-03-28T13:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1012,3,2026-03-29T17:30:00Z,Bertrand Vandermolen,qualification_question,False,,what's the deal size here?
+R1013,0,2026-05-10T09:15:00Z,Nadia Okonkwo,unclassified,True,,"does anyone know anyone at Nortonbury Logistics? looking for Chief Operating Officer, ideally warm"
+R1013,1,2026-05-12T19:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,did we not already lose this one?
+R1013,2,2026-05-13T11:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1014,0,2026-02-18T09:14:00Z,Yusuf Petrossian,unclassified,True,,"does anyone know anyone at Northwind Freight? looking for Chief Operating Officer, ideally warm"
+R1014,1,2026-02-22T15:30:00Z,Hana Nakashima,blocker_note,False,,I think their procurement is frozen until Q1
+R1015,0,2026-06-23T09:16:00Z,Yusuf Petrossian,unclassified,True,,long shot — Cindermill Mining. Niall Zettergren-Isenberg (Chief Information Officer). Anyone?
+R1015,1,2026-06-26T12:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1015,2,2026-06-27T12:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1015,3,2026-06-27T15:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1016,0,2026-03-30T09:17:00Z,Curtis Hartigan,unclassified,True,,"does anyone know anyone at Nortonbury Logistics? looking for Chief Operating Officer, ideally warm"
+R1016,1,2026-03-30T13:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1016,2,2026-03-30T18:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1017,0,2025-11-06T09:12:00Z,Nadia Okonkwo,unclassified,True,,any connections into Vireo Systems? we're up against a renewal window and I need an intro to Head of Developer Productivity
+R1017,1,2025-11-07T10:30:00Z,Hana Nakashima,qualification_question,False,,what's the deal size here?
+R1017,2,2025-11-07T12:30:00Z,Rafael Salcedo,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1017,3,2025-11-10T19:30:00Z,Hana Nakashima,qualification_question,False,,what's the deal size here?
+R1018,0,2026-05-31T09:11:00Z,Yusuf Petrossian,unclassified,True,,who do we know at Wrenfield Robotics? Chief Technology Officer would be ideal but I'll take anyone senior
+R1018,1,2026-06-03T19:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,is this the same as the one from last month?
+R1019,0,2026-01-01T09:19:00Z,Nadia Okonkwo,unclassified,True,,any connections into Northwind Freight? we're up against a renewal window and I need an intro to Chief Data Officer
+R1020,0,2025-11-01T09:14:00Z,Bertrand Vandermolen,unclassified,True,,Rafael Kirkbride-Ibarra is the person I need. Pretty sure they're a Chief Information Officer somewhere in Semiconductors.
+R1021,0,2025-10-29T09:11:00Z,Imani Mkhize,unclassified,True,,"does anyone know anyone at Larchmont Aerospace? looking for VP Data & Analytics, ideally warm"
+R1021,1,2025-10-29T12:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1021,2,2025-11-02T19:30:00Z,Imani Mkhize,possible_duplicate_query,False,,is this the same as the one from last month?
+R1022,0,2026-06-11T09:15:00Z,Nadia Okonkwo,bump,False,,asking again: Blackwood Industrial. Director of Software Engineering. Happy to draft the forward myself if someone can vouch.
+R1022,1,2026-06-14T16:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,did we not already lose this one?
+R1023,0,2025-10-21T09:10:00Z,Bertrand Vandermolen,bump,False,,asking again: Thistledown Energy. Chief Operating Officer. Happy to draft the forward myself if someone can vouch.
+R1024,0,2026-07-04T09:12:00Z,Curtis Hartigan,unclassified,True,,who do we know at Apex Logistics? Director of Software Engineering would be ideal but I'll take anyone senior
+R1024,1,2026-07-06T17:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1024,2,2026-07-07T17:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1024,3,2026-07-08T13:30:00Z,Nadia Okonkwo,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1025,0,2026-02-25T09:10:00Z,Sloane Fairweather,unclassified,True,,"does anyone know anyone at Glasspoint Health? looking for Chief Information Officer, ideally warm"
+R1025,1,2026-02-25T15:30:00Z,Nadia Okonkwo,referral_suggestion,False,Sloane Fairweather,adding Sloane Fairweather who might know
+R1025,2,2026-02-27T13:30:00Z,Imani Mkhize,blocker_note,False,,I think their procurement is frozen until Q1
+R1025,3,2026-02-28T10:30:00Z,Curtis Hartigan,referral_suggestion,False,Bertrand Vandermolen,adding Bertrand Vandermolen who might know
+R1026,0,2025-12-12T09:10:00Z,Imani Mkhize,unclassified,True,,"need help getting to Tessellate Payments. Duarte Wolstenholme-Crowther is the Chief Data Officer there, cold outbound is going nowhere"
+R1026,1,2025-12-12T13:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,did we not already lose this one?
+R1026,2,2025-12-14T18:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1027,0,2026-07-05T09:16:00Z,Hana Nakashima,bump,False,,asking again: Strathmore Rail. Chief Technology Officer. Happy to draft the forward myself if someone can vouch.
+R1027,1,2026-07-06T10:30:00Z,Nadia Okonkwo,blocker_note,False,,I think their procurement is frozen until Q1
+R1027,2,2026-07-07T13:30:00Z,Hana Nakashima,referral_suggestion,False,Yusuf Petrossian,adding Yusuf Petrossian who might know
+R1027,3,2026-07-09T14:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1028,0,2026-07-18T09:14:00Z,Yusuf Petrossian,unclassified,True,,"Duncastle Hotels introduced us to Calderon Aerospace, but the account I actually need is Osric Networks (Chief Digital Officer)."
+R1029,0,2026-07-13T09:15:00Z,Rafael Salcedo,unclassified,True,,"Brightmoor Energy is the target. Our champion at Yarrowdale Media used to work with their team, and I think Marlowe Freight Systems is a supplier of theirs. Any path?"
+R1030,0,2026-07-01T09:15:00Z,Curtis Hartigan,unclassified,True,,long shot — Larchmont Aerospace. Kofi Højgaard-Zettergren (Head of Platform Engineering). Anyone?
+R1031,0,2025-11-26T09:18:00Z,Imani Mkhize,unclassified,True,,"does anyone know anyone at Ironvale Steel? looking for Chief Data Officer, ideally warm"
+R1031,1,2025-11-28T18:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,is this the same as the one from last month?
+R1031,2,2025-11-28T18:30:00Z,Hana Nakashima,qualification_question,False,,what's the deal size here?
+R1031,3,2025-11-30T14:30:00Z,Rafael Salcedo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1032,0,2025-09-11T09:16:00Z,Hana Nakashima,unclassified,True,,who do we know at Duncastle Hotels? VP Enterprise Architecture would be ideal but I'll take anyone senior
+R1032,1,2025-09-11T11:30:00Z,Curtis Hartigan,bump,False,,bumping this
+R1032,2,2025-09-11T16:30:00Z,Bertrand Vandermolen,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1032,3,2025-09-15T17:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1033,0,2026-06-02T09:17:00Z,Curtis Hartigan,unclassified,True,,long shot — Priorwood Chemicals. Astrid Thackeray-Grimsby (Head of Developer Productivity). Anyone?
+R1033,1,2026-06-06T14:30:00Z,Imani Mkhize,referral_suggestion,False,Nadia Okonkwo,adding Nadia Okonkwo who might know
+R1034,0,2025-10-13T09:12:00Z,Sloane Fairweather,unclassified,True,,long shot — Sundermere Bank. Margot Vasquez-Salcedo (Chief Data Officer). Anyone?
+R1034,1,2025-10-13T14:05:00Z,Nadia Okonkwo,volunteer_offer,False,,"their Head of Platform reports to someone I've known for a decade, leave it with me"
+R1034,2,2025-10-16T18:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1034,3,2025-10-17T10:30:00Z,Nadia Okonkwo,referral_suggestion,False,Nadia Okonkwo,adding Nadia Okonkwo who might know
+R1035,0,2025-12-23T09:18:00Z,Rafael Salcedo,unclassified,True,,"does anyone know anyone at Marrow Point Airways? looking for VP Engineering, ideally warm"
+R1036,0,2026-05-19T09:19:00Z,Curtis Hartigan,bump,False,,asking again: Sablefield Motors. Chief Data Officer. Happy to draft the forward myself if someone can vouch.
+R1036,1,2026-05-21T14:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1037,0,2025-11-26T09:11:00Z,Hana Nakashima,unclassified,True,,trying to reach Head of Platform Engineering at Thistledown Energy — anyone have a path?
+R1038,0,2026-05-18T09:18:00Z,Nadia Okonkwo,unclassified,True,,trying to reach Chief Operating Officer at Apex Logistics. I know we sell into Larkhall Software and Cindermill Mining — could either of those relationships get us there?
+R1038,1,2026-05-18T13:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1038,2,2026-05-21T17:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1039,0,2026-01-29T09:15:00Z,Nadia Okonkwo,bump,False,,asking again: Ravensmoor Defense. Head of Developer Productivity. Happy to draft the forward myself if someone can vouch.
+R1039,1,2026-01-31T18:30:00Z,Imani Mkhize,no_knowledge,False,,no idea sorry
+R1039,2,2026-01-31T18:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,did we not already lose this one?
+R1039,3,2026-02-01T17:30:00Z,Sloane Fairweather,no_knowledge,False,,no idea sorry
+R1040,0,2026-06-29T09:11:00Z,Sloane Fairweather,unclassified,True,,trying to reach Chief Technology Officer at Ironvale Steel — anyone have a path?
+R1040,1,2026-06-29T11:30:00Z,Nadia Okonkwo,no_knowledge,False,,no idea sorry
+R1040,2,2026-06-30T10:30:00Z,Hana Nakashima,referral_suggestion,False,Sloane Fairweather,adding Sloane Fairweather who might know
+R1040,3,2026-07-01T13:30:00Z,Nadia Okonkwo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1041,0,2025-12-02T09:19:00Z,Hana Nakashima,unclassified,True,,trying to reach SVP Digital at Apex Logistics — anyone have a path?
+R1041,1,2025-12-03T19:30:00Z,Imani Mkhize,bump,False,,bumping this
+R1041,2,2025-12-05T10:30:00Z,Imani Mkhize,possible_duplicate_query,False,,is this the same as the one from last month?
+R1042,0,2026-06-01T09:13:00Z,Imani Mkhize,unclassified,True,,"Brightmoor Energy is the target. Our champion at Kingsmere Retail Group used to work with their team, and I think Apex Logistics is a supplier of theirs. Any path?"
+R1042,1,2026-06-02T13:30:00Z,Hana Nakashima,qualification_question,False,,what's the deal size here?
+R1042,2,2026-06-03T12:30:00Z,Hana Nakashima,blocker_note,False,,I think their procurement is frozen until Q1
+R1042,3,2026-06-04T16:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,is this the same as the one from last month?
+R1043,0,2026-03-19T09:18:00Z,Yusuf Petrossian,unclassified,True,,who do we know at Copperline Water? Chief Technology Officer would be ideal but I'll take anyone senior
+R1043,1,2026-03-20T15:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,did we not already lose this one?
+R1043,2,2026-03-23T11:30:00Z,Curtis Hartigan,no_knowledge,False,,no idea sorry
+R1044,0,2026-05-03T09:15:00Z,Imani Mkhize,unclassified,True,,who knows someone at Meridian Peak?
+R1044,1,2026-05-07T18:30:00Z,Sloane Fairweather,qualification_question,False,,what's the deal size here?
+R1044,2,2026-05-07T19:30:00Z,Yusuf Petrossian,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1045,0,2025-09-06T09:15:00Z,Yusuf Petrossian,unclassified,True,,who do we know at Marlowe Freight Systems? VP Enterprise Architecture would be ideal but I'll take anyone senior
+R1046,0,2026-06-08T09:10:00Z,Curtis Hartigan,unclassified,True,,Freya Thackeray-Underhill is the person I need. Pretty sure they're a Head of Developer Productivity somewhere in Consumer.
+R1047,0,2025-08-17T09:16:00Z,Rafael Salcedo,unclassified,True,,"Calderon Aerospace introduced us to Kestrel Airlines, but the account I actually need is Pelham Beverage (Director of Software Engineering)."
+R1047,1,2025-08-21T15:30:00Z,Bertrand Vandermolen,bump,False,,bumping this
+R1047,2,2025-08-21T18:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1048,0,2026-04-14T09:16:00Z,Bertrand Vandermolen,unclassified,True,,any connections into Bexley Bioworks? we're up against a renewal window and I need an intro to Chief Data Officer
+R1048,1,2026-04-15T10:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1048,2,2026-04-18T18:30:00Z,Hana Nakashima,referral_suggestion,False,Curtis Hartigan,adding Curtis Hartigan who might know
+R1049,0,2025-10-07T09:13:00Z,Nadia Okonkwo,unclassified,True,,long shot — Ravensmoor Defense. Rhys Ferreira-Ingleby (Chief Digital Officer). Anyone?
+R1049,1,2025-10-07T16:30:00Z,Rafael Salcedo,no_knowledge,False,,no idea sorry
+R1049,2,2025-10-09T19:30:00Z,Rafael Salcedo,referral_suggestion,False,Imani Mkhize,adding Imani Mkhize who might know
+R1049,3,2025-10-11T11:30:00Z,Curtis Hartigan,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1050,0,2025-09-05T09:11:00Z,Curtis Hartigan,unclassified,True,,trying to reach Head of Developer Productivity at Pemberton Retail — anyone have a path?
+R1051,0,2026-04-17T09:12:00Z,Hana Nakashima,unclassified,True,,"anyone connected to Solveig Dobrescu-Mkhize? They run engineering at a large logistics business, I don't have the entity name handy"
+R1051,1,2026-04-19T12:30:00Z,Curtis Hartigan,blocker_note,False,,I think their procurement is frozen until Q1
+R1051,2,2026-04-21T13:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1052,0,2025-08-19T09:19:00Z,Yusuf Petrossian,bump,False,,asking again: Priorwood Chemicals. Head of Platform Engineering. Happy to draft the forward myself if someone can vouch.
+R1052,1,2025-08-21T17:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1053,0,2026-06-16T09:18:00Z,Rafael Salcedo,bump,False,,asking again: Strathmore Rail. VP Data & Analytics. Happy to draft the forward myself if someone can vouch.
+R1054,0,2026-01-10T09:15:00Z,Nadia Okonkwo,unclassified,True,,trying to reach Chief Operating Officer at Kestrel Airlines — anyone have a path?
+R1054,1,2026-01-10T10:30:00Z,Yusuf Petrossian,qualification_question,False,,what's the deal size here?
+R1054,2,2026-01-13T11:30:00Z,Curtis Hartigan,qualification_question,False,,what's the deal size here?
+R1055,0,2026-07-08T09:15:00Z,Rafael Salcedo,unclassified,True,,"looking for a path to Noor Isenberg-Havercamp — email domain is vireosystems.com, that's all I have"
+R1055,1,2026-07-12T10:30:00Z,Imani Mkhize,referral_suggestion,False,Imani Mkhize,adding Imani Mkhize who might know
+R1056,0,2025-08-25T09:18:00Z,Sloane Fairweather,unclassified,True,,Elena Bellinger-Havercamp is the person I need. Pretty sure they're a VP Engineering somewhere in Healthcare.
+R1056,1,2025-08-25T10:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1056,2,2025-08-27T13:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,did we not already lose this one?
+R1057,0,2026-06-16T09:17:00Z,Curtis Hartigan,unclassified,True,,any connections into Harrowgate Health? we're up against a renewal window and I need an intro to Chief Information Officer
+R1057,1,2026-06-16T17:30:00Z,Yusuf Petrossian,bump,False,,bumping this
+R1057,2,2026-06-18T10:30:00Z,Sloane Fairweather,qualification_question,False,,what's the deal size here?
+R1057,3,2026-06-18T16:30:00Z,Rafael Salcedo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1058,0,2026-01-01T09:11:00Z,Curtis Hartigan,unclassified,True,,"need help getting to Gravenhurst Motors. Imani Salcedo-Prendergast is the Chief Data Officer there, cold outbound is going nowhere"
+R1058,1,2026-01-02T19:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1058,2,2026-01-03T10:30:00Z,Hana Nakashima,referral_suggestion,False,Curtis Hartigan,adding Curtis Hartigan who might know
+R1059,0,2025-09-06T09:14:00Z,Bertrand Vandermolen,unclassified,True,,"Cindermill Mining is the target. Our champion at Quillon Pharma used to work with their team, and I think Pemberton Retail is a supplier of theirs. Any path?"
+R1059,1,2025-09-07T15:30:00Z,Hana Nakashima,possible_duplicate_query,False,,is this the same as the one from last month?
+R1060,0,2025-08-15T09:11:00Z,Nadia Okonkwo,unclassified,True,,"does anyone know anyone at Vireo Systems? looking for VP Enterprise Architecture, ideally warm"
+R1061,0,2026-02-21T09:17:00Z,Bertrand Vandermolen,unclassified,True,,"does anyone know anyone at Pemberton Retail? looking for Head of Developer Productivity, ideally warm"
+R1061,1,2026-02-21T11:30:00Z,Nadia Okonkwo,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1061,2,2026-02-22T17:30:00Z,Rafael Salcedo,referral_suggestion,False,Nadia Okonkwo,adding Nadia Okonkwo who might know
+R1062,0,2026-05-09T09:15:00Z,Bertrand Vandermolen,unclassified,True,,who do we know at Larkhall Software? Head of Developer Productivity would be ideal but I'll take anyone senior
+R1062,1,2026-05-09T17:30:00Z,Imani Mkhize,no_knowledge,False,,no idea sorry
+R1062,2,2026-05-13T15:30:00Z,Yusuf Petrossian,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1063,0,2025-11-06T09:14:00Z,Sloane Fairweather,unclassified,True,,trying to reach Chief Operating Officer at Silverbrook Paper — anyone have a path?
+R1063,1,2025-11-07T15:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1063,2,2025-11-07T16:30:00Z,Hana Nakashima,bump,False,,bumping this
+R1063,3,2025-11-10T11:30:00Z,Hana Nakashima,possible_duplicate_query,False,,is this the same as the one from last month?
+R1064,0,2025-08-14T09:14:00Z,Yusuf Petrossian,unclassified,True,,trying to reach Chief Data Officer at Thistledown Energy — anyone have a path?
+R1064,1,2025-08-15T11:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,did we not already lose this one?
+R1064,2,2025-08-15T18:30:00Z,Rafael Salcedo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1065,0,2026-04-08T09:14:00Z,Bertrand Vandermolen,unclassified,True,,"Volney Industrial Systems introduced us to Halcyon Grid, but the account I actually need is Hollowbrook Grocers (Director of Software Engineering)."
+R1065,1,2026-04-11T10:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1066,0,2026-06-25T09:11:00Z,Curtis Hartigan,unclassified,True,,any connections into Kingsmere Retail Group? we're up against a renewal window and I need an intro to Chief Digital Officer
+R1066,1,2026-06-27T14:05:00Z,Yusuf Petrossian,volunteer_offer,False,,I'll take this one — I've got a direct line to their exec team
+R1067,0,2025-10-22T09:12:00Z,Curtis Hartigan,unclassified,True,,"does anyone know anyone at Redtree Foods? looking for Head of Platform Engineering, ideally warm"
+R1068,0,2026-02-14T09:15:00Z,Rafael Salcedo,unclassified,True,,long shot — Calderon Aerospace. Emeka Ingleby-Brenneman (Chief Digital Officer). Anyone?
+R1069,0,2025-10-30T09:18:00Z,Sloane Fairweather,unclassified,True,,any connections into Apex Logistics Group? we're up against a renewal window and I need an intro to SVP Digital
+R1070,0,2026-05-07T09:12:00Z,Imani Mkhize,unclassified,True,,trying to reach SVP Digital at Kingsmere Retail Group. I know we sell into Pelham Beverage and Larchmont Aerospace — could either of those relationships get us there?
+R1070,1,2026-05-09T10:30:00Z,Imani Mkhize,qualification_question,False,,what's the deal size here?
+R1070,2,2026-05-10T11:30:00Z,Sloane Fairweather,qualification_question,False,,what's the deal size here?
+R1071,0,2026-01-29T09:10:00Z,Curtis Hartigan,unclassified,True,,trying to reach Chief Digital Officer at Duncastle Hotels. I know we sell into Blackwood Industrial and Ellerby Semiconductor — could either of those relationships get us there?
+R1072,0,2025-10-31T09:11:00Z,Sloane Fairweather,unclassified,True,,long shot — Harrowgate Health. Liesel Marchetti-Wolstenholme (SVP Digital). Anyone?
+R1072,1,2025-11-02T16:30:00Z,Bertrand Vandermolen,referral_suggestion,False,Sloane Fairweather,adding Sloane Fairweather who might know
+R1072,2,2025-11-04T19:30:00Z,Rafael Salcedo,no_knowledge,False,,no idea sorry
+R1073,0,2025-12-20T09:14:00Z,Nadia Okonkwo,unclassified,True,,"need help getting to Volney Industrial Systems. Anouk Underhill-Hartigan is the Chief Information Officer there, cold outbound is going nowhere"
+R1073,1,2025-12-23T13:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1073,2,2025-12-24T15:30:00Z,Sloane Fairweather,referral_suggestion,False,Nadia Okonkwo,adding Nadia Okonkwo who might know
+R1074,0,2026-06-03T09:18:00Z,Bertrand Vandermolen,unclassified,True,,trying to reach VP Data & Analytics at Redtree Foods — anyone have a path?
+R1074,1,2026-06-05T14:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,did we not already lose this one?
+R1074,2,2026-06-07T15:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,is this the same as the one from last month?
+R1075,0,2026-02-25T09:18:00Z,Hana Nakashima,unclassified,True,,who do we know at Vireo Systems? VP Engineering would be ideal but I'll take anyone senior
+R1075,1,2026-02-26T16:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1075,2,2026-02-27T10:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1076,0,2026-01-27T09:10:00Z,Imani Mkhize,entity_warning,True,,"we need Cobalt Lane Capital Markets. Not Ferrowick Insurance — that's a different entity and we already have that one. Also spoke to Apex Logistics last week, unrelated."
+R1076,1,2026-01-28T11:30:00Z,Hana Nakashima,possible_duplicate_query,False,,did we not already lose this one?
+R1076,2,2026-01-30T15:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1077,0,2026-02-26T09:16:00Z,Rafael Salcedo,unclassified,True,,trying to reach Head of Developer Productivity at Nortonbury Logistics — anyone have a path?
+R1078,0,2025-11-11T09:18:00Z,Hana Nakashima,bump,False,,asking again: Cobalt Lane Capital Markets. VP Engineering. Happy to draft the forward myself if someone can vouch.
+R1078,1,2025-11-12T19:30:00Z,Hana Nakashima,possible_duplicate_query,False,,is this the same as the one from last month?
+R1079,0,2026-06-23T09:12:00Z,Curtis Hartigan,unclassified,True,,who knows someone at Cobalt Lane?
+R1079,1,2026-06-24T11:00:00Z,Elena Duvall,entity_warning,False,,careful — Redtree Capital (fund) and Redtree Foods (operating co) are completely different companies
+R1079,2,2026-06-24T17:30:00Z,Bertrand Vandermolen,blocker_note,False,,I think their procurement is frozen until Q1
+R1080,0,2026-01-14T09:18:00Z,Hana Nakashima,unclassified,True,,trying to reach VP Engineering at Volney Industrial Systems — anyone have a path?
+R1080,1,2026-01-14T12:30:00Z,Nadia Okonkwo,referral_suggestion,False,Bertrand Vandermolen,adding Bertrand Vandermolen who might know
+R1080,2,2026-01-14T18:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1080,3,2026-01-16T10:30:00Z,Nadia Okonkwo,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1081,0,2025-09-30T09:12:00Z,Curtis Hartigan,unclassified,True,,who do we know at Sablefield Motors? SVP Digital would be ideal but I'll take anyone senior
+R1081,1,2025-10-03T16:30:00Z,Yusuf Petrossian,bump,False,,bumping this
+R1081,2,2025-10-04T18:30:00Z,Imani Mkhize,no_knowledge,False,,no idea sorry
+R1082,0,2025-08-02T09:16:00Z,Sloane Fairweather,unclassified,True,,trying to reach Chief Information Officer at Duncastle Hotels. I know we sell into Wrenfield Robotics and Yarrowdale Media — could either of those relationships get us there?
+R1082,1,2025-08-02T14:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,is this the same as the one from last month?
+R1082,2,2025-08-04T14:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,is this the same as the one from last month?
+R1082,3,2025-08-04T19:30:00Z,Rafael Salcedo,bump,False,,bumping this
+R1083,0,2026-06-04T09:17:00Z,Nadia Okonkwo,unclassified,True,,"looking for a path to Perrine Hartigan-Thackeray — email domain is thistledownenergy.com, that's all I have"
+R1084,0,2026-07-13T09:12:00Z,Bertrand Vandermolen,unclassified,True,,"need help getting to Hollowbrook Grocers. Dev Prendergast-Jarrold is the VP Engineering there, cold outbound is going nowhere"
+R1084,1,2026-07-13T16:30:00Z,Nadia Okonkwo,referral_suggestion,False,Hana Nakashima,adding Hana Nakashima who might know
+R1084,2,2026-07-16T11:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1084,3,2026-07-17T11:30:00Z,Curtis Hartigan,no_knowledge,False,,no idea sorry
+R1085,0,2026-04-27T09:19:00Z,Yusuf Petrossian,unclassified,True,,Matteo Petrossian-Lomsadze is the person I need. Pretty sure they're a Director of Software Engineering somewhere in Financial Services.
+R1085,1,2026-05-01T10:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,is this the same as the one from last month?
+R1086,0,2026-02-17T09:18:00Z,Sloane Fairweather,unclassified,True,,who do we know at Ironvale Steel? VP Enterprise Architecture would be ideal but I'll take anyone senior
+R1086,1,2026-02-17T12:30:00Z,Imani Mkhize,no_knowledge,False,,no idea sorry
+R1086,2,2026-02-18T16:30:00Z,Rafael Salcedo,referral_suggestion,False,Hana Nakashima,adding Hana Nakashima who might know
+R1086,3,2026-02-20T14:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,is this the same as the one from last month?
+R1087,0,2026-02-10T09:19:00Z,Curtis Hartigan,unclassified,True,,who knows someone at Silverbrook?
+R1087,1,2026-02-11T10:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,is this the same as the one from last month?
+R1087,2,2026-02-12T18:30:00Z,Hana Nakashima,blocker_note,False,,I think their procurement is frozen until Q1
+R1087,3,2026-02-14T12:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1088,0,2026-04-09T09:18:00Z,Curtis Hartigan,unclassified,True,,need an intro at Thornbury — anyone?
+R1088,1,2026-04-10T11:00:00Z,Tomás Beckett,entity_warning,False,,careful — Ironvale Partners (fund) and Ironvale Steel (operating co) are completely different companies
+R1088,2,2026-04-11T10:30:00Z,Curtis Hartigan,no_knowledge,False,,no idea sorry
+R1089,0,2026-02-18T09:19:00Z,Hana Nakashima,unclassified,True,,who do we know at Ironvale Steel? VP Enterprise Architecture would be ideal but I'll take anyone senior
+R1089,1,2026-02-22T16:30:00Z,Imani Mkhize,qualification_question,False,,what's the deal size here?
+R1090,0,2025-12-17T09:10:00Z,Hana Nakashima,unclassified,True,,any connections into Harrowgate Health? we're up against a renewal window and I need an intro to VP Engineering
+R1090,1,2025-12-18T10:30:00Z,Sloane Fairweather,no_knowledge,False,,no idea sorry
+R1090,2,2025-12-19T15:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1091,0,2026-04-14T09:11:00Z,Yusuf Petrossian,unclassified,True,,who do we know at Blackwood Industrial? Chief Digital Officer would be ideal but I'll take anyone senior
+R1091,1,2026-04-16T17:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,is this the same as the one from last month?
+R1091,2,2026-04-16T19:30:00Z,Hana Nakashima,blocker_note,False,,I think their procurement is frozen until Q1
+R1091,3,2026-04-17T13:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1092,0,2026-03-28T09:18:00Z,Sloane Fairweather,unclassified,True,,who do we know at Priorwood Chemicals? VP Enterprise Architecture would be ideal but I'll take anyone senior
+R1093,0,2025-12-16T09:15:00Z,Curtis Hartigan,unclassified,True,,long shot — Strathmore Rail. Rafael Hartigan-Zubkov (Head of Platform Engineering). Anyone?
+R1093,1,2025-12-17T14:30:00Z,Nadia Okonkwo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1093,2,2025-12-18T15:30:00Z,Curtis Hartigan,referral_suggestion,False,Bertrand Vandermolen,adding Bertrand Vandermolen who might know
+R1093,3,2025-12-19T15:30:00Z,Hana Nakashima,possible_duplicate_query,False,,is this the same as the one from last month?
+R1094,0,2026-06-23T09:18:00Z,Hana Nakashima,unclassified,True,,long shot — Strathmore Rail. Hugo Glückstein-Sandoval (VP Data & Analytics). Anyone?
+R1095,0,2025-12-24T09:19:00Z,Rafael Salcedo,unclassified,True,,Yusuf Sandoval-Drummond is the person I need. Pretty sure they're a Chief Digital Officer somewhere in Transport.
+R1096,0,2026-03-25T09:16:00Z,Sloane Fairweather,unclassified,True,,need an intro at Silverbrook — anyone?
+R1096,1,2026-03-25T18:30:00Z,Hana Nakashima,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1096,2,2026-03-27T10:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,did we not already lose this one?
+R1096,3,2026-03-28T19:30:00Z,Imani Mkhize,blocker_note,False,,I think their procurement is frozen until Q1
+R1097,0,2025-12-04T09:11:00Z,Nadia Okonkwo,unclassified,True,,any connections into Pemberton Retail? we're up against a renewal window and I need an intro to VP Data & Analytics
+R1097,1,2025-12-05T17:30:00Z,Sloane Fairweather,bump,False,,bumping this
+R1097,2,2025-12-06T15:30:00Z,Imani Mkhize,blocker_note,False,,I think their procurement is frozen until Q1
+R1097,3,2025-12-08T15:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1098,0,2026-03-20T09:17:00Z,Curtis Hartigan,unclassified,True,,"need help getting to Priorwood Chemicals. Liesel Merriweather-Lomsadze is the Chief Data Officer there, cold outbound is going nowhere"
+R1098,1,2026-03-20T12:30:00Z,Yusuf Petrossian,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1098,2,2026-03-20T17:30:00Z,Nadia Okonkwo,referral_suggestion,False,Sloane Fairweather,adding Sloane Fairweather who might know
+R1098,3,2026-03-24T18:30:00Z,Sloane Fairweather,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1099,0,2026-01-09T09:14:00Z,Nadia Okonkwo,unclassified,True,,long shot — Aldergate Telecom. Dana Fairweather-Dellinger (VP Enterprise Architecture). Anyone?
+R1099,1,2026-01-12T10:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1100,0,2026-05-08T09:10:00Z,Curtis Hartigan,unclassified,True,,any connections into Northwind Freight? we're up against a renewal window and I need an intro to Chief Technology Officer
+R1100,1,2026-05-08T18:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1100,2,2026-05-12T12:30:00Z,Hana Nakashima,possible_duplicate_query,False,,is this the same as the one from last month?
+R1101,0,2026-05-09T09:12:00Z,Imani Mkhize,unclassified,True,,any connections into Calderon Aerospace? we're up against a renewal window and I need an intro to Head of Developer Productivity
+R1101,1,2026-05-12T15:30:00Z,Hana Nakashima,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1102,0,2025-10-27T09:10:00Z,Yusuf Petrossian,unclassified,True,,any connections into Strathmore Rail? we're up against a renewal window and I need an intro to VP Engineering
+R1102,1,2025-10-27T19:30:00Z,Curtis Hartigan,no_knowledge,False,,no idea sorry
+R1102,2,2025-10-30T12:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1102,3,2025-10-31T12:30:00Z,Hana Nakashima,possible_duplicate_query,False,,is this the same as the one from last month?
+R1103,0,2025-11-29T09:12:00Z,Nadia Okonkwo,unclassified,True,,trying to reach SVP Digital at Larchmont Aerospace. I know we sell into Apex Logistics Group and Calderon Aerospace — could either of those relationships get us there?
+R1104,0,2025-12-20T09:19:00Z,Bertrand Vandermolen,bump,False,,asking again: Ellerby Semiconductor. VP Engineering. Happy to draft the forward myself if someone can vouch.
+R1104,1,2025-12-21T16:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,did we not already lose this one?
+R1104,2,2025-12-23T16:30:00Z,Nadia Okonkwo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1104,3,2025-12-23T17:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1105,0,2025-09-14T09:15:00Z,Imani Mkhize,unclassified,True,,who do we know at Thornbury Financial? Chief Information Officer would be ideal but I'll take anyone senior
+R1105,1,2025-09-15T12:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1105,2,2025-09-18T14:30:00Z,Yusuf Petrossian,bump,False,,bumping this
+R1106,0,2026-07-14T09:13:00Z,Yusuf Petrossian,unclassified,True,,"anyone connected to Arjun Lindqvist-Lomsadze? They run engineering at a large logistics business, I don't have the entity name handy"
+R1106,1,2026-07-14T19:30:00Z,Curtis Hartigan,qualification_question,False,,what's the deal size here?
+R1106,2,2026-07-18T17:30:00Z,Rafael Salcedo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1107,0,2025-11-05T09:11:00Z,Nadia Okonkwo,unclassified,True,,long shot — Vireo Systems. Ilse Vandermolen-Grimsby (Head of Developer Productivity). Anyone?
+R1107,1,2025-11-05T11:30:00Z,Hana Nakashima,possible_duplicate_query,False,,did we not already lose this one?
+R1107,2,2025-11-05T18:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1107,3,2025-11-07T17:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1108,0,2025-10-09T09:10:00Z,Yusuf Petrossian,unclassified,True,,any connections into Gravenhurst Motors? we're up against a renewal window and I need an intro to VP Engineering
+R1108,1,2025-10-09T10:30:00Z,Curtis Hartigan,bump,False,,bumping this
+R1108,2,2025-10-09T10:30:00Z,Curtis Hartigan,blocker_note,False,,I think their procurement is frozen until Q1
+R1108,3,2025-10-09T14:05:00Z,Hana Nakashima,volunteer_offer,False,,"I met their Chief Digital Officer at a conference last spring, happy to reach out"
+R1108,4,2025-10-13T19:30:00Z,Curtis Hartigan,bump,False,,bumping this
+R1109,0,2025-10-24T09:12:00Z,Bertrand Vandermolen,unclassified,True,,"need help getting to Ravensmoor Defense. Liesel Bellinger-Dellinger is the VP Engineering there, cold outbound is going nowhere"
+R1109,1,2025-10-24T17:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1109,2,2025-10-26T14:05:00Z,Owen Trask,volunteer_offer,False,,"their Head of Platform reports to someone I've known for a decade, leave it with me"
+R1110,0,2026-07-13T09:15:00Z,Sloane Fairweather,unclassified,True,,"anyone connected to Rosalind Isenberg-Prendergast? They run engineering at a large logistics business, I don't have the entity name handy"
+R1110,1,2026-07-13T12:30:00Z,Bertrand Vandermolen,no_knowledge,False,,no idea sorry
+R1110,2,2026-07-14T10:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1111,0,2026-01-29T09:10:00Z,Imani Mkhize,unclassified,True,,who do we know at Vantage Ridge Utilities? Chief Operating Officer would be ideal but I'll take anyone senior
+R1111,1,2026-02-01T11:30:00Z,Curtis Hartigan,qualification_question,False,,what's the deal size here?
+R1112,0,2026-01-15T09:14:00Z,Yusuf Petrossian,unclassified,True,,Nadia Mkhize-Ferreira is the person I need. Pretty sure they're a VP Engineering somewhere in Airlines.
+R1112,1,2026-01-19T18:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1113,0,2026-02-01T09:18:00Z,Imani Mkhize,unclassified,True,,who do we know at Kingsmere Retail Group? Chief Digital Officer would be ideal but I'll take anyone senior
+R1113,1,2026-02-05T15:30:00Z,Hana Nakashima,referral_suggestion,False,Nadia Okonkwo,adding Nadia Okonkwo who might know
+R1114,0,2026-02-17T09:13:00Z,Yusuf Petrossian,unclassified,True,,trying to reach Head of Platform Engineering at Marchford Clinics — anyone have a path?
+R1114,1,2026-02-19T11:30:00Z,Nadia Okonkwo,blocker_note,False,,I think their procurement is frozen until Q1
+R1114,2,2026-02-21T11:30:00Z,Bertrand Vandermolen,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1115,0,2026-02-20T09:19:00Z,Curtis Hartigan,unclassified,True,,trying to reach SVP Digital at Gravenhurst Motors — anyone have a path?
+R1115,1,2026-02-20T14:05:00Z,Priya Raghunathan,volunteer_offer,False,,"their Head of Platform reports to someone I've known for a decade, leave it with me"
+R1115,2,2026-02-21T11:30:00Z,Curtis Hartigan,blocker_note,False,,I think their procurement is frozen until Q1
+R1115,3,2026-02-21T14:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,is this the same as the one from last month?
+R1115,4,2026-02-22T18:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,did we not already lose this one?
+R1116,0,2026-04-24T09:10:00Z,Curtis Hartigan,unclassified,True,,trying to reach Chief Digital Officer at Marrow Point Airways. I know we sell into Kestrel Airlines and Bexley Bioworks — could either of those relationships get us there?
+R1116,1,2026-04-24T13:30:00Z,Bertrand Vandermolen,referral_suggestion,False,Curtis Hartigan,adding Curtis Hartigan who might know
+R1116,2,2026-04-24T18:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,did we not already lose this one?
+R1117,0,2026-04-11T09:17:00Z,Yusuf Petrossian,unclassified,True,,any connections into Sablefield Motors? we're up against a renewal window and I need an intro to SVP Digital
+R1117,1,2026-04-11T13:30:00Z,Hana Nakashima,possible_duplicate_query,False,,did we not already lose this one?
+R1117,2,2026-04-11T15:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1117,3,2026-04-13T14:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1118,0,2025-09-15T09:17:00Z,Nadia Okonkwo,unclassified,True,,trying to reach Chief Operating Officer at Priorwood Chemicals — anyone have a path?
+R1118,1,2025-09-18T11:30:00Z,Rafael Salcedo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1119,0,2026-06-10T09:11:00Z,Imani Mkhize,unclassified,True,,Freya Havercamp-Drummond is the person I need. Pretty sure they're a VP Enterprise Architecture somewhere in Aerospace.
+R1119,1,2026-06-11T15:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1120,0,2025-10-28T09:12:00Z,Yusuf Petrossian,bump,False,,asking again: Duncastle Hotels. Chief Information Officer. Happy to draft the forward myself if someone can vouch.
+R1120,1,2025-11-01T12:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,did we not already lose this one?
+R1121,0,2025-09-11T09:13:00Z,Sloane Fairweather,unclassified,True,,"Ferrowick Insurance introduced us to Pelham Beverage, but the account I actually need is Marchford Clinics (VP Engineering)."
+R1121,1,2025-09-14T10:30:00Z,Bertrand Vandermolen,no_knowledge,False,,no idea sorry
+R1122,0,2026-07-19T09:15:00Z,Rafael Salcedo,unclassified,True,,"need help getting to Gravenhurst Motors. Greta Bellinger-Fairweather is the SVP Digital there, cold outbound is going nowhere"
+R1122,1,2026-07-20T14:05:00Z,Curtis Hartigan,volunteer_offer,False,,"I met their Chief Data Officer at a conference last spring, happy to reach out"
+R1123,0,2026-04-22T09:10:00Z,Imani Mkhize,unclassified,True,,"does anyone know anyone at Brightmoor Energy? looking for VP Enterprise Architecture, ideally warm"
+R1123,1,2026-04-23T10:30:00Z,Yusuf Petrossian,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1124,0,2025-11-10T09:19:00Z,Yusuf Petrossian,unclassified,True,,"need help getting to Hollowbrook Grocers. Anouk Halloran-Lindqvist is the VP Engineering there, cold outbound is going nowhere"
+R1124,1,2025-11-10T14:05:00Z,Priya Raghunathan,volunteer_offer,False,,"I met their Chief Operating Officer at a conference last spring, happy to reach out"
+R1125,0,2026-07-05T09:16:00Z,Sloane Fairweather,bump,False,,asking again: Strathmore Rail. Chief Operating Officer. Happy to draft the forward myself if someone can vouch.
+R1125,1,2026-07-06T12:30:00Z,Imani Mkhize,qualification_question,False,,what's the deal size here?
+R1125,2,2026-07-06T14:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1125,3,2026-07-06T18:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,did we not already lose this one?
+R1126,0,2026-03-09T09:19:00Z,Sloane Fairweather,unclassified,True,,path into Cobalt Lane? our champion mentioned them last week
+R1126,1,2026-03-13T10:30:00Z,Hana Nakashima,blocker_note,False,,I think their procurement is frozen until Q1
+R1126,2,2026-03-13T16:30:00Z,Sloane Fairweather,bump,False,,bumping this
+R1127,0,2026-05-26T09:13:00Z,Imani Mkhize,bump,False,,asking again: Halcyon Grid. SVP Digital. Happy to draft the forward myself if someone can vouch.
+R1127,1,2026-05-28T17:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1128,0,2025-12-26T09:12:00Z,Nadia Okonkwo,unclassified,True,,who do we know at Kingsmere Retail Group? VP Enterprise Architecture would be ideal but I'll take anyone senior
+R1128,1,2025-12-28T18:30:00Z,Hana Nakashima,bump,False,,bumping this
+R1129,0,2026-05-06T09:15:00Z,Nadia Okonkwo,unclassified,True,,"Sundermere Bank introduced us to Redtree Foods, but the account I actually need is Marlowe Freight Systems (Chief Digital Officer)."
+R1129,1,2026-05-10T17:30:00Z,Hana Nakashima,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1129,2,2026-05-10T18:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,is this the same as the one from last month?
+R1130,0,2026-02-04T09:12:00Z,Sloane Fairweather,unclassified,True,,trying to reach Director of Software Engineering at Blackwood Industrial — anyone have a path?
+R1130,1,2026-02-06T14:05:00Z,Tomás Beckett,volunteer_offer,False,,I'll take this one — I've got a direct line to their exec team
+R1131,0,2026-06-20T09:12:00Z,Rafael Salcedo,unclassified,True,,trying to reach Chief Data Officer at Vireo Systems. I know we sell into Volney Industrial Systems and Larchmont Aerospace — could either of those relationships get us there?
+R1131,1,2026-06-21T15:30:00Z,Yusuf Petrossian,referral_suggestion,False,Yusuf Petrossian,adding Yusuf Petrossian who might know
+R1131,2,2026-06-24T10:30:00Z,Nadia Okonkwo,no_knowledge,False,,no idea sorry
+R1131,3,2026-06-24T18:30:00Z,Bertrand Vandermolen,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1132,0,2025-12-13T09:18:00Z,Sloane Fairweather,bump,False,,asking again: Strathmore Rail. Chief Operating Officer. Happy to draft the forward myself if someone can vouch.
+R1133,0,2026-04-08T09:13:00Z,Sloane Fairweather,unclassified,True,,long shot — Marrow Point Airways. Mei Eastcott-Thackeray (Chief Technology Officer). Anyone?
+R1133,1,2026-04-11T15:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,did we not already lose this one?
+R1134,0,2026-03-05T09:19:00Z,Bertrand Vandermolen,unclassified,True,,"Harrowgate Health introduced us to Copperline Water, but the account I actually need is Marlowe Freight Systems (Chief Technology Officer)."
+R1134,1,2026-03-06T11:30:00Z,Hana Nakashima,bump,False,,bumping this
+R1134,2,2026-03-06T14:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1135,0,2025-12-08T09:14:00Z,Curtis Hartigan,unclassified,True,,"looking for a path to Ilse Oldfield-Dobrescu — email domain is redtreefoods.com, that's all I have"
+R1136,0,2026-03-14T09:16:00Z,Nadia Okonkwo,unclassified,True,,who do we know at Harrowgate Health? SVP Digital would be ideal but I'll take anyone senior
+R1136,1,2026-03-16T14:05:00Z,Elena Duvall,volunteer_offer,False,,"their Head of Platform reports to someone I've known for a decade, leave it with me"
+R1136,2,2026-03-17T15:30:00Z,Bertrand Vandermolen,qualification_question,False,,what's the deal size here?
+R1137,0,2025-09-15T09:17:00Z,Imani Mkhize,unclassified,True,,trying to reach Chief Digital Officer at Harrowgate Health — anyone have a path?
+R1137,1,2025-09-16T18:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1137,2,2025-09-17T10:30:00Z,Imani Mkhize,bump,False,,bumping this
+R1138,0,2026-04-06T09:14:00Z,Yusuf Petrossian,unclassified,True,,"does anyone know anyone at Sablefield Motors? looking for Chief Information Officer, ideally warm"
+R1138,1,2026-04-10T10:30:00Z,Bertrand Vandermolen,no_knowledge,False,,no idea sorry
+R1139,0,2025-10-28T09:18:00Z,Bertrand Vandermolen,bump,False,,asking again: Brightmoor Energy. VP Data & Analytics. Happy to draft the forward myself if someone can vouch.
+R1139,1,2025-10-28T10:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1139,2,2025-10-28T11:30:00Z,Imani Mkhize,possible_duplicate_query,False,,did we not already lose this one?
+R1139,3,2025-11-01T19:30:00Z,Bertrand Vandermolen,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1140,0,2025-09-17T09:19:00Z,Yusuf Petrossian,unclassified,True,,"need help getting to Harrowgate Health. Freya Lindqvist-Eastcott is the Chief Digital Officer there, cold outbound is going nowhere"
+R1140,1,2025-09-17T19:30:00Z,Yusuf Petrossian,qualification_question,False,,what's the deal size here?
+R1140,2,2025-09-18T19:30:00Z,Yusuf Petrossian,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1140,3,2025-09-21T19:30:00Z,Rafael Salcedo,bump,False,,bumping this
+R1141,0,2025-11-25T09:19:00Z,Curtis Hartigan,unclassified,True,,"need help getting to Ironvale Steel. Priya Rushworth-Fairweather is the VP Enterprise Architecture there, cold outbound is going nowhere"
+R1141,1,2025-11-26T10:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,did we not already lose this one?
+R1141,2,2025-11-26T14:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1141,3,2025-11-26T17:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,did we not already lose this one?
+R1142,0,2025-09-26T09:16:00Z,Rafael Salcedo,unclassified,True,,who do we know at Marchford Clinics? Chief Technology Officer would be ideal but I'll take anyone senior
+R1142,1,2025-09-28T16:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1143,0,2026-03-04T09:16:00Z,Sloane Fairweather,unclassified,True,,any connections into Gravenhurst Motors? we're up against a renewal window and I need an intro to Chief Operating Officer
+R1144,0,2025-08-17T09:10:00Z,Curtis Hartigan,unclassified,True,,long shot — Cindermill Mining. Amara Højgaard-Egerton (VP Engineering). Anyone?
+R1144,1,2025-08-17T16:30:00Z,Hana Nakashima,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1144,2,2025-08-19T11:30:00Z,Nadia Okonkwo,blocker_note,False,,I think their procurement is frozen until Q1
+R1145,0,2026-04-12T09:11:00Z,Bertrand Vandermolen,unclassified,True,,Zaid Falkenrath-Lomsadze is the person I need. Pretty sure they're a SVP Digital somewhere in Financial Services.
+R1145,1,2026-04-12T10:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,is this the same as the one from last month?
+R1145,2,2026-04-12T17:30:00Z,Hana Nakashima,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1146,0,2026-03-15T09:11:00Z,Nadia Okonkwo,unclassified,True,,trying to reach Chief Operating Officer at Larchmont Aerospace. I know we sell into Ellerby Semiconductor and Quillon Pharma — could either of those relationships get us there?
+R1146,1,2026-03-16T17:30:00Z,Sloane Fairweather,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1147,0,2026-02-11T09:15:00Z,Hana Nakashima,unclassified,True,,"does anyone know anyone at Kingsmere Retail Group? looking for VP Enterprise Architecture, ideally warm"
+R1148,0,2026-04-14T09:12:00Z,Hana Nakashima,unclassified,True,,who do we know at Thistledown Energy? Chief Information Officer would be ideal but I'll take anyone senior
+R1148,1,2026-04-15T14:30:00Z,Bertrand Vandermolen,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1148,2,2026-04-16T11:30:00Z,Yusuf Petrossian,referral_suggestion,False,Yusuf Petrossian,adding Yusuf Petrossian who might know
+R1148,3,2026-04-17T11:30:00Z,Nadia Okonkwo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1149,0,2026-05-02T09:15:00Z,Rafael Salcedo,unclassified,True,,trying to reach Chief Digital Officer at Gravenhurst Motors — anyone have a path?
+R1149,1,2026-05-02T13:30:00Z,Bertrand Vandermolen,possible_duplicate_query,False,,is this the same as the one from last month?
+R1149,2,2026-05-04T19:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,did we not already lose this one?
+R1150,0,2026-03-09T09:10:00Z,Curtis Hartigan,unclassified,True,,long shot — Priorwood Chemicals. Odette Balogun-Dobrescu (Chief Information Officer). Anyone?
+R1150,1,2026-03-11T14:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1151,0,2026-07-20T09:13:00Z,Nadia Okonkwo,unclassified,True,,trying to reach VP Engineering at Copperline Water — anyone have a path?
+R1151,1,2026-07-22T18:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,is this the same as the one from last month?
+R1151,2,2026-07-24T10:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,is this the same as the one from last month?
+R1152,0,2025-12-18T09:19:00Z,Rafael Salcedo,unclassified,True,,trying to reach Head of Developer Productivity at Thistledown Energy — anyone have a path?
+R1153,0,2025-11-29T09:19:00Z,Nadia Okonkwo,unclassified,True,,"does anyone know anyone at Harrowgate Health? looking for Chief Operating Officer, ideally warm"
+R1154,0,2026-03-02T09:16:00Z,Yusuf Petrossian,unclassified,True,,who do we know at Apex Logistics Group? Head of Platform Engineering would be ideal but I'll take anyone senior
+R1154,1,2026-03-02T14:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1155,0,2026-06-28T09:10:00Z,Hana Nakashima,unclassified,True,,long shot — Vireo Systems. Niall Jarrold-Norrington (VP Engineering). Anyone?
+R1155,1,2026-06-28T10:30:00Z,Sloane Fairweather,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1155,2,2026-06-30T13:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,is this the same as the one from last month?
+R1155,3,2026-07-01T19:30:00Z,Yusuf Petrossian,qualification_question,False,,what's the deal size here?
+R1156,0,2025-10-01T09:14:00Z,Hana Nakashima,unclassified,True,,long shot — Wrenfield Robotics. Astrid Vandermolen-Petrossian (Head of Developer Productivity). Anyone?
+R1157,0,2026-04-28T09:12:00Z,Yusuf Petrossian,unclassified,True,,"does anyone know anyone at Harrowgate Health? looking for VP Enterprise Architecture, ideally warm"
+R1157,1,2026-04-28T19:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1157,2,2026-04-29T14:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,is this the same as the one from last month?
+R1157,3,2026-05-02T10:30:00Z,Bertrand Vandermolen,blocker_note,False,,I think their procurement is frozen until Q1
+R1158,0,2025-10-30T09:15:00Z,Rafael Salcedo,unclassified,True,,any connections into Gravenhurst Motors? we're up against a renewal window and I need an intro to Head of Platform Engineering
+R1158,1,2025-11-02T10:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1158,2,2025-11-03T11:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1159,0,2025-12-11T09:10:00Z,Bertrand Vandermolen,unclassified,True,,"Glasspoint Health introduced us to Pelham Beverage, but the account I actually need is Hollowbrook Grocers (VP Enterprise Architecture)."
+R1159,1,2025-12-11T19:30:00Z,Sloane Fairweather,blocker_note,False,,I think their procurement is frozen until Q1
+R1159,2,2025-12-13T16:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,did we not already lose this one?
+R1160,0,2026-05-22T09:14:00Z,Bertrand Vandermolen,unclassified,True,,any connections into Gravenhurst Motors? we're up against a renewal window and I need an intro to Director of Software Engineering
+R1160,1,2026-05-26T16:30:00Z,Bertrand Vandermolen,no_knowledge,False,,no idea sorry
+R1160,2,2026-05-26T17:30:00Z,Imani Mkhize,referral_suggestion,False,Bertrand Vandermolen,adding Bertrand Vandermolen who might know
+R1161,0,2025-12-20T09:19:00Z,Bertrand Vandermolen,unclassified,True,,"need help getting to Northwind Freight. Malik Højgaard-Ferreira is the Chief Digital Officer there, cold outbound is going nowhere"
+R1161,1,2025-12-20T12:30:00Z,Rafael Salcedo,referral_suggestion,False,Yusuf Petrossian,adding Yusuf Petrossian who might know
+R1162,0,2026-06-02T09:13:00Z,Curtis Hartigan,unclassified,True,,"Marchford Clinics is the target. Our champion at Calderon Aerospace used to work with their team, and I think Meridian Peak Foods is a supplier of theirs. Any path?"
+R1162,1,2026-06-02T14:30:00Z,Curtis Hartigan,no_knowledge,False,,no idea sorry
+R1163,0,2026-03-25T09:18:00Z,Curtis Hartigan,unclassified,True,,"need help getting to Osric Networks. Hana Salcedo-Balogun is the Chief Data Officer there, cold outbound is going nowhere"
+R1163,1,2026-03-25T15:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,did we not already lose this one?
+R1163,2,2026-03-27T14:05:00Z,Elena Duvall,volunteer_offer,False,,"I met their Chief Data Officer at a conference last spring, happy to reach out"
+R1163,3,2026-03-27T16:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1164,0,2025-08-06T09:13:00Z,Hana Nakashima,unclassified,True,,"looking for a path to Marisol Glückstein-Havercamp — email domain is thornburyfinancial.com, that's all I have"
+R1164,1,2025-08-06T12:30:00Z,Curtis Hartigan,bump,False,,bumping this
+R1164,2,2025-08-07T18:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1164,3,2025-08-09T18:30:00Z,Sloane Fairweather,bump,False,,bumping this
+R1165,0,2026-04-30T09:19:00Z,Sloane Fairweather,unclassified,True,,trying to reach Head of Platform Engineering at Pemberton Retail — anyone have a path?
+R1166,0,2025-11-08T09:16:00Z,Rafael Salcedo,unclassified,True,,"need help getting to Vireo Systems. Gideon Achterberg-Thackeray is the Chief Operating Officer there, cold outbound is going nowhere"
+R1167,0,2026-01-15T09:13:00Z,Nadia Okonkwo,unclassified,True,,who do we know at Osric Networks? Director of Software Engineering would be ideal but I'll take anyone senior
+R1167,1,2026-01-15T16:30:00Z,Sloane Fairweather,bump,False,,bumping this
+R1167,2,2026-01-16T14:05:00Z,Priya Raghunathan,volunteer_offer,False,,I'll take this one — I've got a direct line to their exec team
+R1167,3,2026-01-17T17:30:00Z,Imani Mkhize,qualification_question,False,,what's the deal size here?
+R1168,0,2026-07-22T09:13:00Z,Bertrand Vandermolen,unclassified,True,,any connections into Meridian Peak Foods? we're up against a renewal window and I need an intro to VP Engineering
+R1168,1,2026-07-24T17:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1168,2,2026-07-26T12:30:00Z,Hana Nakashima,bump,False,,bumping this
+R1168,3,2026-07-26T18:30:00Z,Nadia Okonkwo,bump,False,,bumping this
+R1169,0,2026-07-10T09:14:00Z,Curtis Hartigan,unclassified,True,,long shot — Yarrowdale Media. Tanvi Thackeray-Wolstenholme (VP Data & Analytics). Anyone?
+R1169,1,2026-07-10T14:05:00Z,Bertrand Vandermolen,volunteer_offer,False,,"I met their Chief Information Officer at a conference last spring, happy to reach out"
+R1170,0,2025-09-10T09:11:00Z,Hana Nakashima,unclassified,True,,any connections into Osric Networks? we're up against a renewal window and I need an intro to SVP Digital
+R1171,0,2026-01-12T09:14:00Z,Curtis Hartigan,unclassified,True,,"need help getting to Kingsmere Retail Group. Tanvi Prendergast-Falkenrath is the VP Enterprise Architecture there, cold outbound is going nowhere"
+R1171,1,2026-01-13T18:30:00Z,Imani Mkhize,blocker_note,False,,I think their procurement is frozen until Q1
+R1172,0,2025-10-21T09:10:00Z,Hana Nakashima,unclassified,True,,any connections into Meridian Peak Foods? we're up against a renewal window and I need an intro to VP Engineering
+R1173,0,2025-10-06T09:11:00Z,Rafael Salcedo,unclassified,True,,"does anyone know anyone at Harrowgate Health? looking for VP Engineering, ideally warm"
+R1174,0,2026-05-29T09:12:00Z,Yusuf Petrossian,unclassified,True,,trying to reach Head of Platform Engineering at Priorwood Chemicals — anyone have a path?
+R1174,1,2026-05-29T19:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,did we not already lose this one?
+R1174,2,2026-05-31T11:30:00Z,Nadia Okonkwo,qualification_question,False,,what's the deal size here?
+R1175,0,2025-11-20T09:11:00Z,Imani Mkhize,bump,False,,asking again: Copperline Water. Chief Digital Officer. Happy to draft the forward myself if someone can vouch.
+R1175,1,2025-11-23T19:30:00Z,Imani Mkhize,possible_duplicate_query,False,,is this the same as the one from last month?
+R1176,0,2026-04-03T09:11:00Z,Yusuf Petrossian,unclassified,True,,"does anyone know anyone at Pelham Beverage? looking for Head of Platform Engineering, ideally warm"
+R1176,1,2026-04-05T14:05:00Z,Imani Mkhize,volunteer_offer,False,,"their Head of Platform reports to someone I've known for a decade, leave it with me"
+R1176,2,2026-04-05T17:30:00Z,Hana Nakashima,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1177,0,2026-01-10T09:16:00Z,Nadia Okonkwo,unclassified,True,,"Halcyon Grid is the target. Our champion at Apex Logistics Group used to work with their team, and I think Yarrowdale Media is a supplier of theirs. Any path?"
+R1177,1,2026-01-11T18:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,did we not already lose this one?
+R1177,2,2026-01-13T12:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1178,0,2026-05-16T09:17:00Z,Bertrand Vandermolen,unclassified,True,,"need help getting to Quillon Pharma. Tanvi Eastcott-Lindqvist is the SVP Digital there, cold outbound is going nowhere"
+R1178,1,2026-05-16T13:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,did we not already lose this one?
+R1178,2,2026-05-17T15:30:00Z,Yusuf Petrossian,qualification_question,False,,what's the deal size here?
+R1179,0,2025-12-10T09:12:00Z,Nadia Okonkwo,unclassified,True,,"need help getting to Blackwood Industrial. Rhys Balogun-Kirkbride is the SVP Digital there, cold outbound is going nowhere"
+R1179,1,2025-12-12T16:30:00Z,Imani Mkhize,possible_duplicate_query,False,,is this the same as the one from last month?
+R1179,2,2025-12-12T16:30:00Z,Bertrand Vandermolen,blocker_note,False,,I think their procurement is frozen until Q1
+R1180,0,2025-08-07T09:16:00Z,Rafael Salcedo,unclassified,True,,long shot — Thornbury Financial. Dev Vandermolen-Havercamp (Director of Software Engineering). Anyone?
+R1180,1,2025-08-08T17:30:00Z,Imani Mkhize,bump,False,,bumping this
+R1180,2,2025-08-10T17:30:00Z,Yusuf Petrossian,blocker_note,False,,I think their procurement is frozen until Q1
+R1181,0,2026-05-03T09:13:00Z,Hana Nakashima,unclassified,True,,Sabine Zettergren-Ashdown is the person I need. Pretty sure they're a Chief Operating Officer somewhere in Healthcare.
+R1182,0,2026-02-12T09:11:00Z,Yusuf Petrossian,unclassified,True,,trying to reach VP Data & Analytics at Sablefield Motors. I know we sell into Cobalt Lane Capital Markets and Kingsmere Retail Group — could either of those relationships get us there?
+R1182,1,2026-02-15T12:30:00Z,Yusuf Petrossian,bump,False,,bumping this
+R1183,0,2026-04-29T09:18:00Z,Yusuf Petrossian,unclassified,True,,"looking for a path to Leandro Okonkwo-Oldfield — email domain is duncastle.com, that's all I have"
+R1183,1,2026-05-03T11:30:00Z,Rafael Salcedo,blocker_note,False,,I think their procurement is frozen until Q1
+R1184,0,2026-07-26T09:17:00Z,Bertrand Vandermolen,unclassified,True,,long shot — Cindermill Mining. Bo Zettergren-Wexford (Chief Digital Officer). Anyone?
+R1185,0,2026-02-04T09:15:00Z,Yusuf Petrossian,unclassified,True,,"need help getting to Gravenhurst Motors. Rosalind Zubkov-Isenberg is the VP Enterprise Architecture there, cold outbound is going nowhere"
+R1186,0,2025-12-27T09:13:00Z,Hana Nakashima,unclassified,True,,trying to reach VP Engineering at Apex Logistics Group. I know we sell into Priorwood Chemicals and Tessellate Payments — could either of those relationships get us there?
+R1186,1,2025-12-27T13:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,did we not already lose this one?
+R1187,0,2025-10-29T09:12:00Z,Bertrand Vandermolen,unclassified,True,,who do we know at Ashgrove Agriculture? Chief Digital Officer would be ideal but I'll take anyone senior
+R1187,1,2025-10-29T14:05:00Z,Priya Raghunathan,volunteer_offer,False,,"I know Kwame Marchetti-Drummond there well, happy to intro"
+R1187,2,2025-11-01T16:30:00Z,Rafael Salcedo,qualification_question,False,,what's the deal size here?
+R1187,3,2025-11-02T12:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,did we not already lose this one?
+R1187,4,2025-11-02T19:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,did we not already lose this one?
+R1188,0,2026-02-02T09:15:00Z,Bertrand Vandermolen,unclassified,True,,who do we know at Northwind Freight? VP Engineering would be ideal but I'll take anyone senior
+R1188,1,2026-02-02T12:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1188,2,2026-02-06T16:30:00Z,Curtis Hartigan,blocker_note,False,,I think their procurement is frozen until Q1
+R1189,0,2026-02-27T09:19:00Z,Nadia Okonkwo,bump,False,,asking again: Marrow Point Airways. Chief Information Officer. Happy to draft the forward myself if someone can vouch.
+R1190,0,2026-07-02T09:11:00Z,Yusuf Petrossian,bump,False,,asking again: Brightmoor Energy. VP Enterprise Architecture. Happy to draft the forward myself if someone can vouch.
+R1190,1,2026-07-04T15:30:00Z,Rafael Salcedo,bump,False,,bumping this
+R1190,2,2026-07-05T12:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1190,3,2026-07-06T12:30:00Z,Imani Mkhize,referral_suggestion,False,Curtis Hartigan,adding Curtis Hartigan who might know
+R1191,0,2025-12-15T09:15:00Z,Yusuf Petrossian,bump,False,,asking again: Volney Industrial Systems. Chief Digital Officer. Happy to draft the forward myself if someone can vouch.
+R1191,1,2025-12-18T19:30:00Z,Yusuf Petrossian,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1192,0,2025-08-18T09:11:00Z,Imani Mkhize,unclassified,True,,trying to reach Chief Operating Officer at Priorwood Chemicals — anyone have a path?
+R1192,1,2025-08-18T14:30:00Z,Sloane Fairweather,possible_duplicate_query,False,,did we not already lose this one?
+R1192,2,2025-08-19T19:30:00Z,Imani Mkhize,blocker_note,False,,I think their procurement is frozen until Q1
+R1192,3,2025-08-20T16:30:00Z,Nadia Okonkwo,possible_duplicate_query,False,,is this the same as the one from last month?
+R1193,0,2026-06-05T09:16:00Z,Rafael Salcedo,unclassified,True,,trying to reach Chief Operating Officer at Kingsmere Retail Group — anyone have a path?
+R1193,1,2026-06-06T11:30:00Z,Rafael Salcedo,referral_suggestion,False,Yusuf Petrossian,adding Yusuf Petrossian who might know
+R1193,2,2026-06-06T12:30:00Z,Rafael Salcedo,possible_duplicate_query,False,,did we not already lose this one?
+R1194,0,2026-06-28T09:19:00Z,Imani Mkhize,bump,False,,asking again: Marrow Point Airways. VP Data & Analytics. Happy to draft the forward myself if someone can vouch.
+R1194,1,2026-06-30T17:30:00Z,Yusuf Petrossian,possible_duplicate_query,False,,is this the same as the one from last month?
+R1194,2,2026-07-02T14:30:00Z,Nadia Okonkwo,routing_challenge,False,,wrong channel? this feels like a partner ask
+R1194,3,2026-07-02T16:30:00Z,Hana Nakashima,no_knowledge,False,,no idea sorry
+R1195,0,2026-04-27T09:13:00Z,Nadia Okonkwo,unclassified,True,,trying to reach SVP Digital at Wrenfield Robotics. I know we sell into Copperline Water and Harrowgate Health — could either of those relationships get us there?
+R1195,1,2026-04-27T13:30:00Z,Nadia Okonkwo,no_knowledge,False,,no idea sorry
+R1195,2,2026-04-27T18:30:00Z,Hana Nakashima,qualification_question,False,,what's the deal size here?
+R1195,3,2026-04-29T16:30:00Z,Hana Nakashima,possible_duplicate_query,False,,did we not already lose this one?
+R1196,0,2026-02-03T09:18:00Z,Bertrand Vandermolen,bump,False,,asking again: Priorwood Chemicals. Chief Technology Officer. Happy to draft the forward myself if someone can vouch.
+R1197,0,2025-08-08T09:16:00Z,Imani Mkhize,unclassified,True,,need an intro at Apex Logistics — anyone?
+R1197,1,2025-08-09T11:30:00Z,Rafael Salcedo,bump,False,,bumping this
+R1197,2,2025-08-10T14:30:00Z,Nadia Okonkwo,referral_suggestion,False,Rafael Salcedo,adding Rafael Salcedo who might know
+R1198,0,2025-10-07T09:17:00Z,Sloane Fairweather,unclassified,True,,who do we know at Quillon Pharma? Chief Operating Officer would be ideal but I'll take anyone senior
+R1198,1,2025-10-09T10:30:00Z,Sloane Fairweather,no_knowledge,False,,no idea sorry
+R1198,2,2025-10-10T17:30:00Z,Curtis Hartigan,possible_duplicate_query,False,,did we not already lose this one?
+R1198,3,2025-10-11T11:30:00Z,Yusuf Petrossian,no_knowledge,False,,no idea sorry
+R1199,0,2025-12-09T09:17:00Z,Curtis Hartigan,unclassified,True,,any connections into Vireo Systems? we're up against a renewal window and I need an intro to Chief Digital Officer
+R1199,1,2025-12-09T17:30:00Z,Sloane Fairweather,qualification_question,False,,what's the deal size here?
+R1200,0,2026-02-15T09:14:00Z,Hana Nakashima,unclassified,True,,"Pelham Beverage is the target. Our champion at Northwind Freight used to work with their team, and I think Apex Logistics is a supplier of theirs. Any path?"
+R1200,1,2026-02-15T13:30:00Z,Imani Mkhize,routing_challenge,False,,wrong channel? this feels like a partner ask

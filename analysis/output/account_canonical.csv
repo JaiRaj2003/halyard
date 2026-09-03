@@ -1,0 +1,73 @@
+canonical_key,display_name,name_variants,sources,mentions,crm_link,crm_account_ids,crm_candidate_ids,domain_group,match_tiers
+aldergatetelecom,Aldergate Telecom,Aldergate Telecom,intro_requests.target_company_raw,1,linked_single_crm_account,A1027,,,B_probable_name_exact
+ambrosetrading,Ambrose Trading,Ambrose Trading,connections.company,248,no_crm_record,,,,E_unmatched
+apexlogistics,Apex Logistics,Apex Logistics; Apex Logistics Group,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,9,linked_to_shared_domain_group_account_id_unresolved,,"A1001:Apex Logistics; A91001:Apex Logistics, Inc.",DG_apexlogistics.com,B_probable_shared_domain_group
+ashgroveagriculture,Ashgrove Agriculture,Ashgrove Agriculture,intro_requests.target_company_raw,1,linked_to_shared_domain_group_account_id_unresolved,,A1035:Ashgrove Agriculture; A91035:Ashgrove Agriculture Inc,DG_ashgroveag.com,B_probable_shared_domain_group
+bellchambermedia,Bellchamber Media,Bellchamber Media,connections.company,253,no_crm_record,,,,E_unmatched
+bexleybioworks,Bexley Bioworks,Bexley Bioworks,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,9,linked_single_crm_account,A1045,,,B_probable_name_exact
+blackwoodindustrial,Blackwood Industrial,Blackwood Industrial,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,11,distinct_from_lookalike_crm_account,,A1010:Blackwood Holdings(62.1),,C_similar_but_distinct
+brightmoorenergy,Brightmoor Energy,Brightmoor Energy,connections.company; intro_requests.target_company_raw; investor_network.prior_employer,5,linked_to_shared_domain_group_account_id_unresolved,,A1006:Brightmoor Energy; A91006:Brightmoor Energy Inc,DG_brightmoorenergy.com,B_probable_shared_domain_group
+calderonaerospace,Calderon Aerospace,Calderon Aerospace,connections.company; intro_requests.target_company_raw,6,no_crm_record,,,,E_unmatched
+cindermillmining,Cindermill Mining,Cindermill Mining,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,11,distinct_from_lookalike_crm_account,,A1025:Cindermill Holdings(74.1),,C_similar_but_distinct
+cobaltlane,Cobalt Lane,Cobalt Lane,intro_requests.target_company_raw,2,distinct_from_lookalike_crm_account,,A1038:Cobalt Lane Capital Markets(57.9),,C_similar_but_distinct
+cobaltlanecapitalmarkets,Cobalt Lane Capital Markets,Cobalt Lane Capital Markets,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,4,linked_single_crm_account,A1038,,,B_probable_name_exact
+copperlinewater,Copperline Water,Copperline Water,intro_requests.target_company_raw,3,no_crm_record,,,,E_unmatched
+corbridgerealty,Corbridge Realty,Corbridge Realty,connections.company,271,no_crm_record,,,,E_unmatched
+duncastlehotels,Duncastle Hotels,Duncastle Hotels,intro_requests.target_company_raw; investor_network.portfolio_company,7,distinct_from_lookalike_crm_account,,A1029:Duncastle Holdings(72.0),,C_similar_but_distinct
+dunmowetravel,Dunmowe Travel,Dunmowe Travel,connections.company,252,no_crm_record,,,,E_unmatched
+ellerbysemiconductor,Ellerby Semiconductor,Ellerby Semiconductor,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,8,linked_to_shared_domain_group_account_id_unresolved,,"A1020:Ellerby Semiconductor; A91020:Ellerby Semiconductor, Inc.",DG_ellerbysemi.com,B_probable_shared_domain_group
+elmsworthtutors,Elmsworth Tutors,Elmsworth Tutors,connections.company,253,no_crm_record,,,,E_unmatched
+fairbournefitness,Fairbourne Fitness,Fairbourne Fitness,connections.company,251,no_crm_record,,,,E_unmatched
+falkirkshipping,Falkirk Shipping,Falkirk Shipping,connections.company; investor_network.portfolio_company,6,linked_single_crm_account,A1040,,,B_probable_name_exact
+garrowbybooks,Garrowby Books,Garrowby Books,connections.company,217,no_crm_record,,,,E_unmatched
+glasspointhealth,Glasspoint Health,Glasspoint Health,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,5,linked_single_crm_account,A1017,,,B_probable_name_exact
+gravenhurstmotors,Gravenhurst Motors,Gravenhurst Motors,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,14,linked_single_crm_account,A1041,,,B_probable_name_exact
+halcyongrid,Halcyon Grid,Halcyon Grid,intro_requests.target_company_raw,2,linked_single_crm_account,A1008,,,B_probable_name_exact
+harrowgatehealth,Harrowgate Health,Harrowgate Health,connections.company; intro_requests.target_company_raw; investor_network.prior_employer,17,linked_single_crm_account,A1050,,,B_probable_name_exact
+highmoorcycles,Highmoor Cycles,Highmoor Cycles,connections.company,238,no_crm_record,,,,E_unmatched
+hollowbrookgrocers,Hollowbrook Grocers,Hollowbrook Grocers,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,7,linked_to_shared_domain_group_account_id_unresolved,,A1024:Hollowbrook Grocers; A91024:Hollowbrook Grocers Inc.,DG_hollowbrook.com,B_probable_shared_domain_group
+inglenookbakery,Inglenook Bakery,Inglenook Bakery,connections.company,279,no_crm_record,,,,E_unmatched
+ironvalesteel,Ironvale Steel,Ironvale Steel,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,12,linked_single_crm_account,A1009,,,B_probable_name_exact
+kestrelairlines,Kestrel Airlines,Kestrel Airlines,intro_requests.target_company_raw; investor_network.portfolio_company,3,linked_single_crm_account,A1012,,,B_probable_name_exact
+kingsmereretail,Kingsmere Retail Group,Kingsmere Retail Group,connections.company; intro_requests.target_company_raw; investor_network.prior_employer,12,no_crm_record,,,,E_unmatched
+larchmontaerospace,Larchmont Aerospace,Larchmont Aerospace,intro_requests.target_company_raw,2,linked_single_crm_account,A1042,,,B_probable_name_exact
+larkhallsoftware,Larkhall Software,Larkhall Software,intro_requests.target_company_raw,2,linked_single_crm_account,A1022,,,B_probable_name_exact
+marchfordclinics,Marchford Clinics,Marchford Clinics,connections.company; intro_requests.target_company_raw,7,linked_single_crm_account,A1018,,,B_probable_name_exact
+marlowefreightsystems,Marlowe Freight Systems,Marlowe Freight Systems,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,4,linked_single_crm_account,A1047,,,B_probable_name_exact
+marrowpointairways,Marrow Point Airways,Marrow Point Airways,intro_requests.target_company_raw,4,no_crm_record,,,,E_unmatched
+meridianpeak,Meridian Peak,Meridian Peak,intro_requests.target_company_raw,1,distinct_from_lookalike_crm_account,,A1034:Meridian Holdings(76.2),,C_similar_but_distinct
+meridianpeakfoods,Meridian Peak Foods,Meridian Peak Foods,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,6,distinct_from_lookalike_crm_account,,A1034:Meridian Holdings(59.3),,C_similar_but_distinct
+northwindfreight,Northwind Freight,Northwind Freight,intro_requests.target_company_raw,5,linked_single_crm_account,A1003,,,B_probable_name_exact
+nortonburylogistics,Nortonbury Logistics,Nortonbury Logistics,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,13,linked_single_crm_account,A1039,,,B_probable_name_exact
+ondermarkconsulting,Ondermark Consulting,Ondermark Consulting,connections.company,238,no_crm_record,,,,E_unmatched
+osricnetworks,Osric Networks,Osric Networks,intro_requests.target_company_raw; investor_network.portfolio_company,6,linked_single_crm_account,A1044,,,B_probable_name_exact
+paleharbourstudio,Pale Harbour Studio,Pale Harbour Studio,connections.company,232,no_crm_record,,,,E_unmatched
+pelhambeverage,Pelham Beverage,Pelham Beverage,intro_requests.target_company_raw,1,linked_single_crm_account,A1043,,,B_probable_name_exact
+pembertonretail,Pemberton Retail,Pemberton Retail,intro_requests.target_company_raw,4,linked_single_crm_account,A1023,,,B_probable_name_exact
+priorwoodchemicals,Priorwood Chemicals,Priorwood Chemicals,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,16,linked_single_crm_account,A1030,,,B_probable_name_exact
+quillonpharma,Quillon Pharma,Quillon Pharma,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,15,linked_single_crm_account,A1019,,,B_probable_name_exact
+quintrelladvisory,Quintrell Advisory,Quintrell Advisory,connections.company,238,no_crm_record,,,,E_unmatched
+ravensmoordefense,Ravensmoor Defense,Ravensmoor Defense,intro_requests.target_company_raw,4,linked_single_crm_account,A1031,,,B_probable_name_exact
+redtreefoods,Redtree Foods,Redtree Foods,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,10,no_crm_record,,,,E_unmatched
+rooksbylegal,Rooksby Legal,Rooksby Legal,connections.company,244,no_crm_record,,,,E_unmatched
+sablefieldmotors,Sablefield Motors,Sablefield Motors,intro_requests.target_company_raw,4,linked_single_crm_account,A1005,,,B_probable_name_exact
+silverbrook,Silverbrook,Silverbrook,intro_requests.target_company_raw,2,ambiguous_crm_candidates,,A1032:Silverbrook Paper(78.6); A91032:Silverbrook Paper Corp(78.6),,D_ambiguous
+silverbrookpaper,Silverbrook Paper,Silverbrook Paper,connections.company; intro_requests.target_company_raw,3,linked_to_shared_domain_group_account_id_unresolved,,A1032:Silverbrook Paper; A91032:Silverbrook Paper Corp,DG_silverbrookpaper.com,B_probable_shared_domain_group
+strathmorerail,Strathmore Rail,Strathmore Rail,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,17,distinct_from_lookalike_crm_account,,A1026:Strathmore Holdings(80.0),,C_similar_but_distinct
+sundermerebank,Sundermere Bank,Sundermere Bank,intro_requests.target_company_raw,1,linked_single_crm_account,A1014,,,B_probable_name_exact
+tannerlydesign,Tannerly Design,Tannerly Design,connections.company,291,no_crm_record,,,,E_unmatched
+tessellatepayments,Tessellate Payments,Tessellate Payments,connections.company; intro_requests.target_company_raw; investor_network.prior_employer,6,linked_single_crm_account,A1037,,,B_probable_name_exact
+thistledownenergy,Thistledown Energy,Thistledown Energy,intro_requests.target_company_raw,5,linked_single_crm_account,A1046,,,B_probable_name_exact
+thornbury,Thornbury,Thornbury,intro_requests.target_company_raw,2,no_crm_record,,,,E_unmatched
+thornburyfinancial,Thornbury Financial,Thornbury Financial,intro_requests.target_company_raw,2,linked_single_crm_account,A1015,,,B_probable_name_exact
+underwoodvale,Underwood & Vale,Underwood & Vale,connections.company,244,no_crm_record,,,,E_unmatched
+vantageridgeutilities,Vantage Ridge Utilities,Vantage Ridge Utilities,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,5,linked_single_crm_account,A1007,,,B_probable_name_exact
+vespermillanalytics,Vespermill Analytics,Vespermill Analytics,connections.company,250,no_crm_record,,,,E_unmatched
+vireosystems,Vireo Systems,Vireo Systems,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,11,no_crm_record,,,,E_unmatched
+volneyindustrialsystems,Volney Industrial Systems,Volney Industrial Systems,intro_requests.target_company_raw; investor_network.portfolio_company,8,linked_single_crm_account,A1049,,,B_probable_name_exact
+whitlockstaffing,Whitlock Staffing,Whitlock Staffing,connections.company,261,no_crm_record,,,,E_unmatched
+wrenfieldrobotics,Wrenfield Robotics,Wrenfield Robotics,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company; investor_network.prior_employer,5,linked_single_crm_account,A1036,,,B_probable_name_exact
+xanthelabs,Xanthe Labs,Xanthe Labs,connections.company,229,no_crm_record,,,,E_unmatched
+yardleyprint,Yardley Print,Yardley Print,connections.company,242,no_crm_record,,,,E_unmatched
+yarrowdalemedia,Yarrowdale Media,Yarrowdale Media,connections.company; intro_requests.target_company_raw; investor_network.portfolio_company,4,linked_single_crm_account,A1028,,,B_probable_name_exact
+zennerfoods,Zenner Foods,Zenner Foods,connections.company,244,no_crm_record,,,,E_unmatched

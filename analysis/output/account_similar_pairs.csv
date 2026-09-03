@@ -1,0 +1,3 @@
+account_id_a,account_name_a,account_id_b,account_name_b,name_similarity,shared_name_core,discriminators,verdict
+A1002,Apex Holdings,A91001,"Apex Logistics, Inc.",44.4,True,domain apexlogisticsgroup.co.uk != apexlogistics.com; hq Leeds != Memphis; employees 900 != 14000,C_similar_but_distinct
+A1002,Apex Holdings,A1001,Apex Logistics,44.4,True,domain apexlogisticsgroup.co.uk != apexlogistics.com; hq Leeds != Memphis; employees 900 != 14000,C_similar_but_distinct

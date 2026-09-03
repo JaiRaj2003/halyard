@@ -1,0 +1,8 @@
+check,count,detail
+requests_in_spine,200,authoritative denominator
+requests_without_slack_thread,0,none
+slack_threads_without_request_row,0,none
+requests_with_multiple_slack_threads,0,threads are keyed 1:1 by request_id in the export
+threads_containing_additional_ask_like_messages,0,none
+outcome_rows_not_mappable_to_spine,0,none
+duplicate_outcome_rows_per_request,0,none

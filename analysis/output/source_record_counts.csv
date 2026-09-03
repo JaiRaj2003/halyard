@@ -1,0 +1,14 @@
+source,records
+intro_requests.csv,200
+intro_outcomes.csv,85
+crm_accounts.csv,50
+connector_roster.csv,6
+investor_network.csv,73
+slack_threads.jsonl (messages),523
+connections_aldridge.csv,1455
+connections_beckett.csv,1130
+connections_duvall.csv,420
+connections_raghunathan.csv,728
+connections_trask.csv,356
+connections_whitfield.csv,986
+slack_threads.jsonl (threads),200
