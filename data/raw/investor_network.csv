@@ -1,0 +1,74 @@
+person,role,fund,portfolio_company,board_seat,prior_employer,prior_employer_start,prior_employer_end
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Bexley Bioworks,True,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Gravenhurst Motors,False,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Nortonbury Logistics,False,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Hollowbrook Grocers,True,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Vireo Systems,True,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Falkirk Shipping,False,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Redtree Foods,False,,,
+Priya Raghunathan,"Partner, Redtree Capital",Redtree Capital,Duncastle Hotels,True,,,
+Amara Brenneman-Fairweather,Growth equity investor,Redtree Capital,Nortonbury Logistics,True,,,
+Amara Brenneman-Fairweather,Growth equity investor,Redtree Capital,Duncastle Hotels,True,,,
+Amara Brenneman-Fairweather,Growth equity investor,Redtree Capital,Gravenhurst Motors,False,,,
+Amara Brenneman-Fairweather,Growth equity investor,Redtree Capital,Vireo Systems,False,,,
+Renata Halloran-Quillane,Growth equity investor,Redtree Capital,Redtree Foods,False,,,
+Renata Halloran-Quillane,Growth equity investor,Redtree Capital,Duncastle Hotels,True,,,
+Renata Halloran-Quillane,Growth equity investor,Redtree Capital,Nortonbury Logistics,False,,,
+Arjun Fairweather-Brenneman,Growth equity investor,Redtree Capital,Falkirk Shipping,False,,,
+Arjun Fairweather-Brenneman,Growth equity investor,Redtree Capital,Hollowbrook Grocers,False,,,
+Ravi Underhill-Halloran,Venture capital investor,Blackwood Ventures,Vantage Ridge Utilities,False,,,
+Matteo Ferreira-Yarrow,Private equity investor,Ironvale Partners,Quillon Pharma,False,,,
+Matteo Ferreira-Yarrow,Private equity investor,Ironvale Partners,Ellerby Semiconductor,False,,,
+Matteo Ferreira-Yarrow,Private equity investor,Ironvale Partners,Wrenfield Robotics,False,,,
+Matteo Ferreira-Yarrow,Private equity investor,Ironvale Partners,Duncastle Hotels,False,,,
+Xiomara Achterberg-Norrington,Growth equity investor,Northgate Growth,Quillon Pharma,False,,,
+Hugo Fairweather-Højgaard,Growth equity investor,Northgate Growth,Yarrowdale Media,True,,,
+Priya Crowther-Kirkbride,Growth equity investor,Northgate Growth,Glasspoint Health,False,,,
+Wren Petrossian-Norrington,Venture capital investor,Silverbrook Capital,Kestrel Airlines,True,,,
+Espen Rushworth-Oyelaran,Venture capital investor,Silverbrook Capital,Apex Logistics Group,False,,,
+Espen Rushworth-Oyelaran,Venture capital investor,Silverbrook Capital,Kestrel Airlines,True,,,
+Espen Rushworth-Oyelaran,Venture capital investor,Silverbrook Capital,Glasspoint Health,True,,,
+Camille Merriweather-Balogun,Venture capital investor,Silverbrook Capital,Cindermill Mining,False,,,
+Perrine Brenneman-Wexford,Private equity investor,Meridian Peak Partners,Nortonbury Logistics,False,,,
+Perrine Brenneman-Wexford,Private equity investor,Meridian Peak Partners,Osric Networks,False,,,
+Perrine Brenneman-Wexford,Private equity investor,Meridian Peak Partners,Meridian Peak Foods,False,,,
+Malik Thackeray-Okonkwo,Private equity investor,Meridian Peak Partners,Osric Networks,True,,,
+Malik Thackeray-Okonkwo,Private equity investor,Meridian Peak Partners,Cobalt Lane Capital Markets,False,,,
+Callum Oldfield-Fairweather,Venture capital investor,Cobalt Lane Ventures,Ironvale Steel,True,,,
+Matteo Falkenrath-Merriweather,Venture capital investor,Cobalt Lane Ventures,Duncastle Hotels,True,,,
+Matteo Falkenrath-Merriweather,Venture capital investor,Cobalt Lane Ventures,Marlowe Freight Systems,False,,,
+Matteo Falkenrath-Merriweather,Venture capital investor,Cobalt Lane Ventures,Ironvale Steel,False,,,
+Otto Højgaard-Ferreira,Venture capital investor,Cobalt Lane Ventures,Ellerby Semiconductor,False,,,
+Otto Højgaard-Ferreira,Venture capital investor,Cobalt Lane Ventures,Marlowe Freight Systems,False,,,
+Curtis Sandoval-Glückstein,Private equity investor,Thornbury Equity,Volney Industrial Systems,True,,,
+Priya Dobrescu-Prendergast,Private equity investor,Thornbury Equity,Volney Industrial Systems,False,,,
+Priya Dobrescu-Prendergast,Private equity investor,Thornbury Equity,Hollowbrook Grocers,False,,,
+Otto Cathcart-Brenneman,Venture capital investor,Ashgrove Capital,Priorwood Chemicals,True,,,
+Otto Cathcart-Brenneman,Venture capital investor,Ashgrove Capital,Quillon Pharma,False,,,
+Otto Cathcart-Brenneman,Venture capital investor,Ashgrove Capital,Blackwood Industrial,True,,,
+Bertrand Achterberg-Quillane,Venture capital investor,Ashgrove Capital,Volney Industrial Systems,False,,,
+Bertrand Achterberg-Quillane,Venture capital investor,Ashgrove Capital,Ellerby Semiconductor,True,,,
+Freya Oldfield-Ibarra,Venture capital investor,Ashgrove Capital,Ellerby Semiconductor,False,,,
+Freya Oldfield-Ibarra,Venture capital investor,Ashgrove Capital,Volney Industrial Systems,False,,,
+Freya Oldfield-Ibarra,Venture capital investor,Ashgrove Capital,Osric Networks,False,,,
+Freya Oldfield-Ibarra,Venture capital investor,Ashgrove Capital,Strathmore Rail,False,,,
+Sunniva Højgaard,Operator (work history),,,False,Ellerby Semiconductor,2013,2015
+Margot Havercamp,Operator (work history),,,False,Priorwood Chemicals,2011,2017
+Kian Merriweather,Operator (work history),,,False,Quillon Pharma,2012,2018
+Casper Bellinger,Operator (work history),,,False,Quillon Pharma,2012,2017
+Yusuf Vasquez,Operator (work history),,,False,Strathmore Rail,2014,2017
+Bertrand Glückstein,Operator (work history),,,False,Cindermill Mining,2011,2016
+Bertrand Lomsadze,Operator (work history),,,False,Strathmore Rail,2013,2017
+Curtis Marchetti,Operator (work history),,,False,Priorwood Chemicals,2010,2017
+Niall Grimsby,Operator (work history),,,False,Redtree Foods,2013,2019
+Kofi Mkhize,Operator (work history),,,False,Kingsmere Retail Group,2012,2019
+Idris Drummond,Operator (work history),,,False,Brightmoor Energy,2015,2018
+Coretta Bellinger,Operator (work history),,,False,Redtree Foods,2012,2016
+Priya Fairweather,Operator (work history),,,False,Gravenhurst Motors,2014,2019
+Tomás Ferreira,Operator (work history),,,False,Ironvale Steel,2015,2020
+Tomás Dobrescu,Operator (work history),,,False,Strathmore Rail,2013,2018
+Saoirse Prendergast,Operator (work history),,,False,Wrenfield Robotics,2012,2015
+Ilse Mkhize,Operator (work history),,,False,Tessellate Payments,2012,2017
+Marcus Højgaard,Operator (work history),,,False,Blackwood Industrial,2014,2017
+Amara Thackeray,Operator (work history),,,False,Harrowgate Health,2012,2019
+Ingrid Marchetti,Operator (work history),,,False,Harrowgate Health,2015,2018

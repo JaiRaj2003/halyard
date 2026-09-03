@@ -1,0 +1,51 @@
+account_id,account_name,domain,owner,stage,arr_potential_usd,industry,employee_count,hq,last_touch_date
+A1015,THORNBURYFINANCIAL,thornburyfinancial.com,Sloane Fairweather,Pilot,400000,Financial Services,26000,Charlotte,2026-02-12
+A91020,"Ellerby Semiconductor, Inc.",ellerbysemi.com,Yusuf Petrossian,Negotiation,400000,Semiconductors,21000,Austin,2025-09-18
+A1028,Yarrowdale Media,yarrowdale.com,Rafael Salcedo,Evaluation,1400000,Media,7100,Los Angeles,2026-07-28
+A1031,Ravensmoor Defense,ravensmoor.com,Hana Nakashima,Negotiation,1400000,Defense,34000,Arlington,2025-10-12
+A1002,Apex Holdings,apexlogisticsgroup.co.uk,Imani Mkhize,Negotiation,600000,Logistics,900,Leeds,2025-08-03
+A91001,"Apex Logistics, Inc.",apexlogistics.com,Yusuf Petrossian,Prospect,2200000,Logistics,14000,Memphis,2026-04-03
+A1043,Pelham Beverage,pelhambev.com,Yusuf Petrossian,Evaluation,3500000,Consumer,28000,Charlotte,2026-01-20
+A1020,Ellerby Semiconductor,ellerbysemi.com,Sloane Fairweather,Negotiation,400000,Semiconductors,21000,Austin,2025-09-18
+A1037,Tessellate Payments,tessellate.co,Nadia Okonkwo,Negotiation,120000,Fintech,3100,London,2025-08-01
+A91035,Ashgrove Agriculture Inc,ashgroveag.com,Rafael Salcedo,Pilot,600000,Agriculture,23000,Des Moines,2026-01-31
+A1023,Pemberton Retail,pembertonretail.com,Hana Nakashima,Negotiation,1400000,Retail,76000,Columbus,2025-08-24
+A1035,Ashgrove Agriculture,ashgroveag.com,Hana Nakashima,Pilot,600000,Agriculture,23000,Des Moines,2026-01-31
+A1017,Glasspoint Health,glasspointhealth.com,Bertrand Vandermolen,Closed Lost,600000,Healthcare,37000,Nashville,2026-06-20
+A1030,Priorwood Chemicals,priorwood.com,Bertrand Vandermolen,Discovery,3500000,Chemicals,16800,Baton Rouge,2025-10-17
+A1005,Sablefield Motors,sablefield.com,Hana Nakashima,Closed Lost,3500000,Automotive,61000,Detroit,2026-02-14
+A1008,Halcyon Grid,halcyongrid.com,Bertrand Vandermolen,Negotiation,600000,Utilities,6400,Portland,2026-03-14
+A1042,Larchmont Aerospace,larchmontaero.com,Bertrand Vandermolen,Closed Lost,400000,Aerospace,12900,Everett,2025-12-17
+A1009,Ironvale Steel,ironvalesteel.com,Hana Nakashima,Negotiation,600000,Industrials,18000,Pittsburgh,2026-04-16
+A91006,Brightmoor Energy Inc,brightmoorenergy.com,Imani Mkhize,Discovery,600000,Energy,9800,Houston,2025-12-22
+A91032,Silverbrook Paper Corp,silverbrookpaper.com,Yusuf Petrossian,Closed Lost,600000,Materials,11200,Green Bay,2026-05-10
+A1034,Meridian Holdings,meridianpeakfoods.com,Bertrand Vandermolen,Evaluation,250000,Consumer,19000,Omaha,2026-04-21
+A1040,Falkirk Shipping,falkirkshipping.com,Curtis Hartigan,Prospect,400000,Logistics,10400,Norfolk,2026-03-09
+A1016,Ferrowick Insurance,ferrowick.com,Hana Nakashima,Negotiation,1400000,Insurance,15500,Hartford,2026-07-20
+A1027,Aldergate Telecom,aldergate.com,Yusuf Petrossian,Closed Lost,2200000,Telecom,39000,Dallas,2026-04-08
+A1003,Northwind Freight,northwindfreight.com,Curtis Hartigan,Pilot,2200000,Logistics,22000,Chicago,2026-04-11
+A1012,Kestrel Airlines,flykestrel.com,Rafael Salcedo,Negotiation,120000,Airlines,54000,Denver,2025-10-14
+A1024,Hollowbrook Grocers,hollowbrook.com,Nadia Okonkwo,Pilot,600000,Retail,44000,Boise,2026-05-16
+A1029,Duncastle Holdings,duncastle.com,Bertrand Vandermolen,Prospect,600000,Hospitality,52000,Orlando,2025-12-07
+A1026,Strathmore Holdings,strathmorerail.com,Imani Mkhize,Prospect,250000,Transport,25000,Kansas City,2026-06-23
+A1019,Quillon Pharma,quillonpharma.com,Rafael Salcedo,Closed Lost,3500000,Pharma,29000,Basel,2025-07-07
+A1018,Marchford Clinics,marchfordclinics.com,Curtis Hartigan,Prospect,2200000,Healthcare,8200,Rochester,2025-07-15
+A91024,Hollowbrook Grocers Inc.,hollowbrook.com,Imani Mkhize,Pilot,600000,Retail,44000,Boise,2026-05-16
+A1036,WRENFIELDROBOTICS,wrenfield.ai,Rafael Salcedo,Discovery,1400000,Technology,2600,Boston,2025-10-15
+A1014,Sundermere Bank,sundermere.com,Imani Mkhize,Pilot,600000,Financial Services,41000,New York,2026-06-04
+A1022,Larkhall Software,larkhall.io,Imani Mkhize,Prospect,250000,Technology,1800,Toronto,2026-03-16
+A1032,Silverbrook Paper,silverbrookpaper.com,Curtis Hartigan,Closed Lost,600000,Materials,11200,Green Bay,2026-05-10
+A1010,Blackwood Holdings,blackwoodindustrial.com,Imani Mkhize,Negotiation,400000,Industrials,27000,Cleveland,2025-09-26
+A1006,Brightmoor Energy,brightmoorenergy.com,Imani Mkhize,Discovery,600000,Energy,9800,Houston,2025-12-22
+A1046,Thistledown Energy,thistledownenergy.com,Yusuf Petrossian,Pilot,120000,Energy,8600,Calgary,2026-05-13
+A1049,Volney Industrial Systems,volney.com,Yusuf Petrossian,Closed Lost,2200000,Industrials,14700,Milwaukee,2026-01-13
+A1050,Harrowgate Health,harrowgatehealth.com,Imani Mkhize,Pilot,3500000,Healthcare,22400,Tampa,2026-05-14
+A1007,Vantage Ridge Utilities,vantageridge.com,Rafael Salcedo,Discovery,250000,Utilities,12500,Sacramento,2026-03-19
+A1044,Osric Networks,osricnetworks.com,Nadia Okonkwo,Discovery,250000,Telecom,9100,Reston,2026-04-19
+A1047,Marlowe Freight Systems,marlowefreight.com,Imani Mkhize,Pilot,600000,Logistics,5200,Salt Lake City,2026-02-02
+A1041,Gravenhurst Motors,gravenhurst.com,Sloane Fairweather,Negotiation,400000,Automotive,43000,Windsor,2026-01-07
+A1025,Cindermill Holdings,cindermill.com,Nadia Okonkwo,Discovery,600000,Mining,13000,Perth,2025-07-10
+A1039,Nortonbury Logistics,nortonbury.com,Bertrand Vandermolen,Evaluation,600000,Logistics,7700,Louisville,2026-01-22
+A1045,Bexley Bioworks,bexleybio.com,Sloane Fairweather,Negotiation,1400000,Biotech,1400,Cambridge,2026-03-01
+A1001,Apex Logistics,apexlogistics.com,Rafael Salcedo,Prospect,2200000,Logistics,14000,Memphis,2026-04-03
+A1038,Cobalt Lane Capital Markets,cobaltlanecm.com,Rafael Salcedo,Discovery,600000,Financial Services,6900,Chicago,2025-11-27
