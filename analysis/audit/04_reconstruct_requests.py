@@ -24,12 +24,13 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for halyard.matching
 
 from common import io
-from common.accounts import AccountResolver, canonical_key
-from common.normalize import extract_domains, norm_ws, parse_date, parse_timestamp, title_family
-from common.people import PersonResolver
-from common.slack import EXPLICIT_STATE_INTENTS, classify, looks_like_ask, referred_person
+from halyard.matching.accounts import AccountResolver, canonical_key
+from halyard.matching.normalize import extract_domains, norm_ws, parse_date, parse_timestamp, title_family
+from halyard.matching.people import PersonResolver
+from halyard.matching.slack import EXPLICIT_STATE_INTENTS, classify, looks_like_ask, referred_person
 
 INACTIVITY_BUCKETS = ((7, "7-13d"), (14, "14-29d"), (30, "30d+"))
 

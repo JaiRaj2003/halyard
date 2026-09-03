@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from common.accounts import (
+from halyard.matching.accounts import (
     TIER_AMBIGUOUS,
     TIER_EXACT_ID,
     TIER_PROBABLE_DOMAIN_GROUP,
@@ -11,7 +11,7 @@ from common.accounts import (
     AccountResolver,
     canonical_key,
 )
-from common.people import T1, T3, T5, T6, T_AMBIGUOUS, PersonResolver
+from halyard.matching.people import T1, T3, T5, T6, T_AMBIGUOUS, PersonResolver
 
 CRM = pd.DataFrame(
     [

@@ -3,8 +3,10 @@ import sys
 from pathlib import Path
 from types import ModuleType
 
-AUDIT_DIR = Path(__file__).resolve().parents[1] / "audit"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+AUDIT_DIR = REPO_ROOT / "analysis" / "audit"
 sys.path.insert(0, str(AUDIT_DIR))
+sys.path.insert(0, str(REPO_ROOT))
 
 
 def load_step(filename: str) -> ModuleType:

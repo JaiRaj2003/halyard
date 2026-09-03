@@ -1,6 +1,6 @@
 from datetime import date
 
-from common.normalize import (
+from halyard.matching.normalize import (
     extract_domains,
     has_casing_defect,
     has_whitespace_defect,

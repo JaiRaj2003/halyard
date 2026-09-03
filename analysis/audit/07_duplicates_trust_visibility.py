@@ -17,9 +17,10 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for halyard.matching
 
 from common import io
-from common.normalize import norm_person, norm_ws, parse_date
+from halyard.matching.normalize import norm_person, norm_ws, parse_date
 
 DUPLICATE_WINDOW_DAYS = 90
 REASK_PATTERN = re.compile(r"asking again|again|already|follow(?:ing)? up|still waiting|any update", re.IGNORECASE)

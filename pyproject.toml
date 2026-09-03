@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "halyard"
+version = "0.1.0"
+description = "Operational system of record for warm-introduction requests at Halyard Systems"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2,<3",
+    "rapidfuzz>=3.9,<4",
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.30,<1",
+    "sqlalchemy>=2.0,<3",
+    "pydantic>=2.8,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<10",
+    "httpx>=0.27,<1",
+    "flake8>=7,<8",
+]
+
+[tool.setuptools.packages.find]
+include = ["halyard*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "analysis/tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.flake8]
+max-line-length = 130
