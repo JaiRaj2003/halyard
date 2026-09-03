@@ -3,7 +3,7 @@ VENV := .venv
 PY := $(VENV)/bin/python
 PIP := $(VENV)/bin/pip
 
-.PHONY: help bootstrap ingest dev test audit lint verify report reset
+.PHONY: help bootstrap ingest dev ui test audit lint verify report reset
 
 help:  ## show this help
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -24,6 +24,9 @@ report:  ## show what the current database was built from
 
 dev:  ## run the API at http://127.0.0.1:8000 (docs at /docs)
 	$(VENV)/bin/uvicorn halyard.api.asgi:app --reload --port 8000
+
+ui:  ## run the operator console at http://127.0.0.1:5173 (proxies /api to make dev)
+	cd app && npm install --silent && npm run dev
 
 test:  ## run every test (application + forensic audit)
 	$(PY) -m pytest -q
