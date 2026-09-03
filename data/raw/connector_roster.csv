@@ -1,0 +1,7 @@
+name,role,type,focus_areas,stated_monthly_capacity,notes,connections_file
+Marcus Aldridge,Advisor (former enterprise CIO),Advisor,Industrials; Logistics; Utilities; Aerospace,4,Sits on the largest number of viable paths. Historically asked far more than anyone else.,connections_aldridge.csv
+Dana Whitfield,Chief Revenue Officer,Internal,Financial Services; Retail; Consumer,6,Happy to help but travels constantly; slow to respond in-quarter.,connections_whitfield.csv
+Priya Raghunathan,"Partner, Redtree Capital",Investor,Technology; Fintech; Biotech,3,Board seats give direct-to-CEO access. Prefers one consolidated ask per month.,connections_raghunathan.csv
+Tomás Beckett,VP Partnerships,Internal,Telecom; Media; Technology,8,Fast responder. Network is broad but shallow.,connections_beckett.csv
+Elena Duvall,"Advisor (former COO, industrial manufacturing)",Advisor,Industrials; Energy; Chemicals; Mining,3,Deep but narrow. Will decline anything outside heavy industry.,connections_duvall.csv
+Owen Trask,Angel investor / advisor,Investor,Fintech; Insurance; Payments,2,Explicitly asked to be tapped no more than twice a month.,connections_trask.csv
