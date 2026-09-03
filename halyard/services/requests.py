@@ -430,6 +430,22 @@ def request_paths(session: Session, request_key: str, settings: Settings, clock:
     return candidate_path_payload(session, request, settings, clock.now())
 
 
+def _empty_paths_note(request: IntroRequest) -> str:
+    """Why a request under path review can still show nothing to review.
+
+    A route offered in Slack is evidence that someone believes a path exists.
+    The connection exports may not contain it. Both facts are true and the
+    operator has to see both rather than one silently overruling the other.
+    """
+    if request.workflow_state != WorkflowState.PATH_REVIEW.value:
+        return ""
+    return (
+        "This request is under path review on evidence outside the connection exports — "
+        f"{request.state_evidence or 'a route was recorded elsewhere'}. "
+        "Nothing in the supplied network corroborates it, so there is nothing here to rank."
+    )
+
+
 def candidate_path_payload(session: Session, request: IntroRequest, settings: Settings, now: datetime) -> dict:
     """Candidate paths in investigation order.
 
@@ -449,6 +465,7 @@ def candidate_path_payload(session: Session, request: IntroRequest, settings: Se
             "Ordered by evidence-based investigation priority: which lead is worth checking first, not how strong "
             "a relationship is or how likely an introduction is to happen."
         ),
+        "note": _empty_paths_note(request) if not paths else "",
         "counts": {
             "total": len(paths),
             "historically_observable": sum(1 for p in paths if p.observability == "historically_observable"),
@@ -472,6 +489,8 @@ def candidate_path_payload(session: Session, request: IntroRequest, settings: Se
                 "limitations": entry.path.limitations,
                 "evidence": entry.path.evidence,
                 "source_file": entry.path.source_file,
+                "review_status": entry.path.review_status,
+                "review_note": entry.path.review_note,
             }
             for entry in ranked
         ],

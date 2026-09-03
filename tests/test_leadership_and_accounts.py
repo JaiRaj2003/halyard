@@ -38,6 +38,13 @@ def test_every_leadership_metric_states_its_denominator_and_window(client):
             assert metric["value"] <= metric["denominator"]
 
 
+def test_every_metric_has_a_denominator(client):
+    """A bare count is not a defensible number: it has to say what it is out of."""
+    body = client.get("/api/metrics/leadership").json()
+    missing = [metric["key"] for metric in body["metrics"] if metric["denominator"] is None]
+    assert missing == []
+
+
 def test_each_metric_drills_down_to_the_rows_it_counted(client):
     body = client.get("/api/metrics/leadership").json()
     for metric in body["metrics"]:
@@ -84,6 +91,21 @@ def test_a_live_request_appears_on_its_account_view(client, busy_account):
 
     view = client.get(f"/api/accounts/{busy_account}/view").json()
     assert key in {row["request_id"] for row in view["active_requests"]}
+
+
+def test_account_people_are_listed_once_however_many_affiliations_they_hold(client, busy_account):
+    body = client.get(f"/api/accounts/{busy_account}/view").json()
+    ids = [person["id"] for person in body["known_people"]]
+    assert len(ids) == len(set(ids))
+
+
+def test_a_request_under_path_review_with_no_paths_explains_the_contradiction(client):
+    """State evidence and network evidence can disagree; the operator sees both."""
+    rows = client.get("/api/queue", params={"view": "path_review", "limit": 500}).json()["items"]
+    for row in rows:
+        paths = client.get(f"/api/requests/{row['request_id']}/paths").json()
+        if paths["counts"]["total"] == 0:
+            assert paths["note"], f"{row['request_id']} claims path review with nothing to review and no explanation"
 
 
 def test_unknown_account_is_a_404(client):

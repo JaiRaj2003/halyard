@@ -132,6 +132,34 @@ def test_confirming_a_route_updates_the_same_request(client):
         assert stored.reviewed_at is not None
 
 
+def test_a_reviewed_path_carries_its_verdict_and_the_ask_moves_on(client):
+    """The operator must see the decision they just made, on the row they made it on."""
+    account = connected_account(api_engine(client))
+    result = start(client, raw_ask=f"Warm intro to the Head of Security at {account.name}?")
+    request_id = result["request"]["request_id"]
+    paths = result["paths"]["paths"]
+    assert len(paths) > 1
+    assert all(path["review_status"] == "unreviewed" for path in paths)
+
+    rejected = client.post(
+        f"/api/requests/{request_id}/route",
+        json={"path_id": paths[-1]["id"], "decision": "reject", "note": "left the company"},
+    ).json()
+    by_id = {path["id"]: path for path in rejected["paths"]["paths"]}
+    assert by_id[paths[-1]["id"]]["review_status"] == "rejected"
+    assert by_id[paths[-1]["id"]]["review_note"] == "left the company"
+    assert rejected["next_decision"]["decision"] == "confirm_route"
+
+    confirmed = client.post(
+        f"/api/requests/{request_id}/route",
+        json={"path_id": paths[0]["id"], "decision": "confirm"},
+    ).json()
+    selected = {path["id"]: path for path in confirmed["paths"]["paths"]}[paths[0]["id"]]
+    assert selected["review_status"] == "selected"
+    assert confirmed["next_decision"]["decision"] == "follow_up_connector"
+    assert confirmed["request"]["next_action"] in confirmed["next_decision"]["prompt"]
+
+
 def test_rejecting_every_path_leaves_the_request_active_and_owned(client):
     account = connected_account(api_engine(client))
     result = start(client, raw_ask=f"Intro to the CFO at {account.name}")
@@ -167,6 +195,19 @@ def test_confirming_the_account_resolves_the_target_on_the_same_request(client, 
         WorkflowState.PATH_REVIEW.value,
         WorkflowState.NO_OBSERVABLE_PATH.value,
     }
+
+
+def test_confirming_the_account_stops_the_ask_being_reported_as_ambiguous(client, engine):
+    """A human answer settles the question; the losing candidates stop being asked about."""
+    account = known_account(engine)
+    result = start(client, raw_ask="Intro to the VP of Security please")
+    request_id = result["request"]["request_id"]
+    confirmed = client.post(
+        f"/api/requests/{request_id}/target",
+        json={"account_id": account.id, "note": "confirmed with the requester"},
+    ).json()
+    assert [candidate["id"] for candidate in confirmed["account_candidates"]] == [account.id]
+    assert confirmed["next_decision"]["decision"] != "confirm_account"
 
 
 def test_duplicate_asks_surface_as_account_activity_not_merges(client, engine):

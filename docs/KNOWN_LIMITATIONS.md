@@ -70,6 +70,12 @@ human.
 **Ingestion is whole-corpus.** There is no incremental sync from a live source,
 because there is no live source.
 
+**Some requests are under path review with nothing to review.** They reached
+that state because someone volunteered a route in Slack, and the connection
+exports contain no edge that corroborates it. The detail view says so rather
+than pretending one of the two sources is wrong; the underlying gap is in the
+exports, not in the workflow.
+
 ## Things that would be wrong to conclude from this system
 
 - That a candidate path means an introduction can be made. It means there is

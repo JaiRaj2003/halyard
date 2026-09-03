@@ -190,8 +190,8 @@ function PathRow({ path, busy, onDecide }: {
       </div>
       <ul className="mt-2 grid gap-1 lg:grid-cols-2">
         {path.factors.map((factor) => (
-          <li key={factor.key} className={`text-xs ${factor.direction === 'for' ? 'text-muted' : 'text-warn'}`}>
-            {factor.direction === 'for' ? '· ' : '! '}
+          <li key={factor.key} className={`text-xs ${factor.direction === 'limiting' ? 'text-warn' : 'text-ink'}`}>
+            {factor.direction === 'limiting' ? '! ' : '+ '}
             {factor.statement}
           </li>
         ))}
@@ -225,8 +225,8 @@ function PathsPanel({ data, onChange }: { data: IntakeResult; onChange: (result:
       {error && <div className="mb-3"><ErrorNote error={error} /></div>}
       {paths.length === 0 ? (
         <Empty>
-          No observable path in the supplied network. The request stays active, owned and on the queue — it is not
-          closed by the absence of evidence.
+          {data.paths.note || 'No observable path in the supplied network.'} The request stays active, owned and on
+          the queue — it is not closed by the absence of evidence.
         </Empty>
       ) : (
         <>

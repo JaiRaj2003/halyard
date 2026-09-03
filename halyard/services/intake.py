@@ -186,13 +186,55 @@ def _title_text(submission: IntakeSubmission, parsed: ParsedAsk) -> str:
     return norm_ws(submission.target_title) or parsed.title
 
 
+def _confirmed_only(candidates: list[Candidate], resolved_id: int | None) -> list[Candidate]:
+    """Once a human has answered, the alternatives stop being open questions."""
+    if resolved_id is None:
+        return []
+    return [candidate for candidate in candidates if candidate.id == resolved_id]
+
+
+def _confirmed_accounts(session: Session, candidates: list[Candidate], account_id: int | None) -> list[Candidate]:
+    """The confirmed account, even when the resolver never proposed it."""
+    kept = _confirmed_only(candidates, account_id)
+    if kept or account_id is None:
+        return kept
+    org = session.get(Organization, account_id)
+    if org is None:  # pragma: no cover - referential integrity
+        return []
+    return [
+        Candidate(
+            id=org.id,
+            label=org.name,
+            detail=f"CRM account {org.crm_account_id}" if org.crm_account_id else "known organization",
+            method="human_confirmation",
+            confidence="high",
+            extra={"account": account_summary(org)},
+        )
+    ]
+
+
 def _next_decision(
     request: IntroRequest,
     accounts: list[Candidate],
     people: list[Candidate],
     path_count: int,
 ) -> dict:
-    """The one thing the operator should do next, and why."""
+    """The one thing the operator should do next, and why.
+
+    A human answer outranks the resolver: once the target has been confirmed the
+    remaining candidates are history, and once a route is confirmed the decision
+    is the follow-up, not the review that produced it.
+    """
+    if request.selected_connector_id is not None:
+        return {
+            "decision": "follow_up_connector",
+            "prompt": (
+                f"{request.next_action} Due {request.next_action_due_at:%Y-%m-%d}."
+                if request.next_action_due_at
+                else request.next_action
+            ),
+            "blocking": False,
+        }
     if len(accounts) > 1:
         return {
             "decision": "confirm_account",
@@ -242,6 +284,9 @@ def intake_payload(
         parsed.domains,
     )
     people = person_candidates(session, target.raw_target_name if target else "")
+    if target is not None and target.resolution_method == "human_confirmation":
+        accounts = _confirmed_accounts(session, accounts, target.organization_id)
+        people = _confirmed_only(people, target.resolved_person_id)
     paths = candidate_path_payload(session, request, settings, now)
     related = related_requests(session, request.request_id, settings, _FrozenClock(now))
     return {

@@ -85,6 +85,8 @@ export interface PathPayload {
   request_id: string
   disclaimer: string
   ordering: string
+  /** Set when the state says paths were expected but the network shows none. */
+  note: string
   counts: Record<string, number>
   paths: CandidatePath[]
 }

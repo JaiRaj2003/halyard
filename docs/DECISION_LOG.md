@@ -190,6 +190,33 @@ Who decided what, on what evidence, and what was deliberately deferred.
 - **Reasoning:** otherwise the system would recommend a connector it had itself
   just loaded up, and the capacity signal would only ever reflect the past.
 
+### D20 — A human answer outranks the resolver
+
+- **Decided by:** Devin, after browser testing.
+- **Decision:** once a target is confirmed, the losing candidates disappear from
+  the payload and the ambiguity prompt goes with them; once a route is
+  confirmed, the next decision becomes the connector follow-up.
+- **Reasoning:** the console was still asking "2 accounts match this ask" after
+  the operator had answered that exact question. Re-asking a settled question
+  teaches operators to ignore the prompt.
+
+### D21 — Path review with no paths is explained, not hidden
+
+- **Decided by:** Devin, after browser testing.
+- **Decision:** a request that reached `PATH_REVIEW` on a Slack volunteer offer
+  but has no corroborating edge now carries a note saying exactly that.
+- **Reasoning:** the queue said "review the paths" and the detail page said
+  "no observable path". Both were true; only showing one of them looked like a
+  bug and hid a real coverage gap in the connection exports.
+
+### D22 — Every leadership metric has a denominator
+
+- **Decided by:** the product owner, enforced by a test.
+- **Decision:** "connectors above stated capacity" is reported out of the roster
+  connectors that state a capacity, since only they can exceed one.
+- **Reasoning:** a bare `0` invites the reading "nobody is overloaded" when the
+  honest statement is "0 of the 49 connectors who state a capacity".
+
 ---
 
 ## Deferred

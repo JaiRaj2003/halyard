@@ -160,7 +160,10 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
     #: leadership number and the list behind it can never disagree.
     counts = queue_view(session, settings, clock, view="all", limit=1)["counts"]
     in_flight = counts["in_flight"]
-    over_capacity = sum(1 for row in connector_load(session, settings, clock)["connectors"] if row["over_capacity"])
+    load = connector_load(session, settings, clock)
+    over_capacity = sum(1 for row in load["connectors"] if row["over_capacity"])
+    #: Only roster connectors state a capacity, so only they can be over it.
+    with_stated_capacity = sum(1 for row in load["connectors"] if row["stated_monthly_capacity"])
     observable = session.scalar(
         select(func.count(func.distinct(IntroCandidatePath.request_id))).where(
             IntroCandidatePath.observability == "historically_observable"
@@ -232,9 +235,12 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
                 "as of now", "no_observable_path",
             ),
             _metric(
-                "connectors_over_capacity", "Connectors above stated capacity", over_capacity, None,
-                "Connectors whose asks in the rolling window exceed their stated monthly capacity. Only roster "
-                "connectors state a capacity.", f"rolling {settings.connector_load_window_days} days", None,
+                "connectors_over_capacity", "Connectors above stated capacity", over_capacity,
+                with_stated_capacity,
+                "Connectors whose asks in the rolling window exceed their stated monthly capacity, out of the "
+                f"{with_stated_capacity} roster connectors that state one; the other "
+                f"{load['off_roster_observed']} observed connectors have no stated capacity to exceed.",
+                f"rolling {settings.connector_load_window_days} days", None,
             ),
         ],
     }
