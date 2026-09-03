@@ -84,6 +84,9 @@ export default function LeadershipPage() {
   if (error) return <ErrorNote error={error} />
   if (!data || !load) return <Loading what="leadership metrics" />
 
+  const legacy = data.metrics.filter((metric) => metric.group === 'legacy_backlog')
+  const current = data.metrics.filter((metric) => metric.group !== 'legacy_backlog')
+
   return (
     <div className="space-y-4">
       <div>
@@ -91,11 +94,28 @@ export default function LeadershipPage() {
         <p className="mt-1 text-sm text-muted">{data.clock}</p>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        {data.metrics.map((metric) => (
-          <MetricCard key={metric.key} metric={metric} />
-        ))}
-      </div>
+      <section className="rounded-lg border border-dashed border-line bg-slate-50 p-4">
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Legacy backlog</h2>
+        <p className="mt-1 text-sm text-muted">{data.legacy_note}</p>
+        <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {legacy.map((metric) => (
+            <MetricCard key={metric.key} metric={metric} />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Current operational health</h2>
+        <p className="mt-1 text-sm text-muted">
+          Requests Halyard is working now, judged against the live clock and the configured SLA defaults.{' '}
+          {data.requests_worked_under_halyard} of {data.requests_total} requests have had an action assigned here.
+        </p>
+        <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {current.map((metric) => (
+            <MetricCard key={metric.key} metric={metric} />
+          ))}
+        </div>
+      </section>
 
       <Card title="Ownership" subtitle="The historical fact and the current guarantee, kept apart.">
         <p className="text-sm">{data.ownership_note}</p>
@@ -142,7 +162,10 @@ export default function LeadershipPage() {
 
       <LoadTable load={load} />
 
-      <Card title="Owners" subtitle="Open requests and overdue next actions per operational owner.">
+      <Card
+        title="Owners"
+        subtitle="Open requests per operational owner, and how many of the actions Halyard assigned them are overdue."
+      >
         <table className="w-full text-left">
           <thead className="text-[11px] uppercase tracking-wide text-muted">
             <tr>

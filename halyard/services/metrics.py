@@ -5,6 +5,12 @@ clock, never the audit's 2026-08-10 corpus date. A request entered today is a
 day old, not two years old.
 
 Staleness is reported as a flag beside the state, never folded into it.
+
+Legacy backlog and current operational health are reported separately. The
+historical corpus was imported on the operationalization date; its next actions
+are remediation targets this system set for itself, not SLAs it was there to
+miss. A corpus request only joins the live SLA numbers once an operator works it
+here and Halyard assigns it a new next action.
 """
 
 from __future__ import annotations
@@ -32,9 +38,20 @@ from ..db.models import (
 )
 from ..db.session import sessionmaker_for
 from ..domain.states import SETTLED_STATES, WorkflowState
-from ..domain.workflow import days_since_activity, inactivity_bucket, is_overdue, is_potentially_stale
-from .queue import queue as queue_view
+from ..domain.workflow import (
+    days_since_activity,
+    inactivity_bucket,
+    is_overdue,
+    is_potentially_stale,
+    is_sla_managed,
+)
+from .queue import DUE_SOON_DAYS, queue as queue_view
 from .requests import request_summary
+
+#: Metric groups. The legacy corpus is reported as backlog we inherited; current
+#: operational health is what Halyard is answerable for.
+LEGACY = "legacy_backlog"
+CURRENT = "current_workflow"
 
 
 def stale_requests(session: Session, settings: Settings, clock: Clock, limit: int = 100) -> dict:
@@ -43,7 +60,8 @@ def stale_requests(session: Session, settings: Settings, clock: Clock, limit: in
     stale = [
         request
         for request in requests
-        if is_potentially_stale(request.workflow_state, request.last_activity_at, now, settings)
+        if is_sla_managed(request.next_action_source)
+        and is_potentially_stale(request.workflow_state, request.last_activity_at, now, settings)
     ]
     buckets: dict[str, int] = defaultdict(int)
     for request in stale:
@@ -54,13 +72,18 @@ def stale_requests(session: Session, settings: Settings, clock: Clock, limit: in
         "staleness_days": settings.staleness_days,
         "note": (
             "Staleness is a flag for attention, not an outcome. These requests are still in their derived workflow "
-            "state and still have an owner and a next action."
+            "state and still have an owner and a next action. Imported legacy backlog is excluded: it went quiet "
+            "before this system existed, and is reported as backlog rather than as staleness under Halyard."
         ),
         "total_requests": len(requests),
         "stale_count": len(stale),
         "stale_value_usd": sum(request.deal_value_usd for request in stale),
         "by_inactivity_bucket": dict(sorted(buckets.items())),
-        "overdue_next_actions": sum(1 for request in requests if is_overdue(request.next_action_due_at, now)),
+        "overdue_next_actions": sum(
+            1
+            for request in requests
+            if is_sla_managed(request.next_action_source) and is_overdue(request.next_action_due_at, now)
+        ),
         "items": [request_summary(request, now, settings) for request in stale[:limit]],
     }
 
@@ -148,14 +171,18 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
         if not settled:
             bucket["open"] += 1
             bucket["value_usd"] += request.deal_value_usd
-        if is_overdue(request.next_action_due_at, now):
+        managed = is_sla_managed(request.next_action_source)
+        if managed and is_overdue(request.next_action_due_at, now):
             overdue += 1
             bucket["overdue"] += 1
-        if is_potentially_stale(request.workflow_state, request.last_activity_at, now, settings):
+        if managed and is_potentially_stale(request.workflow_state, request.last_activity_at, now, settings):
             stale_count += 1
             stale_value += request.deal_value_usd
 
     ownerless_at_ingest = sum(1 for request in requests if request.was_ownerless_at_ingest)
+    imported_total = sum(1 for request in requests if request.origin == "historical_corpus")
+    live_total = total - imported_total
+    under_halyard = sum(1 for request in requests if is_sla_managed(request.next_action_source))
     #: Anything with a drill-down is counted by the queue view it drills into, so a
     #: leadership number and the list behind it can never disagree.
     counts = queue_view(session, settings, clock, view="all", limit=1)["counts"]
@@ -193,6 +220,15 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
         "stale_count": stale_count,
         "stale_value_usd": stale_value,
         "overdue_next_actions": overdue,
+        "imported_requests_total": imported_total,
+        "live_requests_total": live_total,
+        "requests_worked_under_halyard": under_halyard,
+        "legacy_note": (
+            f"{imported_total} requests were imported from the historical corpus on "
+            f"{settings.operationalization_at.date().isoformat()}. Their due dates are remediation targets this "
+            "system set at import, so they are reported as legacy backlog and are not counted as Halyard SLA "
+            "breaches until an operator works them here."
+        ),
         "requests_with_observable_path": int(observable or 0),
         "targets_unresolved": int(unresolved_targets or 0),
         "coverage_gaps": int(session.scalar(select(func.count()).select_from(CoverageGap)) or 0),
@@ -200,18 +236,54 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
         "by_owner": sorted(by_owner.values(), key=lambda row: (-row["open"], row["owner"])),
         "metrics": [
             _metric(
+                "legacy_backlog", "Legacy backlog awaiting review", counts["legacy_backlog"], imported_total,
+                "Requests imported from the historical corpus that no operator has worked in Halyard yet. Owned "
+                "and actionable; their due dates are remediation targets set at import, not missed SLAs.",
+                f"imported {settings.operationalization_at.date().isoformat()}", "legacy_backlog",
+                group=LEGACY,
+            ),
+            _metric(
+                "legacy_backlog_quiet", "Legacy backlog with no recent historical activity",
+                counts["legacy_backlog_quiet"], counts["legacy_backlog"],
+                f"Legacy backlog whose last activity in the corpus pre-dates the import by more than "
+                f"{settings.staleness_days} days. Measured in historical time, against the corpus, not this clock.",
+                "historical time, up to the import date", "legacy_backlog_quiet", group=LEGACY,
+            ),
+            _metric(
+                "legacy_backlog_remediation", "Legacy backlog requiring remediation",
+                counts["legacy_backlog_remediation"], counts["legacy_backlog"],
+                "Legacy backlog that arrived incomplete — no evidenced owner, an unresolved target, or no route "
+                "signal at all — and needs fixing before it can move.",
+                f"imported {settings.operationalization_at.date().isoformat()}", "legacy_backlog_remediation",
+                group=LEGACY,
+            ),
+            _metric(
                 "in_flight", "Requests in flight", counts["in_flight"], total,
                 "Requests in a non-settled workflow state.", "as of now", "in_flight",
             ),
             _metric(
-                "stale", "Quiet / potentially stale", counts["stale"], in_flight,
-                f"Active requests with no activity for more than {settings.staleness_days} days. A flag, never an "
-                "outcome.", f"rolling {settings.staleness_days} days", "stale",
+                "stale", "Quiet under Halyard", counts["stale"], under_halyard,
+                f"Requests worked in Halyard and then quiet for more than {settings.staleness_days} days, out of "
+                f"the {under_halyard} requests Halyard has assigned an action to. A flag, never an outcome; "
+                "imported backlog is reported as legacy backlog instead.",
+                f"rolling {settings.staleness_days} days", "stale",
             ),
             _metric(
-                "overdue", "Overdue next actions", counts["overdue"], total,
-                "The assigned next action passed its due date. Due dates run from when the action was assigned.",
+                "overdue", "Overdue next actions", counts["overdue"], under_halyard,
+                "Next actions Halyard assigned that passed their due date, out of the requests Halyard has "
+                "assigned an action to. Due dates run from assignment; imported backlog is excluded until an "
+                "operator works it here.",
                 "as of now", "overdue",
+            ),
+            _metric(
+                "due_soon", "Due soon", counts["due_soon"], under_halyard,
+                f"Halyard-assigned next actions falling due within {DUE_SOON_DAYS} days and not yet overdue.",
+                f"next {DUE_SOON_DAYS} days", "due_soon",
+            ),
+            _metric(
+                "awaiting_connector", "Awaiting connector", counts["awaiting_connector"], in_flight,
+                "A connector has been asked and the request is waiting on their reply.", "as of now",
+                "awaiting_connector",
             ),
             _metric(
                 "needs_ownership_review", "Needs ownership review", counts["needs_ownership_review"], in_flight,
@@ -230,8 +302,13 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
                 "whole corpus", "outcome_unknown",
             ),
             _metric(
-                "no_observable_path", "No observable path", counts["no_observable_path"], total,
-                "No path is visible in the supplied network. Active and owned, not closed.",
+                "unverified_route", "Unverified route suggested", counts["unverified_route"], in_flight,
+                "Active requests where a person named someone who may hold a route and the supplied network does "
+                "not corroborate it. A lead to validate, never a candidate path.", "as of now", "unverified_route",
+            ),
+            _metric(
+                "no_observable_path", "No route signal", counts["no_observable_path"], total,
+                "Neither the supplied network nor any human message offers a route. Active and owned, not closed.",
                 "as of now", "no_observable_path",
             ),
             _metric(
@@ -254,8 +331,13 @@ def _metric(
     definition: str,
     window: str,
     drill_down_view: str | None,
+    group: str = CURRENT,
 ) -> dict:
-    """One leadership number, with the denominator and window it is true for."""
+    """One leadership number, with the denominator and window it is true for.
+
+    ``group`` keeps the imported backlog visually and semantically apart from
+    what this system is currently responsible for.
+    """
     return {
         "key": key,
         "label": label,
@@ -264,6 +346,7 @@ def _metric(
         "definition": definition,
         "window": window,
         "drill_down_view": drill_down_view,
+        "group": group,
     }
 
 

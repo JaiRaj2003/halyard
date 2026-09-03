@@ -20,7 +20,14 @@ from ..clock import Clock
 from ..config import Settings
 from ..db.models import IntroCandidatePath, IntroRequest, Organization, Person, RequestTarget
 from ..domain.states import ALLOWED_TRANSITIONS, RouteStatus, StateSource, WorkflowState, check_transition
-from ..domain.workflow import assign_next_action
+from ..domain.workflow import (
+    CORROBORATED_PATH,
+    NO_ROUTE_SIGNAL,
+    OPERATOR_ASSIGNED,
+    UNVERIFIED_SUGGESTED_ROUTE,
+    assign_next_action,
+    validate_suggested_route_action,
+)
 from ..ingest.coordination import link_request
 from ..ingest.paths import build_candidate_paths
 from ..intake.parse import parse_ask
@@ -56,6 +63,7 @@ def _move(
         request.next_action = action.action
         request.next_action_assigned_at = action.assigned_at
         request.next_action_due_at = action.due_at
+        request.next_action_source = OPERATOR_ASSIGNED
         request.last_activity_at = now
 
 
@@ -82,6 +90,7 @@ def _apply_state(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
+    request.next_action_source = OPERATOR_ASSIGNED
     log_event(session, request, f"transition:{previous}->{to_state.value}", now, actor=actor, detail=evidence)
     session.flush()
 
@@ -154,15 +163,17 @@ def confirm_target(
         ).first()
     )
     log_event(session, request, "target_confirmed", now, actor=actor, detail="; ".join(parts))
+    unverified = not has_paths and bool(request.suggested_route_person)
     _move(
         session,
         request,
-        WorkflowState.PATH_REVIEW if has_paths else WorkflowState.NO_OBSERVABLE_PATH,
+        WorkflowState.PATH_REVIEW if has_paths or unverified else WorkflowState.NO_OBSERVABLE_PATH,
         settings,
         now,
         actor,
         f"{actor} confirmed the target: {'; '.join(parts)}",
     )
+    _apply_route_signal(request, has_paths)
     session.flush()
     return _payload(session, request, settings, now)
 
@@ -228,17 +239,36 @@ def review_route(
         _move(session, request, WorkflowState.PATH_REVIEW, settings, now, actor, detail)
     else:
         request.route_status = RouteStatus.ROUTE_FAILED.value
+        unverified = bool(request.suggested_route_person)
         _move(
             session,
             request,
-            WorkflowState.NO_OBSERVABLE_PATH,
+            WorkflowState.PATH_REVIEW if unverified else WorkflowState.NO_OBSERVABLE_PATH,
             settings,
             now,
             actor,
             f"{detail}; every candidate path has now been rejected",
         )
+    _apply_route_signal(request, bool(remaining))
     session.flush()
     return _payload(session, request, settings, now)
+
+
+def _apply_route_signal(request: IntroRequest, has_paths: bool) -> None:
+    """Keep the route evidence honest after a human decision.
+
+    A suggestion someone made in the thread survives the loss of every
+    corroborated path: it is still a lead to validate, and it is still not a
+    candidate path.
+    """
+    if has_paths:
+        request.route_signal = CORROBORATED_PATH
+        return
+    if request.suggested_route_person:
+        request.route_signal = UNVERIFIED_SUGGESTED_ROUTE
+        request.next_action = validate_suggested_route_action(request.suggested_route_person)
+        return
+    request.route_signal = NO_ROUTE_SIGNAL
 
 
 def _payload(session: Session, request: IntroRequest, settings: Settings, now: datetime) -> dict:

@@ -7,6 +7,12 @@ resets the clock.
 
 Staleness is derived, never stored, and never touches state or outcome: a quiet
 request is a quiet request, not a failed one.
+
+An SLA can only be missed by a system that was there to meet it. The legacy
+corpus was imported with next actions stamped at the operationalization instant;
+those are remediation targets for a backlog, not evidence that Halyard breached
+anything, so they are reported separately until an operator actually works the
+request here and a new action is assigned under this system.
 """
 
 from __future__ import annotations
@@ -22,6 +28,28 @@ def _aware(value: datetime | None) -> datetime | None:
     if value is None:
         return None
     return value if value.tzinfo else value.replace(tzinfo=timezone.utc)
+
+
+#: Where the current next action came from.
+INGEST_ASSIGNED = "ingest_operationalization"
+LIVE_INTAKE_ASSIGNED = "live_intake"
+OPERATOR_ASSIGNED = "operator"
+
+#: Route evidence, kept apart from the workflow state.
+CORROBORATED_PATH = "corroborated_path"
+UNVERIFIED_SUGGESTED_ROUTE = "unverified_suggested_route"
+NO_ROUTE_SIGNAL = "none"
+
+
+def is_sla_managed(next_action_source: str) -> bool:
+    """Whether this system assigned the action whose due date is being judged."""
+    return next_action_source in {LIVE_INTAKE_ASSIGNED, OPERATOR_ASSIGNED}
+
+
+def validate_suggested_route_action(person: str) -> str:
+    """The next action for a route somebody offered but nothing corroborates."""
+    who = person or "the person who suggested it"
+    return f"Validate the suggested route with {who} before treating it as a candidate path."
 
 
 @dataclass(frozen=True)

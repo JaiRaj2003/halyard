@@ -48,7 +48,7 @@ from .entities import build_entities
 from .paths import build_candidate_paths
 from .quality import check_contradictions
 from .raw import NON_DATA_FILES, SLACK_FILE, raw_file_inventory, stage_raw
-from .requests import build_requests, finalize_unevidenced_states
+from .requests import build_requests, finalize_route_signals, finalize_unevidenced_states
 
 
 class LiveDataPresent(RuntimeError):
@@ -114,6 +114,7 @@ def ingest(
         requests = build_requests(session, staged, index, settings)
         path_counts = build_candidate_paths(session, requests)
         finalize_unevidenced_states(session, requests, path_counts, settings)
+        finalize_route_signals(session, requests, path_counts)
         build_coordination(session, requests, settings)
         check_contradictions(session, requests)
 

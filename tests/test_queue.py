@@ -42,11 +42,16 @@ def test_no_observable_path_requests_stay_in_the_working_queue(client):
 
 
 def test_overdue_and_stale_are_independent_axes(client):
+    #: The corpus arrives as legacy backlog, so the live staleness view is empty
+    #: until an operator works something here. Both axes are still per-row facts.
     stale = client.get("/api/queue", params={"view": "stale", "limit": 500}).json()["items"]
-    assert stale
-    assert {item["workflow_state"] for item in stale} != {"CLOSED"}
-    for item in stale:
+    assert all(item["potentially_stale"] and item["sla_managed"] for item in stale)
+    backlog = client.get("/api/queue", params={"view": "legacy_backlog", "limit": 500}).json()["items"]
+    assert backlog
+    assert {item["workflow_state"] for item in backlog} != {"CLOSED"}
+    for item in backlog:
         assert "potentially_stale" in item and "is_overdue" in item
+        assert item["sla_breached"] is False
 
 
 def test_overlapping_view_reports_related_account_activity(client):

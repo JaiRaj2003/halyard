@@ -10,6 +10,11 @@ fallback was right.
 
 Each view states its own definition so an operator can see what a count means
 before acting on it.
+
+The legacy backlog is kept apart from current operational health. A request
+imported from the corpus carries a remediation target, not an SLA this system
+was ever in a position to meet, so it appears in the legacy views until an
+operator works it here and a new next action is assigned under Halyard.
 """
 
 from __future__ import annotations
@@ -25,6 +30,7 @@ from ..clock import Clock
 from ..config import Settings
 from ..db.models import AccountCoordination, IntroRequest
 from ..domain.states import SETTLED_STATES, WorkflowState
+from ..domain.workflow import NO_ROUTE_SIGNAL, UNVERIFIED_SUGGESTED_ROUTE
 from .requests import request_summary
 
 #: How near a due date has to be before it is "due soon".
@@ -46,6 +52,11 @@ def _active(item: dict) -> bool:
 def _state(*states: WorkflowState) -> Callable[[dict], bool]:
     values = {state.value for state in states}
     return lambda item: item["workflow_state"] in values
+
+
+def _legacy(item: dict) -> bool:
+    """Imported from the corpus and never worked in this system since."""
+    return item["legacy_backlog"] and _active(item)
 
 
 VIEWS: tuple[View, ...] = (
@@ -101,6 +112,46 @@ VIEWS: tuple[View, ...] = (
         _state(WorkflowState.NO_OBSERVABLE_PATH),
     ),
     View(
+        "unverified_route",
+        "Unverified route suggested",
+        (
+            "Somebody named a person who may hold a route and the supplied network does not "
+            "corroborate it. A lead to validate, never a candidate path."
+        ),
+        lambda item: item["route_signal"] == UNVERIFIED_SUGGESTED_ROUTE and _active(item),
+    ),
+    View(
+        "legacy_backlog",
+        "Legacy backlog awaiting review",
+        (
+            "Imported from the historical corpus and not yet worked in Halyard. Owned and "
+            "actionable; the due date is a remediation target, not a breached SLA."
+        ),
+        _legacy,
+    ),
+    View(
+        "legacy_backlog_quiet",
+        "Legacy backlog with no recent historical activity",
+        (
+            "Legacy backlog whose last recorded activity in the corpus pre-dates the import by "
+            "more than the staleness window. Measured in historical time, not against this clock."
+        ),
+        lambda item: _legacy(item) and bool(item["quiet_before_import"]),
+    ),
+    View(
+        "legacy_backlog_remediation",
+        "Legacy backlog requiring remediation",
+        (
+            "Legacy backlog that arrived with something missing — no evidenced owner, an "
+            "unresolved target, or no route signal at all — and needs fixing before it can move."
+        ),
+        lambda item: _legacy(item) and (
+            item["was_ownerless_at_ingest"]
+            or item["target_resolution_status"] != "resolved"
+            or item["route_signal"] == NO_ROUTE_SIGNAL
+        ),
+    ),
+    View(
         "due_soon",
         "Due soon",
         f"Next action falls due within {DUE_SOON_DAYS} days and is not yet overdue.",
@@ -109,17 +160,20 @@ VIEWS: tuple[View, ...] = (
     View(
         "overdue",
         "Overdue",
-        "The next action passed its due date. Due dates run from when the action was assigned.",
-        lambda item: item["is_overdue"],
+        (
+            "A next action assigned under Halyard passed its due date. Due dates run from when "
+            "the action was assigned; imported backlog is reported separately."
+        ),
+        lambda item: item["sla_breached"],
     ),
     View(
         "stale",
         "Quiet / potentially stale",
         (
-            "No activity for longer than the staleness window while still active. Staleness is an "
-            "independent flag: it never changes the state or the outcome."
+            "Worked under Halyard and then quiet for longer than the staleness window while still "
+            "active. Staleness is an independent flag: it never changes the state or the outcome."
         ),
-        lambda item: item["potentially_stale"],
+        lambda item: item["potentially_stale"] and item["sla_managed"],
     ),
     View(
         "overlapping",
@@ -171,7 +225,9 @@ def _decorate(session: Session, items: list[dict], now, settings: Settings) -> l
     for item in items:
         due = item["next_action_due_at"]
         item["related_count"] = related.get(item["id"], 0)
-        item["due_soon"] = bool(due and not item["is_overdue"] and due <= horizon)
+        item["due_soon"] = bool(due and item["sla_managed"] and not item["is_overdue"] and due <= horizon)
+        quiet = item["days_quiet_before_import"]
+        item["quiet_before_import"] = quiet is not None and quiet >= settings.staleness_days
     return items
 
 

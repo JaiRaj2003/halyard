@@ -34,8 +34,11 @@ function Row({ item }: { item: QueuePayload['items'][number] }) {
       </td>
       <td className="px-3 py-2">
         <div className="flex flex-wrap gap-1">
-          {item.is_overdue && <Tag tone="bad">overdue</Tag>}
-          {item.potentially_stale && <Tag tone="warn">quiet</Tag>}
+          {item.sla_breached && <Tag tone="bad">overdue</Tag>}
+          {item.legacy_backlog && <Tag>legacy backlog</Tag>}
+          {item.legacy_backlog && item.is_overdue && <Tag tone="warn">remediation date passed</Tag>}
+          {item.potentially_stale && item.sla_managed && <Tag tone="warn">quiet</Tag>}
+          {item.route_signal === 'unverified_suggested_route' && <Tag tone="warn">unverified route</Tag>}
           {item.was_ownerless_at_ingest && <Tag tone="warn">fallback owner</Tag>}
           {(item.related_count ?? 0) > 0 && <Tag>{item.related_count} related</Tag>}
         </div>

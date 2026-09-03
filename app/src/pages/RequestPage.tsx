@@ -16,8 +16,11 @@ function Header({ data }: { data: IntakeResult }) {
       actions={
         <div className="flex items-center gap-2">
           <StateTag state={request.workflow_state} />
-          {request.is_overdue && <Tag tone="bad">overdue</Tag>}
-          {request.potentially_stale && <Tag tone="warn">quiet {Math.round(request.days_since_activity)}d</Tag>}
+          {request.sla_breached && <Tag tone="bad">overdue</Tag>}
+          {request.legacy_backlog && <Tag>legacy backlog</Tag>}
+          {request.potentially_stale && request.sla_managed && (
+            <Tag tone="warn">quiet {Math.round(request.days_since_activity)}d</Tag>
+          )}
           {request.was_ownerless_at_ingest && <Tag tone="warn">ownership review</Tag>}
         </div>
       }
@@ -224,10 +227,24 @@ function PathsPanel({ data, onChange }: { data: IntakeResult; onChange: (result:
     <Card title="Candidate paths" subtitle={data.paths.disclaimer}>
       {error && <div className="mb-3"><ErrorNote error={error} /></div>}
       {paths.length === 0 ? (
-        <Empty>
-          {data.paths.note || 'No observable path in the supplied network.'} The request stays active, owned and on
-          the queue — it is not closed by the absence of evidence.
-        </Empty>
+        data.request.route_signal === 'unverified_suggested_route' ? (
+          <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2">
+            <p className="text-sm font-medium">
+              Unverified route suggested in the source thread — needs validation before routing.
+            </p>
+            <p className="mt-1 text-sm">
+              {data.request.suggested_route_person} may hold a route. The supplied network does not corroborate it, so
+              it is not a candidate path.
+            </p>
+            <p className="mt-1 text-xs text-muted">{data.request.suggested_route_evidence}</p>
+          </div>
+        ) : (
+          <Empty>
+            {data.paths.note ||
+              'No route signal: neither the supplied network nor any message in the thread offers a route.'}{' '}
+            The request stays active, owned and on the queue — it is not closed by the absence of evidence.
+          </Empty>
+        )
       ) : (
         <>
           <p className="mb-3 text-xs text-muted">{data.paths.ordering}</p>
