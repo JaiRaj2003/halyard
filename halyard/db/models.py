@@ -277,6 +277,9 @@ class IntroRequest(Base):
     state_evidence: Mapped[str] = mapped_column(Text, default="")
 
     selected_connector_id: Mapped[int | None] = mapped_column(ForeignKey("connectors.id"), nullable=True)
+    #: When a human confirmed that route. A confirmed route is an ask on that
+    #: connector, so it counts towards their load exactly like a historical one.
+    route_confirmed_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
 
     next_action: Mapped[str] = mapped_column(String, default="")
     next_action_assigned_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)

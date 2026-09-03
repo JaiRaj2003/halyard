@@ -179,6 +179,13 @@ GRAMMARS: list[tuple[str, str, Confidence, str]] = [
         "'<account> ... looking for <target>'",
     ),
     (
+        "person_comma_title_at_account",
+        r"(?-i:(?P<person>[A-Z][\w'’-]+(?:\s+[A-Z][\w'’-]+)+))\s*,\s*(?P<title>[^,.?!]+?)\s+at\s+"
+        r"(?P<account>[^,.?!—–]+)",
+        "high",
+        "'<person>, <role> at <account>'",
+    ),
+    (
         "target_at_account",
         r"\b(?:introduc\w*|intro|connect(?:ed)?|put\s+(?:us|me)\s+in\s+touch|trying\s+to\s+reach"
         r"|looking\s+to\s+reach|need\s+to\s+reach|reach)\b[^,.?!]*?\b(?:to|with|into)?\s*"

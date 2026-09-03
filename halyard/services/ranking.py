@@ -102,6 +102,20 @@ def connector_contexts(
         ):
             engaged.add(connector_id)
 
+    for request in requests.values():
+        connector_id = request.selected_connector_id
+        routed_at = request.route_confirmed_at
+        if connector_id is None or routed_at is None:
+            continue
+        if routed_at.date() >= window_start:
+            recent[connector_id] = recent.get(connector_id, 0) + 1
+        if (
+            account_id is not None
+            and request.organization_id == account_id
+            and request.workflow_state not in {state.value for state in SETTLED_STATES}
+        ):
+            engaged.add(connector_id)
+
     return {
         connector.id: ConnectorContext(
             recent_asks=recent.get(connector.id, 0),

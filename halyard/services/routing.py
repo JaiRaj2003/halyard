@@ -203,6 +203,7 @@ def review_route(
             other.review_status = UNREVIEWED
         path.review_status = SELECTED
         request.selected_connector_id = path.connector_id
+        request.route_confirmed_at = now
         request.route_status = RouteStatus.CONNECTOR_CONFIRMED.value
         detail = f"route confirmed via {path.connector.name}: {path.evidence}"
         log_event(session, request, "route_confirmed", now, actor=actor, detail=f"{detail}. {norm_ws(note)}".strip())
@@ -219,6 +220,7 @@ def review_route(
     ).all()
     if path.connector_id == request.selected_connector_id:
         request.selected_connector_id = None
+        request.route_confirmed_at = None
     detail = f"route via {path.connector.name} rejected: {norm_ws(note) or 'no reason given'}"
     log_event(session, request, "route_rejected", now, actor=actor, detail=detail)
     if remaining:

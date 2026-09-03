@@ -185,3 +185,11 @@ def test_the_parser_never_invents_an_account_or_person(corpus: list[dict[str, st
         assert _norm(parsed.account_text) in ask
         assert _norm(parsed.person_name) in ask
         assert _norm(parsed.title) in ask
+
+
+def test_named_person_with_their_role_and_account():
+    result = parse_ask("Can someone introduce us to Amara Drummond, Chief Operating Officer at Tannerly Design?")
+    assert result.person_name == "Amara Drummond"
+    assert result.title == "Chief Operating Officer"
+    assert result.account_text == "Tannerly Design"
+    assert result.grammar == "person_comma_title_at_account"
