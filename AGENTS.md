@@ -28,7 +28,7 @@ explicitly closed with a reason. Nothing leaves the workflow by going quiet.
 
 ## Scope
 
-In scope for the foundation:
+In scope:
 
 - reproducible ingestion of `data/raw/` into a canonical SQLite database
 - conservative entity resolution that preserves ambiguity
@@ -36,10 +36,14 @@ In scope for the foundation:
 - candidate-path evidence, time-aware
 - account coordination between parallel asks
 - backend APIs and tests over all of the above
+- live free-text intake that persists and owns the request before routing
+- deterministic, explainable ordering of candidate paths
+- the operator console in `app/`: intake, queue, request detail, account view,
+  leadership metrics
 
 Non-goals: authentication, permissions, paid external APIs, a real CRM or Slack
-integration, a cloud database, microservices, a ranking model, and (for now) the
-polished frontend.
+integration, a cloud database, microservices, a calibrated ranking model, a
+marketing page, settings screens and network-graph decoration.
 
 ## Commands
 
@@ -47,6 +51,7 @@ polished frontend.
 make bootstrap   # create .venv and install the project
 make ingest      # rebuild the database from data/raw/
 make dev         # run the API on http://127.0.0.1:8000 (docs at /docs)
+cd app && npm run dev   # operator console on http://127.0.0.1:5173, proxies /api
 make test        # application tests + forensic audit tests
 make audit       # re-run the forensic audit
 make reset       # delete the built database
@@ -81,15 +86,21 @@ error, never dropped. Source counts must reconcile against canonical counts, and
 
 **Explainable ranking.** Anything ordered or flagged must show its reason.
 Candidate paths carry their hop type, observability, limitations and evidence.
-There is no opaque score, and no field may imply an introduction is available —
-a path says where to investigate, nothing more.
+Ordering uses integer factor weights from configuration, but the composite is
+never serialised or displayed — the operator reads factor sentences, not a
+number. No field may imply an introduction is available: a path says where to
+investigate, nothing more.
+
+**A request is owned the moment it reaches the server.** Intake persists it and
+assigns an owner, state, next action and due date *before* parsing or routing.
+Nothing about a request may be modelled as a preview that can disappear.
 
 **Two clocks.** The application uses real time; the forensic audit uses its
 documented corpus date of 2026-08-10. Historical facts created at ingest are
 stamped with a fixed `operationalization_at` so rebuilds are deterministic. Tests
 inject a clock; nothing calls `datetime.now()` directly.
 
-## UI principles (for the next stage)
+## UI principles
 
 Show the evidence next to the claim. Ambiguity is displayed, not hidden behind a
 best guess. Never show a number without its denominator or a state without its

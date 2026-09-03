@@ -57,12 +57,18 @@ alone. The operator's rulings materially changed the build:
 - The operator then caught a determinism bug in the approved plan: ingest-time
   fallback owners computed from `now()` would make rebuilds non-reproducible.
   Hence `operationalization_time`.
+- At Stage 5, Devin proposed an intake flow that previewed a parse and created
+  the request only once a route was chosen. The operator rejected it: a preview
+  that disappears is the exact failure the audit found. Intake now writes and
+  owns the request first (D15).
+- Devin also proposed showing a composite priority number. The operator allowed
+  the ordering and banned the number (D16).
 
 ## What Devin was good at
 
 - Exhaustive, reproducible arithmetic over 5,075 connections, 200 requests, 523
   Slack messages and 85 outcomes, with the script kept as the evidence.
-- Holding a large invariant set consistent across ~40 modules and 132 tests.
+- Holding a large invariant set consistent across ~50 modules and 215 tests.
 - Writing the unglamorous parts — staging every row with a parse status, hashing
   every source file, recording every match decision including the failures.
 - Catching its own reconciliation errors when forced to reconcile (the Slack
@@ -75,12 +81,14 @@ alone. The operator's rulings materially changed the build:
   finding — all four audit adjustments and D2, D3, D4, D6 in the decision log.
 - Noticing that determinism, not correctness, was the risk in the ingest design.
 - Deciding that the less impressive product was the right one.
+- Insisting the request exist before the clever part runs, and that a heuristic
+  ordering not be dressed up as a score.
 
 ## Verification, not trust
 
 Nothing here rests on Devin asserting it worked:
 
-- 81 application tests plus 51 audit tests, including ten invariant tests that
+- 164 application tests plus 51 audit tests, including ten invariant tests that
   encode the product guarantees as executable assertions.
 - Every source file hashed and every count reconciled, checked in CI-able tests.
 - `make verify` runs lint, a clean rebuild from `data/raw/`, the full suite and

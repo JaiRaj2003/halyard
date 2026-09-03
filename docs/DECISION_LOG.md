@@ -141,15 +141,65 @@ Who decided what, on what evidence, and what was deliberately deferred.
   by closeness (`same_canonical_account` → `explicit_reask`). Nothing is
   auto-merged, auto-closed or labelled a duplicate.
 
+### D15 — Persist and own at intake, before any routing
+
+- **Decided by:** operator (Stage 5 correction 1), overruling Devin's proposed
+  preview-then-create flow.
+- **Options considered:** parse into a throwaway preview and create the request
+  once the operator confirmed a route (fewer half-formed rows); or write the row
+  on submit and update it as the operator works.
+- **Decision:** `POST /api/intake/start` commits the request, its owner, state,
+  next action and due date first, then parses and routes. Everything after that
+  updates the same request.
+- **Tradeoff:** abandoned intakes leave real rows in `NEEDS_TRIAGE`. That is the
+  intended cost — a preview that vanishes reintroduces exactly the loss the
+  audit found.
+
+### D16 — Deterministic ordering, no visible number
+
+- **Decided by:** operator (Stage 5 correction 2).
+- **Decision:** integer factor weights order candidate paths internally; the
+  composite is never serialised or rendered. The UI shows "recommended to
+  investigate first" plus one sentence per factor that fired.
+- **Reasoning:** the weights are product heuristics. 85 outcome rows cannot
+  calibrate a probability, and "Priority 75" would claim they had.
+
+### D17 — "Needs ownership review" replaces "unowned"
+
+- **Decided by:** operator (Stage 5 correction 3).
+- **Decision:** because no request can be operationally ownerless, an `unowned`
+  queue would be permanently empty and would imply otherwise. The queue instead
+  offers `needs_ownership_review`: active requests that arrived with no
+  evidenced owner and hold a fallback owner.
+
+### D18 — Leadership numbers are the queue's numbers
+
+- **Decided by:** Devin, after a test caught the two disagreeing.
+- **Decision:** every leadership metric with a drill-down takes its value from
+  the queue view it links to, rather than recomputing the predicate. A test
+  asserts each metric reconciles with the rows behind it.
+- **Reasoning:** two implementations of "overlapping" had already diverged by 14
+  requests. A metric that disagrees with its own drill-down destroys the trust
+  the whole product is trying to build.
+
+### D19 — A confirmed route counts as load
+
+- **Decided by:** Devin.
+- **Decision:** confirming a route stamps `route_confirmed_at`, and connector
+  load counts those alongside historical asks.
+- **Reasoning:** otherwise the system would recommend a connector it had itself
+  just loaded up, and the capacity signal would only ever reflect the past.
+
 ---
 
 ## Deferred
 
 | deferred | why | what would settle it |
 | --- | --- | --- |
-| Path ranking / score | no outcome volume to calibrate against (85 outcomes, 14 meetings) | measured outcomes per path type over time |
+| A calibrated path score | Stage 5 shipped heuristic ordering only; no outcome volume to calibrate against (85 outcomes, 14 meetings) | measured outcomes per path type over time |
 | Alembic migrations | the DB is currently disposable | the first schema change with live rows to preserve |
 | Auth and permissions | explicitly out of scope | multi-user deployment |
 | Real Slack / CRM integration | explicitly out of scope | production adoption |
 | Whether missing outcome rows mean "never routed" or off-system routing | unanswered by the corpus; affects the interpretation of 115 requests | asking the BD team |
-| Second-hop introduction chains (connector → colleague → buyer) | needs a UI to be useful and a human to judge | Stage 5 |
+| Whether an operator-abandoned intake should auto-close after some period | no evidence about how often it happens | usage data from a real deployment |
+| Notifying a connector directly | no Slack integration, by instruction | production adoption |
