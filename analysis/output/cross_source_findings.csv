@@ -1,0 +1,12 @@
+finding,numerator,denominator,pct,detail
+Requests where a connector is connected to the requested person themselves,0,200,0.0,"the requested buyer never appears in any connector's export, so 'do we know them?' is always a second-hop question"
+Candidate paths that run through people Halyard has no proven route to,229,625,36.6,investor/advisor network people who are neither on the connector roster nor present in any connection export
+Roster connector-request pairs where a time-aware path existed but the connector was never asked,220,263,83.7,supply of observable warm paths vastly exceeds the asks actually made of those connectors
+Requests whose target account has more than one request in the corpus,144,200,72.0,200 requests cover only 51 distinct canonical target accounts
+Requests whose own text says the ask is a repeat,42,200,21.0,requesters re-file asks such as 'asking again: ...' rather than trusting the system to surface the first one
+Requests where someone in Slack asks whether the ask is a duplicate,70,200,35.0,operators visibly cannot tell whether an ask already exists
+Requests where a Slack participant volunteered a path but no outcome row exists,4,200,2.0,offered help evaporates because nothing captures the offer as an assignment
+Requests where Slack suggested a different person to ask and nothing was recorded,18,200,9.0,referral suggestions are made in-thread and then lost
+Recorded connectors who are not on the connector roster,5,11,45.5,"outcome rows name connectors the roster does not track, including at least one person who elsewhere files requests"
+Connector-months exceeding the connector's own stated monthly capacity,2,49,4.1,recorded load is far below stated capacity: overload is NOT what is throttling throughput
+Requests with no recorded activity for 30+ days and no terminal evidence,159,200,79.5,these are neither alive nor closed; nothing in the system will ever surface them again

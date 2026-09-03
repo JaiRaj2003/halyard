@@ -1,0 +1,201 @@
+request_id,requested_by,target_company_raw,deal_value_usd,urgency,declared_status,derived_state,state_confidence,has_terminal_evidence,routed,last_observed_activity,days_since_activity,inactivity_bucket,potentially_stale,staleness_class
+R1001,Imani Mkhize,Vantage Ridge Utilities,400000,High,Open,declared_only:Open,low,False,False,2026-04-16,116,30d+,True,unresolved_no_activity_30d
+R1002,Imani Mkhize,Volney Industrial Systems,400000,High,Open,declared_only:Open,low,False,False,2025-09-14,330,30d+,True,unresolved_no_activity_30d
+R1003,Imani Mkhize,Redtree Foods,400000,High,Stalled,intro_sent,high,True,True,2026-03-18,145,30d+,False,explicitly_resolved
+R1004,Imani Mkhize,Marchford Clinics,750000,Medium,Open,declared_only:Open,low,False,False,2026-07-07,34,30d+,True,unresolved_no_activity_30d
+R1005,Rafael Salcedo,Ravensmoor Defense,150000,Low,Closed - no path,declared_only:Closed - no path,low,False,False,2026-03-05,158,30d+,True,unresolved_no_activity_30d
+R1006,Rafael Salcedo,Kingsmere Retail Group,750000,High,Open,declared_only:Open,low,False,False,2026-06-07,64,30d+,True,unresolved_no_activity_30d
+R1007,Rafael Salcedo,Halcyon Grid,80000,High,Open,declared_only:Open,low,False,False,2026-06-01,70,30d+,True,unresolved_no_activity_30d
+R1008,Yusuf Petrossian,Silverbrook Paper,2000000,High,Open,asked_awaiting_connector_response,medium,False,True,2026-01-10,212,30d+,True,unresolved_no_activity_30d
+R1009,Yusuf Petrossian,Marchford Clinics,1200000,High,Intro sent,declared_only:Intro sent,low,False,False,2026-04-19,113,30d+,True,unresolved_no_activity_30d
+R1010,Bertrand Vandermolen,Larkhall Software,250000,Medium,Open,declared_only:Open,low,False,False,2026-05-28,74,30d+,True,unresolved_no_activity_30d
+R1011,Rafael Salcedo,Thornbury,400000,High,Open,declared_only:Open,low,False,False,2025-09-02,342,30d+,True,unresolved_no_activity_30d
+R1012,Nadia Okonkwo,,750000,Low,Open,asked_awaiting_connector_response,medium,False,True,2026-03-31,132,30d+,True,unresolved_no_activity_30d
+R1013,Nadia Okonkwo,Nortonbury Logistics,80000,Low,Open,declared_only:Open,low,False,False,2026-05-13,89,30d+,True,unresolved_no_activity_30d
+R1014,Yusuf Petrossian,Northwind Freight,150000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-02-22,169,30d+,True,unresolved_no_activity_30d
+R1015,Yusuf Petrossian,Cindermill Mining,80000,High,Stalled,asked_awaiting_connector_response,medium,False,True,2026-06-27,44,30d+,True,unresolved_no_activity_30d
+R1016,Curtis Hartigan,Nortonbury Logistics,1200000,High,Intro sent,declared_only:Intro sent,low,False,False,2026-03-30,133,30d+,True,unresolved_no_activity_30d
+R1017,Nadia Okonkwo,Vireo Systems,250000,Medium,Closed - no path,declared_only:Closed - no path,low,False,False,2025-11-10,273,30d+,True,unresolved_no_activity_30d
+R1018,Yusuf Petrossian,Wrenfield Robotics,1200000,High,Open,declared_only:Open,low,False,False,2026-06-03,68,30d+,True,unresolved_no_activity_30d
+R1019,Nadia Okonkwo,Northwind Freight,400000,High,Open,declared_only:Open,low,False,False,2026-01-01,221,30d+,True,unresolved_no_activity_30d
+R1020,Bertrand Vandermolen,,750000,Low,Intro sent,intro_sent,high,True,True,2025-11-15,268,30d+,False,explicitly_resolved
+R1021,Imani Mkhize,Larchmont Aerospace,1200000,Medium,Intro sent,declared_only:Intro sent,low,False,False,2025-11-02,281,30d+,True,unresolved_no_activity_30d
+R1022,Nadia Okonkwo,Blackwood Industrial,1200000,High,Open,intro_sent,high,True,True,2026-06-20,51,30d+,False,explicitly_resolved
+R1023,Bertrand Vandermolen,Thistledown Energy,400000,Low,Routed,declared_only:Routed,low,False,False,2025-10-21,293,30d+,True,unresolved_no_activity_30d
+R1024,Curtis Hartigan,Apex Logistics,2000000,High,Routed,declared_only:Routed,low,False,False,2026-07-08,33,30d+,True,unresolved_no_activity_30d
+R1025,Sloane Fairweather,Glasspoint Health,1200000,Medium,Open,connector_responded_no_intro_recorded,medium,False,True,2026-03-07,156,30d+,True,unresolved_no_activity_30d
+R1026,Imani Mkhize,Tessellate Payments,1200000,Low,Routed,connector_responded_no_intro_recorded,medium,False,True,2025-12-18,235,30d+,True,unresolved_no_activity_30d
+R1027,Hana Nakashima,Strathmore Rail,400000,High,Routed,declared_only:Routed,low,False,False,2026-07-09,32,30d+,True,unresolved_no_activity_30d
+R1028,Yusuf Petrossian,,2000000,Critical,Open,declared_only:Open,low,False,False,2026-07-18,23,14-29d,False,recent_or_unknown
+R1029,Rafael Salcedo,,150000,Medium,Stalled,asked_awaiting_connector_response,medium,False,True,2026-07-18,23,14-29d,False,recent_or_unknown
+R1030,Curtis Hartigan,Larchmont Aerospace,80000,High,Open,declared_only:Open,low,False,False,2026-07-01,40,30d+,True,unresolved_no_activity_30d
+R1031,Imani Mkhize,Ironvale Steel,80000,High,Open,asked_awaiting_connector_response,medium,False,True,2025-11-30,253,30d+,True,unresolved_no_activity_30d
+R1032,Hana Nakashima,Duncastle Hotels,80000,Critical,Closed - no path,intro_sent,high,True,True,2025-09-30,314,30d+,False,explicitly_resolved
+R1033,Curtis Hartigan,Priorwood Chemicals,750000,High,Closed - no path,connector_responded_no_intro_recorded,medium,False,True,2026-06-11,60,30d+,True,unresolved_no_activity_30d
+R1034,Sloane Fairweather,Sundermere Bank,400000,High,Open,volunteered_no_recorded_followup,medium,False,False,2025-10-17,297,30d+,True,unresolved_no_activity_30d
+R1035,Rafael Salcedo,Marrow Point Airways,400000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2025-12-23,230,30d+,True,unresolved_no_activity_30d
+R1036,Curtis Hartigan,Sablefield Motors,150000,Critical,Open,declared_only:Open,low,False,False,2026-05-21,81,30d+,True,unresolved_no_activity_30d
+R1037,Hana Nakashima,Thistledown Energy,1200000,Low,Open,declared_only:Open,low,False,False,2025-11-26,257,30d+,True,unresolved_no_activity_30d
+R1038,Nadia Okonkwo,,250000,High,Intro sent,meeting_booked,high,True,True,2026-06-10,61,30d+,False,explicitly_resolved
+R1039,Nadia Okonkwo,Ravensmoor Defense,2000000,High,Stalled,declared_only:Stalled,low,False,False,2026-02-01,190,30d+,True,unresolved_no_activity_30d
+R1040,Sloane Fairweather,Ironvale Steel,80000,High,Intro sent,declared_only:Intro sent,low,False,False,2026-07-01,40,30d+,True,unresolved_no_activity_30d
+R1041,Hana Nakashima,Apex Logistics,750000,Medium,Open,declared_only:Open,low,False,False,2025-12-05,248,30d+,True,unresolved_no_activity_30d
+R1042,Imani Mkhize,,80000,High,Stalled,meeting_booked,high,True,True,2026-06-17,54,30d+,False,explicitly_resolved
+R1043,Yusuf Petrossian,Copperline Water,150000,High,Intro sent,declared_only:Intro sent,low,False,False,2026-03-23,140,30d+,True,unresolved_no_activity_30d
+R1044,Imani Mkhize,Meridian Peak,750000,High,Open,intro_sent,high,True,True,2026-05-23,79,30d+,False,explicitly_resolved
+R1045,Yusuf Petrossian,Marlowe Freight Systems,750000,High,Closed - no path,intro_sent,high,True,True,2025-09-27,317,30d+,False,explicitly_resolved
+R1046,Curtis Hartigan,,80000,Medium,Open,connector_responded_no_intro_recorded,medium,False,True,2026-06-18,53,30d+,True,unresolved_no_activity_30d
+R1047,Rafael Salcedo,,250000,High,Stalled,declared_only:Stalled,low,False,False,2025-08-21,354,30d+,True,unresolved_no_activity_30d
+R1048,Bertrand Vandermolen,Bexley Bioworks,750000,High,Stalled,declared_only:Stalled,low,False,False,2026-04-18,114,30d+,True,unresolved_no_activity_30d
+R1049,Nadia Okonkwo,Ravensmoor Defense,750000,Critical,Open,declared_only:Open,low,False,False,2025-10-11,303,30d+,True,unresolved_no_activity_30d
+R1050,Curtis Hartigan,Pemberton Retail,400000,Medium,Open,declared_only:Open,low,False,False,2025-09-05,339,30d+,True,unresolved_no_activity_30d
+R1051,Hana Nakashima,,2000000,High,Open,asked_awaiting_connector_response,medium,False,True,2026-04-21,111,30d+,True,unresolved_no_activity_30d
+R1052,Yusuf Petrossian,Priorwood Chemicals,80000,Low,Open,asked_awaiting_connector_response,medium,False,True,2025-08-21,354,30d+,True,unresolved_no_activity_30d
+R1053,Rafael Salcedo,Strathmore Rail,400000,Medium,Stalled,asked_awaiting_connector_response,medium,False,True,2026-06-22,49,30d+,True,unresolved_no_activity_30d
+R1054,Nadia Okonkwo,Kestrel Airlines,1200000,Low,Routed,declared_only:Routed,low,False,False,2026-01-13,209,30d+,True,unresolved_no_activity_30d
+R1055,Rafael Salcedo,,1200000,Critical,Open,declared_only:Open,low,False,False,2026-07-12,29,14-29d,False,recent_or_unknown
+R1056,Sloane Fairweather,,1200000,High,Open,declared_only:Open,low,False,False,2025-08-27,348,30d+,True,unresolved_no_activity_30d
+R1057,Curtis Hartigan,Harrowgate Health,250000,High,Stalled,connector_responded_no_intro_recorded,medium,False,True,2026-07-03,38,30d+,True,unresolved_no_activity_30d
+R1058,Curtis Hartigan,Gravenhurst Motors,80000,Medium,Open,asked_awaiting_connector_response,medium,False,True,2026-01-03,219,30d+,True,unresolved_no_activity_30d
+R1059,Bertrand Vandermolen,,250000,High,Open,declared_only:Open,low,False,False,2025-09-07,337,30d+,True,unresolved_no_activity_30d
+R1060,Nadia Okonkwo,Vireo Systems,80000,Medium,Open,asked_awaiting_connector_response,medium,False,True,2025-08-19,356,30d+,True,unresolved_no_activity_30d
+R1061,Bertrand Vandermolen,Pemberton Retail,1200000,Medium,Stalled,declared_only:Stalled,low,False,False,2026-02-22,169,30d+,True,unresolved_no_activity_30d
+R1062,Bertrand Vandermolen,Larkhall Software,400000,Critical,Intro sent,declared_only:Intro sent,low,False,False,2026-05-13,89,30d+,True,unresolved_no_activity_30d
+R1063,Sloane Fairweather,Silverbrook Paper,80000,High,Routed,declared_only:Routed,low,False,False,2025-11-10,273,30d+,True,unresolved_no_activity_30d
+R1064,Yusuf Petrossian,Thistledown Energy,1200000,Low,Routed,declared_only:Routed,low,False,False,2025-08-15,360,30d+,True,unresolved_no_activity_30d
+R1065,Bertrand Vandermolen,,80000,High,Stalled,declared_only:Stalled,low,False,False,2026-04-11,121,30d+,True,unresolved_no_activity_30d
+R1066,Curtis Hartigan,Kingsmere Retail Group,750000,Medium,Open,connector_responded_no_intro_recorded,medium,False,True,2026-07-06,35,30d+,True,unresolved_no_activity_30d
+R1067,Curtis Hartigan,Redtree Foods,1200000,Medium,Open,declared_only:Open,low,False,False,2025-10-22,292,30d+,True,unresolved_no_activity_30d
+R1068,Rafael Salcedo,Calderon Aerospace,150000,Medium,Closed - no path,asked_awaiting_connector_response,medium,False,True,2026-02-15,176,30d+,True,unresolved_no_activity_30d
+R1069,Sloane Fairweather,Apex Logistics Group,1200000,Medium,Closed - no path,asked_awaiting_connector_response,medium,False,True,2025-11-01,282,30d+,True,unresolved_no_activity_30d
+R1070,Imani Mkhize,,400000,High,Open,declared_only:Open,low,False,False,2026-05-10,92,30d+,True,unresolved_no_activity_30d
+R1071,Curtis Hartigan,,400000,Critical,Closed - no path,declared_only:Closed - no path,low,False,False,2026-01-29,193,30d+,True,unresolved_no_activity_30d
+R1072,Sloane Fairweather,Harrowgate Health,750000,Low,Open,asked_awaiting_connector_response,medium,False,True,2025-11-04,279,30d+,True,unresolved_no_activity_30d
+R1073,Nadia Okonkwo,Volney Industrial Systems,80000,Low,Closed - no path,declared_only:Closed - no path,low,False,False,2025-12-24,229,30d+,True,unresolved_no_activity_30d
+R1074,Bertrand Vandermolen,Redtree Foods,750000,High,Stalled,declared_only:Stalled,low,False,False,2026-06-07,64,30d+,True,unresolved_no_activity_30d
+R1075,Hana Nakashima,Vireo Systems,750000,Medium,Stalled,declared_only:Stalled,low,False,False,2026-02-27,164,30d+,True,unresolved_no_activity_30d
+R1076,Imani Mkhize,,250000,Critical,Open,intro_sent,high,True,True,2026-02-07,184,30d+,False,explicitly_resolved
+R1077,Rafael Salcedo,Nortonbury Logistics,750000,Low,Open,asked_awaiting_connector_response,medium,False,True,2026-03-04,159,30d+,True,unresolved_no_activity_30d
+R1078,Hana Nakashima,Cobalt Lane Capital Markets,2000000,Medium,Intro sent,meeting_booked,high,True,True,2025-11-26,257,30d+,False,explicitly_resolved
+R1079,Curtis Hartigan,Cobalt Lane,150000,Medium,Closed - no path,declared_only:Closed - no path,low,False,False,2026-06-24,47,30d+,True,unresolved_no_activity_30d
+R1080,Hana Nakashima,Volney Industrial Systems,750000,High,Open,declared_only:Open,low,False,False,2026-01-16,206,30d+,True,unresolved_no_activity_30d
+R1081,Curtis Hartigan,Sablefield Motors,80000,Low,Open,declared_only:Open,low,False,False,2025-10-04,310,30d+,True,unresolved_no_activity_30d
+R1082,Sloane Fairweather,,400000,Medium,Stalled,connector_responded_no_intro_recorded,medium,False,True,2025-08-17,358,30d+,True,unresolved_no_activity_30d
+R1083,Nadia Okonkwo,,750000,Critical,Open,declared_only:Open,low,False,False,2026-06-04,67,30d+,True,unresolved_no_activity_30d
+R1084,Bertrand Vandermolen,Hollowbrook Grocers,2000000,Critical,Open,declared_only:Open,low,False,False,2026-07-17,24,14-29d,False,recent_or_unknown
+R1085,Yusuf Petrossian,,80000,Medium,Open,asked_awaiting_connector_response,medium,False,True,2026-05-01,101,30d+,True,unresolved_no_activity_30d
+R1086,Sloane Fairweather,Ironvale Steel,150000,Critical,Open,asked_awaiting_connector_response,medium,False,True,2026-02-20,171,30d+,True,unresolved_no_activity_30d
+R1087,Curtis Hartigan,Silverbrook,400000,Critical,Routed,declared_only:Routed,low,False,False,2026-02-14,177,30d+,True,unresolved_no_activity_30d
+R1088,Curtis Hartigan,Thornbury,400000,Critical,Closed - no path,declared_only:Closed - no path,low,False,False,2026-04-11,121,30d+,True,unresolved_no_activity_30d
+R1089,Hana Nakashima,Ironvale Steel,400000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-02-22,169,30d+,True,unresolved_no_activity_30d
+R1090,Hana Nakashima,Harrowgate Health,400000,Medium,Closed - no path,asked_awaiting_connector_response,medium,False,True,2025-12-20,233,30d+,True,unresolved_no_activity_30d
+R1091,Yusuf Petrossian,Blackwood Industrial,150000,High,Stalled,intro_sent,high,True,True,2026-05-02,100,30d+,False,explicitly_resolved
+R1092,Sloane Fairweather,Priorwood Chemicals,750000,Critical,Stalled,declared_only:Stalled,low,False,False,2026-03-28,135,30d+,True,unresolved_no_activity_30d
+R1093,Curtis Hartigan,Strathmore Rail,1200000,Critical,Closed - no path,asked_awaiting_connector_response,medium,False,True,2025-12-19,234,30d+,True,unresolved_no_activity_30d
+R1094,Hana Nakashima,Strathmore Rail,750000,High,Open,asked_awaiting_connector_response,medium,False,True,2026-06-23,48,30d+,True,unresolved_no_activity_30d
+R1095,Rafael Salcedo,,750000,Critical,Open,asked_awaiting_connector_response,medium,False,True,2025-12-30,223,30d+,True,unresolved_no_activity_30d
+R1096,Sloane Fairweather,Silverbrook,750000,High,Open,declared_only:Open,low,False,False,2026-03-28,135,30d+,True,unresolved_no_activity_30d
+R1097,Nadia Okonkwo,Pemberton Retail,400000,Low,Intro sent,declared_only:Intro sent,low,False,False,2025-12-08,245,30d+,True,unresolved_no_activity_30d
+R1098,Curtis Hartigan,Priorwood Chemicals,150000,Medium,Open,connector_responded_no_intro_recorded,medium,False,True,2026-03-28,135,30d+,True,unresolved_no_activity_30d
+R1099,Nadia Okonkwo,Aldergate Telecom,400000,Critical,Open,declared_only:Open,low,False,False,2026-01-12,210,30d+,True,unresolved_no_activity_30d
+R1100,Curtis Hartigan,Northwind Freight,750000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-05-12,90,30d+,True,unresolved_no_activity_30d
+R1101,Imani Mkhize,Calderon Aerospace,80000,High,Open,meeting_booked,high,True,True,2026-05-30,72,30d+,False,explicitly_resolved
+R1102,Yusuf Petrossian,Strathmore Rail,400000,Low,Routed,connector_responded_no_intro_recorded,medium,False,True,2025-11-01,282,30d+,True,unresolved_no_activity_30d
+R1103,Nadia Okonkwo,,250000,High,Intro sent,declared_only:Intro sent,low,False,False,2025-11-29,254,30d+,True,unresolved_no_activity_30d
+R1104,Bertrand Vandermolen,Ellerby Semiconductor,2000000,Medium,Open,connector_responded_no_intro_recorded,medium,False,True,2025-12-28,225,30d+,True,unresolved_no_activity_30d
+R1105,Imani Mkhize,Thornbury Financial,2000000,High,Open,declared_only:Open,low,False,False,2025-09-18,326,30d+,True,unresolved_no_activity_30d
+R1106,Yusuf Petrossian,,80000,Critical,Stalled,declared_only:Stalled,low,False,False,2026-07-18,23,14-29d,False,recent_or_unknown
+R1107,Nadia Okonkwo,Vireo Systems,750000,High,Intro sent,connector_responded_no_intro_recorded,medium,False,True,2025-11-14,269,30d+,True,unresolved_no_activity_30d
+R1108,Yusuf Petrossian,Gravenhurst Motors,250000,Critical,Stalled,connector_responded_no_intro_recorded,medium,False,True,2025-10-23,291,30d+,True,unresolved_no_activity_30d
+R1109,Bertrand Vandermolen,Ravensmoor Defense,150000,Critical,Closed - no path,volunteered_no_recorded_followup,medium,False,False,2025-10-26,288,30d+,True,unresolved_no_activity_30d
+R1110,Sloane Fairweather,,250000,High,Stalled,connector_responded_no_intro_recorded,medium,False,True,2026-07-22,19,14-29d,False,recent_or_unknown
+R1111,Imani Mkhize,Vantage Ridge Utilities,1200000,Medium,Intro sent,declared_only:Intro sent,low,False,False,2026-02-01,190,30d+,True,unresolved_no_activity_30d
+R1112,Yusuf Petrossian,,80000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-01-19,203,30d+,True,unresolved_no_activity_30d
+R1113,Imani Mkhize,Kingsmere Retail Group,150000,Medium,Open,connector_responded_no_intro_recorded,medium,False,True,2026-02-05,186,30d+,True,unresolved_no_activity_30d
+R1114,Yusuf Petrossian,Marchford Clinics,2000000,Medium,Stalled,connector_responded_no_intro_recorded,medium,False,True,2026-02-24,167,30d+,True,unresolved_no_activity_30d
+R1115,Curtis Hartigan,Gravenhurst Motors,2000000,High,Intro sent,volunteered_no_recorded_followup,medium,False,False,2026-02-22,169,30d+,True,unresolved_no_activity_30d
+R1116,Curtis Hartigan,,2000000,Medium,Open,declared_only:Open,low,False,False,2026-04-24,108,30d+,True,unresolved_no_activity_30d
+R1117,Yusuf Petrossian,Sablefield Motors,250000,Low,Open,declared_only:Open,low,False,False,2026-04-13,119,30d+,True,unresolved_no_activity_30d
+R1118,Nadia Okonkwo,Priorwood Chemicals,1200000,Critical,Open,connector_responded_no_intro_recorded,medium,False,True,2025-09-18,326,30d+,True,unresolved_no_activity_30d
+R1119,Imani Mkhize,,150000,Critical,Open,declared_only:Open,low,False,False,2026-06-11,60,30d+,True,unresolved_no_activity_30d
+R1120,Yusuf Petrossian,Duncastle Hotels,80000,High,Stalled,asked_awaiting_connector_response,medium,False,True,2025-11-01,282,30d+,True,unresolved_no_activity_30d
+R1121,Sloane Fairweather,,80000,Medium,Stalled,intro_sent,high,True,True,2025-09-26,318,30d+,False,explicitly_resolved
+R1122,Rafael Salcedo,Gravenhurst Motors,1200000,Low,Intro sent,meeting_booked,high,True,True,2026-08-10,0,<7d,False,explicitly_resolved
+R1123,Imani Mkhize,Brightmoor Energy,2000000,High,Routed,intro_sent,high,True,True,2026-04-29,103,30d+,False,explicitly_resolved
+R1124,Yusuf Petrossian,Hollowbrook Grocers,1200000,High,Open,asked_awaiting_connector_response,medium,False,True,2025-11-13,270,30d+,True,unresolved_no_activity_30d
+R1125,Sloane Fairweather,Strathmore Rail,400000,High,Open,declared_only:Open,low,False,False,2026-07-06,35,30d+,True,unresolved_no_activity_30d
+R1126,Sloane Fairweather,Cobalt Lane,750000,High,Open,declared_only:Open,low,False,False,2026-03-13,150,30d+,True,unresolved_no_activity_30d
+R1127,Imani Mkhize,Halcyon Grid,750000,High,Open,declared_only:Open,low,False,False,2026-05-28,74,30d+,True,unresolved_no_activity_30d
+R1128,Nadia Okonkwo,Kingsmere Retail Group,80000,Critical,Routed,declared_only:Routed,low,False,False,2025-12-28,225,30d+,True,unresolved_no_activity_30d
+R1129,Nadia Okonkwo,,1200000,Critical,Routed,opportunity_created,high,True,True,2026-05-19,83,30d+,False,explicitly_resolved
+R1130,Sloane Fairweather,Blackwood Industrial,80000,Low,Stalled,connector_responded_no_intro_recorded,medium,False,True,2026-02-19,172,30d+,True,unresolved_no_activity_30d
+R1131,Rafael Salcedo,,1200000,Low,Stalled,asked_awaiting_connector_response,medium,False,True,2026-06-25,46,30d+,True,unresolved_no_activity_30d
+R1132,Sloane Fairweather,Strathmore Rail,150000,High,Routed,declared_only:Routed,low,False,False,2025-12-13,240,30d+,True,unresolved_no_activity_30d
+R1133,Sloane Fairweather,Marrow Point Airways,1200000,Low,Open,declared_only:Open,low,False,False,2026-04-11,121,30d+,True,unresolved_no_activity_30d
+R1134,Bertrand Vandermolen,,1200000,High,Open,declared_only:Open,low,False,False,2026-03-06,157,30d+,True,unresolved_no_activity_30d
+R1135,Curtis Hartigan,,750000,High,Open,connector_responded_no_intro_recorded,medium,False,True,2025-12-16,237,30d+,True,unresolved_no_activity_30d
+R1136,Nadia Okonkwo,Harrowgate Health,1200000,Low,Open,volunteered_no_recorded_followup,medium,False,False,2026-03-17,146,30d+,True,unresolved_no_activity_30d
+R1137,Imani Mkhize,Harrowgate Health,250000,High,Open,asked_awaiting_connector_response,medium,False,True,2025-09-17,327,30d+,True,unresolved_no_activity_30d
+R1138,Yusuf Petrossian,Sablefield Motors,80000,High,Open,declared_only:Open,low,False,False,2026-04-10,122,30d+,True,unresolved_no_activity_30d
+R1139,Bertrand Vandermolen,Brightmoor Energy,1200000,Critical,Closed - no path,declared_only:Closed - no path,low,False,False,2025-11-01,282,30d+,True,unresolved_no_activity_30d
+R1140,Yusuf Petrossian,Harrowgate Health,80000,Low,Open,intro_sent,high,True,True,2025-10-08,306,30d+,False,explicitly_resolved
+R1141,Curtis Hartigan,Ironvale Steel,400000,High,Intro sent,intro_sent,high,True,True,2025-12-06,247,30d+,False,explicitly_resolved
+R1142,Rafael Salcedo,Marchford Clinics,2000000,Low,Stalled,declared_only:Stalled,low,False,False,2025-09-28,316,30d+,True,unresolved_no_activity_30d
+R1143,Sloane Fairweather,Gravenhurst Motors,150000,Low,Routed,declared_only:Routed,low,False,False,2026-03-04,159,30d+,True,unresolved_no_activity_30d
+R1144,Curtis Hartigan,Cindermill Mining,400000,Critical,Open,declared_only:Open,low,False,False,2025-08-19,356,30d+,True,unresolved_no_activity_30d
+R1145,Bertrand Vandermolen,,80000,High,Stalled,declared_only:Stalled,low,False,False,2026-04-12,120,30d+,True,unresolved_no_activity_30d
+R1146,Nadia Okonkwo,,1200000,High,Intro sent,declared_only:Intro sent,low,False,False,2026-03-16,147,30d+,True,unresolved_no_activity_30d
+R1147,Hana Nakashima,Kingsmere Retail Group,1200000,Medium,Closed - no path,asked_awaiting_connector_response,medium,False,True,2026-02-16,175,30d+,True,unresolved_no_activity_30d
+R1148,Hana Nakashima,Thistledown Energy,150000,High,Intro sent,declared_only:Intro sent,low,False,False,2026-04-17,115,30d+,True,unresolved_no_activity_30d
+R1149,Rafael Salcedo,Gravenhurst Motors,80000,Critical,Routed,opportunity_created,high,True,True,2026-05-23,79,30d+,False,explicitly_resolved
+R1150,Curtis Hartigan,Priorwood Chemicals,750000,High,Stalled,opportunity_created,high,True,True,2026-03-16,147,30d+,False,explicitly_resolved
+R1151,Nadia Okonkwo,Copperline Water,250000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-07-24,17,14-29d,False,recent_or_unknown
+R1152,Rafael Salcedo,Thistledown Energy,400000,High,Routed,declared_only:Routed,low,False,False,2025-12-18,235,30d+,True,unresolved_no_activity_30d
+R1153,Nadia Okonkwo,Harrowgate Health,750000,Critical,Stalled,declared_only:Stalled,low,False,False,2025-11-29,254,30d+,True,unresolved_no_activity_30d
+R1154,Yusuf Petrossian,Apex Logistics Group,2000000,Critical,Stalled,intro_sent,high,True,True,2026-03-11,152,30d+,False,explicitly_resolved
+R1155,Hana Nakashima,Vireo Systems,1200000,Low,Intro sent,asked_awaiting_connector_response,medium,False,True,2026-07-01,40,30d+,True,unresolved_no_activity_30d
+R1156,Hana Nakashima,Wrenfield Robotics,1200000,High,Routed,intro_sent,high,True,True,2025-10-18,296,30d+,False,explicitly_resolved
+R1157,Yusuf Petrossian,Harrowgate Health,750000,Medium,Stalled,connector_responded_no_intro_recorded,medium,False,True,2026-05-09,93,30d+,True,unresolved_no_activity_30d
+R1158,Rafael Salcedo,Gravenhurst Motors,750000,Critical,Open,declared_only:Open,low,False,False,2025-11-03,280,30d+,True,unresolved_no_activity_30d
+R1159,Bertrand Vandermolen,,1200000,Critical,Open,declared_only:Open,low,False,False,2025-12-13,240,30d+,True,unresolved_no_activity_30d
+R1160,Bertrand Vandermolen,Gravenhurst Motors,150000,High,Closed - no path,intro_sent,high,True,True,2026-06-14,57,30d+,False,explicitly_resolved
+R1161,Bertrand Vandermolen,Northwind Freight,80000,Critical,Routed,declared_only:Routed,low,False,False,2025-12-20,233,30d+,True,unresolved_no_activity_30d
+R1162,Curtis Hartigan,,80000,High,Open,asked_awaiting_connector_response,medium,False,True,2026-06-04,67,30d+,True,unresolved_no_activity_30d
+R1163,Curtis Hartigan,Osric Networks,400000,High,Open,opportunity_created,high,True,True,2026-04-02,130,30d+,False,explicitly_resolved
+R1164,Hana Nakashima,,150000,Low,Intro sent,declared_only:Intro sent,low,False,False,2025-08-09,366,30d+,True,unresolved_no_activity_30d
+R1165,Sloane Fairweather,Pemberton Retail,80000,Low,Open,declared_only:Open,low,False,False,2026-04-30,102,30d+,True,unresolved_no_activity_30d
+R1166,Rafael Salcedo,Vireo Systems,750000,High,Closed - no path,connector_responded_no_intro_recorded,medium,False,True,2025-11-21,262,30d+,True,unresolved_no_activity_30d
+R1167,Nadia Okonkwo,Osric Networks,250000,Critical,Stalled,meeting_booked,high,True,True,2026-01-31,191,30d+,False,explicitly_resolved
+R1168,Bertrand Vandermolen,Meridian Peak Foods,750000,Medium,Open,opportunity_created,high,True,True,2026-08-04,6,<7d,False,explicitly_resolved
+R1169,Curtis Hartigan,Yarrowdale Media,150000,High,Stalled,asked_awaiting_connector_response,medium,False,True,2026-07-12,29,14-29d,False,recent_or_unknown
+R1170,Hana Nakashima,Osric Networks,1200000,High,Open,declared_only:Open,low,False,False,2025-09-10,334,30d+,True,unresolved_no_activity_30d
+R1171,Curtis Hartigan,Kingsmere Retail Group,1200000,Medium,Open,intro_sent,high,True,True,2026-02-04,187,30d+,False,explicitly_resolved
+R1172,Hana Nakashima,Meridian Peak Foods,150000,High,Intro sent,asked_awaiting_connector_response,medium,False,True,2025-10-21,293,30d+,True,unresolved_no_activity_30d
+R1173,Rafael Salcedo,Harrowgate Health,150000,Medium,Intro sent,declared_only:Intro sent,low,False,False,2025-10-06,308,30d+,True,unresolved_no_activity_30d
+R1174,Yusuf Petrossian,Priorwood Chemicals,150000,Critical,Open,declared_only:Open,low,False,False,2026-05-31,71,30d+,True,unresolved_no_activity_30d
+R1175,Imani Mkhize,Copperline Water,80000,Critical,Closed - no path,declared_only:Closed - no path,low,False,False,2025-11-23,260,30d+,True,unresolved_no_activity_30d
+R1176,Yusuf Petrossian,Pelham Beverage,400000,Critical,Stalled,opportunity_created,high,True,True,2026-04-19,113,30d+,False,explicitly_resolved
+R1177,Nadia Okonkwo,,2000000,Medium,Open,declared_only:Open,low,False,False,2026-01-13,209,30d+,True,unresolved_no_activity_30d
+R1178,Bertrand Vandermolen,Quillon Pharma,750000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-05-17,85,30d+,True,unresolved_no_activity_30d
+R1179,Nadia Okonkwo,Blackwood Industrial,250000,High,Open,declared_only:Open,low,False,False,2025-12-12,241,30d+,True,unresolved_no_activity_30d
+R1180,Rafael Salcedo,Thornbury Financial,2000000,High,Routed,declared_only:Routed,low,False,False,2025-08-10,365,30d+,True,unresolved_no_activity_30d
+R1181,Hana Nakashima,,400000,High,Closed - no path,declared_only:Closed - no path,low,False,False,2026-05-03,99,30d+,True,unresolved_no_activity_30d
+R1182,Yusuf Petrossian,,2000000,Critical,Open,declared_only:Open,low,False,False,2026-02-15,176,30d+,True,unresolved_no_activity_30d
+R1183,Yusuf Petrossian,,750000,High,Open,declared_only:Open,low,False,False,2026-05-03,99,30d+,True,unresolved_no_activity_30d
+R1184,Bertrand Vandermolen,Cindermill Mining,750000,Critical,Open,declared_only:Open,low,False,False,2026-07-26,15,14-29d,False,recent_or_unknown
+R1185,Yusuf Petrossian,Gravenhurst Motors,1200000,High,Stalled,intro_sent,high,True,True,2026-02-22,169,30d+,False,explicitly_resolved
+R1186,Hana Nakashima,,1200000,Low,Open,intro_sent,high,True,True,2026-01-05,217,30d+,False,explicitly_resolved
+R1187,Bertrand Vandermolen,Ashgrove Agriculture,400000,Critical,Open,connector_responded_no_intro_recorded,medium,False,True,2025-11-03,280,30d+,True,unresolved_no_activity_30d
+R1188,Bertrand Vandermolen,Northwind Freight,80000,Low,Stalled,declared_only:Stalled,low,False,False,2026-02-06,185,30d+,True,unresolved_no_activity_30d
+R1189,Nadia Okonkwo,Marrow Point Airways,750000,Medium,Open,declared_only:Open,low,False,False,2026-02-27,164,30d+,True,unresolved_no_activity_30d
+R1190,Yusuf Petrossian,Brightmoor Energy,1200000,Critical,Routed,connector_responded_no_intro_recorded,medium,False,True,2026-07-06,35,30d+,True,unresolved_no_activity_30d
+R1191,Yusuf Petrossian,Volney Industrial Systems,2000000,High,Stalled,declared_only:Stalled,low,False,False,2025-12-18,235,30d+,True,unresolved_no_activity_30d
+R1192,Imani Mkhize,Priorwood Chemicals,2000000,High,Intro sent,opportunity_created,high,True,True,2025-08-31,344,30d+,False,explicitly_resolved
+R1193,Rafael Salcedo,Kingsmere Retail Group,250000,Low,Stalled,declared_only:Stalled,low,False,False,2026-06-06,65,30d+,True,unresolved_no_activity_30d
+R1194,Imani Mkhize,Marrow Point Airways,750000,High,Open,declared_only:Open,low,False,False,2026-07-02,39,30d+,True,unresolved_no_activity_30d
+R1195,Nadia Okonkwo,,1200000,Low,Open,declared_only:Open,low,False,False,2026-04-29,103,30d+,True,unresolved_no_activity_30d
+R1196,Bertrand Vandermolen,Priorwood Chemicals,1200000,Medium,Stalled,meeting_booked,high,True,True,2026-02-20,171,30d+,False,explicitly_resolved
+R1197,Imani Mkhize,Apex Logistics,250000,Low,Intro sent,connector_responded_no_intro_recorded,medium,False,True,2025-08-24,351,30d+,True,unresolved_no_activity_30d
+R1198,Sloane Fairweather,Quillon Pharma,750000,Critical,Closed - no path,declared_only:Closed - no path,low,False,False,2025-10-11,303,30d+,True,unresolved_no_activity_30d
+R1199,Curtis Hartigan,Vireo Systems,750000,High,Open,asked_awaiting_connector_response,medium,False,True,2025-12-09,244,30d+,True,unresolved_no_activity_30d
+R1200,Hana Nakashima,,750000,Medium,Open,declared_only:Open,low,False,False,2026-02-15,176,30d+,True,unresolved_no_activity_30d

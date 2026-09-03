@@ -1,0 +1,135 @@
+{
+  "connector_months_over_stated_capacity": {
+    "denominator": 49,
+    "numerator": 2,
+    "pct": 4.1
+  },
+  "declared_no_path_or_unknown_contradicted_by_time_aware_path": {
+    "denominator": 109,
+    "numerator": 46,
+    "pct": 42.2
+  },
+  "distinct_target_accounts": 51,
+  "funnel": [
+    {
+      "count": "200",
+      "denominator": "200",
+      "pct_of_requests": "100.0",
+      "stage": "requests_in_spine"
+    },
+    {
+      "count": "200",
+      "denominator": "200",
+      "pct_of_requests": "100.0",
+      "stage": "slack_thread_present"
+    },
+    {
+      "count": "157",
+      "denominator": "200",
+      "pct_of_requests": "78.5",
+      "stage": "any_slack_reply"
+    },
+    {
+      "count": "44",
+      "denominator": "200",
+      "pct_of_requests": "22.0",
+      "stage": "substantive_slack_reply"
+    },
+    {
+      "count": "85",
+      "denominator": "200",
+      "pct_of_requests": "42.5",
+      "stage": "routed_to_connector"
+    },
+    {
+      "count": "55",
+      "denominator": "200",
+      "pct_of_requests": "27.5",
+      "stage": "connector_responded"
+    },
+    {
+      "count": "32",
+      "denominator": "200",
+      "pct_of_requests": "16.0",
+      "stage": "intro_sent"
+    },
+    {
+      "count": "14",
+      "denominator": "200",
+      "pct_of_requests": "7.0",
+      "stage": "meeting_booked"
+    },
+    {
+      "count": "7",
+      "denominator": "200",
+      "pct_of_requests": "3.5",
+      "stage": "opportunity_created"
+    }
+  ],
+  "high_severity_contradictions": {
+    "denominator": 217,
+    "numerator": 54,
+    "pct": 24.9
+  },
+  "pipeline_usd_total": 137790000,
+  "pipeline_usd_unresolved_and_silent_30d_plus": 106480000,
+  "reasks_whose_prior_ask_was_never_routed": {
+    "denominator": 31,
+    "numerator": 14,
+    "pct": 45.2
+  },
+  "reference_date": {
+    "reference_date": "2026-08-10"
+  },
+  "request_universe": {
+    "denominator": 200,
+    "note": "intro_requests.csv is the authoritative spine; Slack reconciled against it separately",
+    "numerator": 200,
+    "pct": 100.0
+  },
+  "requests_in_a_within_90d_same_account_pair": {
+    "denominator": 200,
+    "numerator": 114,
+    "pct": 57.0
+  },
+  "requests_unresolved_and_silent_30d_plus": {
+    "denominator": 200,
+    "numerator": 159,
+    "pct": 79.5
+  },
+  "requests_whose_state_rests_on_declared_status_only": {
+    "denominator": 200,
+    "numerator": 111,
+    "pct": 55.5
+  },
+  "requests_with_any_snapshot_path": {
+    "denominator": 200,
+    "numerator": 109,
+    "pct": 54.5
+  },
+  "requests_with_at_least_one_contradiction": {
+    "denominator": 200,
+    "numerator": 150,
+    "pct": 75.0
+  },
+  "requests_with_no_owner_and_no_terminal_evidence": {
+    "denominator": 200,
+    "numerator": 115,
+    "pct": 57.5
+  },
+  "requests_with_time_aware_path": {
+    "denominator": 200,
+    "numerator": 97,
+    "pct": 48.5
+  },
+  "requests_without_outcome_row": {
+    "denominator": 200,
+    "numerator": 115,
+    "pct": 57.5
+  },
+  "self_declared_reasks": {
+    "denominator": 200,
+    "numerator": 42,
+    "pct": 21.0
+  }
+}

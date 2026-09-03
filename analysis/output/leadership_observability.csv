@@ -1,0 +1,7 @@
+leadership_question,answerable_from_data,denominator,answerable_pct,unanswerable,pipeline_usd_unanswerable,pipeline_usd_total,evidence_rule
+What is the real state of this request?,89,200,44.5,111,75460000,137790000,state derived from an outcome event or an explicit Slack statement; declared status alone does not count
+Who owns the next action right now?,85,200,42.5,115,79210000,137790000,a connector is recorded on the outcome row
+What is the next action?,35,200,17.5,165,112760000,137790000,an unambiguous next step follows from the derived state
+Is this request still alive or quietly dead?,41,200,20.5,159,106480000,137790000,"terminal evidence exists, or the request has shown activity within 30 days"
+Do we even have a warm path into this account?,109,200,54.5,91,56360000,137790000,at least one candidate path is observable in the supplied network snapshot
+Does the request record itself say whether a path exists?,145,200,72.5,55,39660000,137790000,path_found_flag is not 'Unknown'

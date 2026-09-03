@@ -1,0 +1,218 @@
+request_id,check,detail,severity,declared_status,declared_path_found_flag,derived_state,deal_value_usd
+R1003,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 5 time-aware path(s) exist,high,Stalled,No path found,intro_sent,400000
+R1003,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,No path found,intro_sent,400000
+R1003,target_account_unresolved,target 'Redtree Foods' resolves to tier E_unmatched,medium,Stalled,No path found,intro_sent,400000
+R1006,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Open,,declared_only:Open,750000
+R1008,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,asked_awaiting_connector_response,2000000
+R1009,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,Path found,declared_only:Intro sent,1200000
+R1011,target_account_unresolved,target 'Thornbury' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,400000
+R1012,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Path found,asked_awaiting_connector_response,750000
+R1015,target_account_unresolved,target 'Cindermill Mining' resolves to tier C_similar_but_distinct,medium,Stalled,Path found,asked_awaiting_connector_response,80000
+R1016,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,,declared_only:Intro sent,1200000
+R1017,closed_no_path_but_path_observable,closed as 'no path' yet 1 connection(s) to the account pre-dating the request exist via Marcus Aldridge,high,Closed - no path,Unknown,declared_only:Closed - no path,250000
+R1017,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Closed - no path,Unknown,declared_only:Closed - no path,250000
+R1020,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Intro sent,Path found,intro_sent,750000
+R1021,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,,declared_only:Intro sent,1200000
+R1022,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,Unknown,intro_sent,1200000
+R1022,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,intro_sent,1200000
+R1022,target_account_unresolved,target 'Blackwood Industrial' resolves to tier C_similar_but_distinct,medium,Open,Unknown,intro_sent,1200000
+R1023,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,,declared_only:Routed,400000
+R1024,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Path found,declared_only:Routed,2000000
+R1025,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,connector_responded_no_intro_recorded,1200000
+R1025,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,Unknown,connector_responded_no_intro_recorded,1200000
+R1026,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Routed,,connector_responded_no_intro_recorded,1200000
+R1027,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Unknown,declared_only:Routed,400000
+R1027,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Routed,Unknown,declared_only:Routed,400000
+R1028,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,2000000
+R1029,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,Path found,asked_awaiting_connector_response,150000
+R1032,target_account_unresolved,target 'Duncastle Hotels' resolves to tier C_similar_but_distinct,medium,Closed - no path,Path found,intro_sent,80000
+R1033,closed_no_path_but_path_observable,closed as 'no path' yet 6 connection(s) to the account pre-dating the request exist via Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,high,Closed - no path,Path found,connector_responded_no_intro_recorded,750000
+R1033,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Closed - no path,Path found,connector_responded_no_intro_recorded,750000
+R1035,target_account_unresolved,target 'Marrow Point Airways' resolves to tier E_unmatched,medium,Closed - no path,,declared_only:Closed - no path,400000
+R1038,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Intro sent,Unknown,meeting_booked,250000
+R1038,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Intro sent,Unknown,meeting_booked,250000
+R1040,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,Unknown,declared_only:Intro sent,80000
+R1042,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Unknown,meeting_booked,80000
+R1042,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,meeting_booked,80000
+R1042,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,Unknown,meeting_booked,80000
+R1043,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,No path found,declared_only:Intro sent,150000
+R1043,target_account_unresolved,target 'Copperline Water' resolves to tier E_unmatched,medium,Intro sent,No path found,declared_only:Intro sent,150000
+R1044,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,Unknown,intro_sent,750000
+R1044,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,intro_sent,750000
+R1044,target_account_unresolved,target 'Meridian Peak' resolves to tier C_similar_but_distinct,medium,Open,Unknown,intro_sent,750000
+R1045,closed_no_path_but_path_observable,closed as 'no path' yet 1 connection(s) to the account pre-dating the request exist via Marcus Aldridge,high,Closed - no path,,intro_sent,750000
+R1046,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,connector_responded_no_intro_recorded,80000
+R1046,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,connector_responded_no_intro_recorded,80000
+R1046,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,Unknown,connector_responded_no_intro_recorded,80000
+R1047,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,,declared_only:Stalled,250000
+R1051,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,asked_awaiting_connector_response,2000000
+R1053,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,asked_awaiting_connector_response,400000
+R1053,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Stalled,Unknown,asked_awaiting_connector_response,400000
+R1054,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Unknown,declared_only:Routed,1200000
+R1055,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,1200000
+R1056,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,1200000
+R1057,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,connector_responded_no_intro_recorded,250000
+R1057,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,Unknown,connector_responded_no_intro_recorded,250000
+R1059,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,declared_only:Open,250000
+R1060,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Open,,asked_awaiting_connector_response,80000
+R1062,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,No path found,declared_only:Intro sent,400000
+R1063,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Path found,declared_only:Routed,80000
+R1064,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Unknown,declared_only:Routed,1200000
+R1065,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,,declared_only:Stalled,80000
+R1066,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 5 time-aware path(s) exist,high,Open,No path found,connector_responded_no_intro_recorded,750000
+R1066,connector_not_on_roster,'Yusuf Petrossian' is recorded as connector but is absent from connector_roster.csv,medium,Open,No path found,connector_responded_no_intro_recorded,750000
+R1066,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Open,No path found,connector_responded_no_intro_recorded,750000
+R1066,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,No path found,connector_responded_no_intro_recorded,750000
+R1067,target_account_unresolved,target 'Redtree Foods' resolves to tier E_unmatched,medium,Open,,declared_only:Open,1200000
+R1068,closed_no_path_but_path_observable,closed as 'no path' yet 3 connection(s) to the account pre-dating the request exist via Elena Duvall; Marcus Aldridge; Owen Trask,high,Closed - no path,Unknown,asked_awaiting_connector_response,150000
+R1068,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Closed - no path,Unknown,asked_awaiting_connector_response,150000
+R1068,target_account_unresolved,target 'Calderon Aerospace' resolves to tier E_unmatched,medium,Closed - no path,Unknown,asked_awaiting_connector_response,150000
+R1069,closed_no_path_but_path_observable,closed as 'no path' yet 3 connection(s) to the account pre-dating the request exist via Elena Duvall; Marcus Aldridge,high,Closed - no path,,asked_awaiting_connector_response,1200000
+R1070,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,declared_only:Open,400000
+R1071,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Closed - no path,,declared_only:Closed - no path,400000
+R1074,target_account_unresolved,target 'Redtree Foods' resolves to tier E_unmatched,medium,Stalled,,declared_only:Stalled,750000
+R1075,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Stalled,,declared_only:Stalled,750000
+R1076,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,Path found,intro_sent,250000
+R1076,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Path found,intro_sent,250000
+R1079,target_account_unresolved,target 'Cobalt Lane' resolves to tier C_similar_but_distinct,medium,Closed - no path,Path found,declared_only:Closed - no path,150000
+R1082,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,Path found,connector_responded_no_intro_recorded,400000
+R1082,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,Path found,connector_responded_no_intro_recorded,400000
+R1083,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,750000
+R1085,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Path found,asked_awaiting_connector_response,80000
+R1087,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,,declared_only:Routed,400000
+R1087,target_account_unresolved,target 'Silverbrook' resolves to tier D_ambiguous,medium,Routed,,declared_only:Routed,400000
+R1088,target_account_unresolved,target 'Thornbury' resolves to tier E_unmatched,medium,Closed - no path,Unknown,declared_only:Closed - no path,400000
+R1089,closed_no_path_but_path_observable,closed as 'no path' yet 3 connection(s) to the account pre-dating the request exist via Marcus Aldridge; Priya Raghunathan; Tomás Ferreira,high,Closed - no path,Path found,declared_only:Closed - no path,400000
+R1090,closed_no_path_but_path_observable,closed as 'no path' yet 7 connection(s) to the account pre-dating the request exist via Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,high,Closed - no path,,asked_awaiting_connector_response,400000
+R1091,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Unknown,intro_sent,150000
+R1091,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,intro_sent,150000
+R1091,target_account_unresolved,target 'Blackwood Industrial' resolves to tier C_similar_but_distinct,medium,Stalled,Unknown,intro_sent,150000
+R1093,closed_no_path_but_path_observable,closed as 'no path' yet 9 connection(s) to the account pre-dating the request exist via Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,high,Closed - no path,,asked_awaiting_connector_response,1200000
+R1093,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Closed - no path,,asked_awaiting_connector_response,1200000
+R1094,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Open,Path found,asked_awaiting_connector_response,750000
+R1095,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Path found,asked_awaiting_connector_response,750000
+R1096,target_account_unresolved,target 'Silverbrook' resolves to tier D_ambiguous,medium,Open,,declared_only:Open,750000
+R1097,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,,declared_only:Intro sent,400000
+R1098,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,connector_responded_no_intro_recorded,150000
+R1098,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,Unknown,connector_responded_no_intro_recorded,150000
+R1101,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,,meeting_booked,80000
+R1101,target_account_unresolved,target 'Calderon Aerospace' resolves to tier E_unmatched,medium,Open,,meeting_booked,80000
+R1102,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Routed,Path found,connector_responded_no_intro_recorded,400000
+R1102,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Routed,Path found,connector_responded_no_intro_recorded,400000
+R1103,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,No path found,declared_only:Intro sent,250000
+R1103,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Intro sent,No path found,declared_only:Intro sent,250000
+R1104,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,,connector_responded_no_intro_recorded,2000000
+R1106,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,,declared_only:Stalled,80000
+R1107,declared_intro_sent_contradicted_by_outcome,outcome row records intro_sent=N,high,Intro sent,Path found,connector_responded_no_intro_recorded,750000
+R1107,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Intro sent,Path found,connector_responded_no_intro_recorded,750000
+R1107,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Intro sent,Path found,connector_responded_no_intro_recorded,750000
+R1108,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 3 time-aware path(s) exist,high,Stalled,No path found,connector_responded_no_intro_recorded,250000
+R1108,connector_not_on_roster,'Hana Nakashima' is recorded as connector but is absent from connector_roster.csv,medium,Stalled,No path found,connector_responded_no_intro_recorded,250000
+R1108,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,No path found,connector_responded_no_intro_recorded,250000
+R1110,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,,connector_responded_no_intro_recorded,250000
+R1110,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,,connector_responded_no_intro_recorded,250000
+R1111,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,Unknown,declared_only:Intro sent,1200000
+R1112,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Closed - no path,,declared_only:Closed - no path,80000
+R1113,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Open,Path found,connector_responded_no_intro_recorded,150000
+R1113,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,Path found,connector_responded_no_intro_recorded,150000
+R1114,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,,connector_responded_no_intro_recorded,2000000
+R1115,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 3 time-aware path(s) exist,high,Intro sent,No path found,volunteered_no_recorded_followup,2000000
+R1115,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,No path found,volunteered_no_recorded_followup,2000000
+R1116,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,declared_only:Open,2000000
+R1118,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,,connector_responded_no_intro_recorded,1200000
+R1119,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,150000
+R1120,target_account_unresolved,target 'Duncastle Hotels' resolves to tier C_similar_but_distinct,medium,Stalled,,asked_awaiting_connector_response,80000
+R1121,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Unknown,intro_sent,80000
+R1121,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,intro_sent,80000
+R1121,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,Unknown,intro_sent,80000
+R1122,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 3 time-aware path(s) exist,high,Intro sent,No path found,meeting_booked,1200000
+R1122,connector_not_on_roster,'Curtis Hartigan' is recorded as connector but is absent from connector_roster.csv,medium,Intro sent,No path found,meeting_booked,1200000
+R1123,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Routed,Unknown,intro_sent,2000000
+R1124,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 2 time-aware path(s) exist,high,Open,No path found,asked_awaiting_connector_response,1200000
+R1125,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Open,Path found,declared_only:Open,400000
+R1126,target_account_unresolved,target 'Cobalt Lane' resolves to tier C_similar_but_distinct,medium,Open,,declared_only:Open,750000
+R1128,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Unknown,declared_only:Routed,80000
+R1128,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Routed,Unknown,declared_only:Routed,80000
+R1129,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Routed,Unknown,opportunity_created,1200000
+R1129,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Routed,Unknown,opportunity_created,1200000
+R1130,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 4 time-aware path(s) exist,high,Stalled,No path found,connector_responded_no_intro_recorded,80000
+R1130,target_account_unresolved,target 'Blackwood Industrial' resolves to tier C_similar_but_distinct,medium,Stalled,No path found,connector_responded_no_intro_recorded,80000
+R1130,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,No path found,connector_responded_no_intro_recorded,80000
+R1131,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,,asked_awaiting_connector_response,1200000
+R1132,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,,declared_only:Routed,150000
+R1132,target_account_unresolved,target 'Strathmore Rail' resolves to tier C_similar_but_distinct,medium,Routed,,declared_only:Routed,150000
+R1133,target_account_unresolved,target 'Marrow Point Airways' resolves to tier E_unmatched,medium,Open,,declared_only:Open,1200000
+R1134,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Path found,declared_only:Open,1200000
+R1135,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Open,Unknown,connector_responded_no_intro_recorded,750000
+R1135,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,connector_responded_no_intro_recorded,750000
+R1135,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,Unknown,connector_responded_no_intro_recorded,750000
+R1136,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 7 time-aware path(s) exist,high,Open,No path found,volunteered_no_recorded_followup,1200000
+R1139,closed_no_path_but_path_observable,closed as 'no path' yet 2 connection(s) to the account pre-dating the request exist via Elena Duvall; Idris Drummond,high,Closed - no path,Path found,declared_only:Closed - no path,1200000
+R1140,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,Path found,intro_sent,80000
+R1143,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,Path found,declared_only:Routed,150000
+R1144,target_account_unresolved,target 'Cindermill Mining' resolves to tier C_similar_but_distinct,medium,Open,Unknown,declared_only:Open,400000
+R1145,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Stalled,,declared_only:Stalled,80000
+R1146,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,Unknown,declared_only:Intro sent,1200000
+R1146,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Intro sent,Unknown,declared_only:Intro sent,1200000
+R1147,closed_no_path_but_path_observable,closed as 'no path' yet 5 connection(s) to the account pre-dating the request exist via Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,high,Closed - no path,Unknown,asked_awaiting_connector_response,1200000
+R1147,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Closed - no path,Unknown,asked_awaiting_connector_response,1200000
+R1147,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Closed - no path,Unknown,asked_awaiting_connector_response,1200000
+R1148,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,No path found,declared_only:Intro sent,150000
+R1150,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Path found,opportunity_created,750000
+R1151,target_account_unresolved,target 'Copperline Water' resolves to tier E_unmatched,medium,Closed - no path,,declared_only:Closed - no path,250000
+R1152,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,No path found,declared_only:Routed,400000
+R1154,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Path found,intro_sent,2000000
+R1155,declared_intro_sent_contradicted_by_outcome,outcome row records intro_sent=N,high,Intro sent,,asked_awaiting_connector_response,1200000
+R1155,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Intro sent,,asked_awaiting_connector_response,1200000
+R1156,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Routed,Unknown,intro_sent,1200000
+R1157,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,connector_responded_no_intro_recorded,750000
+R1157,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Stalled,Unknown,connector_responded_no_intro_recorded,750000
+R1159,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,declared_only:Open,1200000
+R1160,closed_no_path_but_path_observable,closed as 'no path' yet 3 connection(s) to the account pre-dating the request exist via Elena Duvall; Priya Fairweather; Priya Raghunathan,high,Closed - no path,Path found,intro_sent,150000
+R1161,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,No path found,declared_only:Routed,80000
+R1162,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,asked_awaiting_connector_response,80000
+R1163,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,No path found,opportunity_created,400000
+R1164,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,Unknown,declared_only:Intro sent,150000
+R1164,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Intro sent,Unknown,declared_only:Intro sent,150000
+R1166,closed_no_path_but_path_observable,closed as 'no path' yet 1 connection(s) to the account pre-dating the request exist via Marcus Aldridge,high,Closed - no path,Path found,connector_responded_no_intro_recorded,750000
+R1166,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Closed - no path,Path found,connector_responded_no_intro_recorded,750000
+R1166,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Closed - no path,Path found,connector_responded_no_intro_recorded,750000
+R1167,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,No path found,meeting_booked,250000
+R1168,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,Path found,opportunity_created,750000
+R1168,target_account_unresolved,target 'Meridian Peak Foods' resolves to tier C_similar_but_distinct,medium,Open,Path found,opportunity_created,750000
+R1169,path_flag_no_path_but_path_observable,path_found_flag='No path found' yet 2 time-aware path(s) exist,high,Stalled,No path found,asked_awaiting_connector_response,150000
+R1169,connector_not_on_roster,'Bertrand Vandermolen' is recorded as connector but is absent from connector_roster.csv,medium,Stalled,No path found,asked_awaiting_connector_response,150000
+R1171,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,,intro_sent,1200000
+R1171,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Open,,intro_sent,1200000
+R1172,declared_intro_sent_contradicted_by_outcome,outcome row records intro_sent=N,high,Intro sent,Path found,asked_awaiting_connector_response,150000
+R1172,target_account_unresolved,target 'Meridian Peak Foods' resolves to tier C_similar_but_distinct,medium,Intro sent,Path found,asked_awaiting_connector_response,150000
+R1173,declared_intro_sent_without_outcome_row,status claims an intro with no outcome record at all,high,Intro sent,Unknown,declared_only:Intro sent,150000
+R1175,target_account_unresolved,target 'Copperline Water' resolves to tier E_unmatched,medium,Closed - no path,No path found,declared_only:Closed - no path,80000
+R1176,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,No path found,opportunity_created,400000
+R1176,connector_not_on_roster,'Imani Mkhize' is recorded as connector but is absent from connector_roster.csv,medium,Stalled,No path found,opportunity_created,400000
+R1177,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,No path found,declared_only:Open,2000000
+R1178,closed_no_path_but_path_observable,closed as 'no path' yet 9 connection(s) to the account pre-dating the request exist via Casper Bellinger; Elena Duvall; Kian Merriweather; Marcus Aldridge; Owen Trask; Priya Raghunathan,high,Closed - no path,Path found,declared_only:Closed - no path,750000
+R1179,target_account_unresolved,target 'Blackwood Industrial' resolves to tier C_similar_but_distinct,medium,Open,Path found,declared_only:Open,250000
+R1180,declared_routed_without_connector,status claims routing but no connector or asked_date is recorded anywhere,high,Routed,No path found,declared_only:Routed,2000000
+R1181,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Closed - no path,,declared_only:Closed - no path,400000
+R1182,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,No path found,declared_only:Open,2000000
+R1183,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,750000
+R1184,target_account_unresolved,target 'Cindermill Mining' resolves to tier C_similar_but_distinct,medium,Open,,declared_only:Open,750000
+R1185,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Path found,intro_sent,1200000
+R1186,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Open,,intro_sent,1200000
+R1186,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,intro_sent,1200000
+R1187,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Open,No path found,connector_responded_no_intro_recorded,400000
+R1189,target_account_unresolved,target 'Marrow Point Airways' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,750000
+R1190,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Routed,,connector_responded_no_intro_recorded,1200000
+R1192,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Intro sent,Unknown,opportunity_created,2000000
+R1193,target_account_unresolved,target 'Kingsmere Retail Group' resolves to tier E_unmatched,medium,Stalled,Path found,declared_only:Stalled,250000
+R1194,target_account_unresolved,target 'Marrow Point Airways' resolves to tier E_unmatched,medium,Open,Unknown,declared_only:Open,750000
+R1195,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,Path found,declared_only:Open,1200000
+R1196,open_status_but_intro_recorded,outcome row records an intro that the status never reflected,medium,Stalled,Unknown,meeting_booked,1200000
+R1196,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Stalled,Unknown,meeting_booked,1200000
+R1197,declared_intro_sent_contradicted_by_outcome,outcome row records intro_sent=N,high,Intro sent,Unknown,connector_responded_no_intro_recorded,250000
+R1197,path_flag_unknown_after_routing,"a connector was asked, yet the path flag was never updated from 'Unknown'",medium,Intro sent,Unknown,connector_responded_no_intro_recorded,250000
+R1197,connector_responded_no_recorded_next_step,"connector responded, no intro and no closure recorded",medium,Intro sent,Unknown,connector_responded_no_intro_recorded,250000
+R1198,closed_no_path_but_path_observable,closed as 'no path' yet 9 connection(s) to the account pre-dating the request exist via Casper Bellinger; Elena Duvall; Kian Merriweather; Marcus Aldridge; Owen Trask; Priya Raghunathan,high,Closed - no path,Unknown,declared_only:Closed - no path,750000
+R1199,target_account_unresolved,target 'Vireo Systems' resolves to tier E_unmatched,medium,Open,Path found,asked_awaiting_connector_response,750000
+R1200,target_account_unresolved,target 'nan' resolves to tier E_unmatched,medium,Open,,declared_only:Open,750000

@@ -1,0 +1,201 @@
+request_id,target_company_raw,target_company_canonical_key,declared_path_found_flag,declared_status,derived_state,routed,connector_asked,deal_value_usd,urgency,n_paths_time_aware,n_paths_snapshot,n_connectors_time_aware,n_connectors_snapshot,time_aware_via_export,time_aware_via_investor,snapshot_only_investor_paths,time_aware_same_title_family,connectors_time_aware,used_connector_was_observable,used_connector_was_only_observable_path,alternatives_to_used_connector
+R1001,Vantage Ridge Utilities,vantageridgeutilities,Unknown,Open,declared_only:Open,False,,400000,High,2,3,2,3,2,0,1,0,Marcus Aldridge; Tomás Beckett,False,False,2
+R1002,Volney Industrial Systems,volneyindustrialsystems,Unknown,Open,declared_only:Open,False,,400000,High,0,4,0,4,0,0,4,0,,False,False,0
+R1003,Redtree Foods,redtreefoods,No path found,Stalled,intro_sent,True,Dana Whitfield,400000,High,5,7,5,6,3,2,2,0,Coretta Bellinger; Marcus Aldridge; Niall Grimsby; Owen Trask; Priya Raghunathan,False,False,5
+R1004,Marchford Clinics,marchfordclinics,Path found,Open,declared_only:Open,False,,750000,Medium,3,3,3,3,3,0,0,0,Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,3
+R1005,Ravensmoor Defense,ravensmoordefense,No path found,Closed - no path,declared_only:Closed - no path,False,,150000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1006,Kingsmere Retail Group,kingsmereretail,,Open,declared_only:Open,False,,750000,High,5,5,5,5,4,1,0,2,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,False,False,5
+R1007,Halcyon Grid,halcyongrid,Unknown,Open,declared_only:Open,False,,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1008,Silverbrook Paper,silverbrookpaper,Unknown,Open,asked_awaiting_connector_response,True,Owen Trask,2000000,High,1,1,1,1,1,0,0,0,Owen Trask,True,True,0
+R1009,Marchford Clinics,marchfordclinics,Path found,Intro sent,declared_only:Intro sent,False,,1200000,High,3,3,3,3,3,0,0,0,Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,3
+R1010,Larkhall Software,larkhallsoftware,No path found,Open,declared_only:Open,False,,250000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1011,Thornbury,thornbury,Unknown,Open,declared_only:Open,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1012,,,Path found,Open,asked_awaiting_connector_response,True,Elena Duvall,750000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1013,Nortonbury Logistics,nortonburylogistics,,Open,declared_only:Open,False,,80000,Low,3,10,3,8,3,0,4,1,Elena Duvall; Owen Trask; Priya Raghunathan,False,False,3
+R1014,Northwind Freight,northwindfreight,No path found,Closed - no path,declared_only:Closed - no path,False,,150000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1015,Cindermill Mining,cindermillmining,Path found,Stalled,asked_awaiting_connector_response,True,Owen Trask,80000,High,7,8,5,6,6,1,1,0,Bertrand Glückstein; Elena Duvall; Marcus Aldridge; Owen Trask; Tomás Beckett,True,False,4
+R1016,Nortonbury Logistics,nortonburylogistics,,Intro sent,declared_only:Intro sent,False,,1200000,High,3,10,3,8,3,0,4,1,Elena Duvall; Owen Trask; Priya Raghunathan,False,False,3
+R1017,Vireo Systems,vireosystems,Unknown,Closed - no path,declared_only:Closed - no path,False,,250000,Medium,1,4,1,4,1,0,2,1,Marcus Aldridge,False,False,1
+R1018,Wrenfield Robotics,wrenfieldrobotics,Unknown,Open,declared_only:Open,False,,1200000,High,2,3,2,3,1,1,1,0,Priya Raghunathan; Saoirse Prendergast,False,False,2
+R1019,Northwind Freight,northwindfreight,,Open,declared_only:Open,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1020,,,Path found,Intro sent,intro_sent,True,Tomás Beckett,750000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1021,Larchmont Aerospace,larchmontaerospace,,Intro sent,declared_only:Intro sent,False,,1200000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1022,Blackwood Industrial,blackwoodindustrial,Unknown,Open,intro_sent,True,Elena Duvall,1200000,High,4,7,4,6,3,1,1,2,Elena Duvall; Marcus Højgaard; Owen Trask; Tomás Beckett,True,False,3
+R1023,Thistledown Energy,thistledownenergy,,Routed,declared_only:Routed,False,,400000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1024,Apex Logistics,apexlogistics,Path found,Routed,declared_only:Routed,False,,2000000,High,3,4,2,3,3,0,1,0,Elena Duvall; Marcus Aldridge,False,False,2
+R1025,Glasspoint Health,glasspointhealth,Unknown,Open,connector_responded_no_intro_recorded,True,Elena Duvall,1200000,Medium,0,4,0,4,0,0,2,0,,False,False,0
+R1026,Tessellate Payments,tessellatepayments,,Routed,connector_responded_no_intro_recorded,True,Owen Trask,1200000,Low,5,5,3,3,4,1,0,2,Ilse Mkhize; Owen Trask; Priya Raghunathan,True,False,2
+R1027,Strathmore Rail,strathmorerail,Unknown,Routed,declared_only:Routed,False,,400000,High,9,10,6,7,6,3,1,2,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,False,False,6
+R1028,,,Unknown,Open,declared_only:Open,False,,2000000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1029,,,Path found,Stalled,asked_awaiting_connector_response,True,Elena Duvall,150000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1030,Larchmont Aerospace,larchmontaerospace,No path found,Open,declared_only:Open,False,,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1031,Ironvale Steel,ironvalesteel,Path found,Open,asked_awaiting_connector_response,True,Priya Raghunathan,80000,High,3,7,3,5,2,1,2,0,Marcus Aldridge; Priya Raghunathan; Tomás Ferreira,True,False,2
+R1032,Duncastle Hotels,duncastlehotels,Path found,Closed - no path,intro_sent,True,Priya Raghunathan,80000,Critical,0,5,0,5,0,0,5,0,,False,False,0
+R1033,Priorwood Chemicals,priorwoodchemicals,Path found,Closed - no path,connector_responded_no_intro_recorded,True,Tomás Beckett,750000,High,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1034,Sundermere Bank,sundermerebank,No path found,Open,volunteered_no_recorded_followup,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1035,Marrow Point Airways,marrowpointairways,,Closed - no path,declared_only:Closed - no path,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1036,Sablefield Motors,sablefieldmotors,,Open,declared_only:Open,False,,150000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1037,Thistledown Energy,thistledownenergy,,Open,declared_only:Open,False,,1200000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1038,,,Unknown,Intro sent,meeting_booked,True,Elena Duvall,250000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1039,Ravensmoor Defense,ravensmoordefense,No path found,Stalled,declared_only:Stalled,False,,2000000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1040,Ironvale Steel,ironvalesteel,Unknown,Intro sent,declared_only:Intro sent,False,,80000,High,3,7,3,5,2,1,2,0,Marcus Aldridge; Priya Raghunathan; Tomás Ferreira,False,False,3
+R1041,Apex Logistics,apexlogistics,Path found,Open,declared_only:Open,False,,750000,Medium,3,4,2,3,3,0,1,2,Elena Duvall; Marcus Aldridge,False,False,2
+R1042,,,Unknown,Stalled,meeting_booked,True,Elena Duvall,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1043,Copperline Water,copperlinewater,No path found,Intro sent,declared_only:Intro sent,False,,150000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1044,Meridian Peak,meridianpeak,Unknown,Open,intro_sent,True,Priya Raghunathan,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1045,Marlowe Freight Systems,marlowefreightsystems,,Closed - no path,intro_sent,True,Marcus Aldridge,750000,High,1,3,1,3,1,0,2,0,Marcus Aldridge,True,True,0
+R1046,,,Unknown,Open,connector_responded_no_intro_recorded,True,Priya Raghunathan,80000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1047,,,,Stalled,declared_only:Stalled,False,,250000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1048,Bexley Bioworks,bexleybioworks,Path found,Stalled,declared_only:Stalled,False,,750000,High,5,8,5,5,5,0,1,2,Dana Whitfield; Elena Duvall; Marcus Aldridge; Priya Raghunathan; Tomás Beckett,False,False,5
+R1049,Ravensmoor Defense,ravensmoordefense,,Open,declared_only:Open,False,,750000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1050,Pemberton Retail,pembertonretail,Unknown,Open,declared_only:Open,False,,400000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1051,,,,Open,asked_awaiting_connector_response,True,Tomás Beckett,2000000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1052,Priorwood Chemicals,priorwoodchemicals,Path found,Open,asked_awaiting_connector_response,True,Tomás Beckett,80000,Low,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1053,Strathmore Rail,strathmorerail,Unknown,Stalled,asked_awaiting_connector_response,True,Marcus Aldridge,400000,Medium,9,10,6,7,6,3,1,0,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,True,False,5
+R1054,Kestrel Airlines,kestrelairlines,Unknown,Routed,declared_only:Routed,False,,1200000,Low,0,2,0,2,0,0,2,0,,False,False,0
+R1055,,,Unknown,Open,declared_only:Open,False,,1200000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1056,,,Unknown,Open,declared_only:Open,False,,1200000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1057,Harrowgate Health,harrowgatehealth,Unknown,Stalled,connector_responded_no_intro_recorded,True,Tomás Beckett,250000,High,8,8,7,7,6,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan; Tomás Beckett,True,False,6
+R1058,Gravenhurst Motors,gravenhurstmotors,Path found,Open,asked_awaiting_connector_response,True,Priya Raghunathan,80000,Medium,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,True,False,2
+R1059,,,,Open,declared_only:Open,False,,250000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1060,Vireo Systems,vireosystems,,Open,asked_awaiting_connector_response,True,Elena Duvall,80000,Medium,0,4,0,4,0,0,2,0,,False,False,0
+R1061,Pemberton Retail,pembertonretail,No path found,Stalled,declared_only:Stalled,False,,1200000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1062,Larkhall Software,larkhallsoftware,No path found,Intro sent,declared_only:Intro sent,False,,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1063,Silverbrook Paper,silverbrookpaper,Path found,Routed,declared_only:Routed,False,,80000,High,1,1,1,1,1,0,0,0,Owen Trask,False,False,1
+R1064,Thistledown Energy,thistledownenergy,Unknown,Routed,declared_only:Routed,False,,1200000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1065,,,,Stalled,declared_only:Stalled,False,,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1066,Kingsmere Retail Group,kingsmereretail,No path found,Open,connector_responded_no_intro_recorded,True,Yusuf Petrossian,750000,Medium,5,5,5,5,4,1,0,0,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,False,False,5
+R1067,Redtree Foods,redtreefoods,,Open,declared_only:Open,False,,1200000,Medium,5,7,5,6,3,2,2,0,Coretta Bellinger; Marcus Aldridge; Niall Grimsby; Owen Trask; Priya Raghunathan,False,False,5
+R1068,Calderon Aerospace,calderonaerospace,Unknown,Closed - no path,asked_awaiting_connector_response,True,Priya Raghunathan,150000,Medium,3,4,3,4,3,0,0,0,Elena Duvall; Marcus Aldridge; Owen Trask,False,False,3
+R1069,Apex Logistics Group,apexlogistics,,Closed - no path,asked_awaiting_connector_response,True,Marcus Aldridge,1200000,Medium,3,4,2,3,3,0,1,2,Elena Duvall; Marcus Aldridge,True,False,1
+R1070,,,,Open,declared_only:Open,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1071,,,,Closed - no path,declared_only:Closed - no path,False,,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1072,Harrowgate Health,harrowgatehealth,Path found,Open,asked_awaiting_connector_response,True,Tomás Beckett,750000,Low,7,8,6,7,5,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1073,Volney Industrial Systems,volneyindustrialsystems,,Closed - no path,declared_only:Closed - no path,False,,80000,Low,0,4,0,4,0,0,4,0,,False,False,0
+R1074,Redtree Foods,redtreefoods,,Stalled,declared_only:Stalled,False,,750000,High,5,7,5,6,3,2,2,3,Coretta Bellinger; Marcus Aldridge; Niall Grimsby; Owen Trask; Priya Raghunathan,False,False,5
+R1075,Vireo Systems,vireosystems,,Stalled,declared_only:Stalled,False,,750000,Medium,2,4,2,4,2,0,2,0,Elena Duvall; Marcus Aldridge,False,False,2
+R1076,,,Path found,Open,intro_sent,True,Tomás Beckett,250000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1077,Nortonbury Logistics,nortonburylogistics,Path found,Open,asked_awaiting_connector_response,True,Marcus Aldridge,750000,Low,3,10,3,8,3,0,4,0,Elena Duvall; Owen Trask; Priya Raghunathan,False,False,3
+R1078,Cobalt Lane Capital Markets,cobaltlanecapitalmarkets,Path found,Intro sent,meeting_booked,True,Tomás Beckett,2000000,Medium,2,3,2,3,2,0,1,0,Priya Raghunathan; Tomás Beckett,True,False,1
+R1079,Cobalt Lane,cobaltlane,Path found,Closed - no path,declared_only:Closed - no path,False,,150000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1080,Volney Industrial Systems,volneyindustrialsystems,Unknown,Open,declared_only:Open,False,,750000,High,0,4,0,4,0,0,4,0,,False,False,0
+R1081,Sablefield Motors,sablefieldmotors,No path found,Open,declared_only:Open,False,,80000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1082,,,Path found,Stalled,connector_responded_no_intro_recorded,True,Priya Raghunathan,400000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1083,,,Unknown,Open,declared_only:Open,False,,750000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1084,Hollowbrook Grocers,hollowbrookgrocers,Path found,Open,declared_only:Open,False,,2000000,Critical,2,5,2,4,2,0,3,0,Dana Whitfield; Priya Raghunathan,False,False,2
+R1085,,,Path found,Open,asked_awaiting_connector_response,True,Tomás Beckett,80000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1086,Ironvale Steel,ironvalesteel,,Open,asked_awaiting_connector_response,True,Priya Raghunathan,150000,Critical,3,7,3,5,2,1,2,0,Marcus Aldridge; Priya Raghunathan; Tomás Ferreira,True,False,2
+R1087,Silverbrook,silverbrook,,Routed,declared_only:Routed,False,,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1088,Thornbury,thornbury,Unknown,Closed - no path,declared_only:Closed - no path,False,,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1089,Ironvale Steel,ironvalesteel,Path found,Closed - no path,declared_only:Closed - no path,False,,400000,High,3,7,3,5,2,1,2,0,Marcus Aldridge; Priya Raghunathan; Tomás Ferreira,False,False,3
+R1090,Harrowgate Health,harrowgatehealth,,Closed - no path,asked_awaiting_connector_response,True,Tomás Beckett,400000,Medium,7,8,6,7,5,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1091,Blackwood Industrial,blackwoodindustrial,Unknown,Stalled,intro_sent,True,Elena Duvall,150000,High,4,7,4,6,3,1,1,0,Elena Duvall; Marcus Højgaard; Owen Trask; Tomás Beckett,True,False,3
+R1092,Priorwood Chemicals,priorwoodchemicals,,Stalled,declared_only:Stalled,False,,750000,Critical,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,False,False,5
+R1093,Strathmore Rail,strathmorerail,,Closed - no path,asked_awaiting_connector_response,True,Marcus Aldridge,1200000,Critical,9,10,6,7,6,3,1,0,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,True,False,5
+R1094,Strathmore Rail,strathmorerail,Path found,Open,asked_awaiting_connector_response,True,Marcus Aldridge,750000,High,9,10,6,7,6,3,1,0,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,True,False,5
+R1095,,,Path found,Open,asked_awaiting_connector_response,True,Marcus Aldridge,750000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1096,Silverbrook,silverbrook,,Open,declared_only:Open,False,,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1097,Pemberton Retail,pembertonretail,,Intro sent,declared_only:Intro sent,False,,400000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1098,Priorwood Chemicals,priorwoodchemicals,Unknown,Open,connector_responded_no_intro_recorded,True,Tomás Beckett,150000,Medium,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1099,Aldergate Telecom,aldergatetelecom,,Open,declared_only:Open,False,,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1100,Northwind Freight,northwindfreight,,Closed - no path,declared_only:Closed - no path,False,,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1101,Calderon Aerospace,calderonaerospace,,Open,meeting_booked,True,Priya Raghunathan,80000,High,3,4,3,4,3,0,0,0,Elena Duvall; Marcus Aldridge; Owen Trask,False,False,3
+R1102,Strathmore Rail,strathmorerail,Path found,Routed,connector_responded_no_intro_recorded,True,Marcus Aldridge,400000,Low,9,10,6,7,6,3,1,2,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,True,False,5
+R1103,,,No path found,Intro sent,declared_only:Intro sent,False,,250000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1104,Ellerby Semiconductor,ellerbysemiconductor,,Open,connector_responded_no_intro_recorded,True,Tomás Beckett,2000000,Medium,3,7,3,7,2,1,4,0,Dana Whitfield; Sunniva Højgaard; Tomás Beckett,True,False,2
+R1105,Thornbury Financial,thornburyfinancial,Unknown,Open,declared_only:Open,False,,2000000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1106,,,,Stalled,declared_only:Stalled,False,,80000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1107,Vireo Systems,vireosystems,Path found,Intro sent,connector_responded_no_intro_recorded,True,Elena Duvall,750000,High,1,4,1,4,1,0,2,1,Marcus Aldridge,False,False,1
+R1108,Gravenhurst Motors,gravenhurstmotors,No path found,Stalled,connector_responded_no_intro_recorded,True,Hana Nakashima,250000,Critical,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,False,False,3
+R1109,Ravensmoor Defense,ravensmoordefense,No path found,Closed - no path,volunteered_no_recorded_followup,False,,150000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1110,,,,Stalled,connector_responded_no_intro_recorded,True,Marcus Aldridge,250000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1111,Vantage Ridge Utilities,vantageridgeutilities,Unknown,Intro sent,declared_only:Intro sent,False,,1200000,Medium,2,3,2,3,2,0,1,0,Marcus Aldridge; Tomás Beckett,False,False,2
+R1112,,,,Closed - no path,declared_only:Closed - no path,False,,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1113,Kingsmere Retail Group,kingsmereretail,Path found,Open,connector_responded_no_intro_recorded,True,Dana Whitfield,150000,Medium,5,5,5,5,4,1,0,0,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,True,False,4
+R1114,Marchford Clinics,marchfordclinics,,Stalled,connector_responded_no_intro_recorded,True,Marcus Aldridge,2000000,Medium,3,3,3,3,3,0,0,0,Marcus Aldridge; Owen Trask; Priya Raghunathan,True,False,2
+R1115,Gravenhurst Motors,gravenhurstmotors,No path found,Intro sent,volunteered_no_recorded_followup,False,,2000000,High,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,False,False,3
+R1116,,,,Open,declared_only:Open,False,,2000000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1117,Sablefield Motors,sablefieldmotors,No path found,Open,declared_only:Open,False,,250000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1118,Priorwood Chemicals,priorwoodchemicals,,Open,connector_responded_no_intro_recorded,True,Tomás Beckett,1200000,Critical,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1119,,,Unknown,Open,declared_only:Open,False,,150000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1120,Duncastle Hotels,duncastlehotels,,Stalled,asked_awaiting_connector_response,True,Priya Raghunathan,80000,High,0,5,0,5,0,0,5,0,,False,False,0
+R1121,,,Unknown,Stalled,intro_sent,True,Marcus Aldridge,80000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1122,Gravenhurst Motors,gravenhurstmotors,No path found,Intro sent,meeting_booked,True,Curtis Hartigan,1200000,Low,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,False,False,3
+R1123,Brightmoor Energy,brightmoorenergy,Unknown,Routed,intro_sent,True,Elena Duvall,2000000,High,2,2,2,2,1,1,0,0,Elena Duvall; Idris Drummond,True,False,1
+R1124,Hollowbrook Grocers,hollowbrookgrocers,No path found,Open,asked_awaiting_connector_response,True,Priya Raghunathan,1200000,High,2,5,2,4,2,0,3,0,Dana Whitfield; Priya Raghunathan,True,False,1
+R1125,Strathmore Rail,strathmorerail,Path found,Open,declared_only:Open,False,,400000,High,9,10,6,7,6,3,1,0,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,False,False,6
+R1126,Cobalt Lane,cobaltlane,,Open,declared_only:Open,False,,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1127,Halcyon Grid,halcyongrid,No path found,Open,declared_only:Open,False,,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1128,Kingsmere Retail Group,kingsmereretail,Unknown,Routed,declared_only:Routed,False,,80000,Critical,5,5,5,5,4,1,0,0,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,False,False,5
+R1129,,,Unknown,Routed,opportunity_created,True,Marcus Aldridge,1200000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1130,Blackwood Industrial,blackwoodindustrial,No path found,Stalled,connector_responded_no_intro_recorded,True,Tomás Beckett,80000,Low,4,7,4,6,3,1,1,2,Elena Duvall; Marcus Højgaard; Owen Trask; Tomás Beckett,True,False,3
+R1131,,,,Stalled,asked_awaiting_connector_response,True,Elena Duvall,1200000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1132,Strathmore Rail,strathmorerail,,Routed,declared_only:Routed,False,,150000,High,9,10,6,7,6,3,1,0,Bertrand Lomsadze; Elena Duvall; Marcus Aldridge; Tomás Beckett; Tomás Dobrescu; Yusuf Vasquez,False,False,6
+R1133,Marrow Point Airways,marrowpointairways,,Open,declared_only:Open,False,,1200000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1134,,,Path found,Open,declared_only:Open,False,,1200000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1135,,,Unknown,Open,connector_responded_no_intro_recorded,True,Priya Raghunathan,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1136,Harrowgate Health,harrowgatehealth,No path found,Open,volunteered_no_recorded_followup,False,,1200000,Low,7,8,6,7,5,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1137,Harrowgate Health,harrowgatehealth,Path found,Open,asked_awaiting_connector_response,True,Tomás Beckett,250000,High,7,8,6,7,5,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1138,Sablefield Motors,sablefieldmotors,,Open,declared_only:Open,False,,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1139,Brightmoor Energy,brightmoorenergy,Path found,Closed - no path,declared_only:Closed - no path,False,,1200000,Critical,2,2,2,2,1,1,0,0,Elena Duvall; Idris Drummond,False,False,2
+R1140,Harrowgate Health,harrowgatehealth,Path found,Open,intro_sent,True,Tomás Beckett,80000,Low,7,8,6,7,5,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1141,Ironvale Steel,ironvalesteel,Path found,Intro sent,intro_sent,True,Priya Raghunathan,400000,High,3,7,3,5,2,1,2,0,Marcus Aldridge; Priya Raghunathan; Tomás Ferreira,True,False,2
+R1142,Marchford Clinics,marchfordclinics,,Stalled,declared_only:Stalled,False,,2000000,Low,3,3,3,3,3,0,0,0,Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,3
+R1143,Gravenhurst Motors,gravenhurstmotors,Path found,Routed,declared_only:Routed,False,,150000,Low,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,False,False,3
+R1144,Cindermill Mining,cindermillmining,Unknown,Open,declared_only:Open,False,,400000,Critical,7,8,5,6,6,1,1,0,Bertrand Glückstein; Elena Duvall; Marcus Aldridge; Owen Trask; Tomás Beckett,False,False,5
+R1145,,,,Stalled,declared_only:Stalled,False,,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1146,,,Unknown,Intro sent,declared_only:Intro sent,False,,1200000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1147,Kingsmere Retail Group,kingsmereretail,Unknown,Closed - no path,asked_awaiting_connector_response,True,Dana Whitfield,1200000,Medium,5,5,5,5,4,1,0,0,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,True,False,4
+R1148,Thistledown Energy,thistledownenergy,No path found,Intro sent,declared_only:Intro sent,False,,150000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1149,Gravenhurst Motors,gravenhurstmotors,Path found,Routed,opportunity_created,True,Priya Raghunathan,80000,Critical,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,True,False,2
+R1150,Priorwood Chemicals,priorwoodchemicals,Path found,Stalled,opportunity_created,True,Tomás Beckett,750000,High,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1151,Copperline Water,copperlinewater,,Closed - no path,declared_only:Closed - no path,False,,250000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1152,Thistledown Energy,thistledownenergy,No path found,Routed,declared_only:Routed,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1153,Harrowgate Health,harrowgatehealth,Unknown,Stalled,declared_only:Stalled,False,,750000,Critical,7,8,6,7,5,2,0,2,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1154,Apex Logistics Group,apexlogistics,Path found,Stalled,intro_sent,True,Marcus Aldridge,2000000,Critical,3,4,2,3,3,0,1,0,Elena Duvall; Marcus Aldridge,True,False,1
+R1155,Vireo Systems,vireosystems,,Intro sent,asked_awaiting_connector_response,True,Elena Duvall,1200000,Low,2,4,2,4,2,0,2,0,Elena Duvall; Marcus Aldridge,True,False,1
+R1156,Wrenfield Robotics,wrenfieldrobotics,Unknown,Routed,intro_sent,True,Priya Raghunathan,1200000,High,2,3,2,3,1,1,1,0,Priya Raghunathan; Saoirse Prendergast,True,False,1
+R1157,Harrowgate Health,harrowgatehealth,Unknown,Stalled,connector_responded_no_intro_recorded,True,Tomás Beckett,750000,Medium,8,8,7,7,6,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan; Tomás Beckett,True,False,6
+R1158,Gravenhurst Motors,gravenhurstmotors,Unknown,Open,declared_only:Open,False,,750000,Critical,3,5,3,4,2,1,2,2,Elena Duvall; Priya Fairweather; Priya Raghunathan,False,False,3
+R1159,,,,Open,declared_only:Open,False,,1200000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1160,Gravenhurst Motors,gravenhurstmotors,Path found,Closed - no path,intro_sent,True,Priya Raghunathan,150000,High,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,True,False,2
+R1161,Northwind Freight,northwindfreight,No path found,Routed,declared_only:Routed,False,,80000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1162,,,,Open,asked_awaiting_connector_response,True,Marcus Aldridge,80000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1163,Osric Networks,osricnetworks,No path found,Open,opportunity_created,True,Elena Duvall,400000,High,0,3,0,3,0,0,3,0,,False,False,0
+R1164,,,Unknown,Intro sent,declared_only:Intro sent,False,,150000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1165,Pemberton Retail,pembertonretail,,Open,declared_only:Open,False,,80000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1166,Vireo Systems,vireosystems,Path found,Closed - no path,connector_responded_no_intro_recorded,True,Elena Duvall,750000,High,1,4,1,4,1,0,2,0,Marcus Aldridge,False,False,1
+R1167,Osric Networks,osricnetworks,No path found,Stalled,meeting_booked,True,Priya Raghunathan,250000,Critical,0,3,0,3,0,0,3,0,,False,False,0
+R1168,Meridian Peak Foods,meridianpeakfoods,Path found,Open,opportunity_created,True,Priya Raghunathan,750000,Medium,3,4,3,4,3,0,1,0,Dana Whitfield; Owen Trask; Priya Raghunathan,True,False,2
+R1169,Yarrowdale Media,yarrowdalemedia,No path found,Stalled,asked_awaiting_connector_response,True,Bertrand Vandermolen,150000,High,2,3,2,3,2,0,1,0,Priya Raghunathan; Tomás Beckett,False,False,2
+R1170,Osric Networks,osricnetworks,No path found,Open,declared_only:Open,False,,1200000,High,0,3,0,3,0,0,3,0,,False,False,0
+R1171,Kingsmere Retail Group,kingsmereretail,,Open,intro_sent,True,Dana Whitfield,1200000,Medium,5,5,5,5,4,1,0,0,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,True,False,4
+R1172,Meridian Peak Foods,meridianpeakfoods,Path found,Intro sent,asked_awaiting_connector_response,True,Priya Raghunathan,150000,High,3,4,3,4,3,0,1,0,Dana Whitfield; Owen Trask; Priya Raghunathan,True,False,2
+R1173,Harrowgate Health,harrowgatehealth,Unknown,Intro sent,declared_only:Intro sent,False,,150000,Medium,7,8,6,7,5,2,0,0,Amara Thackeray; Dana Whitfield; Ingrid Marchetti; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1174,Priorwood Chemicals,priorwoodchemicals,Unknown,Open,declared_only:Open,False,,150000,Critical,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,False,False,5
+R1175,Copperline Water,copperlinewater,No path found,Closed - no path,declared_only:Closed - no path,False,,80000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1176,Pelham Beverage,pelhambeverage,No path found,Stalled,opportunity_created,True,Imani Mkhize,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1177,,,No path found,Open,declared_only:Open,False,,2000000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1178,Quillon Pharma,quillonpharma,Path found,Closed - no path,declared_only:Closed - no path,False,,750000,High,9,13,6,10,7,2,3,0,Casper Bellinger; Elena Duvall; Kian Merriweather; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1179,Blackwood Industrial,blackwoodindustrial,Path found,Open,declared_only:Open,False,,250000,High,4,7,4,6,3,1,1,0,Elena Duvall; Marcus Højgaard; Owen Trask; Tomás Beckett,False,False,4
+R1180,Thornbury Financial,thornburyfinancial,No path found,Routed,declared_only:Routed,False,,2000000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1181,,,,Closed - no path,declared_only:Closed - no path,False,,400000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1182,,,No path found,Open,declared_only:Open,False,,2000000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1183,,,Unknown,Open,declared_only:Open,False,,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1184,Cindermill Mining,cindermillmining,,Open,declared_only:Open,False,,750000,Critical,7,8,5,6,6,1,1,0,Bertrand Glückstein; Elena Duvall; Marcus Aldridge; Owen Trask; Tomás Beckett,False,False,5
+R1185,Gravenhurst Motors,gravenhurstmotors,Path found,Stalled,intro_sent,True,Priya Raghunathan,1200000,High,3,5,3,4,2,1,2,0,Elena Duvall; Priya Fairweather; Priya Raghunathan,True,False,2
+R1186,,,,Open,intro_sent,True,Marcus Aldridge,1200000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1187,Ashgrove Agriculture,ashgroveagriculture,No path found,Open,connector_responded_no_intro_recorded,True,Priya Raghunathan,400000,Critical,0,0,0,0,0,0,0,0,,False,False,0
+R1188,Northwind Freight,northwindfreight,Unknown,Stalled,declared_only:Stalled,False,,80000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1189,Marrow Point Airways,marrowpointairways,Unknown,Open,declared_only:Open,False,,750000,Medium,0,0,0,0,0,0,0,0,,False,False,0
+R1190,Brightmoor Energy,brightmoorenergy,,Routed,connector_responded_no_intro_recorded,True,Elena Duvall,1200000,Critical,2,2,2,2,1,1,0,0,Elena Duvall; Idris Drummond,True,False,1
+R1191,Volney Industrial Systems,volneyindustrialsystems,,Stalled,declared_only:Stalled,False,,2000000,High,0,4,0,4,0,0,4,0,,False,False,0
+R1192,Priorwood Chemicals,priorwoodchemicals,Unknown,Intro sent,opportunity_created,True,Tomás Beckett,2000000,High,6,7,5,6,4,2,1,0,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1193,Kingsmere Retail Group,kingsmereretail,Path found,Stalled,declared_only:Stalled,False,,250000,Low,5,5,5,5,4,1,0,0,Dana Whitfield; Kofi Mkhize; Owen Trask; Priya Raghunathan; Tomás Beckett,False,False,5
+R1194,Marrow Point Airways,marrowpointairways,Unknown,Open,declared_only:Open,False,,750000,High,0,0,0,0,0,0,0,0,,False,False,0
+R1195,,,Path found,Open,declared_only:Open,False,,1200000,Low,0,0,0,0,0,0,0,0,,False,False,0
+R1196,Priorwood Chemicals,priorwoodchemicals,Unknown,Stalled,meeting_booked,True,Tomás Beckett,1200000,Medium,6,7,5,6,4,2,1,2,Curtis Marchetti; Elena Duvall; Marcus Aldridge; Margot Havercamp; Tomás Beckett,True,False,4
+R1197,Apex Logistics,apexlogistics,Unknown,Intro sent,connector_responded_no_intro_recorded,True,Elena Duvall,250000,Low,3,4,2,3,3,0,1,0,Elena Duvall; Marcus Aldridge,True,False,1
+R1198,Quillon Pharma,quillonpharma,Unknown,Closed - no path,declared_only:Closed - no path,False,,750000,Critical,9,13,6,10,7,2,3,0,Casper Bellinger; Elena Duvall; Kian Merriweather; Marcus Aldridge; Owen Trask; Priya Raghunathan,False,False,6
+R1199,Vireo Systems,vireosystems,Path found,Open,asked_awaiting_connector_response,True,Elena Duvall,750000,High,1,4,1,4,1,0,2,0,Marcus Aldridge,False,False,1
+R1200,,,,Open,declared_only:Open,False,,750000,Medium,0,0,0,0,0,0,0,0,,False,False,0

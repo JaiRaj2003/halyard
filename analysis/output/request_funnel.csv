@@ -1,0 +1,10 @@
+stage,count,denominator,pct_of_requests
+requests_in_spine,200,200,100.0
+slack_thread_present,200,200,100.0
+any_slack_reply,157,200,78.5
+substantive_slack_reply,44,200,22.0
+routed_to_connector,85,200,42.5
+connector_responded,55,200,27.5
+intro_sent,32,200,16.0
+meeting_booked,14,200,7.0
+opportunity_created,7,200,3.5

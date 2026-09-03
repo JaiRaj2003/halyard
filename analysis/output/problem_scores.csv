@@ -1,0 +1,7 @@
+problem,headline_evidence,prevalence,business_impact,evidence_confidence,actionability,operator_usefulness,leadership_usefulness,live_request_generalizability,product_differentiation,feasibility,total_score
+P1 - Requests have no owner and no state of record; they die silently,"159/200 requests are unresolved with 30+ days of silence ($106,480,000 of pipeline); 115/200 have no connector of record; 111/200 have no state evidence beyond a self-declared status field",5,5,5,5,5,5,5,3,5,43
+P2 - The record of truth contradicts itself; 'no path' is often false,150/200 requests carry at least one contradiction; 46/109 requests declared no-path/unknown have a connection to the account pre-dating the request,5,4,4,4,5,4,5,4,4,39
+"P3 - Path discovery is manual, so known paths go unused",97/200 requests had a time-aware path; roster connectors sat on 220/263 request-paths they were never asked about,4,4,3,4,5,3,5,5,3,36
+P4 - Duplicate and repeat asks collide on the same accounts,42/200 asks say in their own text that they are repeats; 200 requests cover only 51 accounts,4,3,4,4,4,3,4,3,5,34
+P5 - Entity resolution is unreliable across sources,94/200 requests name a target that does not resolve cleanly to a CRM account; 6 CRM domain pairs are near-duplicates,4,3,4,3,3,2,4,2,3,28
+P6 - Connector overload throttles throughput,only 2/49 connector-months exceed the connector's own stated capacity; recorded asks are far below stated capacity,1,2,4,2,2,2,2,2,4,21
