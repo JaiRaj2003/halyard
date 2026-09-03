@@ -9,21 +9,38 @@ bottleneck — 2 of 49 connector-months exceeded stated capacity — but **115 o
 days ($106.5M of $137.8M pipeline), and 150 contradicted themselves across
 sources.** Requests were not being rejected. They were being lost.
 
-This repository is the foundation of the system that fixes that: ingestion,
-conservative entity resolution, request reconstruction, path evidence, workflow
-state and a backend API. The frontend is a later stage.
+This repository is the system that fixes that: ingestion, conservative entity
+resolution, request reconstruction, path evidence, workflow state, a backend
+API, and an operator console over all of it.
 
 ## Quick start
 
 ```bash
 make bootstrap    # .venv + install
 make ingest       # build data/derived/halyard.sqlite3 from data/raw/
-make test         # 81 application tests + 51 audit tests
+make test         # 164 application tests + 51 audit tests
 make dev          # API on http://127.0.0.1:8000, interactive docs at /docs
+
+cd app && npm install && npm run dev    # console on http://127.0.0.1:5173
 ```
 
+The console proxies `/api` to the backend, so run `make dev` alongside it.
 `make verify` does the whole thing from a clean database: lint, rebuild, tests,
 and a re-run of the forensic audit.
+
+## The hero workflow
+
+A free-text ask becomes an owned operational object *before* anything is parsed
+or routed. `POST /api/intake/start` writes the request, resolves its operational
+owner server-side, gives it a state, a next action and a due date, and only then
+parses the text, resolves the account and target, checks what else is already in
+flight at that account, and generates candidate paths. If parsing fails or no
+path is observable, the request still exists, still has an owner, and still has
+a next action — abandoning the flow cannot lose it.
+
+The operator then confirms the target (if it was ambiguous) and confirms or
+rules out a route. Every one of those calls updates the *same* request and
+advances its state, next action and due date.
 
 ## What it does
 
@@ -78,7 +95,14 @@ GET   /api/requests/{id}                    GET /api/requests/{id}/paths
 GET   /api/requests/{id}/related            # account coordination, not duplicates
 POST  /api/requests/{id}/transition         PATCH /api/requests/{id}/owner
 GET   /api/metrics/stale                    GET /api/metrics/connector-load
-GET   /api/metrics/leadership
+GET   /api/metrics/leadership               # every metric states its denominator and window
+
+POST  /api/intake/start                     # persists and owns first, then routes
+GET   /api/intake/{id}                      # the same working payload, re-fetched
+POST  /api/requests/{id}/target             # human confirms the account/person
+POST  /api/requests/{id}/route              # human confirms or rules out a path
+GET   /api/queue?view=&limit=               GET /api/queue/views
+GET   /api/accounts/{id}/view               # account workspace
 ```
 
 Intake does not require the caller to name an owner — Slack-style asks
@@ -92,8 +116,10 @@ writes the row, and rolls back rather than persist an ownerless request.
 halyard/matching/   entity resolution, shared with the audit
 halyard/ingest/     raw staging, entities, requests, paths, coordination, quality
 halyard/domain/     states, ownership, workflow and SLA rules
-halyard/services/   search, requests, metrics
+halyard/intake/     deterministic free-text ask parser
+halyard/services/   search, requests, ranking, routing, queue, accounts, metrics
 halyard/api/        FastAPI surface
+app/                React + TypeScript operator console
 analysis/audit/     the forensic audit that chose this product
 tests/              application tests, including the ten foundation invariants
 docs/               spec, architecture, data model, lineage, decisions, limits

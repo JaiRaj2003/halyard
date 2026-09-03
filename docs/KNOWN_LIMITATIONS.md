@@ -49,17 +49,32 @@ scope.
 **SQLite, in-process.** Sufficient for 5,075 connections and 200 requests; not a
 multi-writer database.
 
-**No ranking.** Paths are ordered by observability and confidence only. See
-`SCORING_SPEC.md`.
+**Path ordering is heuristic, not calibrated.** Weights in
+`Settings.path_factor_weights` encode product judgment about what an operator
+should check first. They are not fitted to outcomes and no composite number is
+shown. See `SCORING_SPEC.md`.
 
 **Coordination is pairwise.** Related activity is computed per request pair at
-the same canonical account; there is no account-level campaign view yet.
+the same canonical account. The account view lists everything in flight there,
+but nothing plans a coordinated multi-request campaign.
 
-**No frontend.** The foundation is API-only by instruction. The endpoints exist
-and are tested, but nobody can use them without curl.
+**The console is single-user and unauthenticated.** There is no login and no
+permissions; every action is attributed to the request's own owner.
+
+**Parsing is deterministic and narrow.** `halyard/intake/parse.py` recognises a
+fixed set of ask grammars. Anything outside them yields low confidence, and the
+request lands in triage with its raw text preserved rather than being guessed
+at. That is the intended failure mode, but it means unusual phrasings need a
+human.
 
 **Ingestion is whole-corpus.** There is no incremental sync from a live source,
 because there is no live source.
+
+**Some requests are under path review with nothing to review.** They reached
+that state because someone volunteered a route in Slack, and the connection
+exports contain no edge that corroborates it. The detail view says so rather
+than pretending one of the two sources is wrong; the underlying gap is in the
+exports, not in the workflow.
 
 ## Things that would be wrong to conclude from this system
 
@@ -73,3 +88,7 @@ because there is no live source.
   observed connectors are not on it.
 - That historical ownership was as good as the current data suggests. 192 of 200
   requests were ownerless at ingest; the system supplied those owners.
+- That "recommended to investigate first" predicts success. It ranks where to
+  spend the next ten minutes, using the evidence listed beneath it.
+- That connector load is complete. It counts asks recorded in this system;
+  anything routed off-system is invisible to it.

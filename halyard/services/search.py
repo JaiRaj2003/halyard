@@ -117,10 +117,11 @@ def account_detail(session: Session, account_id: int) -> dict | None:
                 Organization.domain_group == account.domain_group, Organization.id != account.id
             )
         ).all()
+    #: One person can hold several affiliations to the same account; that is one person.
     people = session.scalars(
         select(Person).join(Affiliation, Affiliation.person_id == Person.id).where(
             Affiliation.organization_id == account.id
-        )
+        ).distinct().order_by(Person.display_name, Person.id)
     ).all()
     requests = session.scalars(
         select(IntroRequest).where(IntroRequest.organization_id == account.id).order_by(IntroRequest.request_id)

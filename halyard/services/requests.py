@@ -21,7 +21,6 @@ from ..config import Settings
 from ..db.models import (
     AccountCoordination,
     Connector,
-    IntroCandidatePath,
     IntroEvent,
     IntroOutcome,
     IntroRequest,
@@ -43,6 +42,7 @@ from ..ingest.paths import build_candidate_paths
 from ..ingest.requests import derive_unevidenced_state
 from ..matching.accounts import canonical_key
 from ..matching.normalize import norm_person, norm_ws, title_family
+from .ranking import factor_payload, rank_paths
 from .search import _split, account_summary, connector_summary, person_summary
 
 
@@ -76,11 +76,29 @@ def create_request(
     settings: Settings,
     clock: Clock,
 ) -> IntroRequest:
+    if not norm_ws(payload.target_account_text) and not norm_ws(payload.raw_ask):
+        raise ValidationProblem("an account or a free-text ask is required")
+    request = persist_owned_request(session, payload, settings, clock)
+    apply_target_and_paths(session, request, payload, settings, clock.now())
+    return request
+
+
+def persist_owned_request(
+    session: Session,
+    payload: NewRequest,
+    settings: Settings,
+    clock: Clock,
+) -> IntroRequest:
+    """Write the request, owned and actionable, before anything is resolved.
+
+    Nothing downstream — parsing, entity resolution, path discovery — is allowed
+    to decide whether this row exists. Once this returns, the ask is a tracked
+    operational object with an owner, a state and a due next action, and an
+    operator walking away cannot make it disappear.
+    """
     now = clock.now()
     if not norm_ws(payload.requester_name):
         raise ValidationProblem("requester_name is required")
-    if not norm_ws(payload.target_account_text):
-        raise ValidationProblem("target_account_text is required")
 
     requester = _live_person(session, payload.requester_name, is_internal=True, now=now)
     triage_owner = _triage_owner(session, settings)
@@ -96,7 +114,7 @@ def create_request(
     if session.scalar(select(IntroRequest).where(IntroRequest.request_id == request_id)):
         raise ValidationProblem(f"request_id '{request_id}' already exists")
 
-    org = _resolve_live_account(session, payload.target_account_text)
+    action = assign_next_action(WorkflowState.NEEDS_TRIAGE, now, settings)
     request = IntroRequest(
         request_id=request_id,
         origin="live_intake",
@@ -106,22 +124,56 @@ def create_request(
         operational_owner_source=owner_source,
         was_ownerless_at_ingest=False,
         had_recorded_handling=False,
-        organization_id=org.id if org else None,
         raw_ask=norm_ws(payload.raw_ask),
         deal_value_usd=int(payload.deal_value_usd or 0),
         urgency=norm_ws(payload.urgency),
         workflow_state=WorkflowState.NEEDS_TRIAGE.value,
         state_source=StateSource.LIVE_INTAKE.value,
+        state_confidence="high",
+        state_evidence="created at intake; not yet triaged",
+        next_action=action.action,
+        next_action_assigned_at=action.assigned_at,
+        next_action_due_at=action.due_at,
         requested_at=now,
         last_activity_at=now,
         operationalized_at=now,
     )
     session.add(request)
     session.flush()
+    log_event(
+        session,
+        request,
+        "request_created",
+        now,
+        actor=requester.display_name,
+        detail=f"intake; operational owner resolved via {owner_source}",
+    )
+    session.flush()
+    return request
+
+
+def apply_target_and_paths(
+    session: Session,
+    request: IntroRequest,
+    payload: NewRequest,
+    settings: Settings,
+    now: datetime,
+) -> IntroRequest:
+    """Resolve the target, find candidate paths and derive the state.
+
+    Everything here can legitimately come back empty. An unresolvable account or
+    an ask with no observable path leaves the request in an active state with a
+    next action, never removed and never ownerless.
+    """
+    org = _resolve_live_account(session, payload.target_account_text)
+    request.organization_id = org.id if org else None
 
     resolved_person = None
     if payload.target_person_evidenced and norm_ws(payload.target_person_name):
         resolved_person = _live_person(session, payload.target_person_name, is_internal=False, now=now)
+    if request.target is not None:
+        session.delete(request.target)
+        session.flush()
     session.add(
         RequestTarget(
             request_id=request.id,
@@ -143,6 +195,7 @@ def create_request(
         )
     )
     session.flush()
+    session.expire(request, ["target"])
 
     path_counts = build_candidate_paths(session, {request.request_id: request})
     state = derive_unevidenced_state(
@@ -161,9 +214,6 @@ def create_request(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
-
-    _log(session, request, "request_created", now, actor=requester.display_name,
-         detail=f"intake; operational owner resolved via {owner_source}")
     session.flush()
     return request
 
@@ -375,19 +425,47 @@ def request_detail(session: Session, request_key: str, settings: Settings, clock
     }
 
 
-def request_paths(session: Session, request_key: str) -> dict:
+def request_paths(session: Session, request_key: str, settings: Settings, clock: Clock) -> dict:
     request = get_request(session, request_key)
-    paths = session.scalars(
-        select(IntroCandidatePath)
-        .where(IntroCandidatePath.request_id == request.id)
-        .order_by(IntroCandidatePath.observability, IntroCandidatePath.confidence.desc())
-    ).all()
+    return candidate_path_payload(session, request, settings, clock.now())
+
+
+def _empty_paths_note(request: IntroRequest) -> str:
+    """Why a request under path review can still show nothing to review.
+
+    A route offered in Slack is evidence that someone believes a path exists.
+    The connection exports may not contain it. Both facts are true and the
+    operator has to see both rather than one silently overruling the other.
+    """
+    if request.workflow_state != WorkflowState.PATH_REVIEW.value:
+        return ""
+    return (
+        "This request is under path review on evidence outside the connection exports — "
+        f"{request.state_evidence or 'a route was recorded elsewhere'}. "
+        "Nothing in the supplied network corroborates it, so there is nothing here to rank."
+    )
+
+
+def candidate_path_payload(session: Session, request: IntroRequest, settings: Settings, now: datetime) -> dict:
+    """Candidate paths in investigation order.
+
+    The ordering is deterministic and every position is explained by the factor
+    sentences on the path; the composite weight behind it is never serialised,
+    because it would read as a precision these heuristics do not have.
+    """
+    ranked = rank_paths(session, request, settings, now)
+    paths = [entry.path for entry in ranked]
     return {
         "request_id": request.request_id,
         "disclaimer": (
             "Candidate paths are evidence about where to investigate. None of them means an introduction is "
             "available; a human reviews the route before any connector is asked."
         ),
+        "ordering": (
+            "Ordered by evidence-based investigation priority: which lead is worth checking first, not how strong "
+            "a relationship is or how likely an introduction is to happen."
+        ),
+        "note": _empty_paths_note(request) if not paths else "",
         "counts": {
             "total": len(paths),
             "historically_observable": sum(1 for p in paths if p.observability == "historically_observable"),
@@ -396,19 +474,29 @@ def request_paths(session: Session, request_key: str) -> dict:
         },
         "paths": [
             {
-                "id": path.id,
-                "connector": connector_summary(path.connector),
-                "hop_type": path.hop_type,
-                "observability": path.observability,
-                "connector_reachable": path.connector_reachable,
-                "same_title_family": path.same_title_family,
-                "relationship_date": path.relationship_date,
-                "confidence": path.confidence,
-                "limitations": path.limitations,
-                "evidence": path.evidence,
-                "source_file": path.source_file,
+                "id": entry.path.id,
+                "rank": entry.rank,
+                "recommended": entry.recommended and entry.path.review_status == "unreviewed",
+                "recommendation_label": (
+                    "Recommended to investigate first"
+                    if entry.recommended and entry.path.review_status == "unreviewed"
+                    else ""
+                ),
+                "factors": [factor_payload(factor) for factor in entry.factors],
+                "connector": connector_summary(entry.path.connector),
+                "hop_type": entry.path.hop_type,
+                "observability": entry.path.observability,
+                "connector_reachable": entry.path.connector_reachable,
+                "same_title_family": entry.path.same_title_family,
+                "relationship_date": entry.path.relationship_date,
+                "confidence": entry.path.confidence,
+                "limitations": entry.path.limitations,
+                "evidence": entry.path.evidence,
+                "source_file": entry.path.source_file,
+                "review_status": entry.path.review_status,
+                "review_note": entry.path.review_note,
             }
-            for path in paths
+            for entry in ranked
         ],
     }
 
@@ -499,7 +587,7 @@ def transition(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
-    _log(session, request, f"transition:{current.value}->{requested.value}", now, actor=actor, detail=norm_ws(note))
+    log_event(session, request, f"transition:{current.value}->{requested.value}", now, actor=actor, detail=norm_ws(note))
     session.flush()
     return request
 
@@ -521,7 +609,7 @@ def set_owner(
     request.operational_owner_id = owner.id
     request.operational_owner_source = MANUAL_ASSIGNMENT
     request.last_activity_at = now
-    _log(
+    log_event(
         session,
         request,
         "owner_changed",
@@ -533,7 +621,7 @@ def set_owner(
     return request
 
 
-def _log(session: Session, request: IntroRequest, event_type: str, now: datetime, actor: str, detail: str) -> None:
+def log_event(session: Session, request: IntroRequest, event_type: str, now: datetime, actor: str, detail: str) -> None:
     session.add(
         IntroEvent(
             request_id=request.id,

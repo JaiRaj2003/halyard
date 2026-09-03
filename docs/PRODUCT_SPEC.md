@@ -66,9 +66,22 @@ Delivered here:
 8. **Tests**, including ten executable invariants.
 9. **Documentation**, including what the system cannot claim.
 
-Explicitly not in the foundation: the polished frontend, authentication,
-permissions, a ranking model or score, external APIs, and any live CRM or Slack
+Explicitly not in the foundation: authentication, permissions, a calibrated
+ranking model or visible score, external APIs, and any live CRM or Slack
 integration.
+
+Stage 5 added, on top of that foundation:
+
+10. **Live intake** — `POST /api/intake/start` persists and owns the request
+    before parsing or routing anything, then returns the parse, the account and
+    person candidates, existing activity at the account, candidate paths and the
+    next decision the operator has to make.
+11. **Human confirmation** — target confirmation and route confirmation, each
+    updating the same request and advancing its state, next action and due date.
+12. **Evidence-based ordering** of candidate paths, deterministic and
+    decomposable, with no composite number displayed.
+13. **The operator console** — intake, queue, request detail, account workspace
+    and a leadership view whose every metric links to the rows it counted.
 
 ## Product guarantees
 
@@ -85,10 +98,17 @@ These are enforced in code and tested in `tests/test_invariants.py`:
 9. Staleness never determines state or outcome.
 10. The forensic audit still reproduces from the shared matching code.
 
-## What "done" looks like for the next stage
+## The hero workflow
 
-An operator opens their queue, sees eleven overdue requests with reasons, opens
-one, sees the ask, the account, three candidate paths with their observability
-labels and limitations, notices two other live asks at the same account, picks a
-connector, and moves the request forward — with every claim on the screen
-showing where it came from.
+An operator pastes “Can someone introduce us to the VP of Security at Acme?”
+into intake. Before anything is parsed, the request exists: it has an id, an
+owner, a state, a next action and a due date, and the original text verbatim.
+Then the parse comes back with the account and the title family, the account
+resolves (or offers competing candidates for a human to choose between), the
+other live asks at that account are listed, and the candidate paths appear in
+investigation order with the factor sentences behind each. The operator confirms
+a route; the same request advances to `AWAITING_CONNECTOR` with a follow-up due
+date, and appears in the queue.
+
+If the parse fails, or no path is observable, every one of those sentences still
+holds except the last two. That is the point.

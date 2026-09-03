@@ -17,11 +17,19 @@ halyard/ingest/{entities,requests,paths,coordination,quality}.py
 data/derived/halyard.sqlite3   rebuildable, never committed
     │
     ▼
-halyard/services/              search · requests · metrics   (all real logic lives here)
-    │
+halyard/services/              search · requests · ranking · routing · queue ·
+    │                          accounts · metrics   (all real logic lives here)
     ▼
 halyard/api/                   FastAPI: validation, wiring, error mapping only
+    │
+    ▼
+app/                           React console, proxying /api in dev
 ```
+
+Live intake enters from the other end: `halyard/intake/parse.py` turns free text
+into a proposal, `services/intake.py` persists and owns the request before any
+of that proposal is applied, and the same request is then updated by target and
+route confirmation.
 
 The forensic audit (`analysis/audit/`) reads `data/raw/` directly and writes
 CSV/JSON to `analysis/output/`. It shares `halyard/matching/` with the
@@ -71,7 +79,14 @@ rows and contradiction records.
 resolution orders) and `workflow.py` (next actions, SLA, staleness, age).
 
 **`halyard/services/`** — everything the API can do, callable without HTTP. The
-tests exercise both layers.
+tests exercise both layers. `ranking.py` holds the only place factor weights are
+read; `queue.py` owns the named views and their definitions, and `metrics.py`
+takes its drill-down numbers from those views rather than recomputing them.
+
+**`app/`** — Vite + React + TypeScript + Tailwind. Four surfaces: intake, the
+operator queue, request detail (where routing is confirmed) and the account
+workspace, plus a leadership view whose every metric links to the queue rows it
+counted. No state library: each page owns its fetch.
 
 **`halyard/clock.py`** — `SystemClock` for the application, `FixedClock` for
 tests and demos (`HALYARD_AS_OF`), and a separate `audit_clock()` pinned to

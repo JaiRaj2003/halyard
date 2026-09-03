@@ -14,7 +14,7 @@ clean truth.
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 
 from sqlalchemy import (
     Boolean,
@@ -27,6 +27,30 @@ from sqlalchemy import (
     UniqueConstraint,
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.types import TypeDecorator
+
+
+class UtcDateTime(TypeDecorator):
+    """Timestamps that come back from SQLite as UTC-aware as they went in.
+
+    SQLite has no timezone type, so a naive value read back would silently mix
+    with the aware values the clock produces and blow up the first time anything
+    subtracts two dates. Everything in this system is UTC; this makes that true
+    on the way out as well as on the way in.
+    """
+
+    impl = DateTime
+    cache_ok = True
+
+    def process_bind_param(self, value: datetime | None, dialect) -> datetime | None:
+        if value is None:
+            return None
+        return (value if value.tzinfo else value.replace(tzinfo=timezone.utc)).astimezone(timezone.utc)
+
+    def process_result_value(self, value: datetime | None, dialect) -> datetime | None:
+        if value is None:
+            return None
+        return value if value.tzinfo else value.replace(tzinfo=timezone.utc)
 
 
 class Base(DeclarativeBase):
@@ -46,7 +70,7 @@ class SourceFile(Base):
     record_count: Mapped[int] = mapped_column(Integer)
     parsed_count: Mapped[int] = mapped_column(Integer)
     error_count: Mapped[int] = mapped_column(Integer)
-    ingested_at: Mapped[datetime] = mapped_column(DateTime)
+    ingested_at: Mapped[datetime] = mapped_column(UtcDateTime)
 
 
 class SourceRecord(Base):
@@ -253,17 +277,20 @@ class IntroRequest(Base):
     state_evidence: Mapped[str] = mapped_column(Text, default="")
 
     selected_connector_id: Mapped[int | None] = mapped_column(ForeignKey("connectors.id"), nullable=True)
+    #: When a human confirmed that route. A confirmed route is an ask on that
+    #: connector, so it counts towards their load exactly like a historical one.
+    route_confirmed_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
 
     next_action: Mapped[str] = mapped_column(String, default="")
-    next_action_assigned_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    next_action_due_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    next_action_assigned_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
+    next_action_due_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
 
-    requested_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    last_activity_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    requested_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
+    last_activity_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
     #: When this request came under management by this system. For the legacy
     #: backlog this is the deterministic operationalization instant, not "now".
-    operationalized_at: Mapped[datetime] = mapped_column(DateTime)
-    closed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    operationalized_at: Mapped[datetime] = mapped_column(UtcDateTime)
+    closed_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
     closure_reason: Mapped[str] = mapped_column(String, default="")
 
     source_record_id: Mapped[int | None] = mapped_column(ForeignKey("source_records.id"), nullable=True)
@@ -341,6 +368,11 @@ class IntroCandidatePath(Base):
     same_title_family: Mapped[bool] = mapped_column(Boolean, default=False)
     relationship_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     confidence: Mapped[str] = mapped_column(String, default="low")
+    #: unreviewed | selected | rejected — the record of a human route review.
+    review_status: Mapped[str] = mapped_column(String, default="unreviewed", index=True)
+    review_note: Mapped[str] = mapped_column(Text, default="")
+    reviewed_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
+    reviewed_by: Mapped[str] = mapped_column(String, default="")
     limitations: Mapped[str] = mapped_column(Text)
     evidence: Mapped[str] = mapped_column(Text, default="")
     source_file: Mapped[str] = mapped_column(String, default="")
@@ -358,8 +390,8 @@ class IntroEvent(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     request_id: Mapped[int] = mapped_column(ForeignKey("intro_requests.id"), index=True)
     event_type: Mapped[str] = mapped_column(String, index=True)
-    occurred_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    recorded_at: Mapped[datetime] = mapped_column(DateTime)
+    occurred_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
+    recorded_at: Mapped[datetime] = mapped_column(UtcDateTime)
     actor: Mapped[str] = mapped_column(String, default="")
     detail: Mapped[str] = mapped_column(Text, default="")
     asserted_by: Mapped[str] = mapped_column(String, default="")  # source file, or "operator"
