@@ -10,3 +10,4 @@ data/derived/
 # Frontend build products
 app/node_modules/
 app/dist/
+app/tsconfig.tsbuildinfo
