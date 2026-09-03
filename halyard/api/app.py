@@ -19,6 +19,7 @@ from ..domain.ownership import OwnershipError
 from ..domain.states import TransitionError
 from ..services import intake as intake_service
 from ..services import metrics as metrics_service
+from ..services import queue as queue_service
 from ..services import requests as request_service
 from ..services import routing as routing_service
 from ..services import search as search_service
@@ -101,6 +102,27 @@ def create_app(
             session, settings, clock, state=state, owner_id=owner_id, account_id=account_id, origin=origin,
             overdue=overdue, stale=stale, ownerless_at_ingest=ownerless_at_ingest, query=q, limit=limit, offset=offset,
         )
+
+    @app.get("/api/queue/views")
+    def queue_views():
+        return {"views": queue_service.view_catalogue()}
+
+    @app.get("/api/queue")
+    def queue(
+        view: str = "in_flight",
+        owner_id: int | None = None,
+        account_id: int | None = None,
+        limit: int = Query(50, ge=1, le=500),
+        offset: int = Query(0, ge=0),
+        session: Session = Depends(get_session),
+    ):
+        try:
+            return queue_service.queue(
+                session, settings, clock, view=view, owner_id=owner_id, account_id=account_id,
+                limit=limit, offset=offset,
+            )
+        except queue_service.UnknownView as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @app.post("/api/intake/start", status_code=201)
     def intake_start(body: IntakeStart, session: Session = Depends(get_session)):
