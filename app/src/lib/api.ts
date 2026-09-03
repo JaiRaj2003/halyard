@@ -31,8 +31,17 @@ export interface RequestSummary {
   state_evidence: string
   deal_value_usd: number
   urgency: string
+  next_action_source: string
+  sla_managed: boolean
+  sla_breached: boolean
+  legacy_backlog: boolean
+  days_quiet_before_import: number | null
+  route_signal: 'corroborated_path' | 'unverified_suggested_route' | 'none'
+  suggested_route_person: string
+  suggested_route_evidence: string
   related_count?: number
   due_soon?: boolean
+  quiet_before_import?: boolean
 }
 
 export interface Candidate {
@@ -241,6 +250,7 @@ export interface LeadershipMetric {
   definition: string
   window: string
   drill_down_view: string | null
+  group: 'legacy_backlog' | 'current_workflow'
 }
 
 export interface Leadership {
@@ -250,6 +260,10 @@ export interface Leadership {
   requests_with_operational_owner: number
   historically_ownerless_at_ingest: number
   ownership_note: string
+  imported_requests_total: number
+  live_requests_total: number
+  requests_worked_under_halyard: number
+  legacy_note: string
   by_workflow_state: Record<string, number>
   by_outcome: Record<string, number>
   open_value_usd: number

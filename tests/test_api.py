@@ -222,11 +222,14 @@ def test_owner_can_be_reassigned_and_is_never_cleared(client, engine):
     ).status_code == 422
 
 
-def test_metrics_stale(client):
+def test_metrics_stale_counts_only_what_halyard_has_worked(client):
     body = client.get("/api/metrics/stale").json()
-    assert body["stale_count"] > 0
     assert body["staleness_days"] == 30
+    #: The imported corpus went quiet before this system existed; that is legacy
+    #: backlog, not staleness under Halyard.
+    assert body["stale_count"] == 0
     assert all(item["workflow_state"] not in {"COMPLETED", "CLOSED"} for item in body["items"])
+    assert all(item["sla_managed"] for item in body["items"])
 
 
 def test_metrics_connector_load_reports_capacity_only_where_stated(client):

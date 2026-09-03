@@ -217,6 +217,34 @@ Who decided what, on what evidence, and what was deliberately deferred.
 - **Reasoning:** a bare `0` invites the reading "nobody is overloaded" when the
   honest statement is "0 of the 49 connectors who state a capacity".
 
+### D23 — A due date this system set at import is not an SLA it missed
+
+- **Decided by:** the product owner, enforced by tests.
+- **Decision:** every request carries `next_action_source`. Actions stamped at
+  ingest are legacy backlog: they are reported as "awaiting review", "no recent
+  historical activity" and "requiring remediation", and are excluded from the
+  overdue, due-soon and staleness metrics until an operator works the request
+  here, which restamps the action as `operator`. Live intake is SLA-managed from
+  the first second.
+- **Reasoning:** the 2d/5d defaults are product configuration invented in 2026.
+  Counting a 2025 corpus request against them reports a breach of a rule that
+  did not exist, and inflates the live numbers by an order of magnitude.
+- **Not done:** setting the application clock back to the corpus date. Live
+  requests must be judged by real time.
+
+### D24 — A suggested route is a lead, not a path and not silence
+
+- **Decided by:** the product owner, enforced by tests.
+- **Decision:** `route_signal` is recorded separately from the workflow state:
+  `corroborated_path` when the supplied network shows an edge,
+  `unverified_suggested_route` when a person named someone who may hold a route
+  and nothing corroborates it, `none` when neither exists. An unverified
+  suggestion keeps the request in path review with the next action "validate the
+  suggested route with X", and is never promoted into a candidate path.
+- **Reasoning:** "no observable path" was being shown for requests whose source
+  thread said, in as many words, who to ask. That discards the most actionable
+  evidence in the corpus while claiming the network is empty.
+
 ---
 
 ## Deferred

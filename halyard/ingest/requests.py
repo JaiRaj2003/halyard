@@ -24,7 +24,14 @@ from sqlalchemy.orm import Session
 from ..config import Settings
 from ..domain.ownership import resolve_historical_owner
 from ..domain.states import Outcome, RouteStatus, StateSource, WorkflowState
-from ..domain.workflow import assign_next_action
+from ..domain.workflow import (
+    CORROBORATED_PATH,
+    INGEST_ASSIGNED,
+    NO_ROUTE_SIGNAL,
+    UNVERIFIED_SUGGESTED_ROUTE,
+    assign_next_action,
+    validate_suggested_route_action,
+)
 from ..db.models import IntroEvent, IntroOutcome, IntroRequest, Person, RequestTarget
 from ..matching.normalize import (
     extract_domains,
@@ -35,7 +42,13 @@ from ..matching.normalize import (
     title_family,
 )
 from ..matching.people import T1, T3, T4
-from ..matching.slack import EXPLICIT_STATE_INTENTS, classify, looks_like_ask, referred_person
+from ..matching.slack import (
+    EXPLICIT_STATE_INTENTS,
+    classify,
+    looks_like_ask,
+    referred_person,
+    suggested_route_person,
+)
 from .entities import EntityIndex, person_for_name, resolve_account, observed_connector
 from .raw import payload
 
@@ -138,6 +151,7 @@ def derive_unevidenced_state(
     target_ambiguous: bool,
     has_candidate_paths: bool,
     declared_status: str,
+    has_suggested_route: bool = False,
 ) -> DerivedState:
     """State for a request with no recorded event and no explicit statement.
 
@@ -154,6 +168,8 @@ def derive_unevidenced_state(
         follow_on = "the target account could not be resolved from the supplied data"
     elif has_candidate_paths:
         follow_on = "candidate paths exist and need review"
+    elif has_suggested_route:
+        follow_on = "a route was suggested by a person and needs validating"
     else:
         follow_on = "no path to the target is observable in the supplied data"
 
@@ -172,6 +188,15 @@ def derive_unevidenced_state(
         return DerivedState(
             WorkflowState.PATH_REVIEW, RouteStatus.CANDIDATES_IDENTIFIED, Outcome.UNKNOWN, source, "low",
             f"{declared_note}; candidate paths exist and need review",
+        )
+    if has_suggested_route:
+        #: Somebody named a person who may hold a route. That is real evidence
+        #: about where to look, so the request is not pathless — but it is not a
+        #: candidate path either until a human validates it.
+        return DerivedState(
+            WorkflowState.PATH_REVIEW, RouteStatus.NONE, Outcome.UNKNOWN, source, "low",
+            f"{declared_note}; a route was suggested in the source thread and the supplied network does not "
+            "corroborate it",
         )
     return DerivedState(
         WorkflowState.NO_OBSERVABLE_PATH, RouteStatus.NONE, Outcome.UNKNOWN, source, "low",
@@ -252,6 +277,7 @@ def build_requests(
             operationalized_at=operationalized_at,
             source_record_id=record.id,
         )
+        request.suggested_route_person, request.suggested_route_evidence = _suggested_route(messages)
         session.add(request)
         session.flush()
         requests[request_id] = request
@@ -270,6 +296,23 @@ def build_requests(
 
     session.flush()
     return requests
+
+
+def _suggested_route(messages: list[dict]) -> tuple[str, str]:
+    """Who a thread says may hold a route, and the sentence that says so.
+
+    An offer names its speaker ("happy to reach out"); a referral names somebody
+    else ("adding Dana who might know"). Either way this is a person to ask, not
+    a path: nothing here is promoted into a candidate path.
+    """
+    for message in messages:
+        text = norm_ws(message["text"])
+        if classify(text) == "volunteer_offer":
+            return norm_ws(message["user"]), f"Slack: '{text}'"
+        named = referred_person(text) or suggested_route_person(text)
+        if named:
+            return norm_ws(named), f"Slack: '{text}'"
+    return "", ""
 
 
 def _observed_owner(session: Session, index: EntityIndex, messages: list[dict], record_id: int) -> Person | None:
@@ -462,7 +505,13 @@ def _build_outcome(
     return stamps
 
 
-def _apply_state(request: IntroRequest, state: DerivedState, assigned_at: datetime, settings: Settings) -> None:
+def _apply_state(
+    request: IntroRequest,
+    state: DerivedState,
+    assigned_at: datetime,
+    settings: Settings,
+    next_action_source: str = INGEST_ASSIGNED,
+) -> None:
     request.workflow_state = state.workflow_state.value
     request.route_status = state.route_status.value
     request.outcome = state.outcome.value
@@ -476,6 +525,28 @@ def _apply_state(request: IntroRequest, state: DerivedState, assigned_at: dateti
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
+    request.next_action_source = next_action_source
+
+
+def finalize_route_signals(session: Session, requests: dict[str, IntroRequest], path_counts: dict[int, int]) -> None:
+    """Record what kind of route evidence each request actually has.
+
+    Three distinct facts, never collapsed: the network corroborates a path, a
+    person suggested one and the network does not, or nothing suggests one at
+    all. Only the first is a candidate path.
+    """
+    for request in requests.values():
+        if path_counts.get(request.id, 0) > 0:
+            request.route_signal = CORROBORATED_PATH
+        elif request.suggested_route_person:
+            request.route_signal = UNVERIFIED_SUGGESTED_ROUTE
+            if request.workflow_state == WorkflowState.PATH_REVIEW.value:
+                #: Nothing was identified; somebody said they might be able to.
+                request.route_status = RouteStatus.NONE.value
+                request.next_action = validate_suggested_route_action(request.suggested_route_person)
+        else:
+            request.route_signal = NO_ROUTE_SIGNAL
+    session.flush()
 
 
 def finalize_unevidenced_states(
@@ -495,6 +566,7 @@ def finalize_unevidenced_states(
             target_ambiguous=bool(target and target.resolution_status == "ambiguous"),
             has_candidate_paths=path_counts.get(request.id, 0) > 0,
             declared_status=request.declared_status,
+            has_suggested_route=bool(request.suggested_route_person),
         )
         _apply_state(request, state, settings.operationalization_at, settings)
     session.flush()

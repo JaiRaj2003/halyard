@@ -31,17 +31,25 @@ from ..db.models import (
 from ..domain.ownership import MANUAL_ASSIGNMENT, OwnershipError, resolve_live_owner
 from ..domain.states import Outcome, RouteStatus, StateSource, TransitionError, WorkflowState, check_transition
 from ..domain.workflow import (
+    CORROBORATED_PATH,
+    LIVE_INTAKE_ASSIGNED,
+    NO_ROUTE_SIGNAL,
+    OPERATOR_ASSIGNED,
+    UNVERIFIED_SUGGESTED_ROUTE,
     assign_next_action,
     age_days,
     days_since_activity,
     inactivity_bucket,
     is_overdue,
     is_potentially_stale,
+    is_sla_managed,
+    validate_suggested_route_action,
 )
 from ..ingest.paths import build_candidate_paths
 from ..ingest.requests import derive_unevidenced_state
 from ..matching.accounts import canonical_key
 from ..matching.normalize import norm_person, norm_ws, title_family
+from ..matching.slack import suggested_route_person
 from .ranking import factor_payload, rank_paths
 from .search import _split, account_summary, connector_summary, person_summary
 
@@ -134,6 +142,7 @@ def persist_owned_request(
         next_action=action.action,
         next_action_assigned_at=action.assigned_at,
         next_action_due_at=action.due_at,
+        next_action_source=LIVE_INTAKE_ASSIGNED,
         requested_at=now,
         last_activity_at=now,
         operationalized_at=now,
@@ -198,12 +207,22 @@ def apply_target_and_paths(
     session.expire(request, ["target"])
 
     path_counts = build_candidate_paths(session, {request.request_id: request})
+    has_paths = path_counts.get(request.id, 0) > 0
+    #: An ask can name the person who might hold the route ("Dana said she knows
+    #: their CISO"). That is a lead to validate, never a candidate path. It is
+    #: recorded whether or not the network corroborates anything, because it
+    #: outlives the paths: rejecting them all leaves the suggestion standing.
+    request.suggested_route_person = suggested_route_person(norm_ws(payload.raw_ask))
+    request.suggested_route_evidence = (
+        f"stated in the request: '{norm_ws(payload.raw_ask)}'" if request.suggested_route_person else ""
+    )
     state = derive_unevidenced_state(
         was_ownerless=False,
         target_resolved=org is not None,
         target_ambiguous=org is not None and org.review_status == "needs_review",
-        has_candidate_paths=path_counts.get(request.id, 0) > 0,
+        has_candidate_paths=has_paths,
         declared_status="",
+        has_suggested_route=bool(request.suggested_route_person),
     )
     request.workflow_state = state.workflow_state.value
     request.route_status = state.route_status.value
@@ -214,6 +233,14 @@ def apply_target_and_paths(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
+    request.next_action_source = LIVE_INTAKE_ASSIGNED
+    if has_paths:
+        request.route_signal = CORROBORATED_PATH
+    elif request.suggested_route_person:
+        request.route_signal = UNVERIFIED_SUGGESTED_ROUTE
+        request.next_action = validate_suggested_route_action(request.suggested_route_person)
+    else:
+        request.route_signal = NO_ROUTE_SIGNAL
     session.flush()
     return request
 
@@ -321,6 +348,8 @@ def list_requests(
 def request_summary(request: IntroRequest, now: datetime, settings: Settings) -> dict:
     stale = is_potentially_stale(request.workflow_state, request.last_activity_at, now, settings)
     since = days_since_activity(request.last_activity_at, now)
+    sla_managed = is_sla_managed(request.next_action_source)
+    quiet_before_import = days_since_activity(request.last_activity_at, request.operationalized_at)
     return {
         "id": request.id,
         "request_id": request.request_id,
@@ -345,7 +374,17 @@ def request_summary(request: IntroRequest, now: datetime, settings: Settings) ->
         "state_confidence": request.state_confidence,
         "next_action": request.next_action,
         "next_action_due_at": request.next_action_due_at,
+        "next_action_source": request.next_action_source,
         "is_overdue": is_overdue(request.next_action_due_at, now),
+        #: Only an action this system assigned can be a breach of this system's
+        #: SLA. Imported backlog carries a remediation target, not a breach.
+        "sla_managed": sla_managed,
+        "sla_breached": sla_managed and is_overdue(request.next_action_due_at, now),
+        "legacy_backlog": request.origin == "historical_corpus" and not sla_managed,
+        "days_quiet_before_import": _round(quiet_before_import),
+        "route_signal": request.route_signal,
+        "suggested_route_person": request.suggested_route_person,
+        "suggested_route_evidence": request.suggested_route_evidence,
         "deal_value_usd": request.deal_value_usd,
         "urgency": request.urgency,
         "requested_at": request.requested_at,
@@ -587,6 +626,9 @@ def transition(
     request.next_action = action.action
     request.next_action_assigned_at = action.assigned_at
     request.next_action_due_at = action.due_at
+    #: An operator has now worked this request here, so its due date is one this
+    #: system set and can fairly be judged against.
+    request.next_action_source = OPERATOR_ASSIGNED
     log_event(session, request, f"transition:{current.value}->{requested.value}", now, actor=actor, detail=norm_ws(note))
     session.flush()
     return request

@@ -50,6 +50,23 @@ EXPLICIT_STATE_INTENTS = {"intro_confirmed", "declined", "closed"}
 
 _ADDING_RE = re.compile(r"adding\s+(.+?)\s+who might know", flags=re.IGNORECASE)
 
+#: Someone naming a person who may hold a route. Names are matched
+#: case-sensitively so ordinary sentence words cannot pose as people.
+_NAME = r"(?-i:(?P<name>[A-Z][\w'’-]+(?:\s+[A-Z][\w'’-]+)*))"
+_SUGGESTION_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(rf"adding\s+{_NAME}\s+who might know", flags=re.IGNORECASE),
+    re.compile(
+        rf"{_NAME}\s+(?:said|says|mentioned|reckons|thinks|told me)\b",
+        flags=re.IGNORECASE,
+    ),
+    re.compile(
+        rf"{_NAME}\s+(?:might know|may know|knows someone|knows people|has a contact|has a line|"
+        r"has a direct line|offered to|can introduce|can intro|could intro)",
+        flags=re.IGNORECASE,
+    ),
+    re.compile(rf"(?:ask|try|speak to|talk to|check with)\s+{_NAME}\b", flags=re.IGNORECASE),
+)
+
 
 def classify(text: str) -> str:
     lowered = text.casefold()
@@ -67,3 +84,12 @@ def looks_like_ask(text: str) -> bool:
 def referred_person(text: str) -> str:
     match = _ADDING_RE.search(text)
     return match.group(1).strip() if match else ""
+
+
+def suggested_route_person(text: str) -> str:
+    """Who a message says may hold a route. Never a claim that they do."""
+    for pattern in _SUGGESTION_RES:
+        match = pattern.search(text)
+        if match:
+            return match.group("name").strip()
+    return ""

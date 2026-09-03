@@ -284,6 +284,19 @@ class IntroRequest(Base):
     next_action: Mapped[str] = mapped_column(String, default="")
     next_action_assigned_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
     next_action_due_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
+    #: Who created the current next action. Actions stamped at ingest carry the
+    #: legacy backlog's own timeline, so their due date is a remediation target
+    #: rather than an SLA this system was ever in a position to meet.
+    #: ingest_operationalization | live_intake | operator
+    next_action_source: Mapped[str] = mapped_column(String, default="ingest_operationalization")
+
+    #: What kind of route evidence exists, kept apart from the workflow state.
+    #: corroborated_path — the supplied network corroborates at least one path;
+    #: unverified_suggested_route — a human said someone may have a route and
+    #: the network does not corroborate it; none — no signal from either.
+    route_signal: Mapped[str] = mapped_column(String, default="none")
+    suggested_route_person: Mapped[str] = mapped_column(String, default="")
+    suggested_route_evidence: Mapped[str] = mapped_column(Text, default="")
 
     requested_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
     last_activity_at: Mapped[datetime | None] = mapped_column(UtcDateTime, nullable=True)
