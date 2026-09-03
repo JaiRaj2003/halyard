@@ -192,6 +192,10 @@ def test_a_volunteered_route_is_a_lead_to_validate_not_a_candidate_path(client, 
     #: The suggestion is never promoted: no path was invented from it.
     assert payload["paths"]["counts"]["total"] == 0
     assert "Validate the suggested route with Priya Raman" in request["next_action"]
+    #: The prompt has to agree with the state it is prompting about.
+    assert payload["next_decision"]["decision"] == "validate_suggested_route"
+    assert "Priya Raman" in payload["next_decision"]["prompt"]
+    assert "No observable path" not in payload["next_decision"]["prompt"]
 
 
 def test_a_corroborated_path_is_reported_as_corroborated(client, connected_account):

@@ -17,8 +17,9 @@ function RequestList({ items, empty }: { items: RequestSummary[]; empty: string 
           </Link>
           <span className="text-sm">{item.target_title || item.target || 'target unresolved'}</span>
           <StateTag state={item.workflow_state} />
-          {item.is_overdue && <Tag tone="bad">overdue</Tag>}
-          {item.potentially_stale && <Tag tone="warn">quiet {item.days_since_activity}d</Tag>}
+          {item.sla_breached && <Tag tone="bad">overdue</Tag>}
+          {item.legacy_backlog && <Tag>legacy backlog</Tag>}
+          {item.potentially_stale && item.sla_managed && <Tag tone="warn">quiet {item.days_since_activity}d</Tag>}
           <span className="ml-auto text-xs text-muted">
             {item.operational_owner} · {relative(item.last_activity_at)}
           </span>

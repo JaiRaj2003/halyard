@@ -23,6 +23,7 @@ from sqlalchemy.orm import Session
 from ..clock import Clock
 from ..config import Settings
 from ..db.models import IntroRequest, Organization, Person, RequestTarget
+from ..domain.workflow import UNVERIFIED_SUGGESTED_ROUTE
 from ..ingest.coordination import link_request
 from ..intake.parse import ParsedAsk, parse_ask
 from ..matching.accounts import canonical_key
@@ -253,11 +254,21 @@ def _next_decision(
             "prompt": f"{len(people)} people share that name. Confirm which individual is meant.",
             "blocking": True,
         }
+    if path_count == 0 and request.route_signal == UNVERIFIED_SUGGESTED_ROUTE:
+        return {
+            "decision": "validate_suggested_route",
+            "prompt": (
+                f"{request.suggested_route_person or 'Someone'} was named in the source thread as possibly "
+                "holding a route, and the supplied network does not corroborate it. Validate it before routing."
+            ),
+            "blocking": False,
+        }
     if path_count == 0:
         return {
             "decision": "no_observable_path",
             "prompt": (
-                "No observable path to this account. Decide whether to source a new connector, "
+                "No route signal for this account — neither the network nor the thread offers one. Decide "
+                "whether to source a new connector, "
                 "approach cold, or close with a reason — the request stays open and owned until then."
             ),
             "blocking": False,
