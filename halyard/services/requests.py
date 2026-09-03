@@ -21,7 +21,6 @@ from ..config import Settings
 from ..db.models import (
     AccountCoordination,
     Connector,
-    IntroCandidatePath,
     IntroEvent,
     IntroOutcome,
     IntroRequest,
@@ -43,6 +42,7 @@ from ..ingest.paths import build_candidate_paths
 from ..ingest.requests import derive_unevidenced_state
 from ..matching.accounts import canonical_key
 from ..matching.normalize import norm_person, norm_ws, title_family
+from .ranking import factor_payload, rank_paths
 from .search import _split, account_summary, connector_summary, person_summary
 
 
@@ -375,18 +375,29 @@ def request_detail(session: Session, request_key: str, settings: Settings, clock
     }
 
 
-def request_paths(session: Session, request_key: str) -> dict:
+def request_paths(session: Session, request_key: str, settings: Settings, clock: Clock) -> dict:
     request = get_request(session, request_key)
-    paths = session.scalars(
-        select(IntroCandidatePath)
-        .where(IntroCandidatePath.request_id == request.id)
-        .order_by(IntroCandidatePath.observability, IntroCandidatePath.confidence.desc())
-    ).all()
+    return candidate_path_payload(session, request, settings, clock.now())
+
+
+def candidate_path_payload(session: Session, request: IntroRequest, settings: Settings, now: datetime) -> dict:
+    """Candidate paths in investigation order.
+
+    The ordering is deterministic and every position is explained by the factor
+    sentences on the path; the composite weight behind it is never serialised,
+    because it would read as a precision these heuristics do not have.
+    """
+    ranked = rank_paths(session, request, settings, now)
+    paths = [entry.path for entry in ranked]
     return {
         "request_id": request.request_id,
         "disclaimer": (
             "Candidate paths are evidence about where to investigate. None of them means an introduction is "
             "available; a human reviews the route before any connector is asked."
+        ),
+        "ordering": (
+            "Ordered by evidence-based investigation priority: which lead is worth checking first, not how strong "
+            "a relationship is or how likely an introduction is to happen."
         ),
         "counts": {
             "total": len(paths),
@@ -396,19 +407,23 @@ def request_paths(session: Session, request_key: str) -> dict:
         },
         "paths": [
             {
-                "id": path.id,
-                "connector": connector_summary(path.connector),
-                "hop_type": path.hop_type,
-                "observability": path.observability,
-                "connector_reachable": path.connector_reachable,
-                "same_title_family": path.same_title_family,
-                "relationship_date": path.relationship_date,
-                "confidence": path.confidence,
-                "limitations": path.limitations,
-                "evidence": path.evidence,
-                "source_file": path.source_file,
+                "id": entry.path.id,
+                "rank": entry.rank,
+                "recommended": entry.recommended,
+                "recommendation_label": "Recommended to investigate first" if entry.recommended else "",
+                "factors": [factor_payload(factor) for factor in entry.factors],
+                "connector": connector_summary(entry.path.connector),
+                "hop_type": entry.path.hop_type,
+                "observability": entry.path.observability,
+                "connector_reachable": entry.path.connector_reachable,
+                "same_title_family": entry.path.same_title_family,
+                "relationship_date": entry.path.relationship_date,
+                "confidence": entry.path.confidence,
+                "limitations": entry.path.limitations,
+                "evidence": entry.path.evidence,
+                "source_file": entry.path.source_file,
             }
-            for path in paths
+            for entry in ranked
         ],
     }
 

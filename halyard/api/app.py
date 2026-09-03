@@ -153,7 +153,7 @@ def create_app(
 
     @app.get("/api/requests/{request_key}/paths")
     def paths(request_key: str, session: Session = Depends(get_session)):
-        return _guarded(lambda: request_service.request_paths(session, request_key))
+        return _guarded(lambda: request_service.request_paths(session, request_key, settings, clock))
 
     @app.get("/api/requests/{request_key}/related")
     def related(request_key: str, session: Session = Depends(get_session)):

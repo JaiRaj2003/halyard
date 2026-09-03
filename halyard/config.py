@@ -45,6 +45,36 @@ SLA_DAYS_BY_STATE: dict[WorkflowState, int] = {
 }
 
 
+#: Weights for evidence-based investigation priority. Product heuristics that
+#: decide the *order* in which candidate paths are worth investigating — not
+#: relationship strength, not the probability that an introduction happens, and
+#: not calibrated against any outcome in the corpus. They exist here, in one
+#: place, so the ordering can be changed and argued about without touching code;
+#: the composite total is deliberately never shown to an operator, who sees the
+#: factor sentences instead. See docs/SCORING_SPEC.md.
+PATH_FACTOR_WEIGHTS: dict[str, int] = {
+    "historically_observable": 40,
+    "snapshot_only": 0,
+    "post_dates_request": -40,
+    "direct_target_person": 25,
+    "same_title_family": 12,
+    "colleague_at_account": 6,
+    "investor_relationship": 4,
+    "connector_on_roster": 15,
+    "connector_off_roster": -10,
+    "corroborated_by_second_source": 10,
+    "connector_prior_successful_intro": 12,
+    "connector_over_stated_capacity": -20,
+    #: Applied once per ask the connector has taken in the load window.
+    "connector_recent_ask": -3,
+    "connector_already_engaged_on_account": -8,
+}
+
+#: Floor for the cumulative recent-ask penalty, so a busy connector is pushed
+#: down the list without being ruled out.
+MAX_RECENT_ASK_PENALTY = -15
+
+
 @dataclass(frozen=True)
 class Settings:
     db_path: Path = DEFAULT_DB_PATH
@@ -60,6 +90,8 @@ class Settings:
     #: Rolling window for connector load.
     connector_load_window_days: int = 30
     sla_days_by_state: dict[WorkflowState, int] = field(default_factory=lambda: dict(SLA_DAYS_BY_STATE))
+    path_factor_weights: dict[str, int] = field(default_factory=lambda: dict(PATH_FACTOR_WEIGHTS))
+    max_recent_ask_penalty: int = MAX_RECENT_ASK_PENALTY
 
     def sla_due(self, state: WorkflowState, assigned_at: datetime) -> datetime | None:
         """Due date for a next action, measured from when it was assigned.
