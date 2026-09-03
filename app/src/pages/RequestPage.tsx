@@ -24,7 +24,15 @@ function Header({ data }: { data: IntakeResult }) {
     >
       <blockquote className="border-l-2 border-line pl-3 text-sm italic text-ink">“{request.raw_ask}”</blockquote>
       <dl className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Field label="Account">{request.account}</Field>
+        <Field label="Account">
+          {request.account_id ? (
+            <Link to={`/accounts/${request.account_id}`} className="text-accent hover:underline">
+              {request.account}
+            </Link>
+          ) : (
+            request.account
+          )}
+        </Field>
         <Field label="Target">{request.target || request.target_title}</Field>
         <Field label="Requester">{request.requester}</Field>
         <Field label="Owner">
@@ -181,10 +189,10 @@ function PathRow({ path, busy, onDecide }: {
         )}
       </div>
       <ul className="mt-2 grid gap-1 lg:grid-cols-2">
-        {path.factors.filter((factor) => factor.present).map((factor) => (
-          <li key={factor.key} className={`text-xs ${factor.direction === 'against' ? 'text-warn' : 'text-muted'}`}>
-            {factor.direction === 'against' ? '! ' : '· '}
-            {factor.detail || factor.label}
+        {path.factors.map((factor) => (
+          <li key={factor.key} className={`text-xs ${factor.direction === 'for' ? 'text-muted' : 'text-warn'}`}>
+            {factor.direction === 'for' ? '· ' : '! '}
+            {factor.statement}
           </li>
         ))}
       </ul>

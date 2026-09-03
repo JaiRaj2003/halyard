@@ -1,5 +1,7 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
+import AccountPage from './pages/AccountPage'
 import IntakePage from './pages/IntakePage'
+import LeadershipPage from './pages/LeadershipPage'
 import QueuePage from './pages/QueuePage'
 import RequestPage from './pages/RequestPage'
 
@@ -28,6 +30,7 @@ export default function App() {
           <nav className="ml-auto flex gap-1">
             <Tab to="/intake">New request</Tab>
             <Tab to="/queue">Queue</Tab>
+            <Tab to="/leadership">Leadership</Tab>
           </nav>
         </div>
       </header>
@@ -36,7 +39,9 @@ export default function App() {
           <Route path="/" element={<Navigate to="/intake" replace />} />
           <Route path="/intake" element={<IntakePage />} />
           <Route path="/queue" element={<QueuePage />} />
+          <Route path="/leadership" element={<LeadershipPage />} />
           <Route path="/requests/:requestId" element={<RequestPage />} />
+          <Route path="/accounts/:accountId" element={<AccountPage />} />
         </Routes>
       </main>
     </div>

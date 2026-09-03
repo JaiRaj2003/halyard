@@ -46,9 +46,8 @@ export interface Candidate {
 
 export interface Factor {
   key: string
-  label: string
-  present: boolean
-  detail: string
+  statement: string
+  /** 'for' | 'against' | 'limiting' — never a number: weights stay server-side. */
   direction: string
 }
 
@@ -232,6 +231,96 @@ export interface IntakeSubmission {
   urgency?: string
 }
 
+export interface LeadershipMetric {
+  key: string
+  label: string
+  value: number
+  denominator: number | null
+  definition: string
+  window: string
+  drill_down_view: string | null
+}
+
+export interface Leadership {
+  as_of: string
+  clock: string
+  requests_total: number
+  requests_with_operational_owner: number
+  historically_ownerless_at_ingest: number
+  ownership_note: string
+  by_workflow_state: Record<string, number>
+  by_outcome: Record<string, number>
+  open_value_usd: number
+  stale_value_usd: number
+  targets_unresolved: number
+  coverage_gaps: number
+  data_quality_issues: number
+  by_owner: { owner: string; open: number; overdue: number; value_usd: number }[]
+  metrics: LeadershipMetric[]
+}
+
+export interface ConnectorLoadRow {
+  connector_id: number
+  connector: string
+  on_roster: boolean
+  stated_monthly_capacity: number | null
+  asks_in_window: number
+  asks_total_observed: number
+  open_asks: number
+  over_capacity: boolean
+  note: string
+}
+
+export interface ConnectorLoad {
+  as_of: string
+  window_days: number
+  roster_size: number
+  off_roster_observed: number
+  connectors: ConnectorLoadRow[]
+}
+
+export interface AccountCoverageRow {
+  connector_id: number
+  connector: string
+  on_roster: boolean
+  edge_count: number
+  named_contacts: string[]
+  sources: string[]
+}
+
+export interface AccountView extends AccountSummary {
+  industry: string
+  hq: string
+  employee_count: number | null
+  stage: string
+  arr_potential_usd: number | null
+  crm_owner: string
+  shares_domain_with: { id: number; name: string; crm_account_id: string }[]
+  known_people: { id: number; display_name: string; title: string }[]
+  known_people_count: number
+  relationship_edge_count: number
+  request_count: number
+  active_requests: RequestSummary[]
+  settled_requests: RequestSummary[]
+  coverage: {
+    note: string
+    connector_count: number
+    edge_count: number
+    has_historically_observable_path: boolean
+    connectors: AccountCoverageRow[]
+  }
+  prior_observed_introductions: {
+    request_id: string
+    connector: string
+    asked_date: string | null
+    intro_date: string | null
+    meeting_booked: boolean
+    opportunity_created: boolean
+  }[]
+  data_quality_issues: { check: string; severity: string; subject: string; detail: string }[]
+  coverage_gaps: { gap_type: string; subject: string; detail: string }[]
+}
+
 export const api = {
   startIntake: (body: IntakeSubmission) =>
     request<IntakeResult>('/api/intake/start', { method: 'POST', body: JSON.stringify(body) }),
@@ -256,6 +345,12 @@ export const api = {
   queueViews: () => request<{ views: QueueView[] }>('/api/queue/views'),
 
   requestDetail: (key: string) => request<RequestDetail>(`/api/requests/${encodeURIComponent(key)}`),
+
+  leadership: () => request<Leadership>('/api/metrics/leadership'),
+
+  connectorLoad: () => request<ConnectorLoad>('/api/metrics/connector-load'),
+
+  accountView: (id: number) => request<AccountView>(`/api/accounts/${id}/view`),
 
   transition: (key: string, body: { to_state: string; note?: string; outcome?: string }) =>
     request<RequestDetail>(`/api/requests/${encodeURIComponent(key)}/transition`, {

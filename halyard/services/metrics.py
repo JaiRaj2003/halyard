@@ -33,6 +33,7 @@ from ..db.models import (
 from ..db.session import sessionmaker_for
 from ..domain.states import SETTLED_STATES, WorkflowState
 from ..domain.workflow import days_since_activity, inactivity_bucket, is_overdue, is_potentially_stale
+from .queue import queue as queue_view
 from .requests import request_summary
 
 
@@ -87,8 +88,15 @@ def connector_load(session: Session, settings: Settings, clock: Clock) -> dict:
         if request and request.workflow_state not in {state.value for state in SETTLED_STATES}:
             open_asks[outcome.connector_id] += 1
     for request in requests.values():
-        if request.selected_connector_id and request.workflow_state == WorkflowState.AWAITING_CONNECTOR.value:
-            open_asks.setdefault(request.selected_connector_id, 0)
+        connector_id = request.selected_connector_id
+        if connector_id is None:
+            continue
+        if request.route_confirmed_at is not None:
+            asks_total[connector_id] += 1
+            if request.route_confirmed_at >= window_start:
+                asks_in_window[connector_id] += 1
+        if request.workflow_state == WorkflowState.AWAITING_CONNECTOR.value:
+            open_asks.setdefault(connector_id, 0)
 
     rows = []
     for connector in connectors:
@@ -148,6 +156,11 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
             stale_value += request.deal_value_usd
 
     ownerless_at_ingest = sum(1 for request in requests if request.was_ownerless_at_ingest)
+    #: Anything with a drill-down is counted by the queue view it drills into, so a
+    #: leadership number and the list behind it can never disagree.
+    counts = queue_view(session, settings, clock, view="all", limit=1)["counts"]
+    in_flight = counts["in_flight"]
+    over_capacity = sum(1 for row in connector_load(session, settings, clock)["connectors"] if row["over_capacity"])
     observable = session.scalar(
         select(func.count(func.distinct(IntroCandidatePath.request_id))).where(
             IntroCandidatePath.observability == "historically_observable"
@@ -182,6 +195,69 @@ def leadership(session: Session, settings: Settings, clock: Clock) -> dict:
         "coverage_gaps": int(session.scalar(select(func.count()).select_from(CoverageGap)) or 0),
         "data_quality_issues": int(session.scalar(select(func.count()).select_from(DataQualityIssue)) or 0),
         "by_owner": sorted(by_owner.values(), key=lambda row: (-row["open"], row["owner"])),
+        "metrics": [
+            _metric(
+                "in_flight", "Requests in flight", counts["in_flight"], total,
+                "Requests in a non-settled workflow state.", "as of now", "in_flight",
+            ),
+            _metric(
+                "stale", "Quiet / potentially stale", counts["stale"], in_flight,
+                f"Active requests with no activity for more than {settings.staleness_days} days. A flag, never an "
+                "outcome.", f"rolling {settings.staleness_days} days", "stale",
+            ),
+            _metric(
+                "overdue", "Overdue next actions", counts["overdue"], total,
+                "The assigned next action passed its due date. Due dates run from when the action was assigned.",
+                "as of now", "overdue",
+            ),
+            _metric(
+                "needs_ownership_review", "Needs ownership review", counts["needs_ownership_review"], in_flight,
+                f"Active requests that arrived with no evidenced owner and hold a fallback owner "
+                f"({ownerless_at_ingest} of {total} across the whole corpus). No current request is ownerless.",
+                "as of now", "needs_ownership_review",
+            ),
+            _metric(
+                "overlapping", "Overlapping account activity", counts["overlapping"], total,
+                "Requests sharing a canonical account with at least one other request. Related work to coordinate, "
+                "not duplicates.", "whole corpus", "overlapping",
+            ),
+            _metric(
+                "outcome_unknown", "Outcome unknown", counts["outcome_unknown"], total,
+                "Settled with no recorded outcome. Unknown is reported as unknown, never inferred from silence.",
+                "whole corpus", "outcome_unknown",
+            ),
+            _metric(
+                "no_observable_path", "No observable path", counts["no_observable_path"], total,
+                "No path is visible in the supplied network. Active and owned, not closed.",
+                "as of now", "no_observable_path",
+            ),
+            _metric(
+                "connectors_over_capacity", "Connectors above stated capacity", over_capacity, None,
+                "Connectors whose asks in the rolling window exceed their stated monthly capacity. Only roster "
+                "connectors state a capacity.", f"rolling {settings.connector_load_window_days} days", None,
+            ),
+        ],
+    }
+
+
+def _metric(
+    key: str,
+    label: str,
+    value: int,
+    denominator: int | None,
+    definition: str,
+    window: str,
+    drill_down_view: str | None,
+) -> dict:
+    """One leadership number, with the denominator and window it is true for."""
+    return {
+        "key": key,
+        "label": label,
+        "value": value,
+        "denominator": denominator,
+        "definition": definition,
+        "window": window,
+        "drill_down_view": drill_down_view,
     }
 
 

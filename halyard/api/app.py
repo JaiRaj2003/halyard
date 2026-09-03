@@ -17,6 +17,7 @@ from ..config import Settings, load_settings
 from ..db.session import build_engine, sessionmaker_for
 from ..domain.ownership import OwnershipError
 from ..domain.states import TransitionError
+from ..services import accounts as account_service
 from ..services import intake as intake_service
 from ..services import metrics as metrics_service
 from ..services import queue as queue_service
@@ -76,6 +77,13 @@ def create_app(
         if detail is None:
             raise HTTPException(status_code=404, detail=f"account {account_id} not found")
         return detail
+
+    @app.get("/api/accounts/{account_id}/view")
+    def account_workspace(account_id: int, session: Session = Depends(get_session)):
+        view = account_service.account_view(session, settings, clock, account_id)
+        if view is None:
+            raise HTTPException(status_code=404, detail=f"account {account_id} not found")
+        return view
 
     @app.get("/api/people/{person_id}")
     def person(person_id: int, session: Session = Depends(get_session)):

@@ -14,7 +14,15 @@ function Row({ item }: { item: QueuePayload['items'][number] }) {
         </Link>
         <p className="max-w-xs truncate text-xs text-muted">{item.target_title || item.target || 'target unresolved'}</p>
       </td>
-      <td className="px-3 py-2 text-sm">{item.account || <span className="text-muted">unresolved</span>}</td>
+      <td className="px-3 py-2 text-sm">
+        {item.account_id ? (
+          <Link to={`/accounts/${item.account_id}`} className="text-accent hover:underline">
+            {item.account}
+          </Link>
+        ) : (
+          <span className="text-muted">unresolved</span>
+        )}
+      </td>
       <td className="px-3 py-2 text-sm">{item.requester}</td>
       <td className="px-3 py-2 text-sm">{item.selected_connector ?? <span className="text-muted">none selected</span>}</td>
       <td className="px-3 py-2"><StateTag state={item.workflow_state} /></td>
