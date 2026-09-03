@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, ApiError, QueuePayload, QueueView } from '../lib/api'
 import { ErrorNote, Loading, StateTag, Tag, relative, shortDate } from '../components/primitives'
+import { label } from '../lib/labels'
 
 function Row({ item }: { item: QueuePayload['items'][number] }) {
   return (
@@ -38,7 +39,9 @@ function Row({ item }: { item: QueuePayload['items'][number] }) {
           {item.legacy_backlog && <Tag>legacy backlog</Tag>}
           {item.legacy_backlog && item.is_overdue && <Tag tone="warn">remediation date passed</Tag>}
           {item.potentially_stale && item.sla_managed && <Tag tone="warn">quiet</Tag>}
-          {item.route_signal === 'unverified_suggested_route' && <Tag tone="warn">unverified route</Tag>}
+          {item.route_signal === 'unverified_suggested_route' && (
+            <Tag tone="warn">{label('route_signal', item.route_signal)}</Tag>
+          )}
           {item.was_ownerless_at_ingest && <Tag tone="warn">fallback owner</Tag>}
           {(item.related_count ?? 0) > 0 && <Tag>{item.related_count} related</Tag>}
         </div>

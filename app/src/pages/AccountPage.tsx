@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AccountView, api, ApiError, RequestSummary } from '../lib/api'
 import { Card, Empty, ErrorNote, Field, Loading, StateTag, Tag, relative, shortDate } from '../components/primitives'
+import { label } from '../lib/labels'
 
 function RequestList({ items, empty }: { items: RequestSummary[]; empty: string }) {
   if (items.length === 0) return <Empty>{empty}</Empty>
@@ -54,7 +55,7 @@ export default function AccountPage() {
           {data.crm_account_id ? `CRM ${data.crm_account_id}` : 'not a CRM account'}
           {data.domain && <span>· {data.domain}</span>}
           {!data.is_crm_account && <Tag tone="warn">observed only, no CRM record</Tag>}
-          {data.review_status !== 'resolved' && <Tag tone="warn">{data.review_status.replaceAll('_', ' ')}</Tag>}
+          {data.review_status !== 'resolved' && <Tag tone="warn">{label('resolution', data.review_status)}</Tag>}
         </p>
       </div>
 
@@ -161,13 +162,13 @@ export default function AccountPage() {
           <ul className="space-y-2">
             {data.data_quality_issues.map((issue, index) => (
               <li key={`issue-${index}`} className="text-xs">
-                <Tag tone={issue.severity === 'high' ? 'bad' : 'warn'}>{issue.check.replaceAll('_', ' ')}</Tag>{' '}
+                <Tag tone={issue.severity === 'high' ? 'bad' : 'warn'}>{label('issue', issue.severity)}</Tag>{' '}
                 <span className="text-muted">{issue.detail}</span>
               </li>
             ))}
             {data.coverage_gaps.map((gap, index) => (
               <li key={`gap-${index}`} className="text-xs">
-                <Tag>{gap.gap_type.replaceAll('_', ' ')}</Tag> <span className="text-muted">{gap.detail}</span>
+                <Tag>Coverage gap</Tag> <span className="text-muted">{gap.detail}</span>
               </li>
             ))}
           </ul>
