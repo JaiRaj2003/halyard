@@ -17,9 +17,10 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for halyard.matching
 
 from common import io
-from common.normalize import norm_ws
+from halyard.matching.normalize import norm_ws
 
 SCORE_DIMENSIONS = [
     "prevalence",

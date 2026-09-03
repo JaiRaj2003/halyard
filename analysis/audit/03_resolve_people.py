@@ -13,10 +13,11 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for halyard.matching
 
 from common import io
-from common.normalize import norm_person, norm_ws
-from common.people import PersonResolver
+from halyard.matching.normalize import norm_person, norm_ws
+from halyard.matching.people import PersonResolver
 
 
 def collect_person_mentions() -> pd.DataFrame:

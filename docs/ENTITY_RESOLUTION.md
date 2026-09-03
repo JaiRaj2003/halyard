@@ -4,9 +4,10 @@ Conservative, provenance-preserving matching. Every mention keeps its tier,
 method, evidence string and competing candidates, so a reader can always see
 *why* two records were joined — or deliberately not joined.
 
-Implementations: `analysis/audit/common/accounts.py`,
-`analysis/audit/common/people.py`, normalisation in
-`analysis/audit/common/normalize.py`.
+Implementation: `halyard/matching/` — `accounts.py`, `people.py`, `slack.py`
+and `normalize.py`. This is a single shared package: the forensic audit
+(`analysis/audit/`) and the application's ingestion both import it, so the
+product cannot drift away from the analysis that justified it.
 
 ## Accounts
 
@@ -76,3 +77,29 @@ Notes:
 | `account_canonical.csv` | canonical account list with mention counts by source |
 | `person_resolution.csv` | every person mention with tier, method, evidence |
 | `person_identities.csv` | identity universe, with conflicting-affiliation and missing-URL flags |
+
+## In the application
+
+The same tiers drive canonical rows, and ambiguity survives ingestion instead of
+being resolved away:
+
+- Every decision — resolved, ambiguous or unmatched — is written to
+  `entity_matches` with its tier, method, evidence and competing candidates.
+  The current build records 92 resolved, 17 ambiguous and 126 unmatched.
+- An ambiguous account or target sends the request to `NEEDS_ENTITY_REVIEW`
+  with the candidates attached. It is never silently assigned to the best guess.
+- Shared-domain CRM accounts stay separate rows in a common `domain_group`;
+  `GET /api/accounts/{id}` shows the siblings explicitly. Twelve
+  `crm_shared_domain` data-quality rows record the overlap.
+- **Unresolved target intent never becomes a person.** "VP of Security at Acme"
+  is a `RequestTarget` with a title family and an account; 199 of the 200
+  historical targets are unresolved this way, and no `Person` is fabricated for
+  any of them.
+- Live input may create a `Person`, but only for a named individual supplied and
+  confirmed at intake, recorded with `source_type='live_input'`,
+  `identity_basis='live_input'` and medium confidence. A name that collides with
+  existing identities is written as `needs_review` with its competitors listed,
+  not merged.
+- 278 export rows have no profile URL. They resolve on name plus company at
+  `name_only_export` and carry a low-severity `missing_profile_url` issue, so
+  the weaker basis is visible wherever they are used.

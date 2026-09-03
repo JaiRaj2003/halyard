@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 130
+extend-ignore = E203
+extend-exclude = .venv,data,analysis/output
+# The audit scripts insert the repo root on sys.path before importing
+# halyard.matching, so their imports cannot be at the top of the file, and their
+# findings text is deliberately written out in full.
+per-file-ignores =
+    analysis/audit/*.py: E402,E501,E231
+    analysis/tests/*.py: E501
+    halyard/matching/*.py: E501

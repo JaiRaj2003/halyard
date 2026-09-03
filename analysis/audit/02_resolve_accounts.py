@@ -16,10 +16,11 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for halyard.matching
 
 from common import io
-from common.accounts import AccountResolver, canonical_key
-from common.normalize import extract_domains, norm_ws
+from halyard.matching.accounts import AccountResolver, canonical_key
+from halyard.matching.normalize import extract_domains, norm_ws
 
 
 def collect_company_mentions() -> pd.DataFrame:

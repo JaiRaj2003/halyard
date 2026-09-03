@@ -28,10 +28,11 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for halyard.matching
 
 from common import io
-from common.accounts import canonical_key
-from common.normalize import norm_person, norm_ws, parse_date, parse_partial_date, title_family
+from halyard.matching.accounts import canonical_key
+from halyard.matching.normalize import norm_person, norm_ws, parse_date, parse_partial_date, title_family
 
 SNAPSHOT_ONLY_NOTE = "Candidate path visible in supplied current snapshot; historical availability unknown."
 
