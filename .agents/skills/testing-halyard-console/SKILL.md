@@ -45,6 +45,8 @@ cd app && npm run e2e      # playwright, e2e/console.spec.ts — needs the API o
   `/api/queue?view=all&q=LIVE` finds live rows past the 50-row page.
 - A backgrounded `make dev` dies with the shell unless started as
   `(setsid nohup make dev > /tmp/api.log 2>&1 < /dev/null &)`.
+- Stop the API with `pkill -f "bin/[u]vicorn"`; a plain `pkill -f uvicorn`
+  also matches the invoking shell and kills the rest of your command chain.
 
 ## Useful endpoints for cross-checking the UI
 
