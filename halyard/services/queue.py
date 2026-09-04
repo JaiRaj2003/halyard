@@ -59,6 +59,37 @@ def _legacy(item: dict) -> bool:
     return item["legacy_backlog"] and _active(item)
 
 
+_JUDGMENT_STATES = {
+    WorkflowState.NEEDS_TRIAGE.value,
+    WorkflowState.NEEDS_ENTITY_REVIEW.value,
+    WorkflowState.PATH_REVIEW.value,
+    WorkflowState.NO_OBSERVABLE_PATH.value,
+    WorkflowState.BLOCKED.value,
+}
+
+
+def _needs_attention(item: dict) -> bool:
+    """A human decision is owed: triage, target or route review, an unverified
+    route, no corroborated route (source one or stand down), a blocker, or an
+    action assigned here that has passed its due date. Each request is one row
+    however many of these apply."""
+    if not _active(item):
+        return False
+    return (
+        item["workflow_state"] in _JUDGMENT_STATES
+        or item["route_signal"] == UNVERIFIED_SUGGESTED_ROUTE
+        or bool(item["sla_breached"])
+    )
+
+
+def _matches(item: dict, needle: str) -> bool:
+    haystack = " ".join(
+        str(item.get(key) or "")
+        for key in ("request_id", "account", "target", "target_title", "requester", "operational_owner")
+    ).casefold()
+    return all(part in haystack for part in needle.casefold().split())
+
+
 VIEWS: tuple[View, ...] = (
     View(
         "all",
@@ -71,6 +102,16 @@ VIEWS: tuple[View, ...] = (
         "In flight",
         "Requests in an active state — somebody still owes this an action.",
         _active,
+    ),
+    View(
+        "needs_attention",
+        "Needs attention",
+        (
+            "Active requests owed a human decision: triage, target confirmation, route review, an "
+            "unverified route to validate, no corroborated route yet, a blocker, or an action assigned "
+            "under Halyard that is overdue."
+        ),
+        _needs_attention,
     ),
     View(
         "needs_triage",
@@ -240,8 +281,13 @@ def queue(
     account_id: int | None = None,
     limit: int = 50,
     offset: int = 0,
+    q: str = "",
 ) -> dict:
-    """One view of the queue, with the definition of the view alongside the rows."""
+    """One view of the queue, with the definition of the view alongside the rows.
+
+    ``q`` narrows the rows by request id, account, target, requester or owner;
+    the per-view counts describe the whole population, not the narrowed one.
+    """
     if view not in VIEWS_BY_KEY:
         raise UnknownView(view)
     now = clock.now()
@@ -258,11 +304,14 @@ def queue(
     )
     chosen = VIEWS_BY_KEY[view]
     matched = [item for item in items if chosen.predicate(item)]
+    if q.strip():
+        matched = [item for item in matched if _matches(item, q)]
     matched.sort(key=lambda item: (item["next_action_due_at"] is None, item["next_action_due_at"], item["request_id"]))
     return {
         "view": {"key": chosen.key, "label": chosen.label, "definition": chosen.definition},
         "counts": {other.key: sum(1 for item in items if other.predicate(item)) for other in VIEWS},
         "total": len(matched),
+        "q": q.strip(),
         "limit": limit,
         "offset": offset,
         "items": matched[offset: offset + limit],

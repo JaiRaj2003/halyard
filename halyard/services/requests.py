@@ -50,7 +50,7 @@ from ..ingest.requests import derive_unevidenced_state
 from ..matching.accounts import canonical_key
 from ..matching.normalize import norm_person, norm_ws, title_family
 from ..matching.slack import suggested_route_person
-from .ranking import factor_payload, rank_paths
+from .ranking import contact_title, factor_payload, rank_paths
 from .search import _split, account_summary, connector_summary, person_summary
 
 
@@ -485,6 +485,31 @@ def _empty_paths_note(request: IntroRequest) -> str:
     )
 
 
+def path_contact(session: Session, path) -> dict | None:
+    """The person this path actually reaches, read from the relationship edge.
+
+    ``None`` when the edge is to an organisation rather than a named person; the
+    caller must not invent one.
+    """
+    edge = path.edge
+    person_id = edge.person_id if edge is not None else None
+    if person_id is None:
+        return None
+    person = session.get(Person, person_id)
+    if person is None:  # pragma: no cover - an edge's person always exists
+        return None
+    organization_id = edge.organization_id
+    if organization_id is None:
+        organization_id = next((a.organization_id for a in person.affiliations if a.organization_id), None)
+    organization = session.get(Organization, organization_id) if organization_id is not None else None
+    return {
+        "id": person.id,
+        "name": person.display_name,
+        "title": contact_title(session, path) or None,
+        "organization": account_summary(organization) if organization is not None else None,
+    }
+
+
 def candidate_path_payload(session: Session, request: IntroRequest, settings: Settings, now: datetime) -> dict:
     """Candidate paths in investigation order.
 
@@ -523,6 +548,7 @@ def candidate_path_payload(session: Session, request: IntroRequest, settings: Se
                 ),
                 "factors": [factor_payload(factor) for factor in entry.factors],
                 "connector": connector_summary(entry.path.connector),
+                "contact": path_contact(session, entry.path),
                 "hop_type": entry.path.hop_type,
                 "observability": entry.path.observability,
                 "connector_reachable": entry.path.connector_reachable,
