@@ -141,9 +141,9 @@ def relevance_tier(target_title: object, contact_title: object) -> str:
 #: Operator-facing sentence for each tier. ``{contact}`` is the known contact's
 #: title as recorded, so the operator sees the fact the tier was derived from.
 TIER_STATEMENTS: dict[str, str] = {
-    SAME_FUNCTION: "Known contact ({contact}) works in the same function as the requested buyer",
-    ADJACENT_FUNCTION: "Known contact ({contact}) works alongside the requested buyer's function",
-    SENIOR_PEER: "Known contact ({contact}) is a senior peer of the requested buyer",
+    SAME_FUNCTION: "Known contact ({contact}) is organizationally relevant to the target role: same function",
+    ADJACENT_FUNCTION: "Known contact ({contact}) is organizationally relevant to the target role: adjacent function",
+    SENIOR_PEER: "Known contact ({contact}) is organizationally relevant to the target role: senior peer",
 }
 
 
