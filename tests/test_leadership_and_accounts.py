@@ -99,6 +99,16 @@ def test_account_people_are_listed_once_however_many_affiliations_they_hold(clie
     assert len(ids) == len(set(ids))
 
 
+def test_account_people_carry_the_role_recorded_at_that_account(client, busy_account):
+    """The console groups access by function, which needs the recorded title."""
+    people = client.get(f"/api/accounts/{busy_account}/view").json()["known_people"]
+    assert people
+    for person in people:
+        assert "title" in person and "title_family" in person
+        assert isinstance(person["title"], str) and isinstance(person["title_family"], str)
+    assert any(person["title"] for person in people), "an affiliation records the role it was seen in"
+
+
 def test_a_request_under_path_review_with_no_paths_explains_the_contradiction(client):
     """State evidence and network evidence can disagree; the operator sees both."""
     rows = client.get("/api/queue", params={"view": "path_review", "limit": 500}).json()["items"]

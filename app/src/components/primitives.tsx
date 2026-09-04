@@ -1,7 +1,9 @@
 /** Small shared pieces: the console has a deliberately narrow visual vocabulary. */
 
 import { ReactNode } from 'react'
-import { label, stateTone } from '../lib/labels'
+import {
+  ACTION_GLYPH, ACTION_MEANING, ACTION_TONE, Actionability, label, stateActionability,
+} from '../lib/labels'
 
 export function Card({ title, subtitle, actions, children }: {
   title?: ReactNode
@@ -33,16 +35,41 @@ const TONES: Record<string, string> = {
   good: 'bg-green-50 text-green-800 border-green-200',
 }
 
-export function Tag({ tone = 'neutral', children }: { tone?: keyof typeof TONES | string; children: ReactNode }) {
+export function Tag({ tone = 'neutral', glyph, children }: {
+  tone?: keyof typeof TONES | string
+  /** Prefixes the badge with its actionability mark, so colour is never load-bearing. */
+  glyph?: Actionability
+  children: ReactNode
+}) {
   return (
-    <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[11px] font-medium ${TONES[tone] ?? TONES.neutral}`}>
+    <span className={`inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-[11px] font-medium ${TONES[tone] ?? TONES.neutral}`}>
+      {glyph && (
+        <span aria-hidden className="font-semibold leading-none opacity-70">{ACTION_GLYPH[glyph]}</span>
+      )}
       {children}
     </span>
   )
 }
 
+/** A badge that says what it wants from the operator, in the shared vocabulary. */
+export function ActionTag({ level, children }: { level: Actionability; children: ReactNode }) {
+  return <Tag tone={ACTION_TONE[level]} glyph={level}>{children}</Tag>
+}
+
 export function StateTag({ state }: { state: string }) {
-  return <Tag tone={stateTone(state)}>{label('state', state)}</Tag>
+  return <ActionTag level={stateActionability(state)}>{label('state', state)}</ActionTag>
+}
+
+/** The four treatments, spelled out once where the operator first meets them. */
+export function ActionLegend() {
+  const levels: Actionability[] = ['act', 'verify', 'healthy', 'context']
+  return (
+    <p className="flex flex-wrap items-center gap-2 text-xs text-muted">
+      {levels.map((level) => (
+        <ActionTag key={level} level={level}>{ACTION_MEANING[level]}</ActionTag>
+      ))}
+    </p>
+  )
 }
 
 /** Detail an operator can ask for but should not have to read. */

@@ -65,8 +65,7 @@ export interface ConnectorSummary {
   name: string
   on_roster: boolean
   stated_monthly_capacity: number | null
-  recent_asks_30d?: number
-  over_capacity?: boolean
+  /** No ask counts here: load reaches a route card as factor sentences, not numbers. */
   note?: string
 }
 
@@ -312,7 +311,7 @@ export interface AccountView extends AccountSummary {
   arr_potential_usd: number | null
   crm_owner: string
   shares_domain_with: { id: number; name: string; crm_account_id: string }[]
-  known_people: { id: number; display_name: string; title: string }[]
+  known_people: { id: number; display_name: string; title: string; title_family: string }[]
   known_people_count: number
   relationship_edge_count: number
   request_count: number

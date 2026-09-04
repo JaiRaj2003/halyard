@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, ApiError, QueuePayload, QueueView } from '../lib/api'
-import { ErrorNote, Loading, StateTag, Tag, relative, shortDate } from '../components/primitives'
+import { ActionLegend, ActionTag, ErrorNote, Loading, StateTag, Tag, relative, shortDate } from '../components/primitives'
 import { label } from '../lib/labels'
 
 function Row({ item }: { item: QueuePayload['items'][number] }) {
@@ -35,14 +35,14 @@ function Row({ item }: { item: QueuePayload['items'][number] }) {
       </td>
       <td className="px-3 py-2">
         <div className="flex flex-wrap gap-1">
-          {item.sla_breached && <Tag tone="bad">overdue</Tag>}
-          {item.legacy_backlog && <Tag>legacy backlog</Tag>}
-          {item.legacy_backlog && item.is_overdue && <Tag tone="warn">remediation date passed</Tag>}
-          {item.potentially_stale && item.sla_managed && <Tag tone="warn">quiet</Tag>}
+          {item.sla_breached && <ActionTag level="act">overdue</ActionTag>}
+          {item.legacy_backlog && <ActionTag level="context">legacy backlog</ActionTag>}
+          {item.legacy_backlog && item.is_overdue && <ActionTag level="verify">remediation date passed</ActionTag>}
+          {item.potentially_stale && item.sla_managed && <ActionTag level="verify">quiet</ActionTag>}
           {item.route_signal === 'unverified_suggested_route' && (
-            <Tag tone="warn">{label('route_signal', item.route_signal)}</Tag>
+            <ActionTag level="verify">{label('route_signal', item.route_signal)}</ActionTag>
           )}
-          {item.was_ownerless_at_ingest && <Tag tone="warn">fallback owner</Tag>}
+          {item.was_ownerless_at_ingest && <ActionTag level="verify">fallback owner</ActionTag>}
           {(item.related_count ?? 0) > 0 && <Tag>{item.related_count} related</Tag>}
         </div>
       </td>
@@ -72,7 +72,10 @@ export default function QueuePage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-semibold tracking-tight">Operator queue</h1>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <h1 className="text-xl font-semibold tracking-tight">Operator queue</h1>
+        <ActionLegend />
+      </div>
 
       <nav className="flex flex-wrap gap-1.5">
         {views.map((option) => (

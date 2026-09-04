@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { api, ApiError, CandidatePath, IntakeResult } from '../lib/api'
 import {
-  Button, Card, Disclosure, Empty, ErrorNote, Field, Loading, StateTag, Tag, relative, shortDate,
+  ActionTag, Button, Card, Disclosure, Empty, ErrorNote, Field, Loading, StateTag, Tag, relative, shortDate,
 } from '../components/primitives'
 import { label } from '../lib/labels'
 
@@ -43,13 +43,13 @@ function Hero({ data }: { data: IntakeResult }) {
             <dt className="text-[11px] uppercase tracking-wide text-muted">Status</dt>
             <dd className="mt-1 flex flex-wrap items-center gap-1.5">
               <StateTag state={request.workflow_state} />
-              {overdue && <Tag tone="bad">overdue</Tag>}
-              {request.legacy_backlog && <Tag>legacy backlog</Tag>}
+              {overdue && <ActionTag level="act">overdue</ActionTag>}
+              {request.legacy_backlog && <ActionTag level="context">legacy backlog</ActionTag>}
               {request.potentially_stale && request.sla_managed && (
-                <Tag tone="warn">quiet {Math.round(request.days_since_activity)}d</Tag>
+                <ActionTag level="verify">quiet {Math.round(request.days_since_activity)}d</ActionTag>
               )}
               {request.route_signal === 'unverified_suggested_route' && (
-                <Tag tone="warn">{label('route_signal', request.route_signal)}</Tag>
+                <ActionTag level="verify">{label('route_signal', request.route_signal)}</ActionTag>
               )}
             </dd>
           </div>
@@ -57,7 +57,7 @@ function Hero({ data }: { data: IntakeResult }) {
             <dt className="text-[11px] uppercase tracking-wide text-muted">Owner</dt>
             <dd className="mt-1 text-sm font-medium">{request.operational_owner}</dd>
             {request.was_ownerless_at_ingest && (
-              <dd className="mt-1"><Tag tone="warn">needs ownership review</Tag></dd>
+              <dd className="mt-1"><ActionTag level="verify">needs ownership review</ActionTag></dd>
             )}
           </div>
         </dl>
@@ -222,10 +222,12 @@ function PathRow({ path, busy, onDecide }: {
   const selected = path.review_status === 'selected'
   const supporting = path.factors.filter((factor) => factor.direction !== 'limiting')
   const limiting = path.factors.filter((factor) => factor.direction === 'limiting')
-  const caveat = limiting[0]?.statement || path.limitations
-  const load = path.connector.over_capacity
-    ? `Asked ${path.connector.recent_asks_30d ?? 0} times in the last 30 days — above their stated capacity`
-    : null
+  // The paths payload carries no ask counts, only the factors the ordering
+  // used, so the connector's load is read from those rather than computed here
+  // from numbers this endpoint does not send.
+  const overCapacity = limiting.find((factor) => factor.key === 'connector_over_stated_capacity')
+  const recentAsks = path.factors.find((factor) => factor.key === 'connector_recent_ask')
+  const caveat = limiting.find((factor) => factor !== overCapacity)?.statement || path.limitations
 
   return (
     <li
@@ -240,7 +242,7 @@ function PathRow({ path, busy, onDecide }: {
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-base font-semibold">{path.connector.name}</span>
-            {selected && <Tag tone="good">selected route</Tag>}
+            {selected && <ActionTag level="healthy">selected route</ActionTag>}
             {rejected && <Tag>ruled out</Tag>}
             {!selected && !rejected && path.recommendation_label && (
               <Tag tone={path.recommended ? 'info' : 'neutral'}>{path.recommendation_label}</Tag>
@@ -253,9 +255,12 @@ function PathRow({ path, busy, onDecide }: {
               <li key={factor.key} className="text-sm text-muted">· {factor.statement}</li>
             ))}
           </ul>
-          {(caveat || load) && (
-            <p className="mt-2 text-sm text-warn">{load ?? caveat}</p>
+          {overCapacity && (
+            <p className="mt-2">
+              <ActionTag level="act">{overCapacity.statement}</ActionTag>
+            </p>
           )}
+          {caveat && <p className="mt-2 text-sm text-warn">{caveat}</p>}
         </div>
 
         {!selected && !rejected && (
@@ -289,10 +294,10 @@ function PathRow({ path, busy, onDecide }: {
             </Field>
           </dl>
           <p className="mt-2 text-xs text-muted">
-            Asked {path.connector.recent_asks_30d ?? 0} times in the last 30 days
+            {recentAsks ? recentAsks.statement : 'No ask recorded against this connector in the current window'}
             {path.connector.stated_monthly_capacity !== null
-              ? ` against a stated capacity of ${path.connector.stated_monthly_capacity} a month.`
-              : '; they state no capacity.'}
+              ? ` · stated capacity ${path.connector.stated_monthly_capacity} a month.`
+              : ' · they state no capacity.'}
             {path.connector.note ? ` ${path.connector.note}` : ''}
           </p>
           {path.limitations && <p className="mt-1 text-xs text-warn">Limitation: {path.limitations}</p>}

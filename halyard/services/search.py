@@ -123,6 +123,14 @@ def account_detail(session: Session, account_id: int) -> dict | None:
             Affiliation.organization_id == account.id
         ).distinct().order_by(Person.display_name, Person.id)
     ).all()
+    #: The role each is recorded as holding *here*. Several affiliations to one
+    #: account are the same person seen twice, so the first recorded title wins
+    #: rather than a guess at which is current.
+    titles: dict[int, Affiliation] = {}
+    for affiliation in session.scalars(
+        select(Affiliation).where(Affiliation.organization_id == account.id).order_by(Affiliation.id)
+    ).all():
+        titles.setdefault(affiliation.person_id, affiliation)
     requests = session.scalars(
         select(IntroRequest).where(IntroRequest.organization_id == account.id).order_by(IntroRequest.request_id)
     ).all()
@@ -141,7 +149,14 @@ def account_detail(session: Session, account_id: int) -> dict | None:
         "shares_domain_with": [
             {"id": other.id, "name": other.name, "crm_account_id": other.crm_account_id} for other in same_domain
         ],
-        "known_people": [person_summary(person) for person in people][:50],
+        "known_people": [
+            {
+                **person_summary(person),
+                "title": titles[person.id].title if person.id in titles else "",
+                "title_family": titles[person.id].title_family if person.id in titles else "",
+            }
+            for person in people
+        ][:50],
         "known_people_count": len(people),
         "relationship_edge_count": len(edges),
         "requests": [
