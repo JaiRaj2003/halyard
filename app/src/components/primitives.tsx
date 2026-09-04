@@ -1,6 +1,7 @@
 /** Small shared pieces: the console has a deliberately narrow visual vocabulary. */
 
 import { ReactNode } from 'react'
+import { label, stateTone } from '../lib/labels'
 
 export function Card({ title, subtitle, actions, children }: {
   title?: ReactNode
@@ -41,19 +42,27 @@ export function Tag({ tone = 'neutral', children }: { tone?: keyof typeof TONES 
 }
 
 export function StateTag({ state }: { state: string }) {
-  const tone =
-    state === 'COMPLETED' ? 'good'
-    : state === 'NO_OBSERVABLE_PATH' || state === 'BLOCKED' ? 'warn'
-    : state === 'CLOSED' ? 'neutral'
-    : 'info'
-  return <Tag tone={tone}>{state.replaceAll('_', ' ').toLowerCase()}</Tag>
+  return <Tag tone={stateTone(state)}>{label('state', state)}</Tag>
 }
 
-export function Field({ label, children }: { label: string; children: ReactNode }) {
+/** Detail an operator can ask for but should not have to read. */
+export function Disclosure({ summary, children }: { summary: string; children: ReactNode }) {
+  return (
+    <details className="group">
+      <summary className="cursor-pointer list-none text-xs font-medium text-accent hover:underline marker:hidden">
+        <span className="group-open:hidden">{summary} ▸</span>
+        <span className="hidden group-open:inline">{summary} ▾</span>
+      </summary>
+      <div className="mt-2">{children}</div>
+    </details>
+  )
+}
+
+export function Field({ label, wrap = false, children }: { label: string; wrap?: boolean; children: ReactNode }) {
   return (
     <div className="min-w-0">
       <dt className="text-[11px] uppercase tracking-wide text-muted">{label}</dt>
-      <dd className="mt-0.5 truncate text-sm">{children || <span className="text-muted">—</span>}</dd>
+      <dd className={`mt-0.5 text-sm ${wrap ? '' : 'truncate'}`}>{children || <span className="text-muted">—</span>}</dd>
     </div>
   )
 }
