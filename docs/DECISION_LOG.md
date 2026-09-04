@@ -245,12 +245,34 @@ Who decided what, on what evidence, and what was deliberately deferred.
   thread said, in as many words, who to ask. That discards the most actionable
   evidence in the corpus while claiming the network is empty.
 
+### D25 — Organizational relevance ships as a tie-breaker, not as evidence
+
+- **Decided by:** the product owner, measured by `analysis/resort/relevance_resort.py`.
+- **Decision:** three additive factors (+3 same function, +2 adjacent function,
+  +1 senior peer) order colleague paths by how close the person we actually know
+  sits to the person we were asked to reach. Weights sit below every other
+  supporting factor, so the factor can only separate paths the ranker had
+  already scored equal.
+- **Reasoning:** the corpus cannot validate this. It holds 17 distinct contact
+  titles and no CFO, Controller or CISO ask at all, so historical flip count is
+  the wrong ship criterion — the system has to handle requests the corpus never
+  contained. The criteria used instead: the factor is deterministic, additive,
+  low-weight, produces no tier at all for an unrecognised title, overturns no
+  historical path that was ahead on evidence (all 20 changed first choices were
+  exact ties previously broken by alphabetical connector name), and puts the
+  Controller ahead of the graduate engineer on a synthetic CFO ask.
+- **Cost accepted:** the function groups are coarse. A CIO, a CTO and a director
+  of engineering share one "technology" group, so `same_function` sometimes
+  means "broadly technical" rather than "the same job". Refining that needs an
+  org chart the supplied data does not contain.
+
 ---
 
 ## Deferred
 
 | deferred | why | what would settle it |
 | --- | --- | --- |
+| A finer organizational-relevance model | the tiers are coarse function groups; no org-chart or reporting-line data exists in the corpus | seniority/reporting data, or observed outcomes per contact function |
 | A calibrated path score | Stage 5 shipped heuristic ordering only; no outcome volume to calibrate against (85 outcomes, 14 meetings) | measured outcomes per path type over time |
 | Alembic migrations | the DB is currently disposable | the first schema change with live rows to preserve |
 | Auth and permissions | explicitly out of scope | multi-user deployment |
