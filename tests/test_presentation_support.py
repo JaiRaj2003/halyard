@@ -101,6 +101,22 @@ def test_unverified_route_in_path_review_appears_once_in_needs_attention(client)
         assert counts.get(item["request_id"]) == 1
 
 
+def test_live_request_with_no_corroborated_route_needs_attention(client):
+    """Deciding to source a new route or stand down is a human decision, so a
+    live ask that lands in NO_OBSERVABLE_PATH must not vanish from the default view."""
+    account = connected_account(api_engine(client))
+    result = start(client, raw_ask=f"Intro to the CFO at {account.name}")
+    request_id = result["request"]["request_id"]
+    for path in result["paths"]["paths"]:
+        body = client.post(
+            f"/api/requests/{request_id}/route",
+            json={"path_id": path["id"], "decision": "reject", "note": "not viable"},
+        )
+    assert body.json()["request"]["workflow_state"] == WorkflowState.NO_OBSERVABLE_PATH.value
+    attention = client.get("/api/queue", params={"view": "needs_attention", "q": request_id}).json()
+    assert [item["request_id"] for item in attention["items"]] == [request_id]
+
+
 def test_queue_search_narrows_rows_but_not_view_counts(client):
     everything = client.get("/api/queue", params={"view": "all", "limit": 500}).json()
     narrowed = client.get("/api/queue", params={"view": "all", "limit": 500, "q": "vantage ridge"}).json()

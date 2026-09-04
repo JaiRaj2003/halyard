@@ -38,9 +38,13 @@ cd app && npm run e2e      # playwright, e2e/console.spec.ts — needs the API o
 - **Restart the API afterwards** — a running uvicorn keeps serving the pre-reset
   database and will report the old counts.
 - Verify with:
-  `curl -s '127.0.0.1:8000/api/queue?view=all' | python3 -c "import sys,json;d=json.load(sys.stdin);print(d['total'],len([r for r in d['items'] if r['request_key'].startswith('LIVE')]))"`
+  `curl -s '127.0.0.1:8000/api/queue?view=all' | python3 -c "import sys,json;d=json.load(sys.stdin);print(d['total'],len([r for r in d['items'] if r['request_id'].startswith('LIVE')]))"`
   (the payload key is `items`, not `requests`).
 - Route selection and intake mutate the DB; always reset at the end of a run.
+- Queue items are keyed `request_id` (not `key`); `?q=` narrows rows, e.g.
+  `/api/queue?view=all&q=LIVE` finds live rows past the 50-row page.
+- A backgrounded `make dev` dies with the shell unless started as
+  `(setsid nohup make dev > /tmp/api.log 2>&1 < /dev/null &)`.
 
 ## Useful endpoints for cross-checking the UI
 

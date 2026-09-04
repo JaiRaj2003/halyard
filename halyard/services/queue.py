@@ -63,14 +63,16 @@ _JUDGMENT_STATES = {
     WorkflowState.NEEDS_TRIAGE.value,
     WorkflowState.NEEDS_ENTITY_REVIEW.value,
     WorkflowState.PATH_REVIEW.value,
+    WorkflowState.NO_OBSERVABLE_PATH.value,
     WorkflowState.BLOCKED.value,
 }
 
 
 def _needs_attention(item: dict) -> bool:
     """A human decision is owed: triage, target or route review, an unverified
-    route, a blocker, or an action assigned here that has passed its due date.
-    Each request is one row however many of these apply."""
+    route, no corroborated route (source one or stand down), a blocker, or an
+    action assigned here that has passed its due date. Each request is one row
+    however many of these apply."""
     if not _active(item):
         return False
     return (
@@ -106,7 +108,8 @@ VIEWS: tuple[View, ...] = (
         "Needs attention",
         (
             "Active requests owed a human decision: triage, target confirmation, route review, an "
-            "unverified route to validate, a blocker, or an action assigned under Halyard that is overdue."
+            "unverified route to validate, no corroborated route yet, a blocker, or an action assigned "
+            "under Halyard that is overdue."
         ),
         _needs_attention,
     ),
