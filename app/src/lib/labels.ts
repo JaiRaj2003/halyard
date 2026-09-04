@@ -148,10 +148,74 @@ export function label(vocabulary: Vocabulary, value: string | null | undefined):
 
 export type Tone = 'neutral' | 'info' | 'warn' | 'bad' | 'good'
 
-/** Colour for a workflow state. Attention states warn; settled ones go quiet. */
+/** What a badge is telling the operator to *do*.
+ *
+ *  One vocabulary for every screen, keyed on actionability rather than on how
+ *  good a relationship looks: red is for work that is being blocked or missed
+ *  now, amber for a human judgment the system cannot make, green for something
+ *  progressing under its own steam, and neutral for context that needs nobody.
+ *  It says nothing about relationship strength or the odds of an introduction.
+ */
+export type Actionability = 'act' | 'verify' | 'healthy' | 'context'
+
+export const ACTION_TONE: Record<Actionability, Tone> = {
+  act: 'bad',
+  verify: 'warn',
+  healthy: 'good',
+  context: 'neutral',
+}
+
+/** Carried alongside every toned badge so the colour is never the only signal —
+ *  the glyph and the badge's own words both survive a greyscale screen. */
+export const ACTION_GLYPH: Record<Actionability, string> = {
+  act: '!',
+  verify: '?',
+  healthy: '✓',
+  context: '·',
+}
+
+export const ACTION_MEANING: Record<Actionability, string> = {
+  act: 'Needs intervention',
+  verify: 'Needs a human judgment',
+  healthy: 'Progressing',
+  context: 'Context only',
+}
+
+/** What a workflow state asks of the operator. */
+export function stateActionability(state: string): Actionability {
+  if (state === 'BLOCKED') return 'act'
+  if (state === 'COMPLETED' || state === 'INTRO_SENT' || state === 'AWAITING_CONNECTOR') return 'healthy'
+  if (state === 'CLOSED') return 'context'
+  // Triage, target confirmation, route review and "no corroborated route yet"
+  // are all waiting on a person to decide something.
+  return 'verify'
+}
+
+/** Colour for a workflow state. */
 export function stateTone(state: string): Tone {
-  if (state === 'COMPLETED') return 'good'
-  if (state === 'NO_OBSERVABLE_PATH' || state === 'BLOCKED') return 'warn'
-  if (state === 'CLOSED') return 'neutral'
-  return 'info'
+  return ACTION_TONE[stateActionability(state)]
+}
+
+/** A connector's load in words. "5 / 4" is telemetry; the operator is deciding
+ *  how much of someone's goodwill to spend, and needs both numbers named. */
+export function loadPhrase(asks: number | null | undefined, capacity: number | null | undefined, windowDays = 30): string {
+  const count = asks ?? 0
+  const asked = `${count} ask${count === 1 ? '' : 's'} in the last ${windowDays} days`
+  return capacity === null || capacity === undefined
+    ? `${asked} · they state no capacity`
+    : `${asked} · stated capacity ${capacity} a month`
+}
+
+/** The one-line judgment on that load, or null when capacity is unknown and
+ *  there is therefore nothing honest to say. */
+export function loadVerdict(
+  asks: number | null | undefined,
+  capacity: number | null | undefined,
+  overCapacity?: boolean,
+): { level: Actionability; text: string } | null {
+  if (capacity === null || capacity === undefined) return null
+  const count = asks ?? 0
+  if (overCapacity ?? count > capacity) return { level: 'act', text: 'Above stated capacity' }
+  if (count >= capacity) return { level: 'verify', text: 'At stated capacity' }
+  return { level: 'healthy', text: 'Capacity available' }
 }

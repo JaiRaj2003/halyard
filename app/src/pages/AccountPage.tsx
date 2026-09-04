@@ -4,8 +4,49 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AccountView, api, ApiError, RequestSummary } from '../lib/api'
-import { Card, Empty, ErrorNote, Field, Loading, StateTag, Tag, relative, shortDate } from '../components/primitives'
+import {
+  ActionTag, Card, Empty, ErrorNote, Field, Loading, StateTag, Tag, relative, shortDate,
+} from '../components/primitives'
+import { accessCoverage } from '../lib/coverage'
 import { label } from '../lib/labels'
+
+/** Where the network reaches into this account, by function rather than by
+ *  contact. Derived entirely from the contacts and observed edges already on
+ *  this page — it compresses them, and claims nothing they do not say. */
+function AccessCoverage({ account }: { account: AccountView }) {
+  const coverage = accessCoverage(account)
+  return (
+    <Card
+      title="Access coverage by function"
+      subtitle="Observed relationship edges only, grouped by the recorded title of the contact reached. A route is somewhere to investigate, not an introduction that is available."
+    >
+      <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
+        {coverage.families.map((family) => (
+          <li key={family.key} className="flex flex-wrap items-baseline gap-x-2 gap-y-1 border-b border-line pb-2 last:border-0">
+            <span className="w-48 shrink-0 text-sm font-medium">{family.label}</span>
+            <ActionTag level={family.actionability}>{family.verdict}</ActionTag>
+            <span className="min-w-0 flex-1 truncate text-xs text-muted">
+              {family.connectors.length > 0
+                ? `via ${family.connectors.join(', ')}`
+                : family.contacts.length > 0
+                  ? `${family.contacts.length} contact${family.contacts.length === 1 ? '' : 's'} known here`
+                  : ''}
+            </span>
+          </li>
+        ))}
+      </ul>
+      {(coverage.unclassified > 0 || coverage.untitled > 0) && (
+        <p className="mt-3 text-xs text-muted">
+          {coverage.unclassified > 0 &&
+            `${coverage.unclassified} contact${coverage.unclassified === 1 ? '' : 's'} here hold a title that maps to no function above. `}
+          {coverage.untitled > 0 &&
+            `${coverage.untitled} contact${coverage.untitled === 1 ? '' : 's'} named by an edge have no title recorded. `}
+          Neither counts towards coverage in either direction.
+        </p>
+      )}
+    </Card>
+  )
+}
 
 function RequestList({ items, empty }: { items: RequestSummary[]; empty: string }) {
   if (items.length === 0) return <Empty>{empty}</Empty>
@@ -18,9 +59,11 @@ function RequestList({ items, empty }: { items: RequestSummary[]; empty: string 
           </Link>
           <span className="text-sm">{item.target_title || item.target || 'target unresolved'}</span>
           <StateTag state={item.workflow_state} />
-          {item.sla_breached && <Tag tone="bad">overdue</Tag>}
-          {item.legacy_backlog && <Tag>legacy backlog</Tag>}
-          {item.potentially_stale && item.sla_managed && <Tag tone="warn">quiet {item.days_since_activity}d</Tag>}
+          {item.sla_breached && <ActionTag level="act">overdue</ActionTag>}
+          {item.legacy_backlog && <ActionTag level="context">legacy backlog</ActionTag>}
+          {item.potentially_stale && item.sla_managed && (
+            <ActionTag level="verify">quiet {item.days_since_activity}d</ActionTag>
+          )}
           <span className="ml-auto text-xs text-muted">
             {item.operational_owner} · {relative(item.last_activity_at)}
           </span>
@@ -54,8 +97,10 @@ export default function AccountPage() {
         <p className="mt-1 flex flex-wrap items-center gap-2 text-sm text-muted">
           {data.crm_account_id ? `CRM ${data.crm_account_id}` : 'not a CRM account'}
           {data.domain && <span>· {data.domain}</span>}
-          {!data.is_crm_account && <Tag tone="warn">observed only, no CRM record</Tag>}
-          {data.review_status !== 'resolved' && <Tag tone="warn">{label('resolution', data.review_status)}</Tag>}
+          {!data.is_crm_account && <ActionTag level="verify">observed only, no CRM record</ActionTag>}
+          {data.review_status !== 'resolved' && (
+            <ActionTag level="verify">{label('resolution', data.review_status)}</ActionTag>
+          )}
         </p>
       </div>
 
@@ -79,6 +124,8 @@ export default function AccountPage() {
         {data.match_evidence && <p className="mt-2 text-xs text-muted">Match evidence: {data.match_evidence}</p>}
       </Card>
 
+      <AccessCoverage account={data} />
+
       <Card title="Network coverage" subtitle={data.coverage.note}>
         {data.coverage.connectors.length === 0 ? (
           <Empty>No observed relationship reaches this account.</Empty>
@@ -96,7 +143,7 @@ export default function AccountPage() {
               {data.coverage.connectors.map((row) => (
                 <tr key={row.connector_id} className="border-t border-line align-top">
                   <td className="py-1.5 pr-3 text-sm">
-                    {row.connector} {!row.on_roster && <Tag tone="warn">not on roster</Tag>}
+                    {row.connector} {!row.on_roster && <ActionTag level="verify">not on roster</ActionTag>}
                   </td>
                   <td className="py-1.5 pr-3 text-sm tabular-nums">{row.edge_count}</td>
                   <td className="py-1.5 pr-3 text-xs text-muted">{row.named_contacts.join(', ') || '—'}</td>
@@ -135,8 +182,8 @@ export default function AccountPage() {
                   </Link>
                   <span>via {intro.connector}</span>
                   <span className="text-xs text-muted">intro {shortDate(intro.intro_date)}</span>
-                  {intro.meeting_booked && <Tag tone="good">meeting booked</Tag>}
-                  {intro.opportunity_created && <Tag tone="good">opportunity</Tag>}
+                  {intro.meeting_booked && <ActionTag level="healthy">meeting booked</ActionTag>}
+                  {intro.opportunity_created && <ActionTag level="healthy">opportunity</ActionTag>}
                 </li>
               ))}
             </ul>
@@ -162,7 +209,9 @@ export default function AccountPage() {
           <ul className="space-y-2">
             {data.data_quality_issues.map((issue, index) => (
               <li key={`issue-${index}`} className="text-xs">
-                <Tag tone={issue.severity === 'high' ? 'bad' : 'warn'}>{label('issue', issue.severity)}</Tag>{' '}
+                <ActionTag level={issue.severity === 'high' ? 'act' : 'verify'}>
+                  {label('issue', issue.severity)}
+                </ActionTag>{' '}
                 <span className="text-muted">{issue.detail}</span>
               </li>
             ))}

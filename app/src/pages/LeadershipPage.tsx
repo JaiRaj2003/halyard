@@ -4,8 +4,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api, ApiError, ConnectorLoad, Leadership, LeadershipMetric } from '../lib/api'
-import { Card, Disclosure, ErrorNote, Loading, Tag } from '../components/primitives'
-import { label } from '../lib/labels'
+import { ActionLegend, ActionTag, Card, Disclosure, ErrorNote, Loading } from '../components/primitives'
+import { label, loadPhrase, loadVerdict } from '../lib/labels'
 
 /** The handful of numbers a leader acts on. Everything else is supporting
  *  detail lower down the page — present, but not competing for attention. */
@@ -88,8 +88,8 @@ function LoadTable({ load }: { load: ConnectorLoad }) {
   const rows = load.connectors.filter((row) => row.asks_in_window > 0 || row.open_asks > 0).slice(0, 12)
   return (
     <Card
-      title="Connector load"
-      subtitle={`Asks in the rolling ${load.window_days} days, against stated capacity where one exists. ${load.off_roster_observed} observed connectors are not on the managed roster and state no capacity.`}
+      title="Connector goodwill in use"
+      subtitle={`How much of each connector's stated monthly capacity the last ${load.window_days} days have spent. ${load.off_roster_observed} observed connectors are not on the managed roster and state no capacity, so nothing can be said about their load.`}
     >
       {rows.length === 0 ? (
         <p className="text-sm text-muted">No connector has been asked inside the current window.</p>
@@ -98,9 +98,8 @@ function LoadTable({ load }: { load: ConnectorLoad }) {
           <thead className="text-[11px] uppercase tracking-wide text-muted">
             <tr>
               <th className="py-1 pr-3 font-medium">Connector</th>
-              <th className="py-1 pr-3 font-medium">Asks in window</th>
-              <th className="py-1 pr-3 font-medium">Stated capacity</th>
-              <th className="py-1 pr-3 font-medium">Open asks</th>
+              <th className="py-1 pr-3 font-medium">Load</th>
+              <th className="py-1 pr-3 font-medium">Still open</th>
               <th className="py-1 font-medium">Notes</th>
             </tr>
           </thead>
@@ -108,12 +107,19 @@ function LoadTable({ load }: { load: ConnectorLoad }) {
             {rows.map((row) => (
               <tr key={row.connector_id} className="border-t border-line">
                 <td className="py-1.5 pr-3 text-sm">{row.connector}</td>
-                <td className="py-1.5 pr-3 text-sm tabular-nums">{row.asks_in_window}</td>
-                <td className="py-1.5 pr-3 text-sm tabular-nums">{row.stated_monthly_capacity ?? '—'}</td>
-                <td className="py-1.5 pr-3 text-sm tabular-nums">{row.open_asks}</td>
-                <td className="py-1.5 text-xs text-muted">
-                  {row.over_capacity && <Tag tone="warn">above stated capacity</Tag>} {row.note}
+                <td className="py-1.5 pr-3 text-sm">
+                  <span className="flex flex-wrap items-center gap-2">
+                    {(() => {
+                      const verdict = loadVerdict(row.asks_in_window, row.stated_monthly_capacity, row.over_capacity)
+                      return verdict ? <ActionTag level={verdict.level}>{verdict.text}</ActionTag> : null
+                    })()}
+                    <span className="text-muted">
+                      {loadPhrase(row.asks_in_window, row.stated_monthly_capacity, load.window_days)}
+                    </span>
+                  </span>
                 </td>
+                <td className="py-1.5 pr-3 text-sm tabular-nums">{row.open_asks}</td>
+                <td className="py-1.5 text-xs text-muted">{row.note}</td>
               </tr>
             ))}
           </tbody>
@@ -151,9 +157,12 @@ export default function LeadershipPage() {
 
   return (
     <div className="space-y-4">
-      <div>
-        <h1 className="text-xl font-semibold tracking-tight">Leadership view</h1>
-        <p className="mt-1 text-sm text-muted">{data.clock}</p>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight">Leadership view</h1>
+          <p className="mt-1 text-sm text-muted">{data.clock}</p>
+        </div>
+        <ActionLegend />
       </div>
 
       <section>
