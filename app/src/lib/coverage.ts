@@ -45,8 +45,8 @@ const FAMILIES: Family[] = [
 const ALWAYS_SHOWN = new Set(['executive', 'finance', 'security', 'engineering'])
 
 /** The function a recorded title belongs to, or "" when it is unrecognised. */
-export function titleFamily(title: string): string {
-  const normalized = ` ${title.toLowerCase().replaceAll(/[^a-z0-9]+/g, ' ').trim()} `
+export function titleFamily(title: string | null | undefined): string {
+  const normalized = ` ${(title ?? '').toLowerCase().replaceAll(/[^a-z0-9]+/g, ' ').trim()} `
   if (!normalized.trim()) return ''
   // "Chief Executive Officer" reads as executive, not as the generic "officer"
   // any C-level title contains, so the specific families are tried first and

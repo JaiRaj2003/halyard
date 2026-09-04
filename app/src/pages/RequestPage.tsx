@@ -6,7 +6,7 @@ import { api, ApiError, CandidatePath, IntakeResult } from '../lib/api'
 import {
   ActionTag, Button, Card, Disclosure, Empty, ErrorNote, Field, Loading, StateTag, Tag, relative, shortDate,
 } from '../components/primitives'
-import { label, loadPhrase, loadVerdict } from '../lib/labels'
+import { label } from '../lib/labels'
 
 /** Target, status, owner, next action — in that order, above everything else. */
 function Hero({ data }: { data: IntakeResult }) {
@@ -222,8 +222,12 @@ function PathRow({ path, busy, onDecide }: {
   const selected = path.review_status === 'selected'
   const supporting = path.factors.filter((factor) => factor.direction !== 'limiting')
   const limiting = path.factors.filter((factor) => factor.direction === 'limiting')
-  const caveat = limiting[0]?.statement || path.limitations
-  const load = loadVerdict(path.connector.recent_asks_30d, path.connector.stated_monthly_capacity, path.connector.over_capacity)
+  // The paths payload carries no ask counts, only the factors the ordering
+  // used, so the connector's load is read from those rather than computed here
+  // from numbers this endpoint does not send.
+  const overCapacity = limiting.find((factor) => factor.key === 'connector_over_stated_capacity')
+  const recentAsks = path.factors.find((factor) => factor.key === 'connector_recent_ask')
+  const caveat = limiting.find((factor) => factor !== overCapacity)?.statement || path.limitations
 
   return (
     <li
@@ -251,12 +255,9 @@ function PathRow({ path, busy, onDecide }: {
               <li key={factor.key} className="text-sm text-muted">· {factor.statement}</li>
             ))}
           </ul>
-          {load && load.level !== 'healthy' && (
-            <p className="mt-2 flex flex-wrap items-center gap-2 text-sm">
-              <ActionTag level={load.level}>{load.text}</ActionTag>
-              <span className="text-muted">
-                {loadPhrase(path.connector.recent_asks_30d, path.connector.stated_monthly_capacity)}
-              </span>
+          {overCapacity && (
+            <p className="mt-2">
+              <ActionTag level="act">{overCapacity.statement}</ActionTag>
             </p>
           )}
           {caveat && <p className="mt-2 text-sm text-warn">{caveat}</p>}
@@ -293,8 +294,10 @@ function PathRow({ path, busy, onDecide }: {
             </Field>
           </dl>
           <p className="mt-2 text-xs text-muted">
-            {loadPhrase(path.connector.recent_asks_30d, path.connector.stated_monthly_capacity)}
-            {load ? ` · ${load.text.toLowerCase()}.` : '.'}
+            {recentAsks ? recentAsks.statement : 'No ask recorded against this connector in the current window'}
+            {path.connector.stated_monthly_capacity !== null
+              ? ` · stated capacity ${path.connector.stated_monthly_capacity} a month.`
+              : ' · they state no capacity.'}
             {path.connector.note ? ` ${path.connector.note}` : ''}
           </p>
           {path.limitations && <p className="mt-1 text-xs text-warn">Limitation: {path.limitations}</p>}
