@@ -11,3 +11,7 @@ data/derived/
 app/node_modules/
 app/dist/
 app/tsconfig.tsbuildinfo
+
+# Playwright
+app/test-results/
+app/playwright-report/

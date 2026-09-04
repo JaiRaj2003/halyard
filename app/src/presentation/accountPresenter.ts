@@ -18,8 +18,8 @@
  *  only: nothing here feeds ranking.
  */
 
-import { AccountView } from './api'
-import { Actionability } from './labels'
+import { AccountView, RequestSummary } from '../lib/api'
+import { Actionability, isSettled, label } from './labels'
 
 interface Family {
   key: string
@@ -140,4 +140,30 @@ const VERDICTS: Record<CoverageState, { verdict: string; actionability: Actionab
   indirect: { verdict: 'Contacts known, no connector reaches them', actionability: 'verify' },
   none: { verdict: 'No corroborated route', actionability: 'act' },
   unknown: { verdict: 'Not enough data', actionability: 'context' },
+}
+
+/** One sentence over the whole account: how many functions show any observable
+ *  route. Counts edges, never promises. */
+export function coverageSummary(coverage: AccessCoverage): string {
+  const shown = coverage.families
+  const reached = shown.filter((family) => family.state === 'multiple' || family.state === 'single')
+  const known = shown.filter((family) => family.state === 'indirect')
+  if (shown.every((family) => family.state === 'unknown')) {
+    return 'No contact at this account has a recorded title, so access cannot be judged by function.'
+  }
+  const parts = [`Observable routes into ${reached.length} of ${shown.length} functions`]
+  if (known.length > 0) parts.push(`contacts known but unreached in ${known.length}`)
+  return `${parts.join('; ')}. A route is somewhere to investigate, not an introduction that is available.`
+}
+
+/** What is happening on this account right now, as a short phrase per state. */
+export function motionSummary(active: RequestSummary[]): string {
+  const open = active.filter((item) => !isSettled(item.workflow_state))
+  if (open.length === 0) return 'Nothing in flight against this account.'
+  const byState = new Map<string, number>()
+  for (const item of open) byState.set(item.workflow_state, (byState.get(item.workflow_state) ?? 0) + 1)
+  const phrases = [...byState.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([state, count]) => `${count} ${label('state', state).toLowerCase()}`)
+  return `${open.length} open: ${phrases.join(', ')}.`
 }

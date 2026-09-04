@@ -69,6 +69,15 @@ export interface ConnectorSummary {
   note?: string
 }
 
+/** The person a path actually reaches, read from the relationship edge; null
+ *  when the edge is to the organisation and no person is named. */
+export interface PathContact {
+  id: number
+  name: string
+  title: string | null
+  organization: AccountSummary | null
+}
+
 export interface CandidatePath {
   id: number
   rank: number
@@ -76,6 +85,7 @@ export interface CandidatePath {
   recommendation_label: string
   factors: Factor[]
   connector: ConnectorSummary
+  contact: PathContact | null
   hop_type: string
   observability: string
   connector_reachable: boolean
@@ -206,6 +216,7 @@ export interface QueuePayload {
   total: number
   limit: number
   offset: number
+  q?: string
   items: RequestSummary[]
 }
 
@@ -336,7 +347,16 @@ export interface AccountView extends AccountSummary {
   coverage_gaps: { gap_type: string; subject: string; detail: string }[]
 }
 
+export interface SearchResult {
+  query: string
+  accounts: { id: number; name: string; crm_account_id: string | null; domain: string; is_crm_account: boolean; review_status: string }[]
+  people: { id: number; display_name: string; is_internal: boolean; source_type: string; review_status: string }[]
+}
+
 export const api = {
+  search: (q: string, limit = 20) =>
+    request<SearchResult>(`/api/search?${new URLSearchParams({ q, limit: String(limit) })}`),
+
   startIntake: (body: IntakeSubmission) =>
     request<IntakeResult>('/api/intake/start', { method: 'POST', body: JSON.stringify(body) }),
 
@@ -370,6 +390,12 @@ export const api = {
   transition: (key: string, body: { to_state: string; note?: string; outcome?: string }) =>
     request<RequestDetail>(`/api/requests/${encodeURIComponent(key)}/transition`, {
       method: 'POST',
+      body: JSON.stringify(body),
+    }),
+
+  setOwner: (key: string, body: { operational_owner_id: number; note?: string }) =>
+    request<RequestDetail>(`/api/requests/${encodeURIComponent(key)}/owner`, {
+      method: 'PATCH',
       body: JSON.stringify(body),
     }),
 }
