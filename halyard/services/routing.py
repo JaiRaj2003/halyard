@@ -33,7 +33,7 @@ from ..ingest.paths import build_candidate_paths
 from ..intake.parse import parse_ask
 from ..matching.normalize import norm_ws, title_family
 from .intake import intake_payload
-from .requests import ValidationProblem, get_request, log_event
+from .requests import ValidationProblem, get_request, log_event, path_contact
 
 SELECTED = "selected"
 REJECTED = "rejected"
@@ -65,6 +65,20 @@ def _move(
         request.next_action_due_at = action.due_at
         request.next_action_source = OPERATOR_ASSIGNED
         request.last_activity_at = now
+
+
+def connector_ask_action(session: Session, request: IntroRequest, path: IntroCandidatePath) -> str:
+    """The concrete human step once a route is selected.
+
+    Names who is being asked and whom they are being asked to reach. Reaching
+    the person is the question, never the answer: the connector may say no.
+    """
+    connector = path.connector.name
+    contact = path_contact(session, path)
+    if contact is not None:
+        return f"Ask {connector} to confirm whether they can reach {contact['name']}"
+    account = request.organization.name if request.organization else "the target account"
+    return f"Ask {connector} to confirm whether they can reach a contact at {account}"
 
 
 def _reachable(state: WorkflowState) -> set[WorkflowState]:
@@ -219,6 +233,7 @@ def review_route(
         detail = f"route confirmed via {path.connector.name}: {path.evidence}"
         log_event(session, request, "route_confirmed", now, actor=actor, detail=f"{detail}. {norm_ws(note)}".strip())
         _move(session, request, WorkflowState.AWAITING_CONNECTOR, settings, now, actor, detail)
+        request.next_action = connector_ask_action(session, request, path)
         session.flush()
         return _payload(session, request, settings, now)
 

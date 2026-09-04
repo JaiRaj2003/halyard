@@ -122,12 +122,13 @@ def create_app(
         account_id: int | None = None,
         limit: int = Query(50, ge=1, le=500),
         offset: int = Query(0, ge=0),
+        q: str = Query("", max_length=200),
         session: Session = Depends(get_session),
     ):
         try:
             return queue_service.queue(
                 session, settings, clock, view=view, owner_id=owner_id, account_id=account_id,
-                limit=limit, offset=offset,
+                limit=limit, offset=offset, q=q,
             )
         except queue_service.UnknownView as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
