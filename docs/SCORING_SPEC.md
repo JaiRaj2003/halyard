@@ -87,6 +87,9 @@ id, so the order is stable across rebuilds.
 | `direct_target_person` | +25 | direct connection to the requested person |
 | `same_title_family` | +12 | contact is in the requested function |
 | `colleague_at_account` | +6 | contact is a colleague at the account |
+| `relevance_same_function` | +3 | known contact works in the requested buyer's function |
+| `relevance_adjacent_function` | +2 | known contact works alongside that function |
+| `relevance_senior_peer` | +1 | known contact is a senior peer of the requested buyer |
 | `investor_relationship` | +4 | investor/board edge to the account |
 | `connector_on_roster` | +15 | capacity and willingness are known |
 | `connector_off_roster` | -10 | observed connector, unmanaged: capacity unknown |
@@ -108,6 +111,32 @@ sentence for each factor that fired, then the ordered alternatives. The
 composite total is never serialised into an API response and never rendered —
 "Priority 75" would imply a calibration these heuristics do not have. A test
 asserts no `score`/`priority`/`weight` key reaches the payload.
+
+### Amendment (Stage 7): organizational relevance as a tie-breaker
+
+`same_title_family` only fires when the contact's title family matches the
+target's exactly, so every other colleague at the account ranked identically: a
+Controller and a graduate engineer were the same path when the ask was the CFO.
+The three `relevance_*` factors above separate them, using coarse function
+groups and a single leadership marker defined in
+`halyard/services/relevance.py`.
+
+That vocabulary lives there rather than in `halyard/matching/`, so the audit's
+entity matching is untouched by an ordering heuristic. A title that is missing
+or unrecognised produces no tier and therefore no factor — it is never a
+penalty. The tiers are coarse by design: "technology" holds a CIO, a CTO and a
+director of engineering alike, which is the price of not inventing an org chart
+the corpus does not contain.
+
+**Blast radius, measured.** `analysis/resort/relevance_resort.py` re-ranks every
+historical request with the factor and with its weights zeroed. It reorders 28
+of the 96 requests that have candidate paths and changes the first choice on 20
+of them — and in all 20 the two paths scored *exactly equal* before the factor
+existed, so the previous winner was decided by alphabetical connector name. The
+factor breaks ties; it never overturns evidence. `tests/test_relevance.py`
+asserts that property across the whole corpus, which is the ship criterion a
+flip count cannot give: a count cannot distinguish "improves the order" from
+"overrides the evidence".
 
 ### Resilience
 

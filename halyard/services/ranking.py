@@ -22,9 +22,17 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..config import Settings
-from ..db.models import Connector, IntroCandidatePath, IntroOutcome, IntroRequest, RelationshipEdge
+from ..db.models import (
+    Connector,
+    IntroCandidatePath,
+    IntroOutcome,
+    IntroRequest,
+    Person,
+    RelationshipEdge,
+)
 from ..domain.states import SETTLED_STATES
 from ..ingest.paths import HISTORICALLY_OBSERVABLE, HOP_COLLEAGUE, HOP_DIRECT, POST_DATES_REQUEST, SNAPSHOT_ONLY
+from .relevance import relevance_tier, tier_statement
 
 SUPPORTING = "supporting"
 LIMITING = "limiting"
@@ -143,11 +151,27 @@ def _corroborating_sources(session: Session, path: IntroCandidatePath) -> int:
     return len({other.source_file for other in session.scalars(stmt).all() if other.source_file})
 
 
+def contact_title(session: Session, path: IntroCandidatePath) -> str:
+    """Recorded title of the person this path actually knows, if there is one."""
+    person_id = path.edge.person_id if path.edge is not None else None
+    if person_id is None:
+        return ""
+    contact = session.get(Person, person_id)
+    if contact is None:  # pragma: no cover - an edge's person always exists
+        return ""
+    for affiliation in contact.affiliations:
+        if affiliation.title:
+            return affiliation.title
+    return ""
+
+
 def path_factors(
     path: IntroCandidatePath,
     context: ConnectorContext | None,
     settings: Settings,
     corroborating_sources: int = 1,
+    target_title: str = "",
+    known_contact_title: str = "",
 ) -> tuple[Factor, ...]:
     """Every factor that fires for one path, in the order an operator reads them."""
     weights = settings.path_factor_weights
@@ -179,6 +203,11 @@ def path_factors(
             add("colleague_at_account", "Connection is to a colleague at the target account", SUPPORTING)
     else:
         add("investor_relationship", "Investor or board relationship to the account", SUPPORTING)
+
+    if path.hop_type == HOP_COLLEAGUE:
+        tier = relevance_tier(target_title, known_contact_title)
+        if tier:
+            add(f"relevance_{tier}", tier_statement(tier, known_contact_title), SUPPORTING)
 
     if path.hop_type != HOP_DIRECT:
         factors.append(
@@ -251,6 +280,7 @@ def rank_paths(
     if not paths:
         return []
     contexts = connector_contexts(session, settings, now, request.organization_id)
+    target_title = request.target.raw_target_title if request.target is not None else ""
 
     scored: list[tuple[int, str, int, IntroCandidatePath, tuple[Factor, ...]]] = []
     for path in paths:
@@ -259,6 +289,8 @@ def rank_paths(
             contexts.get(path.connector_id),
             settings,
             corroborating_sources=_corroborating_sources(session, path),
+            target_title=target_title,
+            known_contact_title=contact_title(session, path),
         )
         priority = sum(factor.weight for factor in factors)
         scored.append((priority, path.connector.name, path.id, path, factors))
@@ -280,6 +312,7 @@ __all__ = [
     "Factor",
     "RankedPath",
     "connector_contexts",
+    "contact_title",
     "factor_payload",
     "path_factors",
     "rank_paths",

@@ -92,3 +92,7 @@ exports, not in the workflow.
   spend the next ten minutes, using the evidence listed beneath it.
 - That connector load is complete. It counts asks recorded in this system;
   anything routed off-system is invisible to it.
+- That "works in the same function as the requested buyer" is precise. It is a
+  keyword match against coarse function groups: a CIO, a CTO and a director of
+  engineering all read as "technology". The relevance tiers break ties between
+  otherwise equal paths and nothing more.

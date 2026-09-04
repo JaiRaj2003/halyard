@@ -59,6 +59,14 @@ PATH_FACTOR_WEIGHTS: dict[str, int] = {
     "direct_target_person": 25,
     "same_title_family": 12,
     "colleague_at_account": 6,
+    #: Organizational relevance of the person we actually know to the person we
+    #: were asked to reach. Additive and deliberately small: it separates
+    #: otherwise identical colleague paths — a Controller when the ask is the
+    #: CFO, a CTO when the ask is the CISO — without ever outweighing dated,
+    #: corroborated or on-roster evidence. See docs/SCORING_SPEC.md.
+    "relevance_same_function": 3,
+    "relevance_adjacent_function": 2,
+    "relevance_senior_peer": 1,
     "investor_relationship": 4,
     "connector_on_roster": 15,
     "connector_off_roster": -10,
