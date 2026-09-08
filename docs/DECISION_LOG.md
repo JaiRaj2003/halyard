@@ -296,6 +296,39 @@ Who decided what, on what evidence, and what was deliberately deferred.
 
 ---
 
+### D27 — Readiness, correlation and a deliberately thin process log
+
+- **Decided by:** runtime hardening pass after D26.
+- **Problem:** `GET /api/health` said the process was up even when the
+  database file was missing, nothing tied an operator's failed call to a server
+  stack trace, and the server wrote no request log at all.
+- **Decision:** `GET /api/health` stays the liveness check and touches nothing.
+  `GET /api/ready` opens a normal session and runs `SELECT 1`; it answers 200
+  with `{"status": "ready", "checks": {"database": "ok"}}` or 503 with
+  `not_ready`/`unreachable`, and consults nothing else — a Slack or CRM outage
+  must never make the console report itself unready. One ASGI middleware gives
+  every exchange an `X-Request-ID` (the caller's when it is 1–128 plain
+  characters, otherwise a fresh UUID), returns it on every response including
+  errors, holds it in a context variable, and writes one line per request with
+  method, route template, path, status and duration. An unhandled exception is
+  logged with its stack trace under the same id and answered with a generic
+  500 carrying the id — never the exception text.
+- **Deliberately not logged:** bodies, query strings, asks, requester and
+  contact names, evidence and path contents. What happened to a request is
+  already recorded as events on the request (`enrichment_failed` included);
+  the process log says only that the server was asked and how it answered.
+  The intake enrichment failure additionally emits a server-side warning with
+  the request key and exception type, so the operator-visible event and the
+  stack trace share a correlation id.
+- **Not confused with:** `Idempotency-Key` (D26), which identifies a
+  *submission* across retries and decides what is created. `X-Request-ID`
+  identifies a *delivery* and decides nothing.
+- **Cost accepted:** plain `logging`, no metrics endpoint, no tracing backend,
+  no external error reporting. Those are deployment decisions; this pass gives
+  them something to attach to.
+
+---
+
 ## Deferred
 
 | deferred | why | what would settle it |

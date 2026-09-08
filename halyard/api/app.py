@@ -9,7 +9,9 @@ from __future__ import annotations
 from typing import Iterator
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Response
-from sqlalchemy import Engine
+from fastapi.responses import JSONResponse
+from sqlalchemy import Engine, text
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from ..clock import Clock, get_clock
@@ -17,6 +19,7 @@ from ..config import Settings, load_settings
 from ..db.session import build_engine, create_all, sessionmaker_for
 from ..domain.ownership import OwnershipError
 from ..domain.states import TransitionError
+from ..observability import current_request_id
 from ..services import accounts as account_service
 from ..services import intake as intake_service
 from ..services import metrics as metrics_service
@@ -26,6 +29,7 @@ from ..services import routing as routing_service
 from ..services import search as search_service
 from ..services.intake import IdempotencyConflict, IntakeSubmission
 from ..services.requests import NewRequest, RequestNotFound, ValidationProblem
+from .observability import RequestContextMiddleware, logger
 from .schemas import ConfirmTarget, CreateRequest, IntakeStart, OwnerRequest, RouteDecision, TransitionRequest
 
 
@@ -52,6 +56,7 @@ def create_app(
     app.state.settings = settings
     app.state.clock = clock
     app.state.engine = engine
+    app.add_middleware(RequestContextMiddleware)
 
     def get_session() -> Iterator[Session]:
         session = factory()
@@ -66,7 +71,23 @@ def create_app(
 
     @app.get("/api/health")
     def health() -> dict:
+        """Liveness: the process is up and answering. Touches nothing."""
         return {"status": "ok", "as_of": clock.now(), "database": str(settings.db_path)}
+
+    @app.get("/api/ready")
+    def ready():
+        """Readiness: a session can be opened and the database answers a query.
+
+        Persistence only. Nothing external is consulted, so a future Slack or
+        CRM outage cannot make the operator console report itself unready.
+        """
+        try:
+            with factory() as session:
+                session.execute(text("SELECT 1"))
+        except SQLAlchemyError as exc:
+            logger.warning("not_ready request_id=%s check=database error=%s", current_request_id(), type(exc).__name__)
+            return JSONResponse({"status": "not_ready", "checks": {"database": "unreachable"}}, status_code=503)
+        return {"status": "ready", "checks": {"database": "ok"}}
 
     @app.get("/api/search")
     def search(q: str = Query(""), limit: int = Query(20, ge=1, le=100), session: Session = Depends(get_session)):

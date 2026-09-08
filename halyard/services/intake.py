@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 
@@ -31,6 +32,7 @@ from ..ingest.coordination import link_request
 from ..intake.parse import ParsedAsk, parse_ask
 from ..matching.accounts import canonical_key
 from ..matching.normalize import norm_person, norm_ws
+from ..observability import current_request_id
 from .requests import (
     NewRequest,
     ValidationProblem,
@@ -46,6 +48,8 @@ from .search import account_summary, person_summary
 
 #: Beyond this, an operator is choosing from a list rather than confirming a match.
 MAX_CANDIDATES = 8
+
+logger = logging.getLogger("halyard.intake")
 
 
 class _FrozenClock:
@@ -468,6 +472,9 @@ def start_intake(
     except Exception as exc:  # enrichment is best-effort; the ask is already safe
         session.rollback()
         request = get_request(session, request_key)
+        logger.exception(
+            "enrichment_failed request_id=%s request=%s error=%s", current_request_id(), request_key, type(exc).__name__
+        )
         log_event(
             session,
             request,
