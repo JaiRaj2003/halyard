@@ -267,15 +267,17 @@ function TargetPanel({ data, onChange }: { data: IntakeResult; onChange: (result
       )}
 
       <div className="mt-4 border-t border-line pt-3">
-        <Disclosure summary="How the target was read">
+        <Disclosure summary="How this ask was read">
           <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             <Field label="Account text" wrap>{data.parse.proposed.account_text}</Field>
             <Field label="Person text" wrap>{data.parse.proposed.person_name}</Field>
             <Field label="Role text" wrap>{data.parse.proposed.title}</Field>
             <Field label="Parse" wrap>{label('confidence', data.parse.confidence)}</Field>
           </dl>
-          <p className="mt-2 text-xs text-muted">{data.parse.evidence}</p>
-          {target?.resolution_evidence && <p className="mt-1 text-xs text-muted">{target.resolution_evidence}</p>}
+          {data.parse.evidence && <p className="mt-2 text-xs text-muted">Read from the ask: {data.parse.evidence}</p>}
+          {target?.resolution_evidence && (
+            <p className="mt-1 text-xs text-muted">Identification: {eventDetail(target.resolution_evidence)}</p>
+          )}
         </Disclosure>
       </div>
     </Card>
@@ -500,8 +502,8 @@ function Timeline({ data }: { data: IntakeResult }) {
       <span className="w-24 shrink-0 text-xs text-muted">{shortDate(event.occurred_at)}</span>
       <span className="min-w-0">
         <span className="font-medium">{eventLabel(event.event_type)}</span>
-        {event.detail && <span className="text-muted"> — {eventDetail(event.detail)}</span>}
         {event.actor && <span className="text-xs text-muted"> ({event.actor})</span>}
+        {event.detail && <span className="block text-xs text-muted">{eventDetail(event.detail)}</span>}
       </span>
     </li>
   )
@@ -527,6 +529,7 @@ function Timeline({ data }: { data: IntakeResult }) {
 
 function RequestRecord({ data }: { data: IntakeResult }) {
   const request = data.request
+  const reasons = attentionReasons(request)
   return (
     <Card title="Request record" tone="quiet">
       <blockquote className="border-l-2 border-line pl-3 text-sm italic text-muted">“{request.raw_ask}”</blockquote>
@@ -544,8 +547,14 @@ function RequestRecord({ data }: { data: IntakeResult }) {
         </Field>
       </dl>
       <div className="mt-4">
-        <Disclosure summary="How this status was reached">
-          <p className="text-xs text-muted">{request.state_evidence}</p>
+        <Disclosure summary="Why this status">
+          <p className="text-sm">
+            <StateTag state={request.workflow_state} />
+            <span className="ml-1.5">{reasons[0] ?? 'Nothing outstanding — this request is settled.'}</span>
+          </p>
+          {request.state_evidence && (
+            <p className="mt-2 text-xs text-muted">Reconciliation record: {eventDetail(request.state_evidence)}</p>
+          )}
           {request.operationalized_at && (
             <p className="mt-1 text-xs text-muted">Brought under Halyard {shortDate(request.operationalized_at)}.</p>
           )}
@@ -564,6 +573,7 @@ function RequestRecord({ data }: { data: IntakeResult }) {
 function SavedBanner({ data, onDismiss }: { data: IntakeResult; onDismiss: () => void }) {
   const request = data.request
   const when = timing(request)
+  const owner = ownerStatus(request)
   return (
     <Callout
       level="healthy"
@@ -571,7 +581,10 @@ function SavedBanner({ data, onDismiss }: { data: IntakeResult; onDismiss: () =>
       actions={<Button size="sm" variant="secondary" onClick={onDismiss}>Dismiss</Button>}
     >
       <ul className="flex flex-wrap gap-x-4 gap-y-1">
-        <li>Owner assigned: <span className="font-medium">{request.operational_owner}</span></li>
+        <li>
+          Owner: <span className="font-medium">{owner.name}</span>
+          {owner.flag && <span className="text-muted"> · {owner.flag.toLowerCase()}</span>}
+        </li>
         <li>
           Next action: <span className="font-medium">{request.next_action}</span>
           {when.dateIso && <span className="text-muted"> · due {shortDate(when.dateIso)}</span>}
