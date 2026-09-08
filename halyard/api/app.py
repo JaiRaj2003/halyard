@@ -8,13 +8,13 @@ from __future__ import annotations
 
 from typing import Iterator
 
-from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Response
 from sqlalchemy import Engine
 from sqlalchemy.orm import Session
 
 from ..clock import Clock, get_clock
 from ..config import Settings, load_settings
-from ..db.session import build_engine, sessionmaker_for
+from ..db.session import build_engine, create_all, sessionmaker_for
 from ..domain.ownership import OwnershipError
 from ..domain.states import TransitionError
 from ..services import accounts as account_service
@@ -24,7 +24,7 @@ from ..services import queue as queue_service
 from ..services import requests as request_service
 from ..services import routing as routing_service
 from ..services import search as search_service
-from ..services.intake import IntakeSubmission
+from ..services.intake import IdempotencyConflict, IntakeSubmission
 from ..services.requests import NewRequest, RequestNotFound, ValidationProblem
 from .schemas import ConfirmTarget, CreateRequest, IntakeStart, OwnerRequest, RouteDecision, TransitionRequest
 
@@ -37,6 +37,7 @@ def create_app(
     settings = settings or load_settings()
     clock = clock or get_clock()
     engine = engine or build_engine(settings.db_path)
+    create_all(engine)
     factory = sessionmaker_for(engine)
 
     app = FastAPI(
@@ -134,21 +135,36 @@ def create_app(
             raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @app.post("/api/intake/start", status_code=201)
-    def intake_start(body: IntakeStart, session: Session = Depends(get_session)):
+    def intake_start(
+        body: IntakeStart,
+        response: Response,
+        session: Session = Depends(get_session),
+        idempotency_key: str | None = Header(default=None, alias="Idempotency-Key", max_length=200),
+    ):
         """Persist and own the ask, then return everything known about it.
 
         The request exists before any parsing or routing happens, so abandoning
-        the screen loses nothing.
+        the screen loses nothing. An optional ``Idempotency-Key`` header makes a
+        retry return the request the first delivery created (marked with the
+        ``Idempotent-Replayed: true`` response header) rather than a second one;
+        reusing a key with a different body is refused with 409.
         """
         try:
-            result = intake_service.start_intake(session, IntakeSubmission(**body.model_dump()), settings, clock)
+            result, replayed = intake_service.start_intake(
+                session, IntakeSubmission(**body.model_dump()), settings, clock, idempotency_key=idempotency_key,
+            )
             session.commit()
         except (ValidationProblem, OwnershipError) as exc:
             session.rollback()
             raise HTTPException(status_code=422, detail=str(exc)) from exc
+        except IdempotencyConflict as exc:
+            session.rollback()
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
         except Exception:
             session.rollback()
             raise
+        if replayed:
+            response.headers["Idempotent-Replayed"] = "true"
         return result
 
     @app.get("/api/intake/{request_key}")

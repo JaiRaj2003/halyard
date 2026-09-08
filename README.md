@@ -98,6 +98,9 @@ GET   /api/metrics/stale                    GET /api/metrics/connector-load
 GET   /api/metrics/leadership               # every metric states its denominator and window
 
 POST  /api/intake/start                     # persists and owns first, then routes
+                                            # optional Idempotency-Key header: a retry
+                                            # replays the same request; reuse with a
+                                            # different body is 409
 GET   /api/intake/{id}                      # the same working payload, re-fetched
 POST  /api/requests/{id}/target             # human confirms the account/person
 POST  /api/requests/{id}/route              # human confirms or rules out a path

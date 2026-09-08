@@ -14,15 +14,18 @@ human to confirm, and candidate paths are ordered evidence about where to look.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import hashlib
+import json
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
 
 from sqlalchemy import func, or_, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..clock import Clock
 from ..config import Settings
-from ..db.models import IntroRequest, Organization, Person, RequestTarget
+from ..db.models import IntakeIdempotencyKey, IntroRequest, Organization, Person, RequestTarget
 from ..domain.workflow import UNVERIFIED_SUGGESTED_ROUTE
 from ..ingest.coordination import link_request
 from ..intake.parse import ParsedAsk, parse_ask
@@ -53,6 +56,10 @@ class _FrozenClock:
 
     def now(self) -> datetime:
         return self._now
+
+
+class IdempotencyConflict(ValueError):
+    """The same ``Idempotency-Key`` arrived with a materially different ask."""
 
 
 @dataclass
@@ -324,39 +331,116 @@ def intake_payload(
     }
 
 
+def submission_fingerprint(submission: IntakeSubmission) -> str:
+    """Stable digest of exactly what the client sent, for detecting key reuse."""
+    canonical = json.dumps(asdict(submission), sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _replay_for_key(
+    session: Session,
+    key: str,
+    submission: IntakeSubmission,
+    settings: Settings,
+    clock: Clock,
+) -> dict | None:
+    """The result of the request this key already created, or None if the key is new."""
+    record = session.scalar(select(IntakeIdempotencyKey).where(IntakeIdempotencyKey.key == key))
+    if record is None:
+        return None
+    if record.fingerprint != submission_fingerprint(submission):
+        raise IdempotencyConflict(
+            f"Idempotency-Key '{key}' was already used for a different submission "
+            f"(request {record.request.request_id}); send a new key for a new request"
+        )
+    return reintake(session, record.request.request_id, settings, clock)
+
+
+def _persist_or_replay(
+    session: Session,
+    submission: IntakeSubmission,
+    key: str,
+    settings: Settings,
+    clock: Clock,
+    now: datetime,
+) -> IntroRequest | dict:
+    """Commit the owned request and its key in one transaction.
+
+    Two deliveries can pass the key lookup before either commits; the unique
+    constraints then decide. If the *key* is what collided, the other delivery
+    created the request and its result is returned instead. If something shared
+    collided — both intakes recording the same new requester, say — nothing of
+    ours persisted and the insert is simply done again, now seeing their commit.
+    """
+    payload = NewRequest(
+        requester_name=submission.requester_name,
+        target_account_text="",
+        raw_ask=submission.raw_ask,
+        deal_value_usd=submission.deal_value_usd,
+        urgency=submission.urgency,
+        request_id=submission.request_id,
+        operational_owner_id=submission.operational_owner_id,
+    )
+
+    def commit_owned() -> IntroRequest:
+        request = persist_owned_request(session, payload, settings, clock)
+        if key:
+            session.add(
+                IntakeIdempotencyKey(
+                    key=key,
+                    fingerprint=submission_fingerprint(submission),
+                    request_id=request.id,
+                    created_at=now,
+                )
+            )
+        session.commit()
+        return request
+
+    try:
+        return commit_owned()
+    except IntegrityError:
+        session.rollback()
+    if key:
+        replay = _replay_for_key(session, key, submission, settings, clock)
+        if replay is not None:
+            return replay
+    return commit_owned()
+
+
 def start_intake(
     session: Session,
     submission: IntakeSubmission,
     settings: Settings,
     clock: Clock,
-) -> dict:
-    """Persist the ask, then enrich it. Returns the full intake result.
+    idempotency_key: str | None = None,
+) -> tuple[dict, bool]:
+    """Persist the ask, then enrich it. Returns the full intake result and
+    whether it was replayed from an earlier submission with the same key.
 
     The persist step is committed on its own before enrichment runs, so a bug or
     a failure anywhere in parsing, resolution or path discovery cannot take the
     ask down with it: the request survives in triage, owned, with the operator's
     original words intact and a note saying enrichment failed.
+
+    ``idempotency_key`` is transport-level protection against retries: the key
+    is written in the same transaction as the request, under a unique
+    constraint, so a retry — or a simultaneous duplicate delivery — finds the
+    request the first attempt created instead of making another. It is not
+    duplicate detection: identical asks under different keys are two requests.
     """
     if not norm_ws(submission.raw_ask) and not norm_ws(submission.account_text):
         raise ValidationProblem("a free-text ask or an account is required")
 
-    now = clock.now()
-    request = persist_owned_request(
-        session,
-        NewRequest(
-            requester_name=submission.requester_name,
-            target_account_text="",
-            raw_ask=submission.raw_ask,
-            deal_value_usd=submission.deal_value_usd,
-            urgency=submission.urgency,
-            request_id=submission.request_id,
-            operational_owner_id=submission.operational_owner_id,
-        ),
-        settings,
-        clock,
-    )
+    key = norm_ws(idempotency_key or "")
+    if key:
+        replay = _replay_for_key(session, key, submission, settings, clock)
+        if replay is not None:
+            return replay, True
 
-    session.commit()
+    now = clock.now()
+    request = _persist_or_replay(session, submission, key, settings, clock, now)
+    if isinstance(request, dict):
+        return request, True
     request_key = request.request_id
 
     parsed = parse_ask(submission.raw_ask)
@@ -393,7 +477,7 @@ def start_intake(
             detail=f"{type(exc).__name__}: {exc}. Request stays in triage with the original ask preserved.",
         )
         session.flush()
-    return intake_payload(session, request, parsed, settings, now)
+    return intake_payload(session, request, parsed, settings, now), False
 
 
 def reintake(session: Session, request_key: str, settings: Settings, clock: Clock) -> dict:
@@ -405,6 +489,7 @@ def reintake(session: Session, request_key: str, settings: Settings, clock: Cloc
 
 __all__ = [
     "Candidate",
+    "IdempotencyConflict",
     "IntakeSubmission",
     "MAX_CANDIDATES",
     "account_candidates",
@@ -412,4 +497,5 @@ __all__ = [
     "person_candidates",
     "reintake",
     "start_intake",
+    "submission_fingerprint",
 ]

@@ -413,6 +413,26 @@ class IntroEvent(Base):
     source_record_id: Mapped[int | None] = mapped_column(ForeignKey("source_records.id"), nullable=True)
 
 
+class IntakeIdempotencyKey(Base):
+    """Durable record of a client-supplied ``Idempotency-Key`` on live intake.
+
+    Transport-level only: it lets a retried submission find the request it
+    already created. It says nothing about whether two asks are the same
+    business request — two operators asking the same thing with different keys
+    are two requests, by design.
+    """
+
+    __tablename__ = "intake_idempotency_keys"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    key: Mapped[str] = mapped_column(String, unique=True, index=True)
+    fingerprint: Mapped[str] = mapped_column(String)
+    request_id: Mapped[int] = mapped_column(ForeignKey("intro_requests.id"), index=True)
+    created_at: Mapped[datetime] = mapped_column(UtcDateTime)
+
+    request: Mapped[IntroRequest] = relationship()
+
+
 class IntroOutcome(Base):
     """The recorded outcome facts for a request, exactly as the corpus states them."""
 
