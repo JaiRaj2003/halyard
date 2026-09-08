@@ -86,7 +86,8 @@ stated, and still has a next action.
 ## API
 
 ```
-GET   /api/health
+GET   /api/health                           # liveness: the process answers
+GET   /api/ready                            # readiness: the database answers SELECT 1; 503 if not
 GET   /api/search?q=
 GET   /api/accounts/{id}                    GET /api/people/{id}
 GET   /api/requests?state=&owner_id=&stale=&overdue=&ownerless_at_ingest=&q=
@@ -107,6 +108,13 @@ POST  /api/requests/{id}/route              # human confirms or rules out a path
 GET   /api/queue?view=&limit=               GET /api/queue/views
 GET   /api/accounts/{id}/view               # account workspace
 ```
+
+Every response carries an `X-Request-ID` — the caller's, if it sent a plain
+one, otherwise generated — and the server writes one log line per request
+(`request_id`, method, route template, path, status, duration) plus a stack
+trace on an unhandled error. Bodies, query strings, asks and people are never
+logged; the request's own events remain the audit trail. `HALYARD_LOG_LEVEL`
+sets the level (default `INFO`).
 
 Intake does not require the caller to name an owner — Slack-style asks
 shouldn't push administration onto the requester. The server resolves it

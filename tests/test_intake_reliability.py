@@ -10,6 +10,7 @@ people asking the same thing is a coordination fact, not a transport error.
 
 from __future__ import annotations
 
+import logging
 import re
 from concurrent.futures import ThreadPoolExecutor
 
@@ -25,8 +26,8 @@ ASK = "Can someone introduce us to the VP of Security at Northwind Traders?"
 LIVE_ID = re.compile(r"^LIVE-\d{4}$")
 
 
-def post(client, key: str | None = None, **body):
-    headers = {"Idempotency-Key": key} if key else {}
+def post(client, key: str | None = None, headers: dict[str, str] | None = None, **body):
+    headers = {**({"Idempotency-Key": key} if key else {}), **(headers or {})}
     return client.post("/api/intake/start", json={"requester_name": "Dana Okafor", "raw_ask": ASK, **body}, headers=headers)
 
 
@@ -233,3 +234,37 @@ def test_simultaneous_distinct_asks_each_get_their_own_live_id(api):
     finally:
         for c in clients:
             c.close()
+
+
+def test_enrichment_failure_leaves_the_owned_request_with_its_audit_event(client, monkeypatch, caplog):
+    """The request is committed before parsing or routing run. When that
+    best-effort step blows up, the row stays, owned and in triage, the failure
+    is written as an ``enrichment_failed`` event on the request itself, and the
+    process log only names the request and the exception type — never the ask."""
+
+    def enrichment_that_breaks(*_args, **_kwargs):
+        raise RuntimeError(f"path discovery fell over on '{ASK}'")
+
+    monkeypatch.setattr(intake_module, "apply_target_and_paths", enrichment_that_breaks)
+    with caplog.at_level(logging.INFO, logger="halyard"):
+        response = post(client, headers={"X-Request-ID": "enrich-1"})
+    assert response.status_code == 201, response.text
+    payload = response.json()["request"]
+    assert payload["operational_owner_id"] and payload["next_action"] and payload["raw_ask"] == ASK
+
+    rows = live_requests(client)
+    assert len(rows) == 1 and rows[0].request_id == payload["request_id"]
+    assert rows[0].raw_ask == ASK and rows[0].operational_owner_id is not None
+
+    events = client.get(f"/api/requests/{payload['request_id']}").json()["events"]
+    failures = [e for e in events if e["event_type"] == "enrichment_failed"]
+    assert len(failures) == 1 and failures[0]["actor"] == "system"
+    assert failures[0]["detail"].startswith("RuntimeError:")
+
+    lines = [r.getMessage() for r in caplog.records if r.name.startswith("halyard")]
+    domain = [line for line in lines if line.startswith("enrichment_failed ")]
+    assert len(domain) == 1
+    assert f"request={payload['request_id']}" in domain[0] and "request_id=enrich-1" in domain[0]
+    assert "error=RuntimeError" in domain[0]
+    assert any("route=/api/intake/start" in line and "status=201" in line for line in lines)
+    assert ASK not in "\n".join(lines) and "Dana Okafor" not in "\n".join(lines)
