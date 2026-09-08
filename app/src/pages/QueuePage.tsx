@@ -14,9 +14,8 @@ function Row({ item }: { item: RequestSummary }) {
   const head = targetHeadline(item)
   const when = timing(item)
   const badges = flags(item).filter((flag) => !['overdue', 'due_soon', 'imported'].includes(flag.key))
-  const live = item.origin === 'live_intake'
   return (
-    <tr className={`border-b border-line align-top last:border-0 hover:bg-slate-50 ${live ? 'bg-green-50/40' : ''}`}>
+    <tr className="border-b border-line align-top last:border-0 hover:bg-slate-50">
       <td className="px-3 py-2">
         <Link to={`/requests/${item.request_id}`} className="block max-w-[16rem] truncate text-sm font-medium text-accent hover:underline">
           {head.headline}
