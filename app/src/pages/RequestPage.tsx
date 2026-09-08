@@ -582,7 +582,7 @@ function SavedBanner({ data, onDismiss }: { data: IntakeResult; onDismiss: () =>
     >
       <ul className="flex flex-wrap gap-x-4 gap-y-1">
         <li>
-          Owner: <span className="font-medium">{owner.name}</span>
+          Owner assigned: <span className="font-medium">{owner.name}</span>
           {owner.flag && <span className="text-muted"> · {owner.flag.toLowerCase()}</span>}
         </li>
         <li>
