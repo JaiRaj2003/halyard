@@ -266,6 +266,34 @@ Who decided what, on what evidence, and what was deliberately deferred.
   means "broadly technical" rather than "the same job". Refining that needs an
   org chart the supplied data does not contain.
 
+### D26 — Intake retries are a transport problem, not a duplicate problem
+
+- **Decided by:** engineering hardening pass after the demo-ready freeze.
+- **Problem:** a client that timed out on `POST /api/intake/start` and retried
+  created a second owned request, and two asks arriving together could both
+  derive the same `LIVE-nnnn` id from a row count and one would fail.
+- **Decision:** an optional `Idempotency-Key` header. The key, a SHA-256
+  fingerprint of the submitted body and the created request's id are written to
+  `intake_idempotency_keys` in the same transaction as the request, under a
+  unique constraint. A retry returns the original request with
+  `Idempotent-Replayed: true`; if two deliveries race, the loser's commit hits
+  the constraint, rolls back and replays the winner. The same key with a
+  different body is refused with 409 and creates nothing. No header means the
+  previous behaviour, unchanged. `LIVE-nnnn` is now derived from the row's
+  database-assigned primary key instead of a count, so the number is handed out
+  under the database's write lock; the label is still checked against explicit
+  operator-supplied ids. A collision on a row two intakes share — both recording
+  a requester the system has never seen — rolls back and repeats the persist
+  step once, since nothing of the loser's was written.
+- **Deliberately not done:** anything that treats two *asks* as the same
+  request. Identical text under two keys is two requests. Whether they are the
+  same business ask is the account-coordination question the operator already
+  answers by hand (D14); a transport key must not answer it for them.
+- **Cost accepted:** a client that forgets to send a key gets the old
+  behaviour; nothing infers a key from the body, because that would be the
+  duplicate suppression above by another name. Keys are kept forever; there is
+  no expiry, so a key can never be legitimately reused for a new ask.
+
 ---
 
 ## Deferred

@@ -44,7 +44,16 @@ discards live rows. `make ingest` refuses to rebuild over live requests without
 transition any request. Deliberate: authentication and permissions were out of
 scope.
 
-**No concurrency control.** Two simultaneous transitions on one request last-write-win. Fine for a local demo, wrong for a team.
+**Concurrency control is limited to intake.** Two simultaneous intakes each get
+their own `LIVE-nnnn` id, and a retried or doubly-delivered submission with an
+`Idempotency-Key` resolves to one request; both rest on SQLite's single-writer
+lock and unique constraints. Two simultaneous transitions on one request still
+last-write-win. Fine for a local demo, wrong for a team.
+
+**Idempotency is opt-in and exact.** A retry without the header is a new
+request, and a key is only honoured for a byte-identical body — the same ask
+with a trailing space is a 409, not a replay. The frontend does not yet send a
+key; the protection is available to any client that does.
 
 **SQLite, in-process.** Sufficient for 5,075 connections and 200 requests; not a
 multi-writer database.

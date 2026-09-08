@@ -52,6 +52,11 @@ observed connectors seen in outcomes but absent from the roster (46, with
 | time | `requested_at`, `last_activity_at`, `operationalized_at`, `closed_at` |
 | declared | `declared_status`, `declared_path_found_flag` — kept as claims, checked against evidence, never trusted |
 
+**`intake_idempotency_keys`** — one row per client-supplied `Idempotency-Key`
+on live intake: `key` (unique), `fingerprint` (SHA-256 of the submitted body),
+`request_id` (the request that key created), `created_at`. Transport bookkeeping
+only; it never says two asks are the same request.
+
 **`request_targets`** — request *intent*, separate from identity: raw target
 text, name, title, `normalized_title_family`, account, nullable
 `resolved_person_id`, `resolution_status`, method, confidence, evidence and

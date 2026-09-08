@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime
+from uuid import uuid4
 
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
@@ -118,13 +119,13 @@ def persist_owned_request(
     if session.get(Person, owner_id) is None:
         raise OwnershipError(f"operational owner {owner_id} does not exist")
 
-    request_id = norm_ws(payload.request_id) or _next_request_id(session)
-    if session.scalar(select(IntroRequest).where(IntroRequest.request_id == request_id)):
+    request_id = norm_ws(payload.request_id)
+    if request_id and session.scalar(select(IntroRequest).where(IntroRequest.request_id == request_id)):
         raise ValidationProblem(f"request_id '{request_id}' already exists")
 
     action = assign_next_action(WorkflowState.NEEDS_TRIAGE, now, settings)
     request = IntroRequest(
-        request_id=request_id,
+        request_id=request_id or _provisional_request_id(),
         origin="live_intake",
         requester_id=requester.id,
         observed_owner_id=None,
@@ -149,6 +150,9 @@ def persist_owned_request(
     )
     session.add(request)
     session.flush()
+    if not request_id:
+        request.request_id = _live_request_id(session, request.id)
+        session.flush()
     log_event(
         session,
         request,
@@ -245,12 +249,29 @@ def apply_target_and_paths(
     return request
 
 
-def _next_request_id(session: Session) -> str:
-    count = session.scalar(select(func.count()).select_from(IntroRequest)) or 0
-    candidate = f"LIVE-{count + 1:04d}"
-    while session.scalar(select(IntroRequest).where(IntroRequest.request_id == candidate)):
-        count += 1
-        candidate = f"LIVE-{count + 1:04d}"
+def _provisional_request_id() -> str:
+    """Placeholder that satisfies NOT NULL/UNIQUE until the row has a database id.
+
+    Never visible: it is replaced in the same transaction, before commit.
+    """
+    return f"LIVE-pending-{uuid4().hex}"
+
+
+def _live_request_id(session: Session, row_id: int) -> str:
+    """``LIVE-nnnn`` derived from the row's own primary key.
+
+    The primary key is handed out by the database at insert time, under its
+    write lock, so two concurrent intakes can never be given the same number the
+    way a row count read before either committed could. The label is still
+    checked against the table because an operator may have supplied an explicit
+    ``LIVE-nnnn`` id by hand; the transaction holds the write lock from the
+    insert until commit, so the check cannot go stale.
+    """
+    number = row_id
+    candidate = f"LIVE-{number:04d}"
+    while session.scalar(select(IntroRequest.id).where(IntroRequest.request_id == candidate)) is not None:
+        number += 1
+        candidate = f"LIVE-{number:04d}"
     return candidate
 
 
