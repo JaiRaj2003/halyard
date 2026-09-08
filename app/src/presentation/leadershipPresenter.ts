@@ -28,7 +28,7 @@ const WORDS: Record<string, { title: string; of: string }> = {
   overdue: { title: 'Overdue under Halyard', of: 'actions assigned here' },
   due_soon: { title: 'Due in the next two days', of: 'actions assigned here' },
   stale: { title: 'Quiet under Halyard', of: 'requests worked here' },
-  awaiting_connector: { title: 'Waiting on a connector', of: 'open requests' },
+  awaiting_connector: { title: 'Waiting on connector', of: 'open requests' },
   needs_ownership_review: { title: 'Owner still to confirm', of: 'open requests' },
   unverified_route: { title: 'Unverified route to validate', of: 'open requests' },
   no_observable_path: { title: 'No route signal', of: 'requests' },

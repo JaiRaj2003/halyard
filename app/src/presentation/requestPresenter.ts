@@ -157,7 +157,7 @@ export function flags(item: RequestSummary, now: number = Date.now()): Flag[] {
     out.push({ key: 'unverified', text: 'Unverified route', level: 'verify' })
   }
   if (ownerStatus(item).flag) out.push({ key: 'owner', text: 'Owner to confirm', level: 'verify' })
-  if (item.origin === 'live_intake') out.push({ key: 'live', text: 'Live request', level: 'healthy' })
+  if (item.origin === 'live_intake') out.push({ key: 'live', text: 'Live request', level: 'context' })
   if (item.legacy_backlog) out.push({ key: 'imported', text: 'Imported backlog', level: 'context' })
   return out
 }
